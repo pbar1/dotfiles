@@ -1,0 +1,19 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_RUNTIME_DIR="/tmp"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
+
+export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/bat.conf"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export DCOS_DIR="$XDG_CONFIG_HOME/dcos"
+
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NVM_DIR="$XDG_DATA_HOME/nvm"
