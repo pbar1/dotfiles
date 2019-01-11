@@ -1,6 +1,6 @@
 # Dotfiles :house:
 
-[This is a bare git repo in my home directory for tracking dotfiles][1]
+This is a [bare git repo][1] in my home directory for tracking dotfiles. It tries to conform to the [XDG directory standard][2].
 
 ```bash
 git init --bare $HOME/.config/dotfiles.git
@@ -19,3 +19,4 @@ Checkout will refuse to overwrite existing files, so make sure to delete any fir
 
 
 [1]: https://news.ycombinator.com/item?id=11071754
+[2]: https://wiki.archlinux.org/index.php/XDG_Base_Directory
