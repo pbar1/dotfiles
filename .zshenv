@@ -4,7 +4,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_RUNTIME_DIR="/tmp"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export HISTFILE="$XDG_DATA_HOME/zsh/history"
+
+export ANTIBODY_HOME="$XDG_DATA_HOME/antibody"
 
 export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/bat.conf"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"

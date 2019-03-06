@@ -3,6 +3,8 @@
 #--------------------------------------------------------------
 # Environment Variables
 #--------------------------------------------------------------
+source "$HOME/.secrets.sh"
+
 export NVM_LAZY_LOAD=true
 export EDITOR=nvim
 export VISUAL=nvim
@@ -11,7 +13,7 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null; then
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
   export CODEPATH="/c/code"
   export DOCKER_HOST=tcp://0.0.0.0:2375
   export BROWSER="explorer.exe"
@@ -36,32 +38,35 @@ export FZF_DEFAULT_OPTS='
 '
 
 #--------------------------------------------------------------
-# zplugin
+# zplug
 #--------------------------------------------------------------
 
-# Added by Zplugin's installer
-source "$ZDOTDIR/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+export ZPLUG_HOME="$XDG_DATA_HOME/zplug"
+source $ZPLUG_HOME/init.zsh
 
-zplugin light "yous/vanilli.sh"
-zplugin light "Tarrasch/zsh-autoenv"
-zplugin light "geometry-zsh/geometry"
-zplugin light "pbar1/geometry-terraform"
-zplugin light "pbar1/geometry-dcos"
-zplugin light "supercrabtree/k"
-zplugin light "eendroroy/zed-zsh"
-zplugin light "Dbz/zsh-kubernetes"
-zplugin light "pbar1/zsh-terraform"
-zplugin light "lukechilds/zsh-nvm"
-zplugin light "zsh-users/zsh-autosuggestions"
-zplugin light "zdharma/fast-syntax-highlighting"
+zplug "yous/vanilli.sh"
+zplug "Tarrasch/zsh-autoenv"
+zplug "geometry-zsh/geometry"
+zplug "pbar1/geometry-terraform"
+zplug "pbar1/geometry-dcos"
+zplug "supercrabtree/k"
+zplug "eendroroy/zed-zsh"
+zplug "Dbz/zsh-kubernetes"
+zplug "pbar1/zsh-terraform"
+zplug "lukechilds/zsh-nvm"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zdharma/fast-syntax-highlighting", defer:2
 
-zplugin ice as"program" cp"emojify.sh -> emojify" pick"emojify"
-zplugin light "BozarthPrime/slack-emojify"
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo
+    zplug install
+  fi
+fi
+zplug load
 
 autoload -Uz compinit && compinit
-zplugin cdreplay -q
 
 #--------------------------------------------------------------
 # Completions, etc
@@ -74,4 +79,3 @@ source <(minikube completion zsh)
 source <(helm completion zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
