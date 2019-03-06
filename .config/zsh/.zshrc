@@ -21,7 +21,7 @@ else
 fi
 
 export GOPATH="$CODEPATH/go"
-export PATH="$GOPATH/bin:$HOME/.local/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$GOPATH/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
 export AUTOENV_FILE_LEAVE=".out"
 export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node kube git terraform dcos)

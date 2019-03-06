@@ -23,9 +23,12 @@ alias toupper="tr '[:lower:]' '[:upper:]'"
 alias myip="curl ipinfo.io/ip"
 #alias copy="xclip -sel clip"
 alias copy='pbcopy'
+alias ldd='otool -L'
 alias cat='bat'
 alias vi="nvim"
 alias nc="ncat"
+alias pass=gopass
+alias rgv="rg -g '!*vendor'"
 alias dotfiles="git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME"
 alias dot="dotfiles"
 alias dots="dotfiles status -s -uno"
@@ -39,6 +42,7 @@ alias docker-sweep="docker rm $(docker ps -a -q -f status=exited)"
 alias lsnpm="npm ls --local-only --depth=0"
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
+alias cobra='cobra -a "Pierce Bartine" -l mit'
 
 powerup() {
 	local note_uuid
@@ -87,3 +91,13 @@ urlgrep() {
   '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$' "$@"
 }
 
+tfvargrep() {
+  rg \
+    --no-line-number \
+    --no-filename \
+    --only-matching \
+    --glob '*.tf' \
+    '(var\.).+?(\b)' \
+  | sed 's/var.//g' \
+  | sort --unique
+}
