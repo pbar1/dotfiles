@@ -77,5 +77,9 @@ source "$XDG_CONFIG_HOME/zsh/siq.sh"
 source <(kubectl completion zsh)
 source <(minikube completion zsh)
 source <(helm completion zsh)
-
+complete -C "$(which packer)" packer
+complete -C "$(which terraform)" terraform
+complete -C "$(which consul)" consul
+complete -C "$(which vault)" vault
+complete -C "$(which nomad)" nomad
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
