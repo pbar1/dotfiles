@@ -43,6 +43,8 @@ alias lsnpm="npm ls --local-only --depth=0"
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
 alias cobra='cobra -a "Pierce Bartine" -l mit'
+alias av='aws-vault'
+alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
 
 powerup() {
 	local note_uuid
@@ -74,12 +76,23 @@ dockerip() {
   docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$1"
 }
 
+dcos_name () {
+  dcos cluster list --attached --json | jq -r '.[].name'
+}
+
 dcossel() {
   local cluster_sel
   cluster_sel="$(dcos cluster list --json | jq -r '.[].name' | fzf --height 40%)"
   dcos cluster attach "$cluster_sel"
   declare -x DCOS_CLUSTER_URL="$(dcos cluster list --attached --json | jq -r '.[].url')"
   echo "$cluster_sel"
+}
+
+dcos_users() {
+ curl -X GET \
+   -H "Authorization: token=$(dcos config show core.dcos_acs_token)" \
+   -H 'accept: application/json' \
+   "$(dcos config show core.dcos_url)/acs/api/v1/users"
 }
 
 ggrep() {
