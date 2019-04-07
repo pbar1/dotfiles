@@ -1,55 +1,45 @@
 #!/usr/bin/env bash
 
-alias zshrc="$EDITOR $ZDOTDIR/.zshrc"
-alias aliasrc="$EDITOR $ZDOTDIR/aliases.sh"
-alias vimrc="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
-alias tmuxrc="$EDITOR $HOME/.tmux.conf"
-
-rc() {
-  local rc_files=(
-    "$HOME/.zshenv"
-    "$ZDOTDIR/.zshrc"
-    "$ZDOTDIR/aliases.sh"
-    "$XDG_CONFIG_HOME/nvim/init.vim"
-    "$HOME/.tmux.conf"
-  )
-  echo "${rc_files[@]}" | fzf
-}
+alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
+alias aliasrc='$EDITOR $ZDOTDIR/aliases.sh'
+alias vimrc='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
+alias tmuxrc='$EDITOR $HOME/.tmux.conf'
 
 eval "$(hub alias -s)"
 
 alias tolower="tr '[:upper:]' '[:lower:]'"
 alias toupper="tr '[:lower:]' '[:upper:]'"
-alias myip="curl ipinfo.io/ip"
+alias myip='curl ipinfo.io/ip'
 #alias copy="xclip -sel clip"
-alias copy='pbcopy'
+alias copy=pbcopy
 alias ldd='otool -L'
-alias cat='bat'
-alias vi="nvim"
-alias nc="ncat"
+alias cat=bat
+alias vi=nvim
+alias nc=ncat
 alias pass=gopass
 alias rgv="rg -g '!*vendor'"
-alias dotfiles="git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME"
-alias dot="dotfiles"
-alias dots="dotfiles status -s -uno"
-alias c="clear"
-alias wo="where"
-alias l="ls -GlASh"
-alias g="git"
-alias gs="git status -s"
-alias rdp="xfreerdp"
-alias docker-sweep="docker rm $(docker ps -a -q -f status=exited)"
-alias lsnpm="npm ls --local-only --depth=0"
+alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
+alias dot=dotfiles
+alias dots='dotfiles status -s -uno'
+alias c=clear
+alias wo=where
+alias l='ls -GlASh'
+alias g=git
+alias gs='git status -s'
+alias rdp=xfreerdp
+alias docker-sweep='docker rm $(docker ps -a -q -f status=exited)'
+alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
 alias cobra='cobra -a "Pierce Bartine" -l mit'
-alias av='aws-vault'
+alias av=aws-vault
 alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
+alias 1p='eval $(op signin my)'
 
-powerup() {
+secretpull() {
 	local note_uuid
-	note_uuid=$(op list items | jq -r '.[] | select(.overview.title==".secrets.sh") | .uuid')
-	source <(op get item "$note_uuid" | jq -r '.details.notesPlain')
+	note_uuid=$(op list items | jq -r '.[] | select(.overview.title=="secrets.sh") | .uuid')
+	op get item "$note_uuid" | jq -r '.details.notesPlain' > "$HOME/.secrets.sh"
 }
 
 path() {
@@ -84,7 +74,8 @@ dcossel() {
   local cluster_sel
   cluster_sel="$(dcos cluster list --json | jq -r '.[].name' | fzf --height 40%)"
   dcos cluster attach "$cluster_sel"
-  declare -x DCOS_CLUSTER_URL="$(dcos cluster list --attached --json | jq -r '.[].url')"
+  declare -x DCOS_CLUSTER_URL
+  DCOS_CLUSTER_URL="$(dcos cluster list --attached --json | jq -r '.[].url')"
   echo "$cluster_sel"
 }
 

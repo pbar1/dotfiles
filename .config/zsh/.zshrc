@@ -54,6 +54,7 @@ zplug "eendroroy/zed-zsh"
 zplug "Dbz/zsh-kubernetes"
 zplug "pbar1/zsh-terraform"
 zplug "lukechilds/zsh-nvm"
+zplug "stackexchange/blackbox"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
 
