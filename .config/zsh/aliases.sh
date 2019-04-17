@@ -7,6 +7,7 @@ alias tmuxrc='$EDITOR $HOME/.tmux.conf'
 
 eval "$(hub alias -s)"
 
+alias utime='date +%s'
 alias tolower="tr '[:upper:]' '[:lower:]'"
 alias toupper="tr '[:lower:]' '[:upper:]'"
 alias myip='curl ipinfo.io/ip'
@@ -16,8 +17,6 @@ alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
 alias nc=ncat
-alias pass=gopass
-alias rgv="rg -g '!*vendor'"
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
@@ -32,7 +31,7 @@ alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
 alias cobra='cobra -a "Pierce Bartine" -l mit'
-alias av=aws-vault
+alias av='aws-vault --backend=keychain'
 alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
 alias 1p='eval $(op signin my)'
 

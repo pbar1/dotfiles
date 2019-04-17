@@ -23,19 +23,15 @@ else
 fi
 
 export GOPATH="$CODEPATH/go"
-export PATH="$GOPATH/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
 export AUTOENV_FILE_LEAVE=".out"
-export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node kube git terraform dcos)
+export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git terraform dcos)
 export GEOMETRY_SYMBOL_PROMPT="♪"
 export GEOMETRY_SYMBOL_EXIT_VALUE="ø"
 export GEOMETRY_SYMBOL_RPROMPT="♮"
 
-export FZF_DEFAULT_OPTS='
---color=dark
---color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
---color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
-'
+source "$XDG_CONFIG_HOME/fzf/theme.sh"
 
 #--------------------------------------------------------------
 # zplug
