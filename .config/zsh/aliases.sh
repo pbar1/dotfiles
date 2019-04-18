@@ -20,6 +20,7 @@ alias nc=ncat
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
+alias gogitignore='cp $XDG_CONFIG_HOME/etc/gogitignore .gitignore'
 alias c=clear
 alias wo=where
 alias l='ls -GlASh'
