@@ -18,22 +18,25 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'hashivim/vim-terraform'
-Plug 'vim-syntastic/syntastic'
-Plug 'juliosueiras/vim-terraform-completion'
+" Visuals
+Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim'
 
+" Workflow
 Plug 'tpope/vim-sensible'
 Plug '/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'rakr/vim-one'
-
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
+" Backends for completion & linting
+Plug 'vim-syntastic/syntastic'
+
+" Language support
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
@@ -46,11 +49,15 @@ call plug#end()
 " Themes / Visuals
 "--------------------------------------------------------------
 
-let g:airline_theme='one'
-colorscheme one
-let g:one_allow_italics = 1
-set background=dark
-"set background=light
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+set noshowmode
 
 syntax on
 highlight Comment cterm=italic

@@ -4,6 +4,7 @@ alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
 alias aliasrc='$EDITOR $ZDOTDIR/aliases.sh'
 alias vimrc='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias tmuxrc='$EDITOR $HOME/.tmux.conf'
+alias notes='$EDITOR $HOME/notes.txt'
 
 eval "$(hub alias -s)"
 
@@ -17,6 +18,7 @@ alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
 alias nc=ncat
+alias ij=idea
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
@@ -26,12 +28,13 @@ alias wo=where
 alias l='ls -GlASh'
 alias g=git
 alias gs='git status -s'
+alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias rdp=xfreerdp
 alias docker-sweep='docker rm $(docker ps -a -q -f status=exited)'
 alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
-alias cobra='cobra -a "Pierce Bartine" -l mit'
+alias cobra='cobra -a "Pierce Bartine" -l none'
 alias av='aws-vault --backend=keychain'
 alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
 alias 1p='eval $(op signin my)'
@@ -86,6 +89,12 @@ dcos_users() {
    "$(dcos config show core.dcos_url)/acs/api/v1/users"
 }
 
+webiqdel() {
+  local sg_id
+  sg_id="$(webiq list | jq -r '.[].service_group_id' | fzf --height 40%)"
+  webiq delete --force -g "$sg_id" -s "$sg_id"
+}
+
 ggrep() {
   git rev-list --all | xargs git grep "$@"
 }
@@ -104,4 +113,12 @@ tfvargrep() {
     '(var\.).+?(\b)' \
   | sed 's/var.//g' \
   | sort --unique
+}
+
+avsel () {
+	local aws_profile_sel
+	aws_profile_sel="$(aws-vault list --profiles | fzf --height 40%)"
+	local aws_vault_output
+  aws_vault_output="$(aws-vault exec "$aws_profile_sel" -- env | grep AWS)"
+  source <(echo "$aws_vault_output" | sed -e 's/^/export /g')
 }

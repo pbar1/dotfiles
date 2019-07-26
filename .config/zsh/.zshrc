@@ -3,6 +3,7 @@
 #--------------------------------------------------------------
 # Environment Variables
 #--------------------------------------------------------------
+source "$HOME/.zshenv"
 source "$HOME/.secrets.sh"
 
 export NVM_LAZY_LOAD=true
@@ -22,6 +23,7 @@ else
   export CODEPATH="$HOME/code"
 fi
 
+
 export GOPATH="$CODEPATH/go"
 export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
@@ -33,6 +35,11 @@ export GEOMETRY_SYMBOL_RPROMPT="♮"
 
 source "$XDG_CONFIG_HOME/fzf/theme.sh"
 
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 #--------------------------------------------------------------
 # zplug
 #--------------------------------------------------------------
@@ -74,6 +81,7 @@ source "$XDG_CONFIG_HOME/zsh/siq.sh"
 source <(kubectl completion zsh)
 source <(minikube completion zsh)
 source <(helm completion zsh)
+# source <(eksctl completion zsh)
 complete -C "$(which packer)" packer
 complete -C "$(which terraform)" terraform
 complete -C "$(which consul)" consul
