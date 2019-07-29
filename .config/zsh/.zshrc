@@ -25,7 +25,7 @@ fi
 
 
 export GOPATH="$CODEPATH/go"
-export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$HOME/Library/Python/3.7/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
 export AUTOENV_FILE_LEAVE=".out"
 export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git terraform dcos)
@@ -81,7 +81,9 @@ source "$XDG_CONFIG_HOME/zsh/siq.sh"
 source <(kubectl completion zsh)
 source <(minikube completion zsh)
 source <(helm completion zsh)
+source <(kops completion zsh)
 # source <(eksctl completion zsh)
+source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 complete -C "$(which packer)" packer
 complete -C "$(which terraform)" terraform
 complete -C "$(which consul)" consul
