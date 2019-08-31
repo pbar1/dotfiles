@@ -6,6 +6,8 @@
 source "$HOME/.zshenv"
 source "$HOME/.secrets.sh"
 
+export KOPS_STATE_STORE="s3://kops-state-3huq8vsi"
+
 export NVM_LAZY_LOAD=true
 export EDITOR=nvim
 export VISUAL=nvim
@@ -22,7 +24,6 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
 else
   export CODEPATH="$HOME/code"
 fi
-
 
 export GOPATH="$CODEPATH/go"
 export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$HOME/Library/Python/3.7/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -82,6 +83,7 @@ source <(kubectl completion zsh)
 source <(minikube completion zsh)
 source <(helm completion zsh)
 source <(kops completion zsh)
+source <(stern --completion zsh)
 # source <(eksctl completion zsh)
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 complete -C "$(which packer)" packer

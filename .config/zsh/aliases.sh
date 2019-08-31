@@ -18,7 +18,7 @@ alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
 alias nc=ncat
-alias ij=idea
+alias gl='goland'
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
@@ -38,6 +38,9 @@ alias cobra='cobra -a "Pierce Bartine" -l none'
 alias av='aws-vault --backend=keychain'
 alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
 alias 1p='eval $(op signin my)'
+alias helmsman='helmsman -no-banner'
+alias hm='helmsman'
+alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
 
 secretpull() {
 	local note_uuid
@@ -116,7 +119,9 @@ tfvargrep() {
 }
 
 avsel () {
-	local aws_profile_sel
+  unset AWS_VAULT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SECURITY_TOKEN \
+    AWS_SESSION_TOKEN
+  local aws_profile_sel
 	aws_profile_sel="$(aws-vault list --profiles | fzf --height 40%)"
 	local aws_vault_output
   aws_vault_output="$(aws-vault exec "$aws_profile_sel" -- env | grep AWS)"
