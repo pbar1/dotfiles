@@ -41,6 +41,10 @@ alias 1p='eval $(op signin my)'
 alias helmsman='helmsman -no-banner'
 alias hm='helmsman'
 alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
+alias dark='darkmode true && base16_solarized-dark'
+alias light='darkmode false && base16_solarized-light'
+alias tm=tmux
+alias kubeconfig-dump='kubectl config view --minify --flatten'
 
 secretpull() {
 	local note_uuid

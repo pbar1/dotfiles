@@ -40,7 +40,7 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'cespare/vim-toml'
 
 call plug#end()

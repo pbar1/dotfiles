@@ -73,18 +73,18 @@ zplug load
 
 autoload -Uz compinit && compinit
 
+export GEOMETRY_GIT_SEPARATOR=""
+
 #--------------------------------------------------------------
 # Completions, etc
 #--------------------------------------------------------------
-export GEOMETRY_GIT_SEPARATOR=""
 source "$XDG_CONFIG_HOME/zsh/aliases.sh"
 source "$XDG_CONFIG_HOME/zsh/siq.sh"
 source <(kubectl completion zsh)
-source <(minikube completion zsh)
 source <(helm completion zsh)
 source <(kops completion zsh)
 source <(stern --completion zsh)
-# source <(eksctl completion zsh)
+source <(velero completion zsh)
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 complete -C "$(which packer)" packer
 complete -C "$(which terraform)" terraform
