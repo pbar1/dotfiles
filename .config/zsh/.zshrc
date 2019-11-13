@@ -29,7 +29,7 @@ export GOPATH="$CODEPATH/go"
 export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$HOME/Library/Python/3.7/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
 export AUTOENV_FILE_LEAVE=".out"
-export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git terraform dcos)
+export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git terraform dcos kube)
 export GEOMETRY_SYMBOL_PROMPT="♪"
 export GEOMETRY_SYMBOL_EXIT_VALUE="ø"
 export GEOMETRY_SYMBOL_RPROMPT="♮"
@@ -38,9 +38,9 @@ source "$XDG_CONFIG_HOME/fzf/theme.sh"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+  eval "$("$BASE16_SHELL/profile_helper.sh")"
+
 #--------------------------------------------------------------
 # zplug
 #--------------------------------------------------------------

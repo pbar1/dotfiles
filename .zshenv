@@ -18,6 +18,8 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 
 export TF_CLI_CONFIG_FILE="$XDG_CONFIG_HOME/terraform/terraformrc"
+export VAULT_CONFIG_PATH="$XDG_CONFIG_HOME/vault/config"
+
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcp/credentials.json"
