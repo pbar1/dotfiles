@@ -30,7 +30,7 @@ alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias rdp=xfreerdp
-alias docker-sweep='docker rm $(docker ps -a -q -f status=exited)'
+alias docker-sweep='docker rm $(docker ps --all --quiet --filter status=exited)'
 alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
 alias dc=docker-compose
@@ -41,10 +41,48 @@ alias 1p='eval $(op signin my)'
 alias helmsman='helmsman -no-banner'
 alias hm='helmsman'
 alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
-alias dark='darkmode true && base16_solarized-dark'
-alias light='darkmode false && base16_solarized-light'
+alias dark='dark-mode on && base16_solarized-dark'
+alias light='dark-mode off && base16_solarized-light'
 alias tm=tmux
 alias kubeconfig-dump='kubectl config view --minify --flatten'
+
+wie() {
+  cat "$(which ${1})"
+}
+
+vaultsel() {
+  local vaults vault_ldap_user
+  vault_ldap_user="pierce.bartine"
+
+  vaults=(
+    "https://vault-ops.build-usw2.platform.einstein.com"
+    "https://vault.build-usw2.platform.einstein.com"
+    "https://vault.dev.platform.einstein.com"
+    "https://vault.staging.platform.einstein.com"
+    "https://vault.rc.platform.einstein.com"
+    "https://vault.prod.platform.einstein.com"
+    "https://vault.rc-euc1.platform.einstein.com"
+    "https://vault.prod-euc1.platform.einstein.com"
+  )
+  VAULT_ADDR=$(printf '%s\n' "${vaults[@]}" | fzf)
+  export VAULT_ADDR
+
+  unset VAULT_TOKEN
+  if ! vault token lookup > /dev/null 2>&1; then
+    vault login -no-print -method="ldap" username="$vault_ldap_user"
+  fi
+  VAULT_TOKEN=$(vault print token)
+  export VAULT_TOKEN
+
+  echo "Switched to Vault cluster \"${VAULT_ADDR}\""
+}
+
+ksec() {
+  kubectl get secret \
+    "${1}" \
+    -o jsonpath="{.data.\"${2}\"}" \
+  | base64 --decode
+}
 
 secretpull() {
 	local note_uuid
@@ -129,5 +167,12 @@ avsel () {
 	aws_profile_sel="$(aws-vault list --profiles | fzf --height 40%)"
 	local aws_vault_output
   aws_vault_output="$(aws-vault exec "$aws_profile_sel" -- env | grep AWS)"
+  source <(echo "$aws_vault_output" | sed -e 's/^/export /g')
+}
+
+aws-build() {
+  local mfa_token
+  mfa_token=$(op get totp 'AWS (build)')
+  local aws_vault_output="$(aws-vault exec --mfa-token=$mfa_token build -- env | grep AWS)"
   source <(echo "$aws_vault_output" | sed -e 's/^/export /g')
 }

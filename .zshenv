@@ -10,7 +10,6 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
-export MINIKUBE_HOME="$XDG_CONFIG_HOME/minikube"
 export DCOS_DIR="$XDG_CONFIG_HOME/dcos"
 
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"

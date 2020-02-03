@@ -16,15 +16,7 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-  export CODEPATH="/c/code"
-  export DOCKER_HOST=tcp://0.0.0.0:2375
-  export BROWSER="explorer.exe"
-  unsetopt BG_NICE
-else
-  export CODEPATH="$HOME/code"
-fi
-
+export CODEPATH="$HOME/code"
 export GOPATH="$CODEPATH/go"
 export PATH="$GOPATH/bin:$HOME/.cargo/bin:$XDG_DATA_HOME/npm/bin:$HOME/.local/bin:/usr/local/sbin:$HOME/Library/Python/3.7/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export AUTOENV_FILE_ENTER=".env"
@@ -48,6 +40,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 export ZPLUG_HOME="$XDG_DATA_HOME/zplug"
 source $ZPLUG_HOME/init.zsh
 
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "yous/vanilli.sh"
 zplug "Tarrasch/zsh-autoenv"
 zplug "geometry-zsh/geometry"
@@ -58,7 +51,6 @@ zplug "eendroroy/zed-zsh"
 zplug "Dbz/zsh-kubernetes"
 zplug "pbar1/zsh-terraform"
 zplug "lukechilds/zsh-nvm"
-zplug "stackexchange/blackbox"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
 
@@ -86,9 +78,7 @@ source <(kops completion zsh)
 source <(stern --completion zsh)
 source <(velero completion zsh)
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
-complete -C "$(which packer)" packer
 complete -C "$(which terraform)" terraform
 complete -C "$(which consul)" consul
 complete -C "$(which vault)" vault
-complete -C "$(which nomad)" nomad
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
