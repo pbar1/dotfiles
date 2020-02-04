@@ -12,8 +12,6 @@ alias utime='date +%s'
 alias tolower="tr '[:upper:]' '[:lower:]'"
 alias toupper="tr '[:lower:]' '[:upper:]'"
 alias myip='curl ipinfo.io/ip'
-#alias copy="xclip -sel clip"
-alias copy=pbcopy
 alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
@@ -29,26 +27,54 @@ alias l='ls -GlASh'
 alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-alias rdp=xfreerdp
 alias docker-sweep='docker rm $(docker ps --all --quiet --filter status=exited)'
 alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
-alias dc=docker-compose
 alias cobra='cobra -a "Pierce Bartine" -l none'
 alias av='aws-vault --backend=keychain'
-alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' | tail -8"
 alias 1p='eval $(op signin my)'
-alias helmsman='helmsman -no-banner'
-alias hm='helmsman'
 alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
 alias dark='dark-mode on && base16_solarized-dark'
 alias light='dark-mode off && base16_solarized-light'
 alias tm=tmux
-alias kubeconfig-dump='kubectl config view --minify --flatten'
+
+copy() {
+  if [ "$(uname)" = "Darwin" ]; then
+    pbcopy
+  elif [ "$(uname)" = "Linux" ]; then
+    xclip -sel clip
+  fi
+}
 
 wie() {
-  cat "$(which ${1})"
+  cat "$(command -v "${1}")"
 }
+
+#------------------------------------------------------------------------------
+# Kubernetes
+#------------------------------------------------------------------------------
+
+alias k="kubectl"
+alias ktx="kubectx"
+alias kns="kubens"
+alias kgp="kubectl get pod"
+alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' --all-namespaces --watch"
+alias kubeconfig="kubectl config view --minify --flatten"
+
+kd() {
+  local resource_type resource_name
+  resource_type="$(kubectl api-resources --output=name | fzf)"
+  resource_name="$(kubectl get "${resource_type}" --output='jsonpath={.items[].metadata.name}' | fzf)"
+  kubectl describe "${resource_type}" "${resource_name}"
+}
+
+ksec() {
+  kubectl get secret "${1}" --output="jsonpath={.data.${2}}" | base64 --decode
+}
+
+#------------------------------------------------------------------------------
+# Other
+#------------------------------------------------------------------------------
 
 vaultsel() {
   local vaults vault_ldap_user
@@ -77,12 +103,7 @@ vaultsel() {
   echo "Switched to Vault cluster \"${VAULT_ADDR}\""
 }
 
-ksec() {
-  kubectl get secret \
-    "${1}" \
-    -o jsonpath="{.data.\"${2}\"}" \
-  | base64 --decode
-}
+
 
 secretpull() {
 	local note_uuid
