@@ -55,7 +55,7 @@ wie() {
 #------------------------------------------------------------------------------
 
 alias k="kubectl"
-alias ktx="kubectx"
+alias kx="kubectx"
 alias kns="kubens"
 alias kgp="kubectl get pod"
 alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' --all-namespaces --watch"
@@ -64,13 +64,32 @@ alias kubeconfig="kubectl config view --minify --flatten"
 kd() {
   local resource_type resource_name
   resource_type="$(kubectl api-resources --output=name | fzf)"
-  resource_name="$(kubectl get "${resource_type}" --output='jsonpath={.items[].metadata.name}' | fzf)"
+  resource_name="$(kubectl get "${resource_type}" --output='jsonpath={.items[*].metadata.name}' | tr -s '[[:space:]]' '\n' | fzf)"
   kubectl describe "${resource_type}" "${resource_name}"
 }
 
 ksec() {
-  kubectl get secret "${1}" --output="jsonpath={.data.${2}}" | base64 --decode
+  local secret_name secret_field
+  secret_name="$(kubectl get secret --output=name | fzf)"
+  secret_field="$(kubectl get "${secret_name}" --output=go-template --template='{{range $k, $v := .data}}{{$k}} {{end}}' | tr -s '[[:space:]]' '\n' | fzf)"
+  kubectl get "${secret_name}" --output=go-template --template="{{ index .data \"${secret_field}\" }}" | base64 --decode
 }
+
+vd() {
+  local resource_type resource_name
+  velero_resources=(
+    "backup-locations"
+    "backups"
+    "plugins"
+    "restores"
+    "schedules"
+    "snapshot-locations"
+  )
+  resource_type=$(printf '%s\n' "${velero_resources[@]}" | fzf)
+  resource_name=$(velero get "${resource_type}" --output=json | jq -r '.items[].metadata.name' | fzf)
+  velero describe "${resource_type}" "${resource_name}" --details
+}
+
 
 #------------------------------------------------------------------------------
 # Other
@@ -89,6 +108,7 @@ vaultsel() {
     "https://vault.prod.platform.einstein.com"
     "https://vault.rc-euc1.platform.einstein.com"
     "https://vault.prod-euc1.platform.einstein.com"
+    "https://vault.perf-usw2.platform.einstein.com"
   )
   VAULT_ADDR=$(printf '%s\n' "${vaults[@]}" | fzf)
   export VAULT_ADDR
@@ -103,7 +123,10 @@ vaultsel() {
   echo "Switched to Vault cluster \"${VAULT_ADDR}\""
 }
 
-
+dirsed() {
+  rg --files-with-matches --fixed-strings "${1}" \
+  | xargs -I {} sed -i '' "s%${1}%${2}%g" {}
+}
 
 secretpull() {
 	local note_uuid
