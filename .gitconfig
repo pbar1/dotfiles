@@ -1,0 +1,23 @@
+[user]
+  email = pbartine@salesforce.com
+  name = Pierce Bartine
+  signingkey = 7ED4581988C8D761
+[push]
+  default = simple
+  followTags = true
+[alias]
+  co = checkout
+  s = status
+  unstage = reset HEAD --
+  br = branch
+  cm = commit
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  zap = remote prune origin
+[commit]
+  gpgSign = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[core]
+  pager = less -RF
+[gpg]
+  program = gpg
