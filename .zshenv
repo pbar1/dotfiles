@@ -3,6 +3,8 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_RUNTIME_DIR="/tmp"
 
+export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
+
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
 export BAT_CONFIG_PATH="${XDG_CONFIG_HOME}/bat/bat.conf"
