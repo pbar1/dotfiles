@@ -17,7 +17,19 @@ gpgconf --launch gpg-agent
 
 export CODEPATH="${HOME}/code"
 export GOPATH="${CODEPATH}/go"
-export PATH="${HOME}/.krew/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${XDG_DATA_HOME}/npm/bin:${HOME}/.local/bin:/usr/local/sbin:${HOME}/Library/Python/3.7/bin:${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+path=(
+  "${HOME}/.krew/bin"
+  "${GOPATH}/bin"
+  "${HOME}/.cargo/bin"
+  "${XDG_DATA_HOME}/npm/bin"
+  "${HOME}/Library/Python/3.7/bin"
+  "${HOME}/.local/bin"
+  "/usr/local/sbin"
+  ${path}
+)
+typeset -U path
+export PATH
+
 export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git kube)
 export GEOMETRY_SYMBOL_PROMPT="♪"
 export GEOMETRY_SYMBOL_EXIT_VALUE="ø"

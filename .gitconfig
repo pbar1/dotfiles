@@ -6,6 +6,7 @@
   default = simple
   followTags = true
 [alias]
+  root = rev-parse --show-toplevel
   co = checkout
   s = status
   unstage = reset HEAD --

@@ -15,8 +15,10 @@ alias myip='curl ipinfo.io/ip'
 alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
+alias vim=nvim
 alias nc=ncat
-alias gl='goland'
+alias gl=goland
+alias code=code-insiders
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
@@ -27,6 +29,7 @@ alias l='ls -GlASh'
 alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+alias gcm='git commit'
 alias docker-sweep='docker rm $(docker ps --all --quiet --filter status=exited)'
 alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
@@ -37,6 +40,7 @@ alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
 alias dark='dark-mode on && base16_solarized-dark'
 alias light='dark-mode off && base16_solarized-light'
 alias tm=tmux
+alias x509-decode='openssl x509 -text -noout -in /dev/stdin'
 
 copy() {
   if [ "$(uname)" = "Darwin" ]; then
@@ -50,58 +54,27 @@ wie() {
   cat "$(command -v "${1}")"
 }
 
-#------------------------------------------------------------------------------
-# Kubernetes
-#------------------------------------------------------------------------------
-
-alias k="kubectl"
-alias kx="kubectx"
-alias kns="kubens"
-alias kgp="kubectl get pod"
-alias kge="kubectl get events --sort-by='.metadata.creationTimestamp' --all-namespaces --watch"
-alias kubeconfig="kubectl config view --minify --flatten"
-
-kd() {
-  local resource_type resource_name
-  resource_type="$(kubectl api-resources --output=name | fzf)"
-  resource_name="$(kubectl get "${resource_type}" --output='jsonpath={.items[*].metadata.name}' | tr -s '[[:space:]]' '\n' | fzf)"
-  kubectl describe "${resource_type}" "${resource_name}"
+gtree() {
+    git_ignore_files=("$(git config --get core.excludesfile)" .gitignore ~/.gitignore)
+    ignore_pattern="$(grep -hvE '^$|^#' "${git_ignore_files[@]}" 2>/dev/null|sed 's:/$::'|tr '\n' '\|')"
+    if git status &> /dev/null && [[ -n "${ignore_pattern}" ]]; then
+      tree -I "${ignore_pattern}" "${@}"
+    else
+      tree "${@}"
+    fi
 }
-
-ksec() {
-  local secret_name secret_field
-  secret_name="$(kubectl get secret --output=name | fzf)"
-  secret_field="$(kubectl get "${secret_name}" --output=go-template --template='{{range $k, $v := .data}}{{$k}} {{end}}' | tr -s '[[:space:]]' '\n' | fzf)"
-  kubectl get "${secret_name}" --output=go-template --template="{{ index .data \"${secret_field}\" }}" | base64 --decode
-}
-
-vd() {
-  local resource_type resource_name
-  velero_resources=(
-    "backup-locations"
-    "backups"
-    "plugins"
-    "restores"
-    "schedules"
-    "snapshot-locations"
-  )
-  resource_type=$(printf '%s\n' "${velero_resources[@]}" | fzf)
-  resource_name=$(velero get "${resource_type}" --output=json | jq -r '.items[].metadata.name' | fzf)
-  velero describe "${resource_type}" "${resource_name}" --details
-}
-
 
 #------------------------------------------------------------------------------
 # Other
 #------------------------------------------------------------------------------
 
-vaultsel() {
+vsel() {
   local vaults vault_ldap_user
   vault_ldap_user="pierce.bartine"
 
   vaults=(
     "https://vault-ops.build-usw2.platform.einstein.com"
-    "https://vault.build-usw2.platform.einstein.com"
+    "https://vault.sfiqautomation.com"
     "https://vault.dev.platform.einstein.com"
     "https://vault.staging.platform.einstein.com"
     "https://vault.rc.platform.einstein.com"
@@ -109,6 +82,7 @@ vaultsel() {
     "https://vault.rc-euc1.platform.einstein.com"
     "https://vault.prod-euc1.platform.einstein.com"
     "https://vault.perf-usw2.platform.einstein.com"
+    "https://legacyprod-usw2-vault.sfiqplatform.com"
   )
   VAULT_ADDR=$(printf '%s\n' "${vaults[@]}" | fzf)
   export VAULT_ADDR
@@ -219,4 +193,17 @@ aws-build() {
   mfa_token=$(op get totp 'AWS (build)')
   local aws_vault_output="$(aws-vault exec --mfa-token=$mfa_token build -- env | grep AWS)"
   source <(echo "$aws_vault_output" | sed -e 's/^/export /g')
+}
+
+qm-s3() {
+  BUCKET_ARN="arn:aws:s3:::euc1-prod-datastore"
+
+for arn in $(aws iam list-users | jq -r '.Users[].Arn'); do
+  decision="$(aws iam simulate-principal-policy \
+    --policy-source-arn "$arn" \
+    --action-names "s3:GetObject" \
+    --resource-arns "$BUCKET_ARN/*" \
+  | jq -r '.EvaluationResults[0].EvalDecision')"
+  echo "$arn --> $decision"
+done
 }

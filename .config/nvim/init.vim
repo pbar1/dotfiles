@@ -33,6 +33,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Backends for completion & linting
 Plug 'vim-syntastic/syntastic'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Language support
 Plug 'hashivim/vim-terraform'
@@ -99,3 +100,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " (Optional) Enable terraform plan to be include in filter
 let g:syntastic_terraform_tffilter_plan = 1
+
+" Source plugin configuration
+source ~/.config/nvim/coc.nvim.vim
