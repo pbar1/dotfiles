@@ -5,7 +5,8 @@ This is a [bare git repo][1] in my home directory for tracking dotfiles. It conf
 ## Dependencies
 
 - `git`
-- [`zplug`][3]
+- `zsh`
+- `zgen`
 
 ## How it was created
 
@@ -28,4 +29,3 @@ dotfiles checkout
 
 [1]: https://news.ycombinator.com/item?id=11071754
 [2]: https://wiki.archlinux.org/index.php/XDG_Base_Directory
-[3]: https://github.com/zplug/zplug
