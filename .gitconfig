@@ -19,6 +19,13 @@
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [core]
-  pager = less -RF
+  pager = delta
 [gpg]
   program = gpg
+[pull]
+	rebase = false
+[delta]
+  syntax-theme = Solarized (light)
+	side-by-side = true
+[interactive]
+  diffFilter = delta --color-only
