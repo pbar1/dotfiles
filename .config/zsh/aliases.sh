@@ -30,6 +30,7 @@ alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gcm='git commit'
+alias gcmp='git stash && git checkout master && git pull'
 alias docker-sweep='docker rm $(docker ps --all --quiet --filter status=exited)'
 alias lsnpm='npm ls --local-only --depth=0'
 alias urldomain="sed -e 's|^[^/]*//||' -e 's|/.*$||'"
@@ -39,8 +40,17 @@ alias 1p='eval $(op signin my)'
 alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
 alias dark='dark-mode on && base16_solarized-dark'
 alias light='dark-mode off && base16_solarized-light'
-alias tm=tmux
 alias x509-decode='openssl x509 -text -noout -in /dev/stdin'
+alias cr='docker run --rm -it --entrypoint=/cluster-registry harbor.k8s.platform.einstein.com/docker/cluster-registry:latest'
+
+alias tm=tmux
+alias tml='tmux ls'
+
+tma() {
+  local session_name
+  session_name="$(tmux list-sessions | fzf --height 40% | cut -d':' -f1)"
+  tmux attach -t "${session_name}"
+}
 
 copy() {
   if [ "$(uname)" = "Darwin" ]; then
@@ -62,6 +72,14 @@ gtree() {
     else
       tree "${@}"
     fi
+}
+
+urlencode() {
+  local toencode
+  if [ -z "${1}" ]; then
+    toencode="$(cat /dev/stdin)"
+  fi
+  python3 -c "import urllib.parse as ul; print(ul.quote_plus('${toencode}'))"
 }
 
 #------------------------------------------------------------------------------

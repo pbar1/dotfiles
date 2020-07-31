@@ -39,6 +39,8 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 [ -n "${PS1}" ] && [ -s "${BASE16_SHELL}/profile_helper.sh" ] && \
   eval "$("${BASE16_SHELL}/profile_helper.sh")"
 
+eval "$(zoxide init zsh)"
+
 #--------------------------------------------------------------
 # zgen
 #--------------------------------------------------------------
@@ -49,7 +51,6 @@ if ! zgen saved; then
   zgen loadall <<EOPLUGINS
     yous/vanilli.sh
     geometry-zsh/geometry
-    eendroroy/zed-zsh
     pbar1/zsh-terraform
     zdharma/fast-syntax-highlighting
     zsh-users/zsh-autosuggestions
@@ -70,7 +71,8 @@ source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
 (( $+commands[helm] ))      && source <(helm completion zsh)
 (( $+commands[kops] ))      && source <(kops completion zsh)
-(( $+commands[stern] ))     && source <(stern --completion zsh)
+(( $+commands[stern] ))     && source <(stern --completion=zsh)
 (( $+commands[velero] ))    && source <(velero completion zsh)
+(( $+commands[kubecfg] ))   && source <(kubecfg completion --shell=zsh)
 (( $+commands[terraform] )) && complete -C "$(which terraform)" terraform
 (( $+commands[vault] ))     && complete -C "$(which vault)"     vault
