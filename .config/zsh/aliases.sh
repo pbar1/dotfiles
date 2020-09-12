@@ -42,6 +42,7 @@ alias dark='dark-mode on && base16_solarized-dark'
 alias light='dark-mode off && base16_solarized-light'
 alias x509-decode='openssl x509 -text -noout -in /dev/stdin'
 alias cr='docker run --rm -it --entrypoint=/cluster-registry harbor.k8s.platform.einstein.com/docker/cluster-registry:latest'
+alias xi='xargs -I {}'
 
 alias tm=tmux
 alias tml='tmux ls'
@@ -115,6 +116,14 @@ vsel() {
   echo "Switched to Vault cluster \"${VAULT_ADDR}\""
 }
 
+r53dig() {
+  local hostname zone_name zone_id
+  hostname="${1}"
+  zone_name="$(echo "${hostname}" | cut -d '.' -f 2-)"
+  zone_id="$(aws route53 list-hosted-zones | jq -r ".HostedZones[] | select(.Name==\"${zone_name}.\") | .Id" | fzf)"
+  aws route53 list-resource-record-sets --hosted-zone-id="${zone_id}" | jq -r ".ResourceRecordSets[] | select(.Name==\"${hostname}.\")"
+}
+
 dirsed() {
   rg --files-with-matches --fixed-strings "${1}" \
   | xargs -I {} sed -i '' "s%${1}%${2}%g" {}
@@ -174,6 +183,12 @@ webiqdel() {
   local sg_id
   sg_id="$(webiq list | jq -r '.[].service_group_id' | fzf --height 40%)"
   webiq delete --force -g "$sg_id" -s "$sg_id"
+}
+
+webiqdel-dcosonly() {
+  local sg_id
+  sg_id="$(webiq list | jq -r '.[].service_group_id' | fzf --height 40%)"
+  webiq delete --force --dcos-only -g "$sg_id" -s "$sg_id"
 }
 
 ggrep() {

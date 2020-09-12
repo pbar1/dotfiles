@@ -22,7 +22,7 @@ path=(
   "${GOPATH}/bin"
   "${HOME}/.cargo/bin"
   "${XDG_DATA_HOME}/npm/bin"
-  "${HOME}/Library/Python/3.7/bin"
+  "${HOME}/Library/Python/3.8/bin"
   "${HOME}/.local/bin"
   "/usr/local/sbin"
   ${path}
@@ -54,6 +54,7 @@ if ! zgen saved; then
     pbar1/zsh-terraform
     zdharma/fast-syntax-highlighting
     zsh-users/zsh-autosuggestions
+    einsteinplatform/devenv lib/k8s.sh
 EOPLUGINS
   zgen save
 fi
@@ -65,7 +66,6 @@ fi
 export GEOMETRY_GIT_SEPARATOR=""
 source "${XDG_CONFIG_HOME}/zsh/aliases.sh"
 source "${XDG_CONFIG_HOME}/zsh/siq.sh"
-source "${CODEPATH}/ep/devenv/shell/k8s.sh"
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
@@ -74,5 +74,6 @@ source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[stern] ))     && source <(stern --completion=zsh)
 (( $+commands[velero] ))    && source <(velero completion zsh)
 (( $+commands[kubecfg] ))   && source <(kubecfg completion --shell=zsh)
+(( $+commands[yq] ))        && source <(yq shell-completion --variation=zsh)
 (( $+commands[terraform] )) && complete -C "$(which terraform)" terraform
 (( $+commands[vault] ))     && complete -C "$(which vault)"     vault

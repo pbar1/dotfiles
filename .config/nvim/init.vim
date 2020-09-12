@@ -44,6 +44,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'cespare/vim-toml'
 
+" Debugging
+Plug 'puremourning/vimspector'
+
 call plug#end()
 
 "--------------------------------------------------------------
