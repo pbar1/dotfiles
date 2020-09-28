@@ -1,31 +1,31 @@
 [user]
-  email = pbartine@salesforce.com
-  name = Pierce Bartine
-  signingkey = 7ED4581988C8D761
+	email = pbartine@salesforce.com
+	name = Pierce Bartine
+	signingkey = 7ED4581988C8D761
 [push]
-  default = simple
-  followTags = true
+	default = simple
+	followTags = true
 [alias]
-  root = rev-parse --show-toplevel
-  co = checkout
-  s = status
-  unstage = reset HEAD --
-  br = branch
-  cm = commit
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  zap = remote prune origin
+	root = rev-parse --show-toplevel
+	co = checkout
+	s = status
+	unstage = reset HEAD --
+	br = branch
+	cm = commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	zap = remote prune origin
 [commit]
-  gpgSign = true
-[url "git@github.com:"]
-  insteadOf = https://github.com/
+	gpgSign = true
 [core]
-  pager = delta
+	pager = delta
 [gpg]
-  program = gpg
+	program = gpg
 [pull]
 	rebase = false
 [delta]
-  syntax-theme = Solarized (light)
+	syntax-theme = Solarized (light)
 	side-by-side = true
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
+[credential]
+	helper = osxkeychain
