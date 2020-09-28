@@ -26,3 +26,5 @@ export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export GOOGLE_APPLICATION_CREDENTIALS="${XDG_CONFIG_HOME}/gcp/credentials.json"
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
+
+#export VSCODE_APPDATA="${XDG_CONFIG_HOME}"
