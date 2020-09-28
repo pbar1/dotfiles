@@ -6,7 +6,17 @@
 
 source "${HOME}/.zshenv"
 source "${HOME}/.secrets.sh"
-source "${XDG_CONFIG_HOME}/fzf/theme.sh"
+source "${XDG_CONFIG_HOME}/fzf/fzf.sh"
+
+if [ "$(uname)" = 'Darwin' ]; then
+  if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = 'Dark' ]; then
+    _fzf_opts_dark
+  else
+    _fzf_opts_light
+  fi
+else
+  _fzf_opts_dark
+fi
 
 export KOPS_STATE_STORE="s3://kops-state-3huq8vsi"
 export EDITOR=nvim
@@ -23,6 +33,7 @@ path=(
   "${HOME}/.cargo/bin"
   "${XDG_DATA_HOME}/npm/bin"
   "${HOME}/Library/Python/3.8/bin"
+  "${HOME}/.emacs.d/bin"
   "${HOME}/.local/bin"
   "/usr/local/sbin"
   ${path}
@@ -71,6 +82,7 @@ source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
 (( $+commands[helm] ))      && source <(helm completion zsh)
 (( $+commands[kops] ))      && source <(kops completion zsh)
+(( $+commands[k3d] ))       && source <(k3d completion zsh)
 (( $+commands[stern] ))     && source <(stern --completion=zsh)
 (( $+commands[velero] ))    && source <(velero completion zsh)
 (( $+commands[kubecfg] ))   && source <(kubecfg completion --shell=zsh)

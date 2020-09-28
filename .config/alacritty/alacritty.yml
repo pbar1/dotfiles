@@ -363,7 +363,7 @@ shell:
   args:
     - --login
     - -c
-    - 'tmux attach || tmux'
+    - tmux
 
 # Startup directory
 #

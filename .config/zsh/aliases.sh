@@ -17,8 +17,9 @@ alias cat=bat
 alias vi=nvim
 alias vim=nvim
 alias nc=ncat
-alias gl=goland
-alias code=code-insiders
+alias ij=idea
+alias gl=idea
+alias code=code
 alias dotfiles='git --git-dir=$HOME/.config/dotfiles.git/ --work-tree=$HOME'
 alias dot=dotfiles
 alias dots='dotfiles status -s -uno'
@@ -38,14 +39,45 @@ alias cobra='cobra -a "Pierce Bartine" -l none'
 alias av='aws-vault --backend=keychain'
 alias 1p='eval $(op signin my)'
 alias usergen='pwgen --secure --no-capitalize --numerals 8 1'
-alias dark='dark-mode on && base16_solarized-dark'
-alias light='dark-mode off && base16_solarized-light'
 alias x509-decode='openssl x509 -text -noout -in /dev/stdin'
 alias cr='docker run --rm -it --entrypoint=/cluster-registry harbor.k8s.platform.einstein.com/docker/cluster-registry:latest'
 alias xi='xargs -I {}'
-
 alias tm=tmux
 alias tml='tmux ls'
+alias rgf='rg --fixed-strings'
+alias rgi='rg --ignore-case'
+alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080:8080 mesos/mesos-mini'
+
+# can also set dark mode to 'not dark mode' to toggle
+alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"
+alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to false' && _fzf_opts_light"
+
+ddd() {
+  local file disk bs filesize
+  file="${1}"
+  disk="${2}"
+  bs="${3:-4m}"
+  filesize="$(du -sh "${file}" | cut -f1)"
+  diskutil unmountDisk "${disk}"
+  dd if="${file}" | pv -s "${filesize}" | sudo dd of="${disk}" bs="${bs}"
+}
+
+helmgrep() {
+  for f in $(ls | grep "${1}"); do
+    printf "%s : %s\n" $f $(cat "${f}/values/$(basename "${PWD}").yaml" \
+    | yq read - docker.tag)
+  done
+}
+
+kgaa() {
+  kubectl get-all --namespace="$(kubectl config view --minify --output='jsonpath={..namespace}')"
+}
+
+kexp() {
+  local expirytime
+  expirytime="$(kubectl config view --flatten --minify -ojsonpath='{.users[0].user.auth-provider.config.id-token}' | jwt decode --json - | jq -r '.payload.exp')"
+  date -r "${expirytime}"
+}
 
 tma() {
   local session_name
