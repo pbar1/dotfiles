@@ -3,7 +3,7 @@
 alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
 alias aliasrc='$EDITOR $ZDOTDIR/aliases.sh'
 alias vimrc='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
-alias tmuxrc='$EDITOR $HOME/.tmux.conf'
+alias tmuxrc='$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf'
 alias notes='$EDITOR $HOME/notes.txt'
 
 eval "$(hub alias -s)"

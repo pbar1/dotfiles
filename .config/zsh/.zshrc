@@ -4,7 +4,6 @@
 # Environment Variables
 #--------------------------------------------------------------
 
-source "${HOME}/.zshenv"
 source "${HOME}/.secrets.sh"
 source "${XDG_CONFIG_HOME}/fzf/fzf.sh"
 
