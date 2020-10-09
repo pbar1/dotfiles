@@ -74,8 +74,7 @@ fi
 #--------------------------------------------------------------
 
 export GEOMETRY_GIT_SEPARATOR=""
-source "${XDG_CONFIG_HOME}/zsh/aliases.sh"
-source "${XDG_CONFIG_HOME}/zsh/siq.sh"
+source "${XDG_CONFIG_HOME}"/shell/*.sh
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
