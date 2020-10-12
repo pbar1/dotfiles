@@ -52,6 +52,11 @@ alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080
 alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"
 alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to false' && _fzf_opts_light"
 
+secsu() {
+  op get item secrets.env > /dev/null 2>&1 || eval $(op signin)
+  op get item secrets.env | jq '.details.sections[0].fields' | gq "export{{range .}} {{.t }}='{{.v}}'{{end}}"
+}
+
 ddd() {
   local file disk bs filesize
   file="${1}"
