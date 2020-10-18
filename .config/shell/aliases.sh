@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
-alias aliasrc='$EDITOR $ZDOTDIR/aliases.sh'
+alias aliasrc='$EDITOR $XDG_CONFIG_HOME/shell/aliases.sh'
 alias vimrc='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias tmuxrc='$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf'
 alias notes='$EDITOR $HOME/notes.txt'
@@ -54,7 +54,7 @@ alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" 
 
 secsu() {
   op get item secrets.env > /dev/null 2>&1 || eval $(op signin)
-  op get item secrets.env | jq '.details.sections[0].fields' | gq "export{{range .}} {{.t }}='{{.v}}'{{end}}"
+  eval "$(op get item secrets.env | jq '.details.sections[0].fields' | gq "export{{range .}} {{.t }}='{{.v}}'{{end}}")"
 }
 
 ddd() {
@@ -176,12 +176,12 @@ path() {
   echo "$PATH" | tr ':' '\n'
 }
 
-yubion() {
-  osascript -e 'tell application "yubiswitch" to KeyOn'
+ykon() {
+  ykman config usb --force --enable=otp
 }
 
-yubioff() {
-  osascript -e 'tell application "yubiswitch" to KeyOff'
+ykoff() {
+  ykman config usb --force --disable=otp
 }
 
 docker_sweepi() {
