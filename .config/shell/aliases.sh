@@ -6,8 +6,6 @@ alias vimrc='$EDITOR $XDG_CONFIG_HOME/nvim/init.vim'
 alias tmuxrc='$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf'
 alias notes='$EDITOR $HOME/notes.txt'
 
-eval "$(hub alias -s)"
-
 alias utime='date +%s'
 alias tolower="tr '[:upper:]' '[:lower:]'"
 alias toupper="tr '[:lower:]' '[:upper:]'"
@@ -47,6 +45,8 @@ alias tml='tmux ls'
 alias rgf='rg --fixed-strings'
 alias rgi='rg --ignore-case'
 alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080:8080 mesos/mesos-mini'
+alias condaon='source /opt/anaconda/bin/activate root'
+alias condaoff='source /opt/anaconda/bin/deactivate root'
 
 # can also set dark mode to 'not dark mode' to toggle
 alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"

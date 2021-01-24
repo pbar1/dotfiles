@@ -11,7 +11,7 @@ if [ "$(uname)" = 'Darwin' ]; then
     _fzf_opts_light
   fi
 else
-  _fzf_opts_dark
+  #_fzf_opts_dark
 fi
 
 export KOPS_STATE_STORE="s3://kops-state-3huq8vsi"
@@ -72,8 +72,13 @@ fi
 export GEOMETRY_GIT_SEPARATOR=""
 source "${XDG_CONFIG_HOME}/shell/k8s.sh"
 source "${XDG_CONFIG_HOME}/shell/aliases.sh"
-source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ $(uname) = 'Linux' ]; then
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
+elif [ $(uname) = 'Darwin' ]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
+(( $+commands[aws] ))       && source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
 (( $+commands[helm] ))      && source <(helm completion zsh)
 (( $+commands[kops] ))      && source <(kops completion zsh)
@@ -84,6 +89,8 @@ source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[yq] ))        && source <(yq shell-completion zsh)
 (( $+commands[terraform] )) && complete -C "$(which terraform)" terraform
 (( $+commands[vault] ))     && complete -C "$(which vault)"     vault
+(( $+commands[op] ))        && eval "$(op completion zsh)"; compdef _op op
+(( $+commands[hub] ))       && eval "$(hub alias -s)"
 
 # added for gcloud
 export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"

@@ -58,6 +58,8 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+colorscheme base16-solarized-dark
+
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }

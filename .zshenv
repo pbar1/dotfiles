@@ -20,6 +20,7 @@ export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 alias wget="wget --hsts-file=${XDG_CACHE_HOME}/wget-hsts"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
+export XZ_DEFAULTS="--verbose --keep --threads=0"
 
 # devops
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"

@@ -23,8 +23,8 @@
 [interactive]
 	diffFilter = delta --color-only
 
-[credential]
-	helper = osxkeychain
+#[credential]
+#	helper = osxkeychain
 
 [gpg]
 	program = gpg
@@ -43,5 +43,5 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	zap = remote prune origin
 	remotes = remote --verbose
-  upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
-  head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
+	upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
+	head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
