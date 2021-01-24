@@ -45,7 +45,23 @@ alias kubeconfig='kubectl config view --minify --flatten'
 alias kbusy='kubectl run --rm --stdin --tty --restart=Never --image=busybox busybox'
 
 # open kubeconfig directory in a finder window
-kopen () { open "${KUBE_HOME}"; }
+kopen() { open "${KUBE_HOME}"; }
+
+# gets resource labels
+# usage: klabel [resource_type]
+klabel() {
+  kubectl get "${@}" \
+    --output=go-template \
+    --template='{{range .items}}{{println .metadata.name}}{{range $k, $v := .metadata.labels}}  {{$k}}: {{$v}}{{println}}{{end}}{{println}}{{end}}'
+}
+
+# gets resource annotations
+# usage: kanno [resource_type]
+kanno() {
+  kubectl get "${@}" \
+    --output=go-template \
+    --template='{{range .items}}{{println .metadata.name}}{{range $k, $v := .metadata.annotations}}  {{$k}}: {{$v}}{{println}}{{end}}{{println}}{{end}}'
+}
 
 #------------------------------------------------------------------------------
 # Utility functions (meant for internal use in this script)
@@ -123,8 +139,8 @@ kyam() {
 # usage: ksec
 # list/select secrets in the current namespace, then fields within that secret, then print the decoded field to stdout
 ksec() {
-  secret_name="$(_kfilter_resource_name secret)"
-  secret_field="$(kubectl get secret "${secret_name}" --output=go-template --template='{{range $k, $v := .data}}{{$k}}{{printf "\n"}}{{end}}' | fzf)"
+  secret_name="$(kubectl get secret --output=go-template --template='{{range .items}}{{println .metadata.name}}{{end}}' | fzf --exact --preview "kubectl describe ${resource_type} {}")"
+  secret_field="$(kubectl get secret "${secret_name}" --output=go-template --template='{{range $k, $v := .data}}{{println $k}}{{end}}' | fzf)"
   kubectl get secret "${secret_name}" --output=go-template --template="{{index .data \"${secret_field}\" | base64decode}}"
 }
 

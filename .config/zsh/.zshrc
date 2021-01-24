@@ -4,9 +4,6 @@
 # Environment Variables
 #--------------------------------------------------------------
 
-source "${HOME}/.secrets.sh"
-source "${XDG_CONFIG_HOME}/fzf/fzf.sh"
-
 if [ "$(uname)" = 'Darwin' ]; then
   if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = 'Dark' ]; then
     _fzf_opts_dark
@@ -29,7 +26,7 @@ export GOPATH="${CODEPATH}/go"
 path=(
   "${HOME}/.krew/bin"
   "${GOPATH}/bin"
-  "${HOME}/.cargo/bin"
+  "${HOME}/.local/share/cargo/bin"
   "${XDG_DATA_HOME}/npm/bin"
   "${HOME}/Library/Python/3.8/bin"
   "${HOME}/.emacs.d/bin"
@@ -64,7 +61,6 @@ if ! zgen saved; then
     pbar1/zsh-terraform
     zdharma/fast-syntax-highlighting
     zsh-users/zsh-autosuggestions
-    einsteinplatform/devenv lib/k8s.sh
 EOPLUGINS
   zgen save
 fi
@@ -74,7 +70,8 @@ fi
 #--------------------------------------------------------------
 
 export GEOMETRY_GIT_SEPARATOR=""
-source "${XDG_CONFIG_HOME}"/shell/*.sh
+source "${XDG_CONFIG_HOME}/shell/k8s.sh"
+source "${XDG_CONFIG_HOME}/shell/aliases.sh"
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 (( $+commands[kubectl] ))   && source <(kubectl completion zsh)
@@ -84,6 +81,11 @@ source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 (( $+commands[stern] ))     && source <(stern --completion=zsh)
 (( $+commands[velero] ))    && source <(velero completion zsh)
 (( $+commands[kubecfg] ))   && source <(kubecfg completion --shell=zsh)
-(( $+commands[yq] ))        && source <(yq shell-completion --variation=zsh)
+(( $+commands[yq] ))        && source <(yq shell-completion zsh)
 (( $+commands[terraform] )) && complete -C "$(which terraform)" terraform
 (( $+commands[vault] ))     && complete -C "$(which vault)"     vault
+
+# added for gcloud
+export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"

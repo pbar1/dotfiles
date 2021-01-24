@@ -52,9 +52,36 @@ alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080
 alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"
 alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to false' && _fzf_opts_light"
 
+# Syncs a local git repo with remote. Discovers if using a fork and keeps it updated.
+# NOTE: if upstream symbolic ref fails, run: git remote set-head upstream --auto
+gsync() {
+  local main_origin=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|^refs/remotes/origin/||')
+  if git remote | grep --quiet upstream; then
+    local main_upstream=$(git symbolic-ref refs/remotes/upstream/HEAD | sed 's|^refs/remotes/upstream/||')
+    git fetch upstream && git checkout ${main_origin} && git merge upstream/${main_upstream} && git push origin ${main_origin}
+  else
+    git checkout ${main_origin} && git pull
+  fi
+}
+
+jqflat() {
+  jq '[leaf_paths as $path | {"key": $path | join("."), "value": getpath($path)}] | from_entries' $@
+}
+
+vaultaudlog() {
+  kubectl logs --selector=vault-active=true --follow \
+  | jqflat -c \
+  | fblog --level-key=type -a request.id -a request.operation -a request.path -a auth.token_policies.0
+}
+
 secsu() {
   op get item secrets.env > /dev/null 2>&1 || eval $(op signin)
   eval "$(op get item secrets.env | jq '.details.sections[0].fields' | gq "export{{range .}} {{.t }}='{{.v}}'{{end}}")"
+}
+
+numeronym() {
+  str="${1}"
+  echo "${str:0:1}$(echo ${str:1:-1} | wc -c | tr -d '[:space:]')${str: -1}"
 }
 
 ddd() {
@@ -69,8 +96,9 @@ ddd() {
 
 helmgrep() {
   for f in $(ls | grep "${1}"); do
-    printf "%s : %s\n" $f $(cat "${f}/values/$(basename "${PWD}").yaml" \
-    | yq read - docker.tag)
+    image_tag="$(cat "${f}/values/$(basename "${PWD}").yaml" | yq read - docker.tag)"
+    replicas="$(cat "${f}/values/$(basename "${PWD}").yaml" | yq read - appConfigs.replicaCount)"
+    printf "%s : %s : replicas=%s\n" $f $image_tag $replicas
   done
 }
 
@@ -137,7 +165,7 @@ vsel() {
     "https://vault.prod.platform.einstein.com"
     "https://vault.rc-euc1.platform.einstein.com"
     "https://vault.prod-euc1.platform.einstein.com"
-    "https://vault.perf-usw2.platform.einstein.com"
+    "https://vault.perf.platform.einstein.com"
     "https://legacyprod-usw2-vault.sfiqplatform.com"
   )
   VAULT_ADDR=$(printf '%s\n' "${vaults[@]}" | fzf)
@@ -145,7 +173,7 @@ vsel() {
 
   unset VAULT_TOKEN
   if ! vault token lookup > /dev/null 2>&1; then
-    vault login -no-print -method="ldap" username="$vault_ldap_user"
+    vault login -no-print -method="ldap" username="${vault_ldap_user}"
   fi
   VAULT_TOKEN=$(vault print token)
   export VAULT_TOKEN

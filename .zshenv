@@ -50,3 +50,6 @@ export PSQL_HISTORY="${XDG_CACHE_HOME}/pg/psql_history"
 export PGPASSFILE="${XDG_CONFIG_HOME}/pg/pgpass"
 export PGSERVICEFILE="${XDG_CONFIG_HOME}/pg/pg_service.conf"
 #export VSCODE_APPDATA="${XDG_CONFIG_HOME}"
+
+# variables not related to XDG
+export AWS_VAULT_KEYCHAIN_NAME="login"
