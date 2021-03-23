@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 #------------------------------------------------------------------------------
 # Dependencies: kubectl, kubectx, kubens, fzf, tr, base64, curl, jq, rg, velero, aws, paste, grep
@@ -44,8 +44,26 @@ alias kubeconfig='kubectl config view --minify --flatten'
 # launches and attaches to a busybox shell in the current namespace
 alias kbusy='kubectl run --rm --stdin --tty --restart=Never --image=busybox busybox'
 
+# kgp() {
+#   local tmpfile
+#   tmpfile="$(mktemp)"
+#   cat <<'EOF' > "${tmpfile}"
+# NAME           QOS-CLASS        POD-IP        HOST-IP
+# .metadata.name .status.qosClass .status.podIP .status.hostIP
+# EOF
+#   kubectl get pod --output="custom-columns-file=${tmpfile}" "${@}"
+#   rm "${tmpfile}"
+# }
+
 # open kubeconfig directory in a finder window
 kopen() { open "${KUBE_HOME}"; }
+
+# gets container and init container image names for pods
+kimg() {
+  kubectl get pod "${@}" \
+    --output=jsonpath="{range .items[*]}{range ['spec.containers', 'spec.initContainers'][*]}{.image}{'\n'}{end}{end}" \
+  | sort --unique
+}
 
 # gets resource labels
 # usage: klabel [resource_type]
@@ -249,4 +267,37 @@ kubeconfig-unmerge() {
 ksel() {
   kubeconfig=$(ls "${KUBE_HOME}" | grep --fixed-strings 'config-' | fzf)
   export KUBECONFIG="${KUBE_HOME}/${kubeconfig}"
+}
+
+krerun() {
+  resource_name="$(_kfilter_resource_name job)"
+  kubectl get job ${resource_name} -o json | jq 'del(.spec.selector)' | jq 'del(.spec.template.metadata.labels)' | kubectl replace --force -f -
+}
+
+# Gets all Pods in the current cluster that are not selected by a PodDisruptionBudget
+# Usage: k.pods_no_pdb
+k.pods_no_pdb() {
+  local getpodtpl getpodcmd
+  getpodtpl="$(mktemp)"
+  getpodcmd="$(mktemp)"
+
+  # Go template for kubectl command to find all pods NOT selected by a PodDisruptionBudget.
+  # With kubectl label selectors, the LAST -l/--selector wins, so only one may be passed.
+  # Commas act as a logical AND operator.
+  cat <<'EOF' > "${getpodtpl}"
+kubectl get pod \
+  --all-namespaces \
+  --output='jsonpath={range .items[*]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}' \
+  --selector='{{ range .items }}{{ range $k, $v := .spec.selector.matchLabels }}{{ $k }}!={{ $v }},{{ end }}{{ end }}'
+EOF
+
+  # Get all PodDisruptionBudgets, feed output into the kubectl command template, and remove trailing comma from command.
+  kubectl get poddisruptionbudget --all-namespaces --output="go-template-file=${getpodtpl}" \
+  | sed "s|,'|'|1" \
+  > "${getpodcmd}"
+
+  # Evaluate the kubectl command, which prints all PBD-less pods in namespace/pod form.
+  eval "$(cat "${getpodcmd}")"
+
+  rm "${getpodtpl}" "${getpodcmd}"
 }

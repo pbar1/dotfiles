@@ -23,18 +23,19 @@ hvaultfwd() {
   local cert_path="${HOME}/.tmp/hawking-vault"
 
   if ! openssl x509 -checkend 86400 -noout -in ~/.tmp/hawking-vault/client.pem; then
-    local active_pod="$(kubectl get pod --namespace=hawking-vault --selector='vault-active=true' --output=name | sed 's|pod/||g')"
+    local active_pod=vault-0
+    #local active_pod="$(kubectl get pod --namespace=hawking-vault --selector='vault-active=true' --output=name | sed 's|pod/||g')"
     mkdir -p "${cert_path}"
     kubectl cp "hawking-vault/${active_pod}:/etc/pki_service/ca/cacerts.pem" "${cert_path}/ca.pem"
     kubectl cp "hawking-vault/${active_pod}:/etc/identity/client/certificates/client.pem" "${cert_path}/client.pem"
     kubectl cp "hawking-vault/${active_pod}:/etc/identity/client/keys/client-key.pem" "${cert_path}/client-key.pem"
   fi
 
-  kubectl port-forward service/vault-active 8200 --namespace=hawking-vault &
+  kubectl port-forward pod/vault-0 8200 --namespace=hawking-vault &
   local kubectl_pid=$!
   socat \
     TCP-LISTEN:9200,fork,reuseaddr \
-    OPENSSL-CONNECT:127.0.0.1:8200,cafile="${cert_path}/ca.pem",certificate="${cert_path}/client.pem",key="${cert_path}/client-key.pem",commonname=hawking-vault.hawking-vault.einstein.dev1-uswest2.aws.sfdc.is \
+    OPENSSL-CONNECT:127.0.0.1:8200,cafile="${cert_path}/ca.pem",certificate="${cert_path}/client.pem",key="${cert_path}/client-key.pem",commonname=vault.hawking-vault.einstein.dev1-uswest2.aws.sfdc.is \
     &
   local socat_pid=$!
 
@@ -46,4 +47,19 @@ hvaultfwd() {
   trap cleanup INT
   wait ${kubectl_pid} ${socat_pid}
   trap - INT
+}
+
+# Usage: pcsk 'export AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... AWS_SESSION_TOKEN=...' [profile]
+# Transforms the export command copied from PCSK and writes it to the AWS shared credentials file.
+# Writes to the default profile unless another profile name is specified.
+pcsk() {
+  local export_cmd="${1}"
+  local profile="${2:-"default"}"
+  echo "${export_cmd}" \
+  | tr ' ' '\n' \
+  | sed "s|export|[${profile}]|" \
+  | sed 's|AWS_ACCESS_KEY_ID|aws_access_key_id|' \
+  | sed 's|AWS_SECRET_ACCESS_KEY|aws_secret_access_key|' \
+  | sed 's|AWS_SESSION_TOKEN|aws_session_token|' \
+  > "${AWS_SHARED_CREDENTIALS_FILE:-"${HOME}/.aws/credentials"}"
 }

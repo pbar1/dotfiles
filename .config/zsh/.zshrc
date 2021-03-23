@@ -1,20 +1,42 @@
 #!/usr/bin/env zsh
 
-#--------------------------------------------------------------
-# Environment Variables
-#--------------------------------------------------------------
+#------------------------------------------------------------------------------
+# ZSH configuration
+#------------------------------------------------------------------------------
 
-if [ "$(uname)" = 'Darwin' ]; then
-  if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = 'Dark' ]; then
-    _fzf_opts_dark
-  else
-    _fzf_opts_light
+# Usage: source_zc example.zsh
+# Compiles a ZSH file into bytecode and sources it
+function source_zc() {
+  # If there is no *.zsh.zwc or it's older than *.zsh, compile *.zsh into *.zsh.zwc.
+  if [[ ! "${1}.zwc" -nt "${1}" ]]; then
+    zcompile "${1}"
   fi
-else
-  #_fzf_opts_dark
-fi
+  source "${1}"
+}
 
-export KOPS_STATE_STORE="s3://kops-state-3huq8vsi"
+# Loads the ZSH compinit function into scope
+autoload -Uz compinit
+
+# Initializes the ZSH completion system while ignoring insecure directories
+compinit -i
+
+# Source plugins, which should exist as submodules of this repo
+export ZSH_PLUGDIR="${ZDOTDIR:-"${HOME}/.config/zsh"}/plugins"
+source_zc "${ZSH_PLUGDIR}/zsh-defer/zsh-defer.plugin.zsh"
+source_zc "${ZSH_PLUGDIR}/vanilli.sh/vanilli.zsh"
+zsh-defer source_zc "${ZSH_PLUGDIR}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+zsh-defer source_zc "${ZSH_PLUGDIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+# If a command begins with a space, it won't be saved to ZSH history
+setopt HIST_IGNORE_SPACE
+
+# Colon-separated list of patterns to ignore when saving ZSH history
+export HISTORY_IGNORE="*AWS_ACCESS_KEY_ID=*:*AWS_SECRET_ACCESS_KEY=*:*AWS_SESSION_TOKEN=*:*VAULT_TOKEN=s.*"
+
+#------------------------------------------------------------------------------
+# Environment variables
+#------------------------------------------------------------------------------
+
 export EDITOR=nvim
 export VISUAL=nvim
 export GPG_TTY="$(tty)"
@@ -37,62 +59,27 @@ path=(
 typeset -U path
 export PATH
 
-export GEOMETRY_PROMPT_PLUGINS=(exec_time jobs node git kube)
-export GEOMETRY_SYMBOL_PROMPT="♪"
-export GEOMETRY_SYMBOL_EXIT_VALUE="ø"
-export GEOMETRY_SYMBOL_RPROMPT="♮"
-
 BASE16_SHELL="${HOME}/.config/base16-shell/"
 [ -n "${PS1}" ] && [ -s "${BASE16_SHELL}/profile_helper.sh" ] && \
   eval "$("${BASE16_SHELL}/profile_helper.sh")"
 
-eval "$(zoxide init zsh)"
+#------------------------------------------------------------------------------
+# Completions, aliases, and functions
+#------------------------------------------------------------------------------
 
-#--------------------------------------------------------------
-# zgen
-#--------------------------------------------------------------
-
-source "${HOME}/.zgen/zgen.zsh"
-if ! zgen saved; then
-  echo "Creating a zgen save"
-  zgen loadall <<EOPLUGINS
-    yous/vanilli.sh
-    geometry-zsh/geometry
-    pbar1/zsh-terraform
-    zdharma/fast-syntax-highlighting
-    zsh-users/zsh-autosuggestions
-EOPLUGINS
-  zgen save
-fi
-
-#--------------------------------------------------------------
-# Completions
-#--------------------------------------------------------------
-
-export GEOMETRY_GIT_SEPARATOR=""
-source "${XDG_CONFIG_HOME}/shell/k8s.sh"
-source "${XDG_CONFIG_HOME}/shell/aliases.sh"
 if [ $(uname) = 'Linux' ]; then
-  source /usr/share/fzf/key-bindings.zsh
-  source /usr/share/fzf/completion.zsh
+  zsh-defer source_zc "/usr/share/fzf/key-bindings.zsh"
+  zsh-defer source_zc "/usr/share/fzf/completion.zsh"
 elif [ $(uname) = 'Darwin' ]; then
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  zsh-defer source_zc "${HOME}/.fzf.zsh"
 fi
-(( $+commands[aws] ))       && source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
-(( $+commands[kubectl] ))   && source <(kubectl completion zsh)
-(( $+commands[helm] ))      && source <(helm completion zsh)
-(( $+commands[kops] ))      && source <(kops completion zsh)
-(( $+commands[k3d] ))       && source <(k3d completion zsh)
-(( $+commands[stern] ))     && source <(stern --completion=zsh)
-(( $+commands[velero] ))    && source <(velero completion zsh)
-(( $+commands[kubecfg] ))   && source <(kubecfg completion --shell=zsh)
-(( $+commands[yq] ))        && source <(yq shell-completion zsh)
-(( $+commands[terraform] )) && complete -C "$(which terraform)" terraform
-(( $+commands[vault] ))     && complete -C "$(which vault)"     vault
-(( $+commands[op] ))        && eval "$(op completion zsh)"; compdef _op op
-(( $+commands[hub] ))       && eval "$(hub alias -s)"
 
-# added for gcloud
-export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/aliases.sh"
+zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/k8s.sh"
+zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/sfdc.sh"
+zsh-defer source_zc "/usr/local/share/zsh/site-functions/aws_zsh_completer.sh"
+zsh-defer source_zc "${ZDOTDIR}/completions/zoxide.zsh"
+zsh-defer source_zc "${ZDOTDIR}/completions/kubectl.zsh"
+zsh-defer source_zc "${ZDOTDIR}/completions/helm.zsh"
+zsh-defer source_zc "${ZDOTDIR}/completions/stern.zsh"
+source_zc "${ZDOTDIR}/completions/starship.zsh"

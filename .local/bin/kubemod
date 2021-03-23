@@ -1,20 +1,24 @@
-#!/bin/sh
-set -euo pipefail
+#!/usr/bin/env bash
+set -o errexit -o nounset -o pipefail -x
 
-VERSION=${1#"v"}
-if [ -z "$VERSION" ]; then
-    echo "Must specify version!"
+# deletes shortest match of string 'v' from first argument to this script
+kube_version=${1#'v'}
+if [ -z "${kube_version}" ]; then
+    >&2 echo "Must specify version!"
     exit 1
 fi
-MODS=($(
-    curl -sS https://raw.githubusercontent.com/kubernetes/kubernetes/v${VERSION}/go.mod |
-    sed -n 's|.*k8s.io/\(.*\) => ./staging/src/k8s.io/.*|k8s.io/\1|p'
-))
-for MOD in "${MODS[@]}"; do
-    V=$(
-        go mod download -json "${MOD}@kubernetes-${VERSION}" |
-        sed -n 's|.*"Version": "\(.*\)".*|\1|p'
-    )
-    go mod edit "-replace=${MOD}=${MOD}@${V}"
+
+# fetch all go module versions from original kubernetes go.mod
+mapfile -t kube_modules < <(
+    curl --silent --show-error "https://raw.githubusercontent.com/kubernetes/kubernetes/v${kube_version}/go.mod" \
+    | sed -n 's|.*k8s.io/\(.*\) => ./staging/src/k8s.io/.*|k8s.io/\1|p'
+)
+
+# resolve go module versions for each kube module
+for kube_module in "${kube_modules[@]}"; do
+    kube_module_version="$(go mod download -json "${kube_module}@kubernetes-${kube_version}" | sed -n 's|.*"Version": "\(.*\)".*|\1|p')"
+    go mod edit -replace="${kube_module}=${kube_module}@${kube_module_version}"
 done
-go get "k8s.io/kubernetes@v${VERSION}"
+
+# fetch go modules
+go get "k8s.io/kubernetes@v${kube_version}"

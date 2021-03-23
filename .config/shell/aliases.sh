@@ -54,7 +54,7 @@ alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" 
 
 # Syncs a local git repo with remote. Discovers if using a fork and keeps it updated.
 # NOTE: if upstream symbolic ref fails, run: git remote set-head upstream --auto
-gsync() {
+gg() {
   local main_origin=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|^refs/remotes/origin/||')
   if git remote | grep --quiet upstream; then
     local main_upstream=$(git symbolic-ref refs/remotes/upstream/HEAD | sed 's|^refs/remotes/upstream/||')

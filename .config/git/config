@@ -20,14 +20,14 @@
 [pull]
 	rebase = false
 
-[interactive]
-	diffFilter = delta --color-only
-
-#[credential]
-#	helper = osxkeychain
+[credential]
+	helper = osxkeychain
 
 [gpg]
 	program = gpg
+
+[interactive]
+	diffFilter = delta --color-only
 
 [delta]
 	syntax-theme = Solarized (light)
