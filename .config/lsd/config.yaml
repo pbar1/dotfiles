@@ -1,0 +1,10 @@
+date: +%Y-%m-%d %H:%M:%S%z
+
+dereference: false
+
+display: almost-all
+
+sorting:
+  dir-grouping: first
+
+total-size: true

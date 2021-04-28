@@ -14,7 +14,6 @@ alias ldd='otool -L'
 alias cat=bat
 alias vi=nvim
 alias vim=nvim
-alias nc=ncat
 alias ij=idea
 alias gl=idea
 alias code=code
@@ -24,7 +23,7 @@ alias dots='dotfiles status -s -uno'
 alias gogitignore='cp $XDG_CONFIG_HOME/etc/gogitignore .gitignore'
 alias c=clear
 alias wo=where
-alias l='ls -GlASh'
+alias l='lsd --long'
 alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
@@ -47,6 +46,7 @@ alias rgi='rg --ignore-case'
 alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080:8080 mesos/mesos-mini'
 alias condaon='source /opt/anaconda/bin/activate root'
 alias condaoff='source /opt/anaconda/bin/deactivate root'
+alias tf=terraform
 
 # can also set dark mode to 'not dark mode' to toggle
 alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"
@@ -148,6 +148,19 @@ urlencode() {
   python3 -c "import urllib.parse as ul; print(ul.quote_plus('${toencode}'))"
 }
 
+# Usage: sshfwd <port> [ssh args]
+sshfwd() {
+  local port
+  port=$1
+  shift
+
+  # -o ControlPersist=yes  : Prevents connection from being closed if ControlMaster=auto is set
+  # -N                     : Do not execute a remote command
+  # -T                     : Disables pseudo-terminal allocation
+  # -L PORT:127.0.0.1:PORT : Forwards remote PORT to same port on localhpst
+  ssh -o ControlPersist=yes -N -T -L "${port}:127.0.0.1:${port}" "${@}"
+}
+
 #------------------------------------------------------------------------------
 # Other
 #------------------------------------------------------------------------------
@@ -217,7 +230,14 @@ docker_sweepi() {
 }
 
 dockersh() {
-  docker run --rm -it --entrypoint sh "$@"
+  docker run \
+    --rm \
+    --interactive \
+    --tty \
+    --volume="${PWD}:/workdir" \
+    --workdir="/workdir" \
+    --entrypoint="sh" \
+    "$@"
 }
 
 dockerip() {
@@ -276,14 +296,18 @@ tfvargrep() {
   | sort --unique
 }
 
+# Sources AWS credentials into environmnent variables.
+# Uses aws-vault for role assumption, and op (1Password CLI) for MFA token generation.
+# USAGE: avsel
 avsel () {
-  unset AWS_VAULT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SECURITY_TOKEN \
-    AWS_SESSION_TOKEN
-  local aws_profile_sel
-	aws_profile_sel="$(aws-vault list --profiles | fzf --height 40%)"
-	local aws_vault_output
-  aws_vault_output="$(aws-vault exec "$aws_profile_sel" -- env | grep AWS)"
-  source <(echo "$aws_vault_output" | sed -e 's/^/export /g')
+  local aws_profile_sel aws_vault_output mfa_token session_arn
+  unset AWS_VAULT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SECURITY_TOKEN AWS_SESSION_TOKEN
+	aws_profile_sel="$(aws-vault list --profiles | fzf --height='40%')"
+  mfa_token="$(op get totp "AWS (${aws_profile_sel})")"
+  aws_vault_output="$(aws-vault exec "${aws_profile_sel}" --mfa-token="${mfa_token}" -- env | grep 'AWS')"
+  source <(echo "${aws_vault_output}" | sed -e 's|^|export |g')
+  session_arn="$(aws sts get-caller-identity | jq -r '.Arn')"
+  echo "Current caller identity: ${session_arn}"
 }
 
 aws-build() {
