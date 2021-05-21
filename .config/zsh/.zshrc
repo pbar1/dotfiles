@@ -74,6 +74,7 @@ elif [ $(uname) = 'Darwin' ]; then
   zsh-defer source_zc "${HOME}/.fzf.zsh"
 fi
 
+zsh-defer source_zc "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/aliases.sh"
 zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/k8s.sh"
 zsh-defer source_zc "${XDG_CONFIG_HOME}/shell/sfdc.sh"
