@@ -156,7 +156,7 @@ kyam() {
 
 # usage: ksec
 # list/select secrets in the current namespace, then fields within that secret, then print the decoded field to stdout
-ksec() {
+function ksec() {
   secret_name="$(kubectl get secret --output=go-template --template='{{range .items}}{{println .metadata.name}}{{end}}' | fzf --exact --preview "kubectl describe ${resource_type} {}")"
   secret_field="$(kubectl get secret "${secret_name}" --output=go-template --template='{{range $k, $v := .data}}{{println $k}}{{end}}' | fzf)"
   kubectl get secret "${secret_name}" --output=go-template --template="{{index .data \"${secret_field}\" | base64decode}}"
