@@ -6,13 +6,13 @@ This is a [bare git repo][1] in my home directory for tracking dotfiles. It conf
 
 - `git`
 - `zsh`
-- `zgen`
+- `starship`
 
 ## How it was created
 
 ```bash
-git init --bare "$HOME/.config/dotfiles.git"
-alias dotfiles="git --git-dir=$HOME/.config/dotfiles.git --work-tree=$HOME"
+git init --bare "${HOME}/.config/dotfiles.git"
+alias dotfiles="git --git-dir=${HOME}/.config/dotfiles.git --work-tree=${HOME}"
 dotfiles config --local status.showUntrackedFiles no
 dotfiles remote add origin git@github.com:pbar1/dotfiles.git
 ```
@@ -22,8 +22,9 @@ dotfiles remote add origin git@github.com:pbar1/dotfiles.git
 Checkout will refuse to overwrite existing files, so make sure to delete any first. From your home directory,
 
 ```bash
-git clone --bare https://github.com/pbar1/dotfiles.git "$HOME/.config/dotfiles.git"
-dotfiles checkout 
+alias dotfiles="git --git-dir=${HOME}/.config/dotfiles.git --work-tree=${HOME}"
+git clone --bare --recurse-submodules --jobs=8 https://github.com/pbar1/dotfiles.git "${HOME}/.config/dotfiles.git"
+dotfiles checkout
 ```
 
 
