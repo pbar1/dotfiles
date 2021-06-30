@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# usage: kd
+# list/select api resource types, then objects of that type in current namespace, then kubectl describe the selected object
+function kd() {
+  local resource_type resource_name
+
+  resource_type="$(kubectl api-resources --output=name | cut -d. -f1 | sort -u | fzf --exact --preview 'kubectl explain {} && kubectl get {}')"
+  resource_name="$(kubectl get "${resource_type}" --output=go-template --template='{{range .items}}{{println .metadata.name}}{{end}}' | fzf --exact --preview "kubectl describe ${resource_type} {}")"
+  kubectl describe "${resource_type}" "${resource_name}"
+}
+
+kd
