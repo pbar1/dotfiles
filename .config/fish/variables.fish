@@ -62,3 +62,4 @@ set -gx PGSERVICEFILE "$XDG_CONFIG_HOME/pg/pg_service.conf"
 # Misc variables
 set -gx AWS_VAULT_KEYCHAIN_NAME "login"
 set -gx FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"

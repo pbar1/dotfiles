@@ -1,6 +1,6 @@
 abbr c clear
 
-abbr cat bat --style=plain
+abbr cat bat
 
 abbr g git
 abbr gs git status --short

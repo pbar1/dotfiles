@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import configparser
+import getpass
+import os
+import re
+from pathlib import Path
+
+# Resolve creds file and set profile
+home = str(Path.home())
+awscreds_filename = os.getenv("AWS_SHARED_CREDENTIALS_FILE", f"{home}/.aws/credentials")
+profile = "default"
+
+# Read AWS credentials file
+config = configparser.ConfigParser()
+config.read(awscreds_filename)
+
+# Save any existing creds that would be overwritten
+if profile in config:
+    config[f"{profile}-backup"] = config[profile]
+
+# Parse user input containing the creds
+# Should be of the form ' export AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... AWS_SESSION_TOKEN=...'
+input = getpass.getpass(prompt='Paste copied PCSK "Export" data (will not be displayed): ')
+m = re.search("(.*)AWS_ACCESS_KEY_ID=(.*) AWS_SECRET_ACCESS_KEY=(.*) AWS_SESSION_TOKEN=(.*)", input)
+config[profile] = {
+    "aws_access_key_id": m.group(2),
+    "aws_secret_access_key": m.group(3),
+    "aws_session_token": m.group(4),
+}
+
+# Write updated credentials to file
+with open(awscreds_filename, "w") as awscreds_file:
+    config.write(awscreds_file)
