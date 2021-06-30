@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 
+import argparse
 import configparser
 import getpass
 import os
 import re
+import sys
 from pathlib import Path
 
-# Resolve creds file and set profile
-home = str(Path.home())
-awscreds_filename = os.getenv("AWS_SHARED_CREDENTIALS_FILE", f"{home}/.aws/credentials")
-profile = "default"
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="Save AWS creds from PCSK")
+parser.add_argument("--profile", default="default", help="AWS shared credentials profile")
+args = parser.parse_args()
 
-# Read AWS credentials file
+# Resolve AWS shared credentials file and desired profile
+filename = os.getenv("AWS_SHARED_CREDENTIALS_FILE", f"{Path.home()}/.aws/credentials")
+profile = args.profile
+
+# Read existing credentials in the file
 config = configparser.ConfigParser()
-config.read(awscreds_filename)
+config.read(filename)
 
 # Save any existing creds that would be overwritten
 if profile in config:
@@ -21,8 +27,11 @@ if profile in config:
 
 # Parse user input containing the creds
 # Should be of the form ' export AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... AWS_SESSION_TOKEN=...'
-input = getpass.getpass(prompt='Paste copied PCSK "Export" data (will not be displayed): ')
-m = re.search("(.*)AWS_ACCESS_KEY_ID=(.*) AWS_SECRET_ACCESS_KEY=(.*) AWS_SESSION_TOKEN=(.*)", input)
+try:
+  raw = getpass.getpass(prompt='Paste copied PCSK "Export" data (will not be displayed): ')
+except KeyboardInterrupt:
+  sys.exit(130)
+m = re.search("(.*)AWS_ACCESS_KEY_ID=(.*) AWS_SECRET_ACCESS_KEY=(.*) AWS_SESSION_TOKEN=(.*)", raw)
 config[profile] = {
     "aws_access_key_id": m.group(2),
     "aws_secret_access_key": m.group(3),
@@ -30,5 +39,5 @@ config[profile] = {
 }
 
 # Write updated credentials to file
-with open(awscreds_filename, "w") as awscreds_file:
-    config.write(awscreds_file)
+with open(filename, "w") as f:
+    config.write(f)
