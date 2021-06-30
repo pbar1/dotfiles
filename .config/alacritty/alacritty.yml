@@ -359,11 +359,10 @@ selection:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: zsh
+  program: /usr/local/bin/fish
   args:
     - --login
-    - -c
-    - tmux
+    - --command=tmux
 
 # Startup directory
 #

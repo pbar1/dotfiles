@@ -13,3 +13,6 @@
 [submodule "code/personal/vault-openapi-generate/vault"]
 	path = code/personal/vault-openapi-generate/vault
 	url = https://github.com/hashicorp/vault.git
+[submodule ".config/base16-fzf"]
+	path = .config/base16-fzf
+	url = https://github.com/fnune/base16-fzf.git

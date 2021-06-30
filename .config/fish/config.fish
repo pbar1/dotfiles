@@ -1,6 +1,9 @@
 # Source environment variables
 source "$HOME/.config/fish/variables.fish"
 
+# Source abbreviations
+source "$HOME/.config/fish/abbreviations.fish"
+
 # Setup GPG agent, including SSH agent emulation
 set -gx GPG_TTY (tty)
 set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
