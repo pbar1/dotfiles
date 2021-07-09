@@ -1,16 +1,11 @@
-# Source environment variables
-source "$HOME/.config/fish/variables.fish"
-
-# Source abbreviations
-source "$HOME/.config/fish/abbreviations.fish"
-
-# Setup GPG agent, including SSH agent emulation
-set -gx GPG_TTY (tty)
-set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-
 # Commands to run in interactive sessions can go here
 if status is-interactive
+  # Disable fish greeting message
+  set -g fish_greeting
+
+  # Source abbreviations
+  source "$HOME/.config/fish/abbreviations.fish"
+  
   # Install Fisher plugin manager if needed, and install all plugins
   if ! type --query fisher
     curl -sL https://git.io/fisher | source && fisher update
@@ -21,11 +16,3 @@ if status is-interactive
   source "$BASE16_SHELL/profile_helper.fish"
 end
 
-# Disable fish greeting message
-set -g fish_greeting
-
-# Initialize prompt theme
-starship init fish | source
-
-# Initialize "z" directory jumper
-zoxide init fish | source
