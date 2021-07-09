@@ -1,4 +1,4 @@
-# Pierce's Dotfiles
+# pbar's Dotfiles
 
 This is a [bare git repo][1] in my home directory for tracking dotfiles. It conforms to the [XDG directory standard][2].
 

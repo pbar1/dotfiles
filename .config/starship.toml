@@ -1,39 +1,10 @@
-format = """\
-  $username\
-  $hostname\
-  $directory\
-  $git_branch\
-  $git_commit\
-  $git_state\
-  $git_status\
-  $golang\
-  $rust\
-  $java\
-  $python\
-  $nodejs\
-  $terraform\
-  $kubernetes\
-  $helm\
-  $aws\
-  $cmd_duration\
-  $custom\
-  $status\
-  $line_break\
-  $jobs\
-  $battery\
-  $time\
-  $character\
-  """
-
-#------------------------------------------------------------------------------
-# System (host, user, directory, version control)
-#------------------------------------------------------------------------------
+format = '$username$hostname$directory$git_branch$git_commit$git_state$git_status$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$line_break$jobs$battery$time$character'
 
 [git_branch]
 disabled = false
 format = ' [ $branch](bold purple)'
 truncation_length = 10
-truncation_symbol = "…"
+truncation_symbol = '…'
 only_attached = false
 
 [git_commit]
@@ -43,12 +14,8 @@ format = ' [$hash $tag](bold green)'
 [git_status]
 disabled = true
 format = ' [$all_status$ahead_behind](bold red)'
-stashed = "📦"
-modified = "~"
-
-#------------------------------------------------------------------------------
-# Programming Languages
-#------------------------------------------------------------------------------
+stashed = '📦'
+modified = '~'
 
 [golang]
 disabled = true
@@ -70,38 +37,35 @@ format = ' [☕ $version](bold brown)'
 disabled = false
 format = ' [⬢ $version](bold green)'
 
-#------------------------------------------------------------------------------
-# Cloud
-#------------------------------------------------------------------------------
-
 [terraform]
 disabled = true
 format = ' [▰ $version$workspace](bold 105)'
 
 [kubernetes]
-disabled = false
+disabled = true
 format = ' [☸ $context:$namespace](bold blue)'
+
 [kubernetes.context_aliases]
-"pbartine-oausw2-alpha" = "oausw2-alpha"
-"pbartine-dausw2-alpha" = "dausw2-alpha"
-"pbartine-dausw2-general" = "dausw2-general"
-"pbartine-dausw2-compute" = "dausw2-compute"
-"pbartine-sausw2-general" = "sausw2-general"
-"pbartine-sausw2-compute" = "sausw2-compute"
-"pbartine-sausw2-perf-general" = "sausw2-perf-general"
-"pbartine-sausw2-perf-compute" = "sausw2-perf-compute"
-"pbartine-pausw2-e0-general" = "pausw2-e0-general"
-"pbartine-paeuc1-rc-compute" = "paeuc1-rc-compute"
-"pbartine-pausw2-rc-compute" = "pausw2-rc-compute"
-"pbartine-pausw2-rc-general" = "pausw2-rc-general"
-"pbartine-paeuc1-rc-general" = "paeuc1-rc-general"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-1" = "dev-eks-usw2-hawking-1"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-2" = "dev-eks-usw2-hawking-2"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-3" = "dev-eks-usw2-hawking-3"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-4" = "dev-eks-usw2-hawking-4"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-5" = "dev-eks-usw2-hawking-5"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-1" = "dev1-eks-usw2-compute-1"
-"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-2" = "dev1-eks-usw2-compute-2"
+pbartine-oausw2-alpha = 'oausw2-alpha'
+pbartine-dausw2-alpha = 'dausw2-alpha'
+pbartine-dausw2-general = 'dausw2-general'
+pbartine-dausw2-compute = 'dausw2-compute'
+pbartine-sausw2-general = 'sausw2-general'
+pbartine-sausw2-compute = 'sausw2-compute'
+pbartine-sausw2-perf-general = 'sausw2-perf-general'
+pbartine-sausw2-perf-compute = 'sausw2-perf-compute'
+pbartine-pausw2-e0-general = 'pausw2-e0-general'
+pbartine-paeuc1-rc-compute = 'paeuc1-rc-compute'
+pbartine-pausw2-rc-compute = 'pausw2-rc-compute'
+pbartine-pausw2-rc-general = 'pausw2-rc-general'
+pbartine-paeuc1-rc-general = 'paeuc1-rc-general'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-1" = 'dev-eks-usw2-hawking-1'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-2" = 'dev-eks-usw2-hawking-2'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-3" = 'dev-eks-usw2-hawking-3'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-4" = 'dev-eks-usw2-hawking-4'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-5" = 'dev-eks-usw2-hawking-5'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-1" = 'dev1-eks-usw2-compute-1'
+"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-2" = 'dev1-eks-usw2-compute-2'
 
 [helm]
 disabled = false
@@ -110,27 +74,24 @@ format = ' [☸ $version](bold white)'
 [aws]
 disabled = true
 format = ' [☁️ $profile:$region](bold yellow)'
+
 [aws.region_aliases]
-us-east-1 = "use1"
-us-west-2 = "usw2"
-eu-central-1 = "euc1"
+us-east-1 = 'use1'
+us-west-2 = 'usw2'
+eu-central-1 = 'euc1'
 
 [gcloud]
 disabled = true
 
-#------------------------------------------------------------------------------
-# Shell (command execution status, duration)
-#------------------------------------------------------------------------------
-
 [status]
 disabled = false
-symbol = "⚠️"
+symbol = '⚠️'
 format = ' [$symbol $common_meaning$signal_name$maybe_int]($style)'
 
 [character]
-success_symbol = "[♪]()"
-error_symbol = "[ø](red)"
-vicmd_symbol = "[V](blue)"
+success_symbol = '[♪]()'
+error_symbol = '[ø](red)'
+vicmd_symbol = '[V](blue)'
 
 [cmd_duration]
 disabled = false
