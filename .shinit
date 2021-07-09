@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# -----------------------------------------------------------------------------
+# ~/.shinit
+# This file contains commands that should be executed for interactive shells
+# -----------------------------------------------------------------------------
+
+# Exec fish as the interactive shell
+# https://wiki.archlinux.org/title/fish#Modify_.bashrc_to_drop_into_fish
+if [ "$(ps -p $PPID -o 'command=')" != "fish" ]; then
+  exec fish
+fi
