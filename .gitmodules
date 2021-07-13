@@ -1,21 +1,6 @@
-[submodule ".config/zsh/plugins/zsh-defer"]
-	path = .config/zsh/plugins/zsh-defer
-	url = https://github.com/romkatv/zsh-defer.git
-[submodule ".config/zsh/plugins/vanilli.sh"]
-	path = .config/zsh/plugins/vanilli.sh
-	url = https://github.com/yous/vanilli.sh
-[submodule ".config/zsh/plugins/fast-syntax-highlighting"]
-	path = .config/zsh/plugins/fast-syntax-highlighting
-	url = https://github.com/zdharma/fast-syntax-highlighting.git
-[submodule ".config/zsh/plugins/zsh-autosuggestions"]
-	path = .config/zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "code/personal/vault-openapi-generate/vault"]
-	path = code/personal/vault-openapi-generate/vault
-	url = https://github.com/hashicorp/vault.git
-[submodule ".config/base16-fzf"]
-	path = .config/base16-fzf
-	url = https://github.com/fnune/base16-fzf.git
 [submodule ".config/base16-shell"]
 	path = .config/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
+[submodule ".config/base16-fzf"]
+	path = .config/base16-fzf
+	url = https://github.com/fnune/base16-fzf.git
