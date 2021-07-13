@@ -77,4 +77,4 @@ export MANPAGER="sh -c 'col -bx | bat --plain --language=man'"
 export LESS="--mouse --use-color"
 
 # sh will invoke the file specified by ENV during interactive shells
-export ENV="$HOME/.shinit"
+export ENV="$XDG_CONFIG_HOME/sh/shinit"
