@@ -63,6 +63,9 @@ BASE16_SHELL="${HOME}/.config/base16-shell/"
 [ -n "${PS1}" ] && [ -s "${BASE16_SHELL}/profile_helper.sh" ] && \
   eval "$("${BASE16_SHELL}/profile_helper.sh")"
 
+export FZF_DEFAULT_COMMAND='fd --type=f --hidden --follow --exclude=.git'
+export FZF_DEFAULT_OPTS="$(cat "${XDG_CONFIG_HOME}/fzf/default_opts")"
+
 #------------------------------------------------------------------------------
 # Completions, aliases, and functions
 #------------------------------------------------------------------------------
@@ -83,4 +86,5 @@ zsh-defer source_zc "${ZDOTDIR}/completions/zoxide.zsh"
 zsh-defer source_zc "${ZDOTDIR}/completions/kubectl.zsh"
 zsh-defer source_zc "${ZDOTDIR}/completions/helm.zsh"
 zsh-defer source_zc "${ZDOTDIR}/completions/stern.zsh"
+zsh-defer source_zc "${ZDOTDIR}/completions/gus.zsh"
 source_zc "${ZDOTDIR}/completions/starship.zsh"

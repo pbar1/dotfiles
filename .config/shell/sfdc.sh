@@ -24,7 +24,6 @@ hvaultfwd() {
 
   if ! openssl x509 -checkend 86400 -noout -in ~/.tmp/hawking-vault/client.pem; then
     local active_pod=vault-0
-    #local active_pod="$(kubectl get pod --namespace=hawking-vault --selector='vault-active=true' --output=name | sed 's|pod/||g')"
     mkdir -p "${cert_path}"
     kubectl cp "hawking-vault/${active_pod}:/etc/pki_service/ca/cacerts.pem" "${cert_path}/ca.pem"
     kubectl cp "hawking-vault/${active_pod}:/etc/identity/client/certificates/client.pem" "${cert_path}/client.pem"
@@ -35,7 +34,7 @@ hvaultfwd() {
   local kubectl_pid=$!
   socat \
     TCP-LISTEN:9200,fork,reuseaddr \
-    OPENSSL-CONNECT:127.0.0.1:8200,cafile="${cert_path}/ca.pem",certificate="${cert_path}/client.pem",key="${cert_path}/client-key.pem",commonname=vault.hawking-vault.einstein.dev1-uswest2.aws.sfdc.is \
+    OPENSSL-CONNECT:127.0.0.1:8200,cafile="${cert_path}/ca.pem",certificate="${cert_path}/client.pem",key="${cert_path}/client-key.pem",commonname=vault.hawking-vault.svc \
     &
   local socat_pid=$!
 
@@ -62,4 +61,41 @@ pcsk() {
   | sed 's|AWS_SECRET_ACCESS_KEY|aws_secret_access_key|' \
   | sed 's|AWS_SESSION_TOKEN|aws_session_token|' \
   > "${AWS_SHARED_CREDENTIALS_FILE:-"${HOME}/.aws/credentials"}"
+}
+
+#------------------------------------------------------------------------------
+# GUS
+#------------------------------------------------------------------------------
+
+export GUS_DATA_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/gusdata"
+
+gus.me() {
+    mgus user query --name="Pierce Bartine" | jq '.[0]'
+}
+
+gus.epics() {
+    mgus epic query --team="$(cat "${GUS_DATA_DIR}/team_id")" \
+    | gq -r 'printf "%s::%s::%s::%s::%.0f::%.0f\n" .id_ .name (default "-" .start_date) (default "-" .end_date) .storypoints_closed .actual_story_points_on_epic' \
+    | column -t -s::
+}
+
+
+gus.work() {
+    tmpfile="$(mktemp)"
+
+    mgus work query --scrum-team-name="Einstein SRE EP Hawking" \
+        | gq -r 'printf "%s,%s,%s,%s,%s,%s\n" .name (toDate "2006-01-02T15:04:05+00:00" .created_date | date "2006-01-02") (default "-" .assignee) .status (default "-" .sprint_name) .product_tag_name' \
+    > "${tmpfile}"
+
+    cp "${tmpfile}" "${tmpfile}-copy"
+    for user_id in $(cat "${tmpfile}-copy" | cut -d',' -f3 | sort -u); do
+        if [ "${user_id}" = "-" ]; then
+            continue
+        fi
+        username="$(mgus user get "${user_id}" | jq -r ".username" | sed "s|@gus.com||g")"
+        gsed -i "s|${user_id}|${username}|g" "${tmpfile}" 
+    done
+
+    cat "${tmpfile}" | column -t -s,
+    rm "${tmpfile}" "${tmpfile}-copy"
 }

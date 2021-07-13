@@ -23,7 +23,8 @@ alias dots='dotfiles status -s -uno'
 alias gogitignore='cp $XDG_CONFIG_HOME/etc/gogitignore .gitignore'
 alias c=clear
 alias wo=where
-alias l='lsd --long'
+alias ls=exa
+alias l='exa --all --long --git --header'
 alias g=git
 alias gs='git status -s'
 alias gpup='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
@@ -47,10 +48,24 @@ alias mesos-mini='docker run --rm --privileged -p 5050:5050 -p 5051:5051 -p 8080
 alias condaon='source /opt/anaconda/bin/activate root'
 alias condaoff='source /opt/anaconda/bin/deactivate root'
 alias tf=terraform
+alias ssh-fingerprint="ssh-keygen -l -E md5 -f"
+alias applesec='open "x-apple.systempreferences:com.apple.preference.security?General"'
 
-# can also set dark mode to 'not dark mode' to toggle
-alias dark="base16_solarized-dark && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true' && _fzf_opts_dark"
-alias light="base16_solarized-light && osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to false' && _fzf_opts_light"
+function light() {
+    base16_solarized-light
+    zsh "${XDG_CONFIG_HOME}/fzf/base16-solarized-light.config"
+    if [ "$(uname)" == "Darwin" ]; then
+        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+    fi
+}
+
+function dark() {
+    base16_solarized-dark
+    zsh "${XDG_CONFIG_HOME}/fzf/base16-solarized-dark.config"
+    if [ "$(uname)" == "Darwin" ]; then
+        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+    fi
+}
 
 # Syncs a local git repo with remote. Discovers if using a fork and keeps it updated.
 # NOTE: if upstream symbolic ref fails, run: git remote set-head upstream --auto
@@ -77,11 +92,6 @@ vaultaudlog() {
 secsu() {
   op get item secrets.env > /dev/null 2>&1 || eval $(op signin)
   eval "$(op get item secrets.env | jq '.details.sections[0].fields' | gq "export{{range .}} {{.t }}='{{.v}}'{{end}}")"
-}
-
-numeronym() {
-  str="${1}"
-  echo "${str:0:1}$(echo ${str:1:-1} | wc -c | tr -d '[:space:]')${str: -1}"
 }
 
 ddd() {

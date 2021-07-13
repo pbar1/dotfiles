@@ -57,7 +57,12 @@ Starship was chosen as the prompt for simple configuration. It also works on man
 
 Custom functions are kept in `~/.local/bin` as executable programs. This reduces dependence on a specific shell's features, allows use of other languages (ie, Python), and improves shell loading time (as they're just programs on the PATH).
 
+## TODO
+
+- [ ] [Ignore][3] changes due to toggling (`starship toggle kubernetes`)
+
 <!-- References -->
 
 [1]: https://news.ycombinator.com/item?id=11071754
 [2]: https://wiki.archlinux.org/index.php/XDG_Base_Directory
+[3]: https://stackoverflow.com/questions/6557467/can-git-ignore-a-specific-line
