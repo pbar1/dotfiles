@@ -31,7 +31,6 @@ export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
-export XZ_DEFAULTS="--verbose --keep --threads=0"
 
 # (XDG support) DevOps
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
@@ -63,15 +62,19 @@ export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 #export VSCODE_APPDATA="$XDG_CONFIG_HOME"
 
-# Misc variables
-export AWS_VAULT_KEYCHAIN_NAME="login"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
 # Setup GPG agent, including SSH agent emulation
 GPG_TTY="$(tty)"; export GPG_TTY
 SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"; export SSH_AUTH_SOCK
 gpgconf --launch gpg-agent
+
+# Misc variables
+export EDITOR="nvim"
+export VISUAL="nvim"
+export AWS_VAULT_KEYCHAIN_NAME="login"
+export XZ_DEFAULTS="--verbose --keep --threads=0"
+export FZF_DEFAULT_COMMAND="fd --type=file --exclude=.git --hidden --follow"
+export MANPAGER="sh -c 'col -bx | bat --plain --language=man'"
+export LESS="--mouse --use-color"
 
 # sh will invoke the file specified by ENV during interactive shells
 export ENV="$HOME/.shinit"

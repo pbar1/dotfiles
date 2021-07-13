@@ -359,10 +359,11 @@ selection:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/tmux
-  # args:
-  #   - --login
-  #   - --command=tmux
+  program: /bin/dash
+  args:
+    - -l
+    - -c
+    - tmux
 
 # Startup directory
 #
