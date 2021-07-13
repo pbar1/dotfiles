@@ -4,3 +4,6 @@
 [submodule ".config/base16-fzf"]
 	path = .config/base16-fzf
 	url = https://github.com/fnune/base16-fzf.git
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/pbar1/LunarVim.git
