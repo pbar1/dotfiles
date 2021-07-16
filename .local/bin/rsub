@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+# USAGE: rsub [FROM_REGEX] [TO_REGEX]
+
+main() {
+  for f in $(rg --files-with-matches "$1"); do
+    tmp_f="$(mktemp)"
+    rg --passthru --replace="$2" "$1" "${f}" > "${tmp_f}"
+    mv "${tmp_f}" "${f}"
+  done
+}
+
+main "$@"
