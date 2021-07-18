@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#------------------------------------------------------------------------------
+# Try this to fuzzy-search through all available packages, with package info
+# shown in a preview window, and then install selected packages
+# 
+# USAGE: pac.install
+#------------------------------------------------------------------------------
+
+set -o errexit -o pipefail
+
+paru --sync --list --quiet \
+| fzf --multi --preview 'paru --sync --info {1}' \
+| xargs --no-run-if-empty --open-tty paru --sync
+

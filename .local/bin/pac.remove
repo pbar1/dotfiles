@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#------------------------------------------------------------------------------
+# List all your installed packages, and then remove selected packages
+#
+# USAGE: pac.remove
+#------------------------------------------------------------------------------
+
+set -o errexit -o pipefail
+
+pacman --query --quiet \
+| fzf --multi --preview 'pacman --query --info {1}' \
+| xargs --no-run-if-empty --open-tty paru --remove --nosave --recursive
