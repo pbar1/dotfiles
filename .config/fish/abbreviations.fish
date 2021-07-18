@@ -35,4 +35,4 @@ abbr rgi rg --ignore-case
 abbr ls exa
 abbr l exa --all --long --git --header
 
-abbr wo command --all --search
+abbr wo type --all --path

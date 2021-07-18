@@ -74,7 +74,7 @@ export AWS_VAULT_KEYCHAIN_NAME="login"
 export XZ_DEFAULTS="--verbose --keep --threads=0"
 export FZF_DEFAULT_COMMAND="fd --type=file --exclude=.git --hidden --follow"
 export MANPAGER="sh -c 'col -bx | bat --plain --language=man'"
-export LESS="--mouse --use-color"
+export LESS="--mouse --use-color --quit-if-one-screen"
 
 # sh will invoke the file specified by ENV during interactive shells
 export ENV="$XDG_CONFIG_HOME/sh/shinit"
