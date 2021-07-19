@@ -9,7 +9,10 @@
 
 set -o errexit -o pipefail
 
-paru --sync --list --quiet \
-| fzf --multi --preview 'paru --sync --info {1}' \
-| xargs --no-run-if-empty --open-tty paru --sync
+paru --sync --list --quiet                                   \
+| fzf --multi                                                \
+    --header='Select packages to install (tab for multiple)' \
+    --preview='paru --sync --info {1}'                       \
+| xargs --no-run-if-empty --open-tty                         \
+    paru --sync
 
