@@ -36,3 +36,5 @@ abbr ls exa
 abbr l exa --all --long --git --header
 
 abbr wo type --all --path
+
+abbr yay paru
