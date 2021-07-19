@@ -8,9 +8,25 @@
 
 set -o errexit -o pipefail
 
-pacman --query --quiet                                      \
-| fzf --multi                                               \
-    --header='Select packages to remove (tab for multiple)' \
-    --preview='pacman --query --info {1}'                   \
-| xargs --no-run-if-empty --open-tty                        \
-    paru --remove --nosave --recursive
+OS="$(uname)"
+
+if [ "${OS}" = "Linux" ]; then
+  LIST_CMD="paru --query --quiet"
+  PREVIEW_CMD="paru --query --info"
+  REMOVE_CMD="paru --remove --nosave --recursive"
+elif [ "${OS}" = "Darwin" ]; then
+  LIST_CMD="brew list -t"
+  PREVIEW_CMD="brew info"
+  REMOVE_CMD="brew uninstall"
+else
+  echo "unsupported os: ${OS}"
+  exit 1
+fi
+
+${LIST_CMD}                                                    \
+| fzf --exact --multi --print0                                 \
+    --header="<TAB> to toggle package(s) selected for removal" \
+    --preview="${PREVIEW_CMD} {1}"                             \
+    --preview-window="right:75%"                               \
+| xargs -0 ${REMOVE_CMD}
+
