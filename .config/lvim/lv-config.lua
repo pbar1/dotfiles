@@ -13,9 +13,10 @@ an executable
 O.format_on_save = true
 O.lint_on_save = true
 O.completion.autocomplete = true
-O.colorscheme = "spacegray"
+O.colorscheme = "solarized8"
 O.default_options.wrap = true
 O.default_options.timeoutlen = 100
+
 -- keymappings
 O.keys.leader_key = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
@@ -65,7 +66,7 @@ O.treesitter.highlight.enabled = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.analysis.use_library_code_types = true
 -- To change default formatter from yapf to black
--- O.lang.python.formatter.exe = "black"
+O.lang.python.formatter.exe = "black"
 -- O.lang.python.formatter.args = {"-"}
 -- To change enabled linters
 -- https://github.com/mfussenegger/nvim-lint#available-linters
@@ -109,13 +110,10 @@ O.lang.latex.latexindent.modify_line_breaks = false
 -- O.lang.latex.ignore_errors = { }
 
 -- Additional Plugins
--- O.user_plugins = {
---     {"folke/tokyonight.nvim"}, {
---         "ray-x/lsp_signature.nvim",
---         config = function() require"lsp_signature".on_attach() end,
---         event = "InsertEnter"
---     }
--- }
+O.user_plugins = {
+  {'editorconfig/editorconfig-vim'},
+  {'lifepillar/vim-solarized8'},
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
