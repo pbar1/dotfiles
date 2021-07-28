@@ -7,6 +7,8 @@
 
 # Exec fish as the interactive shell
 # https://wiki.archlinux.org/title/fish#Modify_.bashrc_to_drop_into_fish
-if [ "$(ps -p $PPID -o 'command=')" != "fish" ]; then
+PARENT_CMD="$(ps -p $PPID -o 'command=')"
+#echo "${PARENT_CMD}" >>"${HOME}/dash_parent_cmd_log"
+if [ "${PARENT_CMD}" != "fish" ] && [ "${PARENT_CMD}" != "/Applications/IntelliJ IDEA.app/Contents/MacOS/idea" ]; then
   exec fish
 fi
