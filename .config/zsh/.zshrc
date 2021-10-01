@@ -14,7 +14,7 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
-# Syntax highlighting, command autosuggestions, and command completions
+# Load ZSH plugins
 # https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
 zinit wait lucid for                                                      \
                                        fnune/base16-shell                 \
@@ -27,11 +27,7 @@ zinit wait lucid for                                                      \
   blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
 
 # Load Starship prompt
-# NOTE: Awaiting bug fix by https://github.com/starship/starship/pull/3088
-# zinit wait'!0' lucid as'command' from'gh-r' for                                   \
-#   atclone'./starship init zsh > init.zsh; ./starship completions zsh > _starship' \
-#   atpull'%atclone' src'init.zsh'                                                  \
-#     starship/starship
+# NOTE: Load with Zinit after fix: https://github.com/starship/starship/pull/3088
 eval "$(starship init zsh)"
 
 # Source shell aliases
