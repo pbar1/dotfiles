@@ -16,20 +16,15 @@ autoload -Uz _zinit
 
 # Syntax highlighting, command autosuggestions, and command completions
 # https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
-zinit wait lucid for                                                                                        \
-    yous/vanilli.sh                                                                                         \
-    olets/zsh-abbr                                                                                          \
-    fnune/base16-shell                                                                                      \
-  atinit'zicompinit; zicdreplay'                                                                            \
-    zdharma/fast-syntax-highlighting                                                                        \
-  atload'_zsh_autosuggest_start'                                                                            \
-    zsh-users/zsh-autosuggestions                                                                           \
-  blockf atpull'zinit creinstall -q .'                                                                      \
-    zsh-users/zsh-completions                                                                               \
-  id-as'zoxide_init' as'null' atclone'zoxide init zsh > init.zsh' atpull'%atclone' run-atpull src'init.zsh' \
-    zdharma/null                                                                                            \
-  pick'shell/key-bindings.zsh'                                                                              \
-    junegunn/fzf
+zinit wait lucid for                                                      \
+                                       fnune/base16-shell                 \
+                                       yous/vanilli.sh                    \
+                                       olets/zsh-abbr                     \
+                                       ellie/atuin                        \
+                                       ajeetdsouza/zoxide                 \
+  atinit'zicompinit; zicdreplay'       zdharma/fast-syntax-highlighting   \
+  atload'_zsh_autosuggest_start'       zsh-users/zsh-autosuggestions      \
+  blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
 
 # Load Starship prompt
 # NOTE: Awaiting bug fix by https://github.com/starship/starship/pull/3088
