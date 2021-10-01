@@ -27,7 +27,7 @@ zinit wait lucid for                                                      \
   blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
 
 # Load Starship prompt
-# NOTE: Load with Zinit after fix: https://github.com/starship/starship/pull/3088
+# NOTE: Load with Zinit after https://github.com/starship/starship/pull/3088
 eval "$(starship init zsh)"
 
 # Source shell aliases
