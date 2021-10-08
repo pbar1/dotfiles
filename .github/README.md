@@ -5,7 +5,7 @@ This is a [bare git repo][1] in my home directory for tracking dotfiles. It conf
 ## Dependencies
 
 - `git`
-- `fish`
+- `zsh`
 - `starship`
 
 ## How it was created
@@ -29,13 +29,13 @@ dotfiles checkout
 
 ## Design
 
-- Terminal: Alacritty
-- Terminal multiplexer: tmux (+tpm)
-- Shell
-  - Login: dash
-  - Interactive: fish (+fisher)
-- Prompt: Starship
-- Editor: Neovim
+- Terminal: [Alacritty](https://github.com/alacritty/alacritty)
+- Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
+  - Plugin manager: [tpm](https://github.com/tmux-plugins/tpm)
+- Shell: [Zsh](https://www.zsh.org/)
+  - Plugin manager: [Zinit](https://github.com/zdharma/zinit)
+- Prompt: [Starship](https://starship.rs/)
+- Editor: [Neovim](https://neovim.io/)
 
 ### Terminal
 
@@ -45,11 +45,7 @@ tmux was chosen as the terminal multiplexer for its configurability and to augme
 
 ### Shell
 
-Previously ZSH (which is also POSIX-compliant) was used for both login and interactive shells.
-
-Dash was chosen as the login shell for its simplicity and speed. As a POSIX-compliant `/bin/sh`, Dash provides portable way to set environment variables. It's small codebase also allows for quick execution times.
-
-Fish was chosen for interactive shell use for its wealth of features out of the box, namely syntax highlighting and autosuggestions. These are obtainable in ZSH via plugins but did not work as well. Fish's _universal variables_ allow FZF themes to be set persistently - this is nontrivial in other shells.
+Zsh was chosen as the shell for its wealth of features, community supported plugins that extend its usability, and POSIX compliance. Zinit (despite a rather unfriendly syntax and high amount of complexity) was chosen as the plugin manager to use with Zsh due to its extreme speed and expressiveness.
 
 Starship was chosen as the prompt for simple configuration. It also works on many different shells, making the prompt easily portable.
 
@@ -57,12 +53,20 @@ Starship was chosen as the prompt for simple configuration. It also works on man
 
 Custom functions are kept in `~/.local/bin` as executable programs. This reduces dependence on a specific shell's features, allows use of other languages (ie, Python), and improves shell loading time (as they're just programs on the PATH).
 
+Aliases are kept in `~./config/sh/aliases.sh` and are kept POSIX-compliant for reusability.
+
+Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviations`, and only work when using Zsh.
+
 ## TODO
 
 - [ ] [Ignore][3] changes due to toggling (`starship toggle kubernetes`)
+- [ ] Install script
 
 <!-- References -->
 
 [1]: https://news.ycombinator.com/item?id=11071754
 [2]: https://wiki.archlinux.org/index.php/XDG_Base_Directory
 [3]: https://stackoverflow.com/questions/6557467/can-git-ignore-a-specific-line
+[4]: https://arslan.io/2021/02/15/automatic-dark-mode-for-terminal-applications/
+[5]: https://www.reddit.com/r/neovim/comments/mehcyt/sync_neovim_background_with_macos_dark_mode/
+[6]: https://docs.google.com/presentation/d/1HOLKb63i-aXNLug5hZsH9QIYxifn2ak-YQf2gRD7jII
