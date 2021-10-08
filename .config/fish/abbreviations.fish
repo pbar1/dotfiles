@@ -24,8 +24,8 @@ abbr tf terraform
 abbr tm tmux
 abbr tml tmux ls
 
-abbr vi nvim
-abbr vim nvim
+abbr vi lvim
+abbr vim lvim
 
 abbr xi xargs -I {}
 
