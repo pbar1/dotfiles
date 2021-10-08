@@ -45,28 +45,6 @@ format = ' [▰ $version$workspace](bold 105)'
 disabled = false
 format = ' [☸ $context:$namespace](bold blue)'
 
-[kubernetes.context_aliases]
-pbartine-oausw2-alpha = 'oausw2-alpha'
-pbartine-dausw2-alpha = 'dausw2-alpha'
-pbartine-dausw2-general = 'dausw2-general'
-pbartine-dausw2-compute = 'dausw2-compute'
-pbartine-sausw2-general = 'sausw2-general'
-pbartine-sausw2-compute = 'sausw2-compute'
-pbartine-sausw2-perf-general = 'sausw2-perf-general'
-pbartine-sausw2-perf-compute = 'sausw2-perf-compute'
-pbartine-pausw2-e0-general = 'pausw2-e0-general'
-pbartine-paeuc1-rc-compute = 'paeuc1-rc-compute'
-pbartine-pausw2-rc-compute = 'pausw2-rc-compute'
-pbartine-pausw2-rc-general = 'pausw2-rc-general'
-pbartine-paeuc1-rc-general = 'paeuc1-rc-general'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-1" = 'dev-eks-usw2-hawking-1'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-2" = 'dev-eks-usw2-hawking-2'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-3" = 'dev-eks-usw2-hawking-3'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-4" = 'dev-eks-usw2-hawking-4'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev-eks-usw2-hawking-5" = 'dev-eks-usw2-hawking-5'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-1" = 'dev1-eks-usw2-compute-1'
-"arn:aws:eks:us-west-2:670963146492:cluster/dev1-eks-usw2-compute-2" = 'dev1-eks-usw2-compute-2'
-
 [helm]
 disabled = false
 format = ' [☸ $version](bold white)'
