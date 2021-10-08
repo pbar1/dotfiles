@@ -61,20 +61,25 @@ export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 #export VSCODE_APPDATA="$XDG_CONFIG_HOME"
+#export VSCODE_PORTABLE="$XDG_CONFIG_HOME/code"
 
 # Setup GPG agent, including SSH agent emulation
-GPG_TTY="$(tty)"; export GPG_TTY
-SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"; export SSH_AUTH_SOCK
+GPG_TTY="$(tty)"
+export GPG_TTY
+#SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+#export SSH_AUTH_SOCK
 gpgconf --launch gpg-agent
 
 # Misc variables
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="lvim"
+export VISUAL="lvim"
 export AWS_VAULT_KEYCHAIN_NAME="login"
 export XZ_DEFAULTS="--verbose --keep --threads=0"
+export ZSTD_NBTHREADS="0"
 export FZF_DEFAULT_COMMAND="fd --type=file --exclude=.git --hidden --follow"
+export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
 export MANPAGER="sh -c 'col -bx | bat --plain --language=man'"
 export LESS="--mouse --use-color --quit-if-one-screen"
 
 # sh will invoke the file specified by ENV during interactive shells
-export ENV="$XDG_CONFIG_HOME/sh/shinit"
+#export ENV="$XDG_CONFIG_HOME/sh/shinit"
