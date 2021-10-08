@@ -16,15 +16,17 @@ autoload -Uz _zinit
 
 # Load ZSH plugins
 # https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
-zinit wait lucid for                                                      \
-                                       fnune/base16-shell                 \
-                                       yous/vanilli.sh                    \
-                                       olets/zsh-abbr                     \
-                                       ellie/atuin                        \
-                                       ajeetdsouza/zoxide                 \
-  atinit'zicompinit; zicdreplay'       zdharma/fast-syntax-highlighting   \
-  atload'_zsh_autosuggest_start'       zsh-users/zsh-autosuggestions      \
-  blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
+zinit wait lucid for                                                             \
+                                                fnune/base16-shell               \
+                                                yous/vanilli.sh                  \
+                                                olets/zsh-abbr                   \
+                                                ajeetdsouza/zoxide               \
+                                                Aloxaf/fzf-tab                   \
+  multisrc'shell/{completion,key-bindings}.zsh' junegunn/fzf                     \
+  as'completion'                                sawadashota/go-task-completions  \
+  atinit'zicompinit; zicdreplay'                zdharma/fast-syntax-highlighting \
+  atload'_zsh_autosuggest_start'                zsh-users/zsh-autosuggestions    \
+  blockf atpull'zinit creinstall -q .'          zsh-users/zsh-completions
 
 # Load Starship prompt
 # NOTE: Load with Zinit after https://github.com/starship/starship/pull/3088
@@ -32,3 +34,5 @@ eval "$(starship init zsh)"
 
 # Source shell aliases
 source "${XDG_CONFIG_HOME}/sh/aliases.sh"
+source "${XDG_CONFIG_HOME}/sh/sfdc.sh"
+
