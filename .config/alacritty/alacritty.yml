@@ -359,7 +359,7 @@ selection:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /bin/dash
+  program: /bin/zsh
   args:
     - -l
     - -c
