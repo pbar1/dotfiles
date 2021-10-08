@@ -1,12 +1,22 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # USAGE: rsub [FROM_REGEX] [TO_REGEX]
 
+set -o errexit -o pipefail
+
 main() {
-  for f in $(rg --files-with-matches "$1"); do
-    tmp_f="$(mktemp)"
-    rg --passthru --replace="$2" "$1" "${f}" > "${tmp_f}"
-    mv "${tmp_f}" "${f}"
+  local from to
+  from="${1}"
+  to="${2}"
+  shift
+  shift
+
+  for f in $(rg --files-with-matches "${@}" -- "${from}"); do
+    local temp_file
+    temp_file="$(mktemp)"
+
+    rg --passthru --replace="${to}" "${@}" -- "${from}" "${f}" >"${temp_file}"
+    mv "${temp_file}" "${f}"
   done
 }
 
-main "$@"
+main "${@}"
