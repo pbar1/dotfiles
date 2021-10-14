@@ -1,4 +1,10 @@
-# pbar's Dotfiles
+<h1 align="center">pbar's dotfiles</h1>
+<h3 align="center">:house: is where the :gear: is</h3>
+
+<p align="center">
+  <img alt="Neovim" src="https://img.shields.io/badge/-Neovim-57A143?logo=Neovim&logoColor=white" />
+</p>
+
 
 This is a [bare git repo][1] in my home directory for tracking dotfiles. It conforms to the [XDG directory standard][2].
 
@@ -27,7 +33,7 @@ git clone --bare --recurse-submodules --jobs=8 https://github.com/pbar1/dotfiles
 dotfiles checkout
 ```
 
-## Design
+## Components
 
 - Terminal: [Alacritty](https://github.com/alacritty/alacritty)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
