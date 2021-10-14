@@ -1,5 +1,5 @@
 <h1 align="center">pbar's dotfiles</h1>
-<h3 align="center">:house: is where the :gear: is</h3>
+<h3 align="center">~ is where the ⚙ is</h3>
 
 <p align="center">
   <img alt="Alacritty" src="https://img.shields.io/badge/-Alacritty-F46D01?logo=Alacritty&logoColor=white" />
