@@ -19,7 +19,7 @@ local doom = {
     "tabline",            -- Tabline, shows your buffers list at top
     -- "zen",             -- Distraction free environment
     "which-key",          -- Keybindings popup menu like Emacs' guide-key
-    -- "indentlines",     -- Show indent lines
+    "indentlines",        -- Show indent lines
     -- "show_registers",  -- popup that shows register contents
   },
   doom = {
@@ -38,7 +38,7 @@ local doom = {
     "telescope",          -- Highly extendable fuzzy finder over lists
     "formatter",          -- File formatting
     "autopairs",          -- Autopairs
-    "editorconfig",    -- EditorConfig support for Neovim
+    "editorconfig",       -- EditorConfig support for Neovim
     "kommentary",         -- Comments plugin
     "lsp",                -- Language Server Protocols
     "dap",                -- Debug Adapter Protocol
@@ -53,26 +53,26 @@ local doom = {
     -- "css",             -- CSS support
     -- "javascript",      -- JavaScript support
     -- "typescript",      -- TypeScript support
-    "bash",            -- The terminal gods language
-    "python +lsp",     -- Python support + lsp
+    "bash",               -- The terminal gods language
+    "python +lsp",        -- Python support + lsp
     -- "ruby",            -- Look ma, I love the gems!
     "lua",                -- Support for our gods language
     -- "elixir",          -- Build scalable and maintainable software
     -- "haskell",         -- Because Functional programming is fun, isn't it?
 
-    "rust +lsp",       -- Let's get rusty!
-    "go",              -- Hello, gopher
+    "rust +lsp",          -- Let's get rusty!
+    "go",                 -- Hello, gopher
     -- "cpp",             -- C++ support
     -- "java",            -- Java support
 
-    "config",          -- Configuration files (JSON, YAML, TOML)
-    "dockerfile",      -- Do you like containers, right?
+    "config",             -- Configuration files (JSON, YAML, TOML)
+    "dockerfile",         -- Do you like containers, right?
   },
   utilities = {
     -- "suda",            -- Write and read files without sudo permissions
     -- "lazygit",         -- LazyGit integration for Neovim, requires LazyGit
     -- "neogit",          -- Magit for Neovim
-    "colorizer",       -- Fastest colorizer for Neovim
+    "colorizer",          -- Fastest colorizer for Neovim
     "range-highlight",    -- hightlights ranges you have entered in commandline
   },
   web = {

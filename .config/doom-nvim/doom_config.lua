@@ -20,7 +20,7 @@ local doom = {
   -- false : Disable format on save
   -- true  : Enable format on save
   -- @default = false
-  fmt_on_save = false,
+  fmt_on_save = true,
 
   -- Disable Vim macros
   -- false : Enable Vim macros
@@ -51,7 +51,7 @@ local doom = {
   -- false : ignores undo Directories (this code block will be ignored)
   -- true  : enable undo files/undo dirs.
   -- @default = false
-  backup = false, -- WARNING: if you change this to false and you have an undo dir already, it will REMOVE the undodir (loss of data might take place)
+  backup = true, -- WARNING: if you change this to false and you have an undo dir already, it will REMOVE the undodir (loss of data might take place)
 
   -- Enable Line wrapping
   -- false : disables line wrapping
@@ -366,7 +366,13 @@ local nvim = {
   --        print("Hello, custom functions!")
   --      end
   --   }
-  functions = {},
+  functions = {
+    function()
+      -- vim.opt.list = true
+      -- vim.opt.listchars:append("space:⋅")
+      -- vim.opt.listchars:append("eol:↴")
+    end
+  },
 
   -- Set custom options
   -- @default = {}
