@@ -1,8 +1,0 @@
-{
-    "editor.formatOnSave": true,
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.untitled.hint": "hidden",
-    "workbench.colorTheme": "Better Solarized Dark",
-    "workbench.iconTheme": "material-icon-theme",
-    "explorer.confirmDelete": false
-}
