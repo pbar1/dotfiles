@@ -2,7 +2,15 @@
 <h3 align="center">:house: is where the :gear: is</h3>
 
 <p align="center">
+  <img alt="Alacritty" src="https://img.shields.io/badge/-Alacritty-F46D01?logo=Alacritty&logoColor=white" />
+  <img alt="tmux" src="https://img.shields.io/badge/-tmux-1BB91F?logo=tmux&logoColor=white" />
+  <img alt="Zsh" src="https://img.shields.io/badge/-Zsh-000000?logo=zelle&logoColor=white" />
+  <img alt="Starship" src="https://img.shields.io/badge/-Starship-DD0B78?logo=Starship&logoColor=white" />
   <img alt="Neovim" src="https://img.shields.io/badge/-Neovim-57A143?logo=Neovim&logoColor=white" />
+</p>
+
+<p align="center">
+  <img src="./preview.png" width="75%" height="75%"/>
 </p>
 
 
