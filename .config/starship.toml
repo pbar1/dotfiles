@@ -1,4 +1,10 @@
-format = '$username$hostname$directory$git_branch$git_commit$git_state$git_status$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$line_break$jobs$battery$time$character'
+format = '$character'
+right_format = '$directory$username$hostname$git_branch$git_commit$git_state$git_status$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time'
+
+[hostname]
+disabled = true
+ssh_only = false
+format = ' [$hostname](bold red)'
 
 [git_branch]
 disabled = false
@@ -42,7 +48,7 @@ disabled = true
 format = ' [▰ $version$workspace](bold 105)'
 
 [kubernetes]
-disabled = false
+disabled = true
 format = ' [☸ $context:$namespace](bold blue)'
 
 [helm]
