@@ -71,8 +71,8 @@ export GPG_TTY
 gpgconf --launch gpg-agent
 
 # Misc variables
-export EDITOR="lvim"
-export VISUAL="lvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export AWS_VAULT_KEYCHAIN_NAME="login"
 export XZ_DEFAULTS="--verbose --keep --threads=0"
 export ZSTD_NBTHREADS="0"
