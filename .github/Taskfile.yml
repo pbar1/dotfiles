@@ -1,0 +1,22 @@
+version: '3'
+
+env:
+  DOCKER_BUILDKIT: '1'
+
+tasks:
+  default: task --list
+
+  brew:save:
+    desc: Dumps installed Homebrew packages to files
+    cmds:
+    - brew bundle dump --force --file="${XDG_CONFIG_HOME}/brew/Brewfile.tmp"
+    - cat "${XDG_CONFIG_HOME}/brew/Brewfile.tmp" | grep -e '^tap' > "${XDG_CONFIG_HOME}/brew/Brewfile.tap"
+    - cat "${XDG_CONFIG_HOME}/brew/Brewfile.tmp" | grep -e '^brew' > "${XDG_CONFIG_HOME}/brew/Brewfile.brew"
+    - cat "${XDG_CONFIG_HOME}/brew/Brewfile.tmp" | grep -e '^cask' > "${XDG_CONFIG_HOME}/brew/Brewfile.cask"
+    - cat "${XDG_CONFIG_HOME}/brew/Brewfile.tmp" | grep -e '^mas' > "${XDG_CONFIG_HOME}/brew/Brewfile.mas"
+    - rm "${XDG_CONFIG_HOME}/brew/Brewfile.tmp"
+
+  brew:print:
+    desc: Prints the complete global Brewfile
+    cmds:
+    - cat ${XDG_CONFIG_HOME}/brew/Brewfile.*
