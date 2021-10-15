@@ -77,7 +77,7 @@ Starship was chosen as the prompt for simple configuration. It also works on man
 
 Custom functions are kept in `~/.local/bin` as executable programs. This reduces dependence on a specific shell's features, allows use of other languages (ie, Python), and improves shell loading time (as they're just programs on the PATH).
 
-Aliases are kept in `~./config/sh/aliases.sh` and are kept POSIX-compliant for reusability.
+Aliases are kept in `~/.config/sh/aliases.sh` and are kept POSIX-compliant for reusability.
 
 Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviations`, and only work when using Zsh.
 
