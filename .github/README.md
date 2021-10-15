@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <img alt="ci" src="https://github.com/pbar1/dotfiles/actions/workflows/ci.yml/badge.svg" />
+</p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/pbar1/dotfiles/master/.github/preview.png" width="75%" height="75%"/>
 </p>
 
