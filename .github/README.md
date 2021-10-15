@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="./preview.png" width="75%" height="75%"/>
+  <img src="preview.png" width="75%" height="75%"/>
 </p>
 
 ## Try it out!

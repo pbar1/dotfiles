@@ -1,4 +1,6 @@
 FROM alpine:edge
+LABEL org.opencontainers.image.authors "Pierce Bartine <pbar1@users.noreply.github.com>"
+LABEL org.opencontainers.image.source "https://github.com/pbar1/dotfiles"
 
 # Set working directory to be our (ie, the root user's) home directory
 WORKDIR /root
