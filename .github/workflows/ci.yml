@@ -28,4 +28,4 @@ jobs:
         with:
           push: true
           tags: ghcr.io/pbar1/dotfiles:latest
-          path: .github
+          file: .github/Dockerfile
