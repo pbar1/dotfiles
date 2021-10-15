@@ -13,15 +13,6 @@
   <img src="./preview.png" width="75%" height="75%"/>
 </p>
 
-
-This is a [bare git repo][1] in my home directory for tracking dotfiles. It conforms to the [XDG directory standard][2].
-
-## Dependencies
-
-- `git`
-- `zsh`
-- `starship`
-
 ## Try it out!
 
 You can demo my dotfiles by launching a shell in a throwaway container with this command:
@@ -31,6 +22,12 @@ docker run --rm -ith pbar-dotfiles ghcr.io/pbar1/dotfiles
 ```
 
 Try things, like running `base16_<tab>` to change the shell theme!
+
+## Dependencies
+
+- `git`
+- `zsh`
+- `starship`
 
 ## How it was created
 
@@ -51,8 +48,11 @@ git clone --bare --recurse-submodules --jobs=8 https://github.com/pbar1/dotfiles
 dotfiles checkout
 ```
 
-## Components
+## Rationale & Components
 
+This is a [bare git repo][1] in my home directory for tracking dotfiles. It conforms to the [XDG directory standard][2].
+
+Here are the components:
 - Terminal: [Alacritty](https://github.com/alacritty/alacritty)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
   - Plugin manager: [tpm](https://github.com/tmux-plugins/tpm)
