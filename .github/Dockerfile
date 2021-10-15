@@ -1,15 +1,16 @@
-FROM archlinux:base-devel
+FROM alpine:edge
 
 # Set working directory to be our (ie, the root user's) home directory
 WORKDIR /root
 
 # Install dependencies
-RUN pacman --sync \
-      --refresh --sysupgrade --noconfirm --noprogressbar \
-      man git zsh starship fzf ripgrep fd neovim python nodejs zoxide bat exa
+RUN apk update && \
+    apk add --no-cache \
+      man-db git zsh starship fzf ripgrep fd neovim python3 nodejs zoxide bat exa
 
-# Set our default shell
-RUN chsh --shell /bin/zsh
+# Tweak some things to allow our shell to work properly in an minimal environment
+RUN sed -i '/gpgconf/s/^/#/g' /root/.profile && \
+    mkdir -p /root/.local/share/zsh/
 
 # Clone the dotfiles straight into the home directory
 RUN git clone --bare --recurse-submodules --jobs=8 https://github.com/pbar1/dotfiles.git /root/.config/dotfiles.git && \
@@ -20,8 +21,8 @@ RUN zsh --login --interactive
 
 # Enable hostname in prompt so it's obvious this is running in a container,
 # and set various other configs
-RUN zsh --login -c 'starship toggle hostname' && \
-    mkdir -p /root/.local/share/zsh/
+RUN zsh --login -c 'starship toggle username' && \
+    zsh --login -c 'starship toggle hostname'
 
 # Configure this image's entrypoint to be a login shell
 ENTRYPOINT [ "/bin/zsh" ]

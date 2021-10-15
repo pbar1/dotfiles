@@ -1,10 +1,18 @@
-format = '$character'
-right_format = '$directory$username$hostname$git_branch$git_commit$git_state$git_status$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time'
+format = '$username$hostname$directory$git_branch$git_commit$git_state$git_status$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time$line_break$character'
+
+[username]
+disabled = true
+format = '[$user]($style)@'
+show_always = false
 
 [hostname]
 disabled = true
+format = '[$hostname]($style):'
 ssh_only = false
-format = ' [$hostname](bold red)'
+
+[directory]
+disabled = false
+format = '[$path]($style)[$read_only]($read_only_style)'
 
 [git_branch]
 disabled = false
