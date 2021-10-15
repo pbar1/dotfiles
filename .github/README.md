@@ -22,6 +22,16 @@ This is a [bare git repo][1] in my home directory for tracking dotfiles. It conf
 - `zsh`
 - `starship`
 
+## Try it out!
+
+You can demo my dotfiles by launching a shell in a throwaway container with this command:
+
+```sh
+docker run --rm -ith pbar-dotfiles ghcr.io/pbar1/dotfiles
+```
+
+Try things, like running `base16_<tab>` to change the shell theme!
+
 ## How it was created
 
 ```bash
