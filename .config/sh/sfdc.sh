@@ -1,20 +1,35 @@
-# usage: hvault [predicate] [target?]
-# examples:
-# - hvault 'policy list'                      <-- needs quoting since predicte is multi-word
-# - hvault read auth/maddog/certs/vault-test  <-- target is optional, here is is used
+#!/usr/bin/env bash
+
+# usage: hvault
 hvault() {
-  predicate="${1}"
-  subject="${2}"
-  vault_token="$(kubectl get secret vault-init --namespace=hawking-vault --output=go-template --template='{{.data.root_token | base64decode}}')"
-  active_pod="$(kubectl get pod --namespace=hawking-vault --selector='vault-active=true' --output=name | sed 's|pod/||g')"
-  kubectl exec "${active_pod}" --namespace=hawking-vault --container=vault -- sh -c "
-    VAULT_TOKEN=${vault_token} vault ${predicate} \
-      -tls-server-name=hawking-vault.hawking-vault.einstein.dev1-uswest2.aws.sfdc.is \
-      -ca-cert=/etc/pki_service/ca/cacerts.pem \
-      -client-cert=/etc/identity/client/certificates/client.pem \
-      -client-key=/etc/identity/client/keys/client-key.pem \
-      ${subject}
-  "
+  local context namespace cert_path active_pod
+
+  context="$(kubectl config current-context)"
+  namespace="${HVAULT_NAMESPACE:-"hawking-vault"}"
+  cert_path="${HOME}/.tmp/${context}/${namespace}"
+
+  mkdir -p "${cert_path}"
+  if ps -p "$(cat "${cert_path}/kubectl_pid")" > /dev/null; then
+    kill "$(cat "${cert_path}/kubectl_pid")"
+  fi
+
+  active_pod="$(kubectl get pod --selector="vault-active=true" --output=jsonpath='{.items[0].metadata.name}' --namespace="${namespace}" --context="${context}")"
+
+  if ! openssl x509 -checkend 86400 -noout -in "${cert_path}/client.pem"; then
+    kubectl cp "${namespace}/${active_pod}:/etc/pki_service/ca/cacerts.pem"              "${cert_path}/ca.pem"         --namespace="${namespace}" --context="${context}"
+    kubectl cp "${namespace}/${active_pod}:/etc/identity/client/certificates/client.pem" "${cert_path}/client.pem"     --namespace="${namespace}" --context="${context}"
+    kubectl cp "${namespace}/${active_pod}:/etc/identity/client/keys/client-key.pem"     "${cert_path}/client-key.pem" --namespace="${namespace}" --context="${context}"
+  fi
+
+  kubectl port-forward "pod/${active_pod}" 8200 --namespace="${namespace}" --context="${context}" &
+  echo $! > "${cert_path}/kubectl_pid"
+
+  export VAULT_ADDR="https://127.0.0.1:8200"                                                                                                                         \
+         VAULT_TOKEN="$(kubectl get secret vault-init --output=go-template='{{.data.root_token | base64decode}}' --namespace="${namespace}" --context="${context}")" \
+         VAULT_TLS_SERVER_NAME="vault.${namespace}.svc"                                                                                                              \
+         VAULT_CACERT="${cert_path}/ca.pem"                                                                                                                          \
+         VAULT_CLIENT_CERT="${cert_path}/client.pem"                                                                                                                 \
+         VAULT_CLIENT_KEY="${cert_path}/client-key.pem"
 }
 
 # usage: hvaultfwd

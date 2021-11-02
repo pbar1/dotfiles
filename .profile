@@ -13,11 +13,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# Path variables
-export CODEPATH="$HOME/code"
-export GOPATH="$XDG_DATA_HOME/go"
-export PATH="$HOME/.local/bin:$HOME/.krew/bin:$GOPATH/bin:$XDG_DATA_HOME/cargo/bin:$XDG_DATA_HOME/npm/bin:$PATH"
-
 # (XDG support) Unix
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
@@ -45,6 +40,7 @@ export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcp/credentials.json"
 
 # (XDG support) Programming toolchains
+export GOPATH="$XDG_DATA_HOME/go"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home"
 export PYLINTHOME="$XDG_CACHE_HOME/pylint"
 export GEM_HOME="$XDG_DATA_HOME/gem"
@@ -54,6 +50,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export DENO_INSTALL_ROOT="$XDG_DATA_HOME/deno"
 
 # (XDG support) Other
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
@@ -78,6 +75,10 @@ export FZF_DEFAULT_COMMAND="fd --type=file --exclude=.git --hidden --follow"
 export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
 export MANPAGER="sh -c 'col -bx | bat --plain --language=man'"
 export LESS="--mouse --use-color --RAW-CONTROL-CHARS --quit-if-one-screen"
+
+# The almighty PATH
+export CODEPATH="$HOME/code"
+export PATH="$HOME/.local/bin:$HOME/.krew/bin:$GOPATH/bin:$CARGO_HOME/bin:$DENO_INSTALL_ROOT/bin:$XDG_DATA_HOME/npm/bin:$PATH"
 
 # sh will invoke the file specified by ENV during interactive shells
 #export ENV="$XDG_CONFIG_HOME/sh/shinit"

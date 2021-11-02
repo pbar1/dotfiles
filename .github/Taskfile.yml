@@ -20,3 +20,8 @@ tasks:
     desc: Prints the complete global Brewfile
     cmds:
     - cat ${XDG_CONFIG_HOME}/brew/Brewfile.*
+
+  nvim:clean:
+    desc: Purges Neovim config
+    cmds:
+    - rm -rf ~/.config/nvim ~/.local/share/nvim ~/.cache/nvim
