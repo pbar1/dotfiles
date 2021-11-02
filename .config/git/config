@@ -45,7 +45,8 @@
 	remotes = remote --verbose
 	upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
 	head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
-  upstream-auto = !git remote set-head origin --auto
+	upstream-auto = !git remote set-head origin --auto
 
 [url "ssh://git@github.com/"]
-	pushInsteadOf = https://github.com/
+	# "pushInsteadOf" is also possible
+	insteadOf = https://github.com/
