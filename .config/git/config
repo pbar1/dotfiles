@@ -21,7 +21,7 @@
 	rebase = false
 
 [credential]
-	helper = osxkeychain
+	helper = kwallet 
 
 [gpg]
 	program = gpg
@@ -46,3 +46,6 @@
 	upstream-name = !git remote | egrep -o '(upstream|origin)' | tail -1
 	head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
   upstream-auto = !git remote set-head origin --auto
+
+[url "ssh://git@github.com/"]
+	pushInsteadOf = https://github.com/
