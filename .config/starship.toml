@@ -56,7 +56,7 @@ disabled = true
 format = ' [▰ $version$workspace](bold 105)'
 
 [kubernetes]
-disabled = true
+disabled = false
 format = ' [☸ $context:$namespace](bold blue)'
 
 [helm]
