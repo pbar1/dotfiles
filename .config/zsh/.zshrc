@@ -16,16 +16,16 @@ autoload -Uz _zinit
 
 # Load ZSH plugins
 # https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
-zinit wait lucid for                                                             \
-                                                fnune/base16-shell               \
-                                                yous/vanilli.sh                  \
-                                                olets/zsh-abbr                   \
-                                                ajeetdsouza/zoxide               \
-                                                Aloxaf/fzf-tab                   \
-  multisrc'shell/{completion,key-bindings}.zsh' junegunn/fzf                     \
-  as'completion'                                sawadashota/go-task-completions  \
+zinit wait lucid for                                                                       \
+                                                fnune/base16-shell                         \
+                                                yous/vanilli.sh                            \
+                                                olets/zsh-abbr                             \
+                                                ajeetdsouza/zoxide                         \
+                                                Aloxaf/fzf-tab                             \
+  multisrc'shell/{completion,key-bindings}.zsh' junegunn/fzf                               \
+  as'completion'                                sawadashota/go-task-completions            \
   atinit'zicompinit; zicdreplay'                zdharma-continuum/fast-syntax-highlighting \
-  atload'_zsh_autosuggest_start'                zsh-users/zsh-autosuggestions    \
+  atload'_zsh_autosuggest_start'                zsh-users/zsh-autosuggestions              \
   blockf atpull'zinit creinstall -q .'          zsh-users/zsh-completions
 
 # Load Starship prompt

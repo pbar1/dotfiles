@@ -85,6 +85,17 @@ Aliases are kept in `~/.config/sh/aliases.sh` and are kept POSIX-compliant for r
 
 Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviations`, and only work when using Zsh.
 
+### Alternatives to Common Tools
+
+| Standard | Preferred |
+|----------|-----------|
+| `ls`     | `exa`     |
+| `grep`   | `rg`      |
+| `find`   | `fd`      |
+| `sed`    | `sd`      |
+| `vim`    | `nvim`    |
+| `dig`    | `dog`     |
+
 ## TODO
 
 - [ ] [Ignore][3] changes due to toggling (`starship toggle kubernetes`)
