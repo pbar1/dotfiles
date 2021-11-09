@@ -18,7 +18,7 @@ setopt bang_hist
 
 # HACK to get color switching working
 function light() {
-  _base16 "${ZDOTDIR}/.zinit/plugins/fnune---base16-shell/scripts/base16-solarized-light.sh" solarized-light
+  base16_solarized-light
   source "${XDG_CONFIG_HOME}/base16-fzf/bash/base16-solarized-light.config"
   if [ $(uname) = "Darwin" ]; then
     osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
@@ -27,7 +27,7 @@ function light() {
 
 # HACK to get color switching working
 function dark() {
-  _base16 "${ZDOTDIR}/.zinit/plugins/fnune---base16-shell/scripts/base16-solarized-dark.sh" solarized-dark
+  base16_solarized-dark
   source "${XDG_CONFIG_HOME}/base16-fzf/bash/base16-solarized-dark.config"
   if [ $(uname) = "Darwin" ]; then
     osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
