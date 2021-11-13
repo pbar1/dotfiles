@@ -1,10 +1,20 @@
-#!/usr/bin/env zsh
+#==============================================================================
+# ~/.config/zsh/.zshrc
+#
+# This file contains Zsh
+#==============================================================================
 
-# Load GPG agent and emulated SSH agent
-# TODO: Possibly don't do this on machines with GPG agent already loaded
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-gpgconf --launch gpg-agent
+# Things that should only happen once, and not in children shells
+if [ "${SHLVL}" = 1 ]; then
+  # Customize PATH
+  source "${XDG_CONFIG_HOME}/sh/path.sh"
+
+  # Load GPG agent and emulated SSH agent
+  # TODO: Possibly don't do this on machines with GPG agent already loaded
+  export GPG_TTY="${TTY}"
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  gpgconf --launch gpg-agent
+fi
 
 # Load ZSH plugins
 eval "$(sheldon source)"
