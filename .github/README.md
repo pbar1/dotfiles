@@ -57,6 +57,7 @@ dotfiles checkout
 This is a [bare git repo][1] in my home directory for tracking dotfiles. It conforms to the [XDG directory standard][2].
 
 Here are the components:
+
 - Terminal: [Alacritty](https://github.com/alacritty/alacritty)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
   - Plugin manager: [tpm](https://github.com/tmux-plugins/tpm)
@@ -88,7 +89,7 @@ Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviation
 ### Alternatives to Common Tools
 
 | Standard | Preferred |
-|----------|-----------|
+| -------- | --------- |
 | `ls`     | `exa`     |
 | `grep`   | `rg`      |
 | `find`   | `fd`      |
@@ -100,6 +101,11 @@ Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviation
 
 - [ ] [Ignore][3] changes due to toggling (`starship toggle kubernetes`)
 - [ ] Install script
+- [ ] Cross-platform config for Git credential helper
+- [ ] Cross-platform config for GPG pinentry
+- [ ] Move environment variables back into `~/.zshenv`
+- [ ] Conditionally load GPG agent only on platforms where needed
+- [ ] Re-think vanilli.sh, as it has some questionable opinions (bang-hist)
 
 <!-- References -->
 
