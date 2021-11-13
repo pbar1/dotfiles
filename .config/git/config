@@ -21,7 +21,7 @@
 	rebase = false
 
 [credential]
-	helper = kwallet 
+	helper = osxkeychain
 
 [gpg]
 	program = gpg
@@ -47,6 +47,3 @@
 	head-branch = !git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'
 	upstream-auto = !git remote set-head origin --auto
 
-[url "ssh://git@github.com/"]
-	# "pushInsteadOf" is also possible
-	insteadOf = https://github.com/
