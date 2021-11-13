@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+# Load GPG agent and emulated SSH agent
+# TODO: Possibly don't do this on machines with GPG agent already loaded
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpgconf --launch gpg-agent
+
 # Load ZSH plugins
 eval "$(sheldon source)"
 
