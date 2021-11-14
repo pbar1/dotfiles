@@ -361,9 +361,9 @@ selection:
 shell:
   program: /bin/zsh
   args:
-    - -l
+    - --login
     - -c
-    - tmux
+    - tmux new-session -A -s main
 
 # Startup directory
 #
