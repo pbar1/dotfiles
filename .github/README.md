@@ -62,7 +62,7 @@ Here are the components:
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
   - Plugin manager: [tpm](https://github.com/tmux-plugins/tpm)
 - Shell: [Zsh](https://www.zsh.org/)
-  - Plugin manager: [Zinit](https://github.com/zdharma/zinit)
+  - Plugin manager: [Sheldon](https://sheldon.cli.rs/)
 - Prompt: [Starship](https://starship.rs/)
 - Editor: [Neovim](https://neovim.io/)
 
@@ -74,7 +74,9 @@ tmux was chosen as the terminal multiplexer for its configurability and to augme
 
 ### Shell
 
-Zsh was chosen as the shell for its wealth of features, community supported plugins that extend its usability, and POSIX compliance. Zinit (despite a rather unfriendly syntax and high amount of complexity) was chosen as the plugin manager to use with Zsh due to its extreme speed and expressiveness.
+Zsh was chosen as the shell for its wealth of features, community supported plugins that extend its usability, and POSIX compliance.
+
+Sheldon was chosen as the plugin manager to use with Zsh due to its ease of use, and the fact thar Zinit has proven to be unreliable.
 
 Starship was chosen as the prompt for simple configuration. It also works on many different shells, making the prompt easily portable.
 
@@ -103,7 +105,6 @@ Abbreviations (enabled via a Zsh plugin) are kept in `~/.config/zsh/abbreviation
 - [ ] Install script
 - [ ] Cross-platform config for Git credential helper
 - [ ] Cross-platform config for GPG pinentry
-- [ ] Move environment variables back into `~/.zshenv`
 - [ ] Conditionally load GPG agent only on platforms where needed
 - [ ] Re-think vanilli.sh, as it has some questionable opinions (bang-hist)
 
