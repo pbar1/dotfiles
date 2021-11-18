@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+
+def run_sqlite(
+    db: str,
+    query: str,
+    text=True,
+    check=True,
+    stdout=subprocess.PIPE,
+    stderr=sys.stderr,
+) -> str:
+    # print(f"DEBUG query: {query}", file=sys.stderr)
+    result = subprocess.run(
+        ["sqlite3", db, query], text=text, check=check, stdout=stdout, stderr=stderr
+    )
+    # print(f"DEBUG stdout: {result.stdout}", file=sys.stderr)
+    return result.stdout
+
+
+def ensure_table(db: str):
+    query = """
+        CREATE TABLE IF NOT EXISTS entries (
+            command   TEXT PRIMARY KEY,
+            stdin     TEXT,
+            stdout    TEXT,
+            stderr    TEXT,
+            exit_code INTEGER,
+            timestamp TEXT
+        )
+        """
+    run_sqlite(db, query)
+
+
+def check_exists(db: str, cmd: str) -> bool:
+    query = f"SELECT EXISTS (SELECT 1 FROM entries WHERE command='{cmd}')"
+    out = run_sqlite(db, query)
+    num = int(out)
+    return num > 0
+
+
+def put_cmd(db: str, cmd: str, stdin: str, stdout: str, stderr: str, exit_code: int):
+    timestamp = datetime.now().isoformat()
+    query = f"""
+        INSERT OR REPLACE INTO entries (
+            command, stdin, stdout, stderr, exit_code, timestamp
+        ) VALUES (
+            '{cmd}', '{stdin}', '{stdout}', '{stderr}', {exit_code}, '{timestamp}'
+        )
+        """
+    run_sqlite(db, query)
+
+
+def get_cmd(db: str, cmd: str) -> str:
+    # FIXME: Return more than just stdout
+    query = f"SELECT stdout FROM entries WHERE command='{cmd}' LIMIT 1"
+    out = run_sqlite(db, query)
+    return out
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Run a command and cache the output.")
+    parser.add_argument(
+        "-m",
+        "--miss",
+        default=False,
+        action="store_true",
+        help="force a cache and run the real command",
+    )
+    parser.add_argument(
+        "-t", "--ttl", default=0, help="number of seconds to cache the output for"
+    )
+    parser.add_argument("command", nargs=argparse.REMAINDER, help="command to run")
+    args = parser.parse_args()
+
+    miss = args.miss
+    ttl = args.ttl
+    command = args.command
+    command_str = " ".join(command)
+
+    cache_home = os.getenv("XDG_CACHE_HOME", f"{Path.home}/.cache")
+    cache_dir = f"{cache_home}/che"
+    db = f"{cache_dir}/cache.db"
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+
+    ensure_table(db)
+
+    # FIXME: Should attempt to get cached entry -> check ttl -> etc
+
+    found = check_exists(db, command_str)
+    if miss or not found:
+        result = subprocess.run(
+            command, text=True, stdin=sys.stdin, capture_output=True
+        )
+        put_cmd(db, command_str, "", result.stdout, result.stderr, result.returncode)
+        print(result.stdout)
+        print(result.stderr, file=sys.stderr)
+        sys.exit(result.returncode)
+    else:
+        print(get_cmd(db, command_str))
+
+
+if __name__ == "__main__":
+    main()
