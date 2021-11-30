@@ -3,8 +3,15 @@ version: '3'
 tasks:
   default: task --list
 
-  switch:
+  bobbery:switch:
+    desc: Builds and switches to new Nix config for personal laptop.
     cmds:
-    - sudo cp configuration.nix /etc/nixos/configuration.nix
-    - sudo cp hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+    - sudo cp bobbery/configuration.nix /etc/nixos/configuration.nix
+    - sudo cp bobbery/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
     - sudo nixos-rebuild switch
+
+  sfdc:switch:
+    desc: Builds and switches to new Nix config for SFDC laptop.
+    cmds:
+    - cp sfdc/darwin-configuration.nix ~/.nixpkgs/darwin-configuration.nix
+    - darwin-rebuild switch
