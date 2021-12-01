@@ -1,23 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ <home-manager/nix-darwin> ];
-
-  users.users.pbartine = {
-    name = "pbartine";
-    home = "/Users/pbartine";
-  };
-
-  # Home Manager
-  home-manager.users.pbartine = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      dive
-    ];
-  };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # environment.systemPackages = with pkgs; [ ];
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -32,11 +18,14 @@
     '';
   };
 
-  # Create /etc/bashrc that loads the nix-darwin environment.
-  # programs.zsh.enable = true;  # default shell on catalina
-  # programs.fish.enable = true;
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    pinentry_mac
+    alacritty
+  ];
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  # Create /etc/bashrc that loads the nix-darwin environment.
+  programs.zsh.enable = true;  # default shell on catalina
+  programs.fish.enable = true;
 }
