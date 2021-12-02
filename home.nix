@@ -59,6 +59,7 @@
     kind
 
     # Nix
+    nixpkgs-fmt
     manix
 
     # Go
@@ -101,6 +102,7 @@
   # https://github.com/nix-community/home-manager/tree/master/modules/programs
   programs.fish = {
     enable = true;
+
     plugins = [
       {
         name = "fzf-fish";
@@ -111,8 +113,157 @@
           sha256 = "sha256-dngAKzyD+lmqmxsCSOMViyCgA/+Ve35gLtPS+Lgs8Pc=";
         };
       }
+      {
+        name = "bang-bang";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "plugin-bang-bang";
+          rev = "f969c618301163273d0a03d002614d9a81952c1e";
+          sha256 = "sha256-A8ydBX4LORk+nutjHurqNNWFmW6LIiBPQcxS3x4nbeQ=";
+        };
+      }
+      {
+        name = "fish-kubectl-completions";
+        src = pkgs.fetchFromGitHub {
+          owner = "evanlucas";
+          repo = "fish-kubectl-completions";
+          rev = "ced676392575d618d8b80b3895cdc3159be3f628";
+          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc=";
+        };
+      }
+      {
+        name = "fish-async-prompt";
+        src = pkgs.fetchFromGitHub {
+          owner = "acomagu";
+          repo = "fish-async-prompt";
+          rev = "40f30a4048b81f03fa871942dcb1671ea0fe7a53";
+          sha256 = "sha256-sSM8jB81TO+n0JVl8ekfVbw99K5NzEdxi1VqWkhIJaY=";
+        };
+      }
+      {
+        name = "bass";
+        src = pkgs.fetchFromGitHub {
+          owner = "edc";
+          repo = "bass";
+          rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
+          sha256 = "sha256-fl4/Pgtkojk5AE52wpGDnuLajQxHoVqyphE90IIPYFU=";
+        };
+      }
     ];
+
+    shellAbbrs = {
+      kgp = "kubectl get pod -o wide";
+    };
   };
+
+  programs.starship = {
+    enable = true;
+
+    settings = {
+      format = "$username$hostname$directory$shell$shlvl$git_branch$git_commit$git_state$git_status$nix_shell$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time$line_break$character";
+
+      username = {
+        disabled = true;
+        format = "[$user]($style)@";
+        show_always = false;
+      };
+
+      hostname = {
+        disabled = true;
+        format = "[$hostname]($style):";
+        ssh_only = false;
+      };
+
+      directory = {
+        disabled = false;
+        format = "[$path]($style)[$read_only]($read_only_style)";
+      };
+
+      shell = {
+        disabled = false;
+        format = "[$indicator]($style)";
+        zsh_indicator = "";
+        bash_indicator = " bash:";
+        fish_indicator = " fish:";
+        powershell_indicator = " posh:";
+        ion_indicator = " ion:";
+        elvish_indicator = " elvish:";
+        tcsh_indicator = " tcsh:";
+        xonsh_indicator = " xonsh:";
+        unknown_indicator = " unknown:";
+      };
+
+      shlvl = {
+        disabled = false;
+        format = "[$shlvl]($style)";
+      };
+
+      git_branch = {
+        disabled = false;
+        format = " [|$branch]($style)";
+        truncation_length = 10;
+        truncation_symbol = "…";
+        only_attached = false;
+      };
+
+      git_commit = {
+        disabled = false;
+        format = " [$hash $tag]($style)";
+      };
+
+      git_status = {
+        disabled = true;
+        format = " [$all_status$ahead_behind](bold red)";
+        stashed = "📦";
+        modified = "~";
+      };
+
+      nix_shell = {
+        disabled = false;
+        format = " [$symbol|$name$state]($style)";
+        symbol = "❄️";
+        style = "bold white";
+        pure_msg = "(pure)";
+        impure_msg = "";
+      };
+
+      terraform = {
+        disabled = false;
+        format = " [$symbol$workspace]($style)";
+        symbol = "▰";
+      };
+
+      kubernetes = {
+        disabled = false;
+        format = " [$symbol|$context:$namespace]($style)";
+        symbol = "☸";
+        style = "bold blue";
+      };
+
+      #---
+
+      aws.disabled = true;
+      gcloud.disabled = true;
+
+      status = {
+        disabled = false;
+        symbol = "⚠️";
+        format = " [$symbol $common_meaning$signal_name$maybe_int]($style)";
+      };
+
+      cmd_duration = {
+        disabled = false;
+        format = " [$duration]($style)";
+      };
+
+      character = {
+        success_symbol = "[♪]()";
+        error_symbol = "[ø](red)";
+        vicmd_symbol = "[V](blue)";
+      };
+    };
+  };
+
   programs.bat.enable = true;
   programs.exa.enable = true;
   programs.jq.enable = true;
