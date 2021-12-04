@@ -227,6 +227,18 @@
         impure_msg = "";
       };
 
+      rust = {
+        disabled = false;
+        format = " [$symbol|$version]($style)";
+        symbol = "🦀";
+      };
+
+      golang = {
+        disabled = false;
+        format = " [$symbol|$version]($style)";
+        symbol = "🐹";
+      };
+
       terraform = {
         disabled = false;
         format = " [$symbol$workspace]($style)";
@@ -239,8 +251,6 @@
         symbol = "☸";
         style = "bold blue";
       };
-
-      #---
 
       aws.disabled = true;
       gcloud.disabled = true;
