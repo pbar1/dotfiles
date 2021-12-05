@@ -57,6 +57,7 @@
     kubectx
     k9s
     kind
+    fluxcd
 
     # Nix
     nixpkgs-fmt
@@ -200,7 +201,8 @@
 
       git_branch = {
         disabled = false;
-        format = " [|$branch]($style)";
+        format = " [$symbol $branch]($style)";
+        symbol = "";
         truncation_length = 10;
         truncation_symbol = "…";
         only_attached = false;
@@ -211,16 +213,11 @@
         format = " [$hash $tag]($style)";
       };
 
-      git_status = {
-        disabled = true;
-        format = " [$all_status$ahead_behind](bold red)";
-        stashed = "📦";
-        modified = "~";
-      };
+      git_status.disabled = true;
 
       nix_shell = {
         disabled = false;
-        format = " [$symbol|$name$state]($style)";
+        format = " [$symbol $name$state]($style)";
         symbol = "❄️";
         style = "bold white";
         pure_msg = "(pure)";
@@ -229,25 +226,25 @@
 
       rust = {
         disabled = false;
-        format = " [$symbol|$version]($style)";
+        format = " [$symbol $version]($style)";
         symbol = "🦀";
       };
 
       golang = {
         disabled = false;
-        format = " [$symbol|$version]($style)";
-        symbol = "🐹";
+        format = " [$symbol $version]($style)";
+        symbol = "";
       };
 
       terraform = {
         disabled = false;
-        format = " [$symbol$workspace]($style)";
+        format = " [$symbol$ $workspace]($style)";
         symbol = "▰";
       };
 
       kubernetes = {
         disabled = false;
-        format = " [$symbol|$context:$namespace]($style)";
+        format = " [$symbol $context:$namespace]($style)";
         symbol = "☸";
         style = "bold blue";
       };
