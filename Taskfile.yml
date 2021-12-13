@@ -3,14 +3,20 @@ version: '3'
 tasks:
   default: task --list
 
-  bobbery:switch:
+  home:
+    desc: Switches to new Home Manager config
+    cmds:
+    - cp home.nix ~/.config/nixpkgs/home.nix
+    - home-manager switch
+
+  nixos:
     desc: Builds and switches to new Nix config for personal laptop.
     cmds:
     - sudo cp bobbery/configuration.nix /etc/nixos/configuration.nix
     - sudo cp bobbery/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
     - sudo nixos-rebuild switch
 
-  sfdc:switch:
+  darwin:
     desc: Builds and switches to new Nix config for SFDC laptop.
     cmds:
     - cp sfdc/darwin-configuration.nix ~/.nixpkgs/darwin-configuration.nix

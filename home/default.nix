@@ -54,7 +54,7 @@
     krew
     kubernetes-helm
     stern
-    kubectx
+    kubie
     k9s
     kind
     fluxcd
@@ -68,6 +68,9 @@
 
     # Python
     black
+    (python39.withPackages (ps: with ps; [
+      pyyaml
+    ]))
 
     # NodeJS
     nodejs
@@ -83,7 +86,6 @@
     # FIXME: Things that might be in `programs` instead. Staging area to get rid of Homebrew.
     gnupg
     neovim
-    fzf
     gh
     tmux
     fish
@@ -94,6 +96,7 @@
     jwt-cli
     starship
     coreutils
+    vault
   ];
 
   # Let Home Manager install and manage itself.
@@ -236,9 +239,15 @@
         symbol = "";
       };
 
+      python = {
+        disabled = false;
+        format = " [$symbol $version]($style)";
+        symbol = "🐍";
+      };
+
       terraform = {
         disabled = false;
-        format = " [$symbol$ $workspace]($style)";
+        format = " [$symbol $workspace]($style)";
         symbol = "▰";
       };
 
@@ -249,6 +258,7 @@
         style = "bold blue";
       };
 
+      helm.disabled = true;
       aws.disabled = true;
       gcloud.disabled = true;
 
@@ -269,6 +279,11 @@
         vicmd_symbol = "[V](blue)";
       };
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = false;
   };
 
   programs.bat.enable = true;
