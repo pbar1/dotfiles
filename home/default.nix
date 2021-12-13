@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+  fzf = pkgs.fzf.overrideAttrs (oldAttrs: { preInstall = null;  });
+in {
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -84,6 +86,7 @@
     aws-iam-authenticator
 
     # FIXME: Things that might be in `programs` instead. Staging area to get rid of Homebrew.
+    fzf
     gnupg
     neovim
     gh
@@ -279,11 +282,6 @@
         vicmd_symbol = "[V](blue)";
       };
     };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = false;
   };
 
   programs.bat.enable = true;
