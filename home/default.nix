@@ -29,4 +29,12 @@
   # https://github.com/nix-community/home-manager/tree/master/modules/programs
   programs.home-manager.enable = true;
   programs.zoxide.enable = true;
+
+  programs.bat = {
+    enable = true;
+    config = {
+      style = "plain";
+      theme = "base16-256";
+    };
+  };
 }

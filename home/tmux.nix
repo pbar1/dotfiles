@@ -8,7 +8,7 @@
     terminal = "screen-256color";
 
     extraConfig = ''
-      set -ag terminal-overrides ",xterm-256color:RGB"
+      set -ga terminal-overrides ",*256col*:RGB"
       set -g mouse on
       set -g renumber-windows on
 

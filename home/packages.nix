@@ -23,8 +23,6 @@ in
     # Command line utils
     coreutils
     fzf
-    starship
-    bat
     ripgrep
     fd
     sd
