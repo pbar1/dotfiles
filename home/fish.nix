@@ -3,6 +3,14 @@
 {
   programs.fish = {
     enable = true;
+
+    # FIXME hardcode
+    interactiveShellInit = ''
+      set -gx GPG_TTY (tty)
+      set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+      gpgconf --launch gpg-agent &
+    '';
+
     plugins = [
       {
         name = "fzf-fish";
@@ -59,6 +67,7 @@
         };
       }
     ];
+
     shellAbbrs = {
       c = "clear";
       g = "git";
@@ -86,6 +95,7 @@
       wo = "command --all";
       xi = "xargs -I {}";
     };
+
     shellAliases = {
       cat = "bat";
       l = "exa --header --all --long --git";

@@ -106,6 +106,7 @@
       helm.disabled = true;
       aws.disabled = true;
       gcloud.disabled = true;
+      battery.disabled = true;
 
       status = {
         disabled = false;
