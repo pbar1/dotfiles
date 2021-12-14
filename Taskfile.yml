@@ -6,8 +6,7 @@ tasks:
   home:
     desc: Updates home config.
     cmds:
-    - cp home/default.nix ~/.config/nixpkgs/home.nix
-    - home-manager switch
+    - home-manager switch -f ./home
 
   nixos:
     desc: Updates NixOS config.
