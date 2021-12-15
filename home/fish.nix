@@ -10,6 +10,8 @@
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
       gpgconf --launch gpg-agent &
+      set BASE16_SHELL "$HOME/.config/base16-shell/"
+      source "$BASE16_SHELL/profile_helper.fish"
     '';
 
     plugins = [
@@ -59,15 +61,16 @@
         };
       }
       {
-        name = "base16-fish-shell";
+        name = "pisces";
         src = pkgs.fetchFromGitHub {
-          owner = "FabioAntunes";
-          repo = "base16-fish-shell";
-          rev = "d358af9a724715efd0d31b417ba56e622a239612";
-          sha256 = "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=";
+          owner = "laughedelic";
+          repo = "pisces";
+          rev = "e45e0869855d089ba1e628b6248434b2dfa709c4";
+          sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=q";
         };
       }
     ];
+    # Dummy sha256: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
 
     shellAbbrs = {
       c = "clear";
@@ -81,8 +84,8 @@
       kgi = "kubectl get ingresses,services,endpoints,certificates,certificaterequests,certificatesigningrequests,challenges,orders";
       kgn = "kubectl get namespaces --show-labels";
       kgno = "kubectl get nodes --label-columns = beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
-      kgp = "kubectl get pods -o wide";
-      wkgp = "watch kubectl get pods -o wide";
+      kgp = "kubectl get pods";
+      wkgp = "watch kubectl get pods";
       kn = "kubens";
       kubeconfig = "kubectl config view --minify --flatten";
       kx = "kubectx";

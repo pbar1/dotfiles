@@ -4,10 +4,10 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "$username$hostname$directory$shell$shlvl$git_branch$git_commit$git_state$git_status$nix_shell$golang$rust$java$python$nodejs$terraform$helm$aws$cmd_duration$custom$status$jobs$battery$time$fill$kubernetes$line_break$character";
+      format = "$username$hostname$directory$shell$shlvl$git_branch$git_commit$git_state$git_status$nix_shell$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time$line_break$character";
 
       fill = {
-        disabled = false;
+        disabled = true;
         symbol = " ";
       };
 
