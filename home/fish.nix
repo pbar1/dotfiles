@@ -25,7 +25,7 @@
         };
       }
       {
-        name = "bang-bang";
+        name = "plugin-bang-bang";
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "plugin-bang-bang";
@@ -69,6 +69,15 @@
           sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=q";
         };
       }
+      {
+        name = "plugin-aws";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "plugin-aws";
+          rev = "a4cfb06627b20c9ffdc65620eb29abcedcc16340";
+          sha256 = "sha256-bTyp5j4VcFSntJ7mJBzERgOGGgu7ub15hy/FQcffgRE=";
+        };
+      }
     ];
     # Dummy sha256: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
 
@@ -83,7 +92,7 @@
       kgg = "kubectl get pods,replicasets,deployments,statefulsets,daemonsets,jobs,cronjobs";
       kgi = "kubectl get ingresses,services,endpoints,certificates,certificaterequests,certificatesigningrequests,challenges,orders";
       kgn = "kubectl get namespaces --show-labels";
-      kgno = "kubectl get nodes --label-columns = beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
+      kgno = "kubectl get nodes --label-columns=beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
       kgp = "kubectl get pods";
       wkgp = "watch kubectl get pods";
       kn = "kubens";
@@ -182,6 +191,29 @@
         " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
         " --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
         " --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+      '';
+
+      vault-login = ''
+        set sel (cat "$XDG_CONFIG_HOME/vault/addrs" | grep -v '#' | fzf)
+        set --global --export VAULT_ADDR (string split ';' -f 1 $sel)
+        set --erase VAULT_TOKEN
+        if not vault token lookup > /dev/null 2>&1
+          set method (string split ';' -f 2 $sel)
+          set params (string split ';' -f 3 $sel)
+          vault login -no-print -method=$method $params
+        end
+        set --global --export VAULT_TOKEN (vault print token)
+        echo "Switched to Vault: $VAULT_ADDR"
+      '';
+
+      vault-aws = ''
+        set aws_role (vault list -format=json aws/roles | jq -r .[] | fzf)
+        vault read -format=json aws/creds/$aws_role | jq -c . |  read --local vault_json
+        set --erase AWS_VAULT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SECURITY_TOKEN AWS_SESSION_TOKEN
+        set --global --export AWS_ACCESS_KEY_ID (echo $vault_json | jq -r .data.access_key)
+        set --global --export AWS_SECRET_ACCESS_KEY (echo $vault_json | jq -r .data.secret_key)
+        set --global --export AWS_SESSION_TOKEN (echo $vault_json | jq -r .data.security_token)
+        aws sts get-caller-identity
       '';
     };
   };

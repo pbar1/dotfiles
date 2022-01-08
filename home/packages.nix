@@ -33,6 +33,8 @@ in
     gnused
     jq
     _1password
+    xz
+    procs
 
     # Networking
     netcat
@@ -43,14 +45,17 @@ in
     vault
     awscli2
     aws-iam-authenticator
+    sops
 
     # Containers & Kubernetes
     dive
+    trivy
     kubectl
     krew
     kubernetes-helm
     stern
     kind
+    fluxcd
 
     # Nix
     nixpkgs-fmt
@@ -67,6 +72,7 @@ in
     (python39.withPackages (ps: with ps; [
       pyyaml
     ]))
+    pipenv
     black
 
     # NodeJS
@@ -75,6 +81,9 @@ in
 
     # .NET and C#
     dotnet-sdk
+
+    # Rust
+    rustup
 
     # FIXME: macOS items that should be in nix-darwin config
     mas
