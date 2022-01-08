@@ -105,7 +105,7 @@
       tf = "terraform";
       tfa = "terraform apply";
       tfp = "terraform plan";
-      wo = "command --all";
+      wo = "type --all --short";
       xi = "xargs -I {}";
     };
 
