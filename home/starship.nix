@@ -93,6 +93,7 @@
       nodejs = {
         disabled = false;
         format = " [$symbol $version]($style)";
+        symbol = "";
       };
 
       terraform = {
