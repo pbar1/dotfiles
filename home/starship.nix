@@ -90,6 +90,11 @@
         symbol = "🐍";
       };
 
+      nodejs = {
+        disabled = false;
+        format = " [$symbol $version]($style)";
+      };
+
       terraform = {
         disabled = false;
         format = " [$symbol $workspace]($style)";

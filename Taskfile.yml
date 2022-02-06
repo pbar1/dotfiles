@@ -3,20 +3,30 @@ version: '3'
 tasks:
   default: task --list
 
+  update:
+    desc: Updates all Nix channels (ie, pull latest derivation versions).
+    cmds:
+    - nix-channel --update
+
   home:
-    desc: Updates home config.
+    desc: Compiles and actives new Home Manager config.
     cmds:
     - home-manager switch -f ./home
 
   nixos:
-    desc: Updates NixOS config.
+    desc: Compiles and activates new NixOS config.
     cmds:
     - sudo cp nixos/configuration.nix /etc/nixos/configuration.nix
     - sudo cp nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
     - sudo nixos-rebuild switch
 
   macos:
-    desc: Updates macOS config.
+    desc: Compiles and activates new macOS config.
     cmds:
     - cp macos/darwin-configuration.nix ~/.nixpkgs/darwin-configuration.nix
     - darwin-rebuild switch
+
+  fmt:
+    desc: Formats code in this project.
+    cmds:
+    - nixpkgs-fmt .

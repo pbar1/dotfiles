@@ -15,9 +15,10 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      
+
       <home-manager/nixos>
     ];
 
@@ -61,7 +62,7 @@ in
         character = {
           success_symbol = "[♪]()";
           error_symbol = "[ø](red)";
-	  vicmd_symbol = "[V](blue)";
+          vicmd_symbol = "[V](blue)";
         };
 
         # package.disabled = true;
@@ -130,10 +131,10 @@ in
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.autoLogin.enable = true; 
+  services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "pierce";
   services.xserver.desktopManager.gnome.enable = true;
-  
+
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -200,7 +201,7 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  
+
   # Create Btrfs-compatible swapfile
   # https://github.com/NixOS/nixpkgs/issues/91986#issuecomment-787143060
   #systemd.services = {

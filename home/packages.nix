@@ -46,6 +46,7 @@ in
     awscli2
     aws-iam-authenticator
     sops
+    terraform-docs
 
     # Containers & Kubernetes
     dive
@@ -75,9 +76,10 @@ in
     pipenv
     black
 
-    # NodeJS
+    # JavaScript
     nodejs
     nodePackages.prettier
+    yarn
 
     # .NET and C#
     dotnet-sdk

@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
@@ -16,11 +17,12 @@
   # Required for lid closing on Razer Blade Stealth 13
   # https://help.ubuntu.com/community/RazerBlade#Suspend
   boot.kernelParams = [ "button.lid_init_state=open" "intel_iommu=on" "iommu=pt" ];
-  
+
   boot.plymouth.enable = true;
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    {
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
 
@@ -29,7 +31,8 @@
   # Recommended Btrfs options for an SSD
   # https://www.reddit.com/r/btrfs/comments/r04i0l/comment/hlrfjzz/?utm_source=share&utm_medium=web2x&context=3
   fileSystems."/" =
-    { device = "/dev/disk/by-label/root";
+    {
+      device = "/dev/disk/by-label/root";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" "noatime" "ssd" "discard=async" "space_cache=v2" "commit=120" "autodefrag" ];
     };
