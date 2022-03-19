@@ -9,10 +9,6 @@
     ./starship.nix
   ];
 
-  home.stateVersion = "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.username = "pbartine"; # FIXME extract
-  home.homeDirectory = "/Users/pbartine"; # FIXME extract
-
   nixpkgs.config.allowUnfree = true;
 
   home.file.".gnupg/gpg-agent.conf".text = ''

@@ -9,11 +9,17 @@
 
   outputs = { home-manager, ... }:
     let
-      system = "x86-64-darwin";
+      system = "x86_64-darwin";
       username = "pbartine";
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         configuration = import ./home/default.nix;
+
+        inherit system username;
+        homeDirectory = "/Users/${username}"; # TODO: Support Linux
+
+        # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+        stateVersion = "22.05";
       };
     };
 }

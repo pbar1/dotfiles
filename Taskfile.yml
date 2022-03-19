@@ -11,7 +11,7 @@ tasks:
   home:
     desc: Compiles and actives new Home Manager config.
     cmds:
-    - home-manager switch -f ./home
+    - home-manager switch --flake '.#pbartine'
 
   nixos:
     desc: Compiles and activates new NixOS config.
