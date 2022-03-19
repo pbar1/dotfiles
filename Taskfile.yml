@@ -23,7 +23,7 @@ tasks:
   macos:
     desc: Compiles and activates new macOS config.
     cmds:
-    - cp macos/darwin-configuration.nix ~/.nixpkgs/darwin-configuration.nix
+    - cp macos/default.nix ~/.nixpkgs/darwin-configuration.nix
     - darwin-rebuild switch
 
   fmt:

@@ -6,7 +6,7 @@
 
     # FIXME hardcode
     interactiveShellInit = ''
-      set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$PATH"
+      set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/flutter/bin:''$PATH"
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
       gpgconf --launch gpg-agent &
@@ -85,6 +85,7 @@
       c = "clear";
       g = "git";
       gs = "git status --short";
+      gd = "git diff";
       ij = "idea";
       k = "kubectl";
       kapi = "kubectl api-resources";
@@ -113,7 +114,8 @@
       cat = "bat";
       copy = "pbcopy"; # FIXME what about linux?
       l = "exa --header --all --long --git";
-      vi = "nvim";
+      nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
+      vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
     };
 
     functions = {

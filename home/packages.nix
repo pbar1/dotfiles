@@ -9,7 +9,8 @@ in
 {
   home.packages = with pkgs; [
     # Editor
-    neovim # FIXME use hm
+    #neovim # FIXME use hm
+    tree-sitter
 
     # Version control & project tools
     gnupg
@@ -19,6 +20,9 @@ in
     tokei
     go-task
     direnv
+    mdbook
+    hugo
+    asdf-vm
 
     # Command line utils
     coreutils
@@ -45,8 +49,10 @@ in
     vault
     awscli2
     aws-iam-authenticator
+    google-cloud-sdk
     sops
     terraform-docs
+    flyctl
 
     # Containers & Kubernetes
     dive
@@ -81,11 +87,18 @@ in
     nodePackages.prettier
     yarn
 
-    # .NET and C#
+    # C# & .NET
     dotnet-sdk
 
     # Rust
     rustup
+
+    # C & C++
+    # FIXME: Rust does not like Nix GCC due to Darwin linkage errors
+    #gcc
+
+    # Lua
+    stylua
 
     # FIXME: macOS items that should be in nix-darwin config
     mas

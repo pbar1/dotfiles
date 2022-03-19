@@ -12,6 +12,9 @@
       set -g mouse on
       set -g renumber-windows on
 
+      # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
+      set -sg escape-time 10
+
       # Status bar
       set -g status "on"
       set -g status-bg "colour236"

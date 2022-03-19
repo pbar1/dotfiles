@@ -4,7 +4,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "$username$hostname$directory$shell$shlvl$git_branch$git_commit$git_state$git_status$nix_shell$golang$rust$java$python$nodejs$terraform$kubernetes$helm$aws$cmd_duration$custom$status$jobs$battery$time$line_break$character";
+      format = "$username$hostname$directory$shell$shlvl$git_branch$git_commit$git_state$git_status$nix_shell$golang$rust$java$python$nodejs$terraform$kubernetes$helm$gcloud$aws$cmd_duration$custom$status$jobs$battery$time$line_break$character";
 
       fill = {
         disabled = true;
@@ -84,6 +84,12 @@
         symbol = "";
       };
 
+      java = {
+        disabled = false;
+        format = " [$symbol $version]($style)";
+        symbol = "";
+      };
+
       python = {
         disabled = false;
         format = " [$symbol $version]($style)";
@@ -110,8 +116,14 @@
       };
 
       helm.disabled = true;
+
+      gcloud = {
+        disabled = true;
+        format = " [$symbol $project]($style)";
+        symbol = "";
+      };
+
       aws.disabled = true;
-      gcloud.disabled = true;
       battery.disabled = true;
 
       status = {
