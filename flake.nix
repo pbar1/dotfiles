@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    darwin.url = "github:lnl7/nix-darwin";
+    #darwin.url = "github:lnl7/nix-darwin";
+    darwin.url = "github:pbar1/nix-darwin"; # FIXME: Waiting for https://github.com/LnL7/nix-darwin/pull/310
     home-manager.url = "github:nix-community/home-manager";
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";
