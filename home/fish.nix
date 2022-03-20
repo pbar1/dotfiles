@@ -114,8 +114,8 @@
       cat = "bat";
       copy = "pbcopy"; # FIXME what about linux?
       l = "exa --header --all --long --git";
-      nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
-      vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
+      # nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
+      # vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
     };
 
     functions = {

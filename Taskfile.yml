@@ -8,11 +8,6 @@ tasks:
     cmds:
     - nix-channel --update
 
-  home:
-    desc: Compiles and actives new Home Manager config.
-    cmds:
-    - home-manager switch -f ./home
-
   nixos:
     desc: Compiles and activates new NixOS config.
     cmds:
@@ -20,11 +15,21 @@ tasks:
     - sudo cp nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
     - sudo nixos-rebuild switch
 
-  macos:
+  darwin:
     desc: Compiles and activates new macOS config.
     cmds:
-    - cp macos/default.nix ~/.nixpkgs/darwin-configuration.nix
+    - cp darwin/default.nix ~/.nixpkgs/darwin-configuration.nix
     - darwin-rebuild switch
+
+  darwin:flake:
+    desc: Compiles and activates new macOS config using Nix flakes (BROKEN).
+    cmds:
+    - darwin-rebuild switch --flake '.#default'
+
+  home:
+    desc: Compiles and actives new Home Manager config.
+    cmds:
+    - home-manager switch --flake '.#default'
 
   fmt:
     desc: Formats code in this project.
