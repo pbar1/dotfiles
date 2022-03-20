@@ -16,14 +16,15 @@
       username = "pbartine";
     in
     {
+      # FIXME: Broken due to: /run/current-system/sw/bin/darwin-rebuild: line 188: /nix/store/<long hash>/activate-user: No such file or directory
       # nix-darwin (macOS)
-      darwinConfigurations."pbartine-ltm.internal.salesforce.com" = darwin.lib.darwinSystem {
+      darwinConfigurations."default" = darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         modules = [ ./darwin ];
       };
 
       # Home Manager
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
         configuration = import ./home;
 
         inherit system username;
