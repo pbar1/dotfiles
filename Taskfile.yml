@@ -18,12 +18,6 @@ tasks:
   darwin:
     desc: Compiles and activates new macOS config.
     cmds:
-    - cp darwin/default.nix ~/.nixpkgs/darwin-configuration.nix
-    - darwin-rebuild switch
-
-  darwin:flake:
-    desc: Compiles and activates new macOS config using Nix flakes (BROKEN).
-    cmds:
     - darwin-rebuild switch --flake '.#default'
 
   home:
