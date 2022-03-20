@@ -9,7 +9,7 @@ in
 {
   home.packages = with pkgs; [
     # Editor
-    #neovim # FIXME use hm
+    neovim
     tree-sitter
 
     # Version control & project tools
@@ -56,7 +56,6 @@ in
 
     # Containers & Kubernetes
     dive
-    trivy
     kubectl
     krew
     kubernetes-helm
@@ -66,7 +65,6 @@ in
 
     # Nix
     nixpkgs-fmt
-    manix
 
     # Bash
     shellcheck
