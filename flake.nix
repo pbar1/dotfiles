@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #darwin.url = "github:lnl7/nix-darwin";
     darwin.url = "github:pbar1/nix-darwin"; # FIXME: Waiting for https://github.com/LnL7/nix-darwin/pull/310
     home-manager.url = "github:nix-community/home-manager";
 
@@ -17,8 +16,6 @@
       username = "pbartine";
     in
     {
-      # FIXME: Broken due to: /run/current-system/sw/bin/darwin-rebuild: line 188: /nix/store/<long hash>/activate-user: No such file or directory
-      # nix-darwin (macOS)
       darwinConfigurations."default" = darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         modules = [ ./darwin ];
@@ -29,7 +26,7 @@
         configuration = import ./home;
 
         inherit system username;
-        homeDirectory = "/Users/${username}"; # TODO: Support Linux
+        homeDirectory = "/Users/${username}"; # FIXME: Support Linux
 
         # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
         stateVersion = "22.05";
