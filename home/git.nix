@@ -5,16 +5,26 @@
     enable = true;
     userName = "Pierce Bartine";
     userEmail = "piercebartine@gmail.com";
-    #signing.key = ""; # GPG guesses key based on Git email
-    signing.signByDefault = true;
-    delta.enable = true;
+    signing.key = null; # GPG picks key based on email if not set
+    #signing.signByDefault = true;
 
     extraConfig = {
       push.default = "simple";
-      push.followTags = "true";
+      push.followTags = true;
       pull.rebase = false;
       #credential.helper = "osxkeychain"; # FIXME: cross platform
     };
+
+    delta = {
+      enable = true;
+      options = {
+        syntax-theme = "Solarized (dark)";
+        side-by-side = true;
+      };
+    };
+
+    # FIXME: create this file
+    includes = [{ path = "~/.config/git/config.sfdc"; condition = "gitdir:~/code/sfdc"; }];
 
     aliases = {
       root = "rev-parse --show-toplevel";
@@ -29,5 +39,12 @@
       head-branch = "!git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'";
       upstream-auto = "!git remote set-head origin --auto";
     };
-  }
+
+    ignores = [
+      "**/.idea/*"
+      "**/.DS_Store"
+    ];
+
+    #attributes = [];
+  };
 }
