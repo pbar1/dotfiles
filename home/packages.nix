@@ -39,6 +39,7 @@ in
     _1password
     xz
     procs
+    openssl
 
     # Networking
     netcat
@@ -53,7 +54,6 @@ in
     google-cloud-sdk
     sops
     terraform-docs
-    flyctl
 
     # Containers & Kubernetes
     dive
@@ -71,6 +71,12 @@ in
     shellcheck
     shfmt
 
+    # C/C++
+    gcc
+
+    # Rust
+    rustup
+
     # Go
     go
 
@@ -86,20 +92,17 @@ in
     nodePackages.prettier
     yarn
 
-    # C# & .NET
-    dotnet-sdk
-
-    # Rust
-    rustup
-
-    # C & C++
-    # FIXME: Rust does not like Nix GCC due to Darwin linkage errors
-    #gcc
-
     # Lua
     stylua
 
-    # FIXME: macOS items that should be in nix-darwin config
-    mas
+    # Java
+    jdk
+    maven
+
+    # .NET and C#
+    dotnet-sdk
+
+    # WebAssembly
+    wasmtime
   ];
 }

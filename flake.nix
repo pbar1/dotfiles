@@ -12,8 +12,9 @@
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }:
     let
-      system = "x86_64-darwin";
-      username = "pbartine";
+      system = "x86_64-linux";
+      username = "pierce";
+      homeDirectory = "/home/pierce";
     in
     {
       darwinConfigurations."default" = darwin.lib.darwinSystem {
@@ -25,8 +26,7 @@
       homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
         configuration = import ./home;
 
-        inherit system username;
-        homeDirectory = "/Users/${username}"; # FIXME: Support Linux
+        inherit system username homeDirectory;
 
         # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
         stateVersion = "22.05";

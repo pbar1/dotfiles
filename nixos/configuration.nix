@@ -18,78 +18,22 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-
-      <home-manager/nixos>
     ];
 
-  # User configuration via home-manager
-  home-manager.users.pierce = { pkgs, ... }: {
-    nixpkgs.config.allowUnfree = true;
-
-    home.packages = with pkgs; [
-      bat
-      fzf
-      exa
-      fd
-      ripgrep
-      fishPlugins.fzf-fish
-      go-task
-    ];
-
-    programs.git = {
-      enable = true;
-      userName = "Pierce Bartine";
-      userEmail = "piercebartine@gmail.com";
-    };
-
-    programs.fish.enable = true;
-    programs.fish.plugins = [{
-      name = "plugin-bang-bang";
-      src = pkgs.fetchFromGitHub {
-        owner = "oh-my-fish";
-        repo = "plugin-bang-bang";
-        rev = "f969c618301163273d0a03d002614d9a81952c1e";
-        sha256 = "1r3d4wgdylnc857j08lbdscqbm9lxbm1wqzbkqz1jf8bgq2rvk03";
-      };
-    }];
-
-    programs.starship = {
-      enable = true;
-      enableFishIntegration = true;
-      settings = {
-        # add_newline = false;
-
-        character = {
-          success_symbol = "[♪]()";
-          error_symbol = "[ø](red)";
-          vicmd_symbol = "[V](blue)";
-        };
-
-        # package.disabled = true;
-      };
-    };
-
-    programs.neovim = {
-      enable = true;
-    };
-
-    programs.vscode = {
-      enable = true;
-    };
-
-    programs.gpg = {
-      enable = true;
-    };
-
-    services.gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-      sshKeys = [ "CDCD1DF93F65BF132EB1F33327E34108F53BD47A" ];
-    };
+  nix = {
+    package = pkgs.nixFlakes; # or versioned attributes like nix_2_7
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
+  hardware.nvidia.modesetting.enable = true;
 
   # Allow unfree packages such as the Nvidia proprietary driver
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "googleearth-pro-7.3.4.8248"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -99,7 +43,7 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/Los_Angeles";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -178,6 +122,13 @@ in
     nvidia-offload
     iosevka
     swtpm-tpm2
+    pinentry-gnome
+    jetbrains.goland
+    jetbrains.clion
+    googleearth-pro
+    nerdfonts
+    discord
+    vlc
   ];
 
   # For virt-manager
@@ -192,6 +143,8 @@ in
   # };
 
   # List services that you want to enable:
+
+  services.tailscale.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
