@@ -9,7 +9,6 @@
       set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/flutter/bin:''$PATH"
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-      #gpgconf --launch gpg-agent &
       set BASE16_SHELL "$HOME/.config/base16-shell/"
       source "$BASE16_SHELL/profile_helper.fish"
     '';
@@ -40,15 +39,6 @@
           repo = "fish-kubectl-completions";
           rev = "ced676392575d618d8b80b3895cdc3159be3f628";
           sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc=";
-        };
-      }
-      {
-        name = "fish-async-prompt";
-        src = pkgs.fetchFromGitHub {
-          owner = "acomagu";
-          repo = "fish-async-prompt";
-          rev = "40f30a4048b81f03fa871942dcb1671ea0fe7a53";
-          sha256 = "sha256-sSM8jB81TO+n0JVl8ekfVbw99K5NzEdxi1VqWkhIJaY=";
         };
       }
       {
@@ -112,7 +102,7 @@
 
     shellAliases = {
       cat = "bat";
-      copy = "pbcopy"; # FIXME what about linux?
+      copy = if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -sel clip";
       l = "exa --header --all --long --git";
       # nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
       # vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
