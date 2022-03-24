@@ -11,9 +11,7 @@ tasks:
   nixos:
     desc: Compiles and activates new NixOS config.
     cmds:
-    - sudo cp nixos/configuration.nix /etc/nixos/configuration.nix
-    - sudo cp nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
-    - sudo nixos-rebuild switch
+    - sudo nixos-rebuild switch --flake '.#default'
 
   darwin:
     desc: Compiles and activates new macOS config.

@@ -17,6 +17,11 @@
       homeDirectory = "/home/pierce";
     in
     {
+      nixosConfigurations."default" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+	modules = [ ./nixos ];
+      };
+
       darwinConfigurations."default" = darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         modules = [ ./darwin ];
