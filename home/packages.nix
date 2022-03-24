@@ -44,6 +44,7 @@ in
     netcat
     socat
     hey
+    jwt-cli
 
     # DevOps
     vault

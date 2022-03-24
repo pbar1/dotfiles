@@ -8,14 +8,18 @@
     global.brewfile = true;
     global.noLock = true;
 
-    taps = [];
+    # taps = [];
 
-    brews = [];
+    # brews = [];
 
     casks = [
+      "1password"
+      "aerial"
+      "amethyst"
+      "clipy"
       "wireshark"
     ];
 
-    masApps = [];
+    # masApps = [];
   };
 }
