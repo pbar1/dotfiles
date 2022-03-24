@@ -6,7 +6,7 @@
     userName = "Pierce Bartine";
     userEmail = "piercebartine@gmail.com";
     signing.key = null; # GPG picks key based on email if not set
-    #signing.signByDefault = true;
+    signing.signByDefault = true;
 
     extraConfig = {
       push.default = "simple";
