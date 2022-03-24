@@ -17,24 +17,30 @@
       homeDirectory = "/home/pierce";
     in
     {
-      nixosConfigurations."default" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         modules = [ ./nixos ];
+        system = "x86_64-linux";
       };
 
-      darwinConfigurations."default" = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
+      darwinConfigurations.default = darwin.lib.darwinSystem {
         modules = [ ./darwin ];
+        system = "x86_64-darwin";
       };
 
-      # Home Manager
-      homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.bobbery = home-manager.lib.homeManagerConfiguration {
         configuration = import ./home;
+        stateVersion = "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+        system = "x86_64-linux";
+        username = "pierce";
+        homeDirectory = "/home/pierce";
+      };
 
-        inherit system username homeDirectory;
-
-        # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-        stateVersion = "22.05";
+      homeConfigurations.pbartine-ltm = home-manager.lib.homeManagerConfiguration {
+        configuration = import ./home;
+        stateVersion = "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+        system = "x86_64-darwin";
+        username = "pbartine";
+        homeDirectory = "/Users/pbartine";
       };
     };
 }

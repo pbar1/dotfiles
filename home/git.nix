@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.git = {
@@ -12,13 +12,13 @@
       push.default = "simple";
       push.followTags = true;
       pull.rebase = false;
-      #credential.helper = "osxkeychain"; # FIXME: cross platform
+      credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "gnome-keyring";
     };
 
     delta = {
       enable = true;
       options = {
-        syntax-theme = "Solarized (dark)";
+        syntax-theme = "Solarized (light)";
         side-by-side = true;
       };
     };

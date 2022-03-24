@@ -1,5 +1,9 @@
 version: '3'
 
+vars:
+  HOSTNAME:
+    sh: hostname -s
+
 tasks:
   default: task --list
 
@@ -11,17 +15,17 @@ tasks:
   nixos:
     desc: Compiles and activates new NixOS config.
     cmds:
-    - sudo nixos-rebuild switch --flake '.#default'
+    - sudo nixos-rebuild switch --flake '.#default' {{.CLI_ARGS}}
 
   darwin:
     desc: Compiles and activates new macOS config.
     cmds:
-    - darwin-rebuild switch --flake '.#default'
+    - darwin-rebuild switch --flake '.#default' {{.CLI_ARGS}}
 
   home:
     desc: Compiles and actives new Home Manager config.
     cmds:
-    - home-manager switch --flake '.#default'
+    - home-manager switch --flake '.#{{.HOSTNAME}}' {{.CLI_ARGS}}
 
   fmt:
     desc: Formats code in this project.
