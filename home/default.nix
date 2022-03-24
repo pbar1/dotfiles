@@ -7,6 +7,7 @@
     ./tmux.nix
     ./fish.nix
     ./starship.nix
+    ./git.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
