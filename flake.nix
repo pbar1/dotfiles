@@ -19,7 +19,7 @@
     {
       nixosConfigurations."default" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	modules = [ ./nixos ];
+        modules = [ ./nixos ];
       };
 
       darwinConfigurations."default" = darwin.lib.darwinSystem {
