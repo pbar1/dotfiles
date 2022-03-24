@@ -26,7 +26,9 @@
       fsType = "vfat";
     };
 
-  boot.initrd.luks.devices."crypt".device = "/dev/disk/by-uuid/a2edcd36-b477-4779-9b3f-6963aa9c0786";
+  # TODO put the following command into a bootstrap script
+  # `sudo cryptsetup config /dev/nvme0n1p2 --label crypt`
+  boot.initrd.luks.devices."crypt".device = "/dev/disk/by-label/crypt";
 
   # Recommended Btrfs options for an SSD
   # https://www.reddit.com/r/btrfs/comments/r04i0l/comment/hlrfjzz/?utm_source=share&utm_medium=web2x&context=3

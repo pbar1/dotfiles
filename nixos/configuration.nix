@@ -26,7 +26,6 @@ in
       experimental-features = nix-command flakes
     '';
   };
-  hardware.nvidia.modesetting.enable = true;
 
   # Allow unfree packages such as the Nvidia proprietary driver
   nixpkgs.config.allowUnfree = true;
@@ -65,8 +64,9 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable Nvidia GPU driver
+  # Enable Nvidia GPU driver. Modesetting is needed for Wayland.
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.prime = {
     offload.enable = true;
     intelBusId = "PCI:0:2:0";
@@ -75,6 +75,7 @@ in
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.nvidiaWayland = true; # FIXME: Nvidia-specific
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "pierce";
   services.xserver.desktopManager.gnome.enable = true;
