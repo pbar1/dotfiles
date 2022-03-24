@@ -8,8 +8,8 @@
     interactiveShellInit = ''
       set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/flutter/bin:''$PATH"
       set -gx GPG_TTY (tty)
-      set -gx SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
-      gpgconf --launch gpg-agent &
+      set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      #gpgconf --launch gpg-agent &
       set BASE16_SHELL "$HOME/.config/base16-shell/"
       source "$BASE16_SHELL/profile_helper.fish"
     '';

@@ -12,10 +12,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  home.file.".gnupg/gpg-agent.conf".text = ''
-    enable-ssh-support
-    pinentry-program /usr/local/bin/pinentry-mac
-  '';
   home.file.".gnupg/sshcontrol".text = ''
     # personal
     CDCD1DF93F65BF132EB1F33327E34108F53BD47A

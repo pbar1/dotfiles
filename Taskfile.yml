@@ -4,9 +4,9 @@ tasks:
   default: task --list
 
   update:
-    desc: Updates all Nix channels (ie, pull latest derivation versions).
+    desc: Updates all Nix flake inputs and updates flake.lock.
     cmds:
-    - nix-channel --update
+    - nix flake update
 
   nixos:
     desc: Compiles and activates new NixOS config.
@@ -27,3 +27,8 @@ tasks:
     desc: Formats code in this project.
     cmds:
     - nixpkgs-fmt .
+
+  gc:
+    desc: Removes all unused objects from the Nix store.
+    cmds:
+    - nix-collect-garbage --delete-old
