@@ -11,11 +11,6 @@
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      username = "pierce";
-      homeDirectory = "/home/pierce";
-    in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         modules = [ ./nixos ];

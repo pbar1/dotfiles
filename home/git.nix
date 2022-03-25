@@ -24,7 +24,7 @@
     };
 
     # FIXME: create this file
-    includes = [{ path = "~/.config/git/config.sfdc"; condition = "gitdir:~/code/sfdc"; }];
+    includes = [{ path = "~/.config/git/config.sfdc"; condition = "gitdir:~/code/sfdc/"; }];
 
     aliases = {
       root = "rev-parse --show-toplevel";

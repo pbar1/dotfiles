@@ -1,6 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    pinentry_mac
+    alacritty
+  ];
+
   homebrew = {
     enable = true;
     autoUpdate = false;

@@ -11,12 +11,11 @@ in
     # Editor
     neovim
     tree-sitter
+    (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
 
     # Version control & project tools
     gnupg
-    git # FIXME use hm
     gh # FIXME use hm
-    delta
     tokei
     go-task
     direnv
