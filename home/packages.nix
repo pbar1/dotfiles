@@ -12,6 +12,7 @@ in
     neovim
     tree-sitter
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
+    chafa
 
     # Version control & project tools
     gnupg
@@ -21,7 +22,7 @@ in
     direnv
     mdbook
     hugo
-    asdf-vm
+    ninja
 
     # Command line utils
     coreutils
@@ -72,6 +73,7 @@ in
 
     # C/C++
     gcc
+    cmake
 
     # Rust
     rustup

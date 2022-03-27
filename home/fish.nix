@@ -7,10 +7,9 @@
     # FIXME hardcode
     interactiveShellInit = ''
       set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/flutter/bin:''$PATH"
+
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-      set BASE16_SHELL "$HOME/.config/base16-shell/"
-      source "$BASE16_SHELL/profile_helper.fish"
     '';
 
     plugins = [
@@ -66,6 +65,15 @@
           repo = "plugin-aws";
           rev = "a4cfb06627b20c9ffdc65620eb29abcedcc16340";
           sha256 = "sha256-bTyp5j4VcFSntJ7mJBzERgOGGgu7ub15hy/FQcffgRE=";
+        };
+      }
+      {
+        name = "base16-fish-shell";
+        src = pkgs.fetchFromGitHub {
+          owner = "FabioAntunes";
+          repo = "base16-fish-shell";
+          rev = "d358af9a724715efd0d31b417ba56e622a239612";
+          sha256 = "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=";
         };
       }
     ];
