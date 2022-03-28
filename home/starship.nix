@@ -110,7 +110,7 @@
       };
 
       kubernetes = {
-        disabled = false;
+        disabled = true;
         format = " [$symbol $context:$namespace]($style)";
         symbol = "☸";
         style = "bold blue";

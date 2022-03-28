@@ -68,12 +68,12 @@
         };
       }
       {
-        name = "base16-fish-shell";
+        name = "catppuccin";
         src = pkgs.fetchFromGitHub {
-          owner = "FabioAntunes";
-          repo = "base16-fish-shell";
-          rev = "d358af9a724715efd0d31b417ba56e622a239612";
-          sha256 = "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=";
+          owner = "catppuccin";
+          repo = "fish";
+          rev = "0b228f65728631bdc815c0f74a4d5134802e092d";
+          sha256 = "sha256-8hJ4EW68NI4Qk5PdpP9Ymj9WOHmxGaoO/kVPQW4NtN8=";
         };
       }
     ];
