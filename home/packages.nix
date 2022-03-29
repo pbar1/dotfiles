@@ -66,6 +66,7 @@ in
 
     # Nix
     nixpkgs-fmt
+    cachix
 
     # Bash
     shellcheck

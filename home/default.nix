@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ overlays }:
 
 {
   imports = [
@@ -10,7 +10,10 @@
     ./git.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    inherit overlays;
+  };
 
   home.file.".gnupg/sshcontrol".text = ''
     # personal
