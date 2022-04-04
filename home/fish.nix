@@ -98,6 +98,7 @@
       kubeconfig = "kubectl config view --minify --flatten";
       kx = "kubectx";
       lt = "exa --tree";
+      nv = "nvim";
       rgf = "rg --fixed-strings";
       rgi = "rg --ignore-case";
       star = "starship";
@@ -112,6 +113,7 @@
       cat = "bat";
       copy = if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -sel clip";
       l = "exa --header --all --long --git";
+      tree = "exa --tree";
       # nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
       # vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
     };

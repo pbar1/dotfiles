@@ -54,6 +54,7 @@ in
     google-cloud-sdk
     sops
     terraform-docs
+    terraform-ls
 
     # Containers & Kubernetes
     dive
@@ -71,6 +72,7 @@ in
     # Bash
     shellcheck
     shfmt
+    nodePackages.bash-language-server
 
     # C/C++
     gcc
@@ -78,6 +80,7 @@ in
 
     # Rust
     rustup
+    rust-analyzer
 
     # Go
     go
