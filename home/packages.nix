@@ -67,6 +67,7 @@ in
 
     # Nix
     nixpkgs-fmt
+    rnix-lsp
     cachix
 
     # Bash
@@ -91,6 +92,8 @@ in
     ]))
     pipenv
     black
+    python3Packages.isort
+    nodePackages.pyright
 
     # JavaScript
     nodejs
@@ -99,6 +102,7 @@ in
 
     # Lua
     stylua
+    sumneko-lua-language-server
 
     # Java
     jdk
