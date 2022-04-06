@@ -22,6 +22,7 @@
       "aerial"
       "amethyst"
       "clipy"
+      "wezterm"
       "wireshark"
     ];
 

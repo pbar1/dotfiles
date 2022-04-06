@@ -94,6 +94,7 @@ in
     black
     python3Packages.isort
     nodePackages.pyright
+    python3Packages.debugpy
 
     # JavaScript
     nodejs
