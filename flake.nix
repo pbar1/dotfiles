@@ -6,15 +6,17 @@
     darwin.url = "github:pbar1/nix-darwin"; # FIXME: Waiting for https://github.com/LnL7/nix-darwin/pull/310
     home-manager.url = "github:nix-community/home-manager";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
-      overlays = [ inputs.neovim-nightly-overlay.overlay ];
+      overlays = [ inputs.neovim-nightly-overlay.overlay inputs.emacs-overlay.overlay ];
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {

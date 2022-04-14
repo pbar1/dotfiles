@@ -13,6 +13,7 @@ in
     tree-sitter
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
     chafa
+    emacsGcc
 
     # Version control & project tools
     gnupg
