@@ -1,7 +1,9 @@
-{ overlays }:
+{ config, lib, packages, overlays }:
 
 {
   imports = [
+    ../modules/languages/go.nix
+
     ./env.nix
     ./packages.nix
     ./tmux.nix
