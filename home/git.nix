@@ -9,7 +9,7 @@
     signing.signByDefault = true;
 
     extraConfig = {
-      push.default = "simple";
+      push.default = "current";
       push.followTags = true;
       pull.rebase = false;
       credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "gnome-keyring";

@@ -10,7 +10,7 @@ in
   home.packages = with pkgs; [
     # Editor
     neovim
-    tree-sitter.withPlugins (_: allGrammars)
+    tree-sitter
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
     chafa
     emacsGcc

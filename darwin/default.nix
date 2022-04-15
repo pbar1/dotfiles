@@ -18,6 +18,14 @@
     '';
   };
 
+  # Keyboard settings
+  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3; # Enable full keyboard in modal dialogs
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
+  system.defaults.NSGlobalDomain.KeyRepeat = 1;
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
+
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
   programs.fish.enable = true;

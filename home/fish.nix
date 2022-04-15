@@ -6,7 +6,7 @@
 
     # FIXME hardcode
     interactiveShellInit = ''
-      set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/flutter/bin:''$PATH"
+      set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/.dotnet/tools:''$PATH"
 
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)

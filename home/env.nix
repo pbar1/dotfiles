@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   xdg.enable = true;
@@ -23,6 +23,7 @@
     GOPATH = "${config.xdg.dataHome}/go";
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
     CARGO_HOME = "${config.xdg.dataHome}/cargo";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk.outPath}";
     NUGET_PACKAGES = "${config.xdg.cacheHome}/NuGetPackages";
     PYLINTHOME = "${config.xdg.cacheHome}/pylint";
     GEM_HOME = "${config.xdg.dataHome}/gem";
