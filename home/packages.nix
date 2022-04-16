@@ -24,6 +24,7 @@ in
     mdbook
     hugo
     ninja
+    lazygit
 
     # Command line utils
     coreutils

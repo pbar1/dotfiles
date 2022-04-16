@@ -24,6 +24,7 @@
       "clipy"
       "wezterm"
       "wireshark"
+      "karabiner-elements"
     ];
 
     # masApps = [];

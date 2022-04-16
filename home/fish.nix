@@ -81,6 +81,7 @@
 
     shellAbbrs = {
       c = "clear";
+      e = "$EDITOR";
       g = "git";
       gs = "git status --short";
       gd = "git diff";
