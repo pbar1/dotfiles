@@ -54,6 +54,7 @@
         { key = "Right"; mods = "Command"; chars = "\\x01\\x4c"; }
       ];
 
+      # TODO: Move themes to separate files and import them here
       # Catppuccin theme
       colors = {
         primary.background = "0x1E1D2F";
