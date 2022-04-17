@@ -4,6 +4,7 @@ let
   configHome = config.xdg.configHome;
   dataHome = config.xdg.dataHome;
   cacheHome = config.xdg.cacheHome;
+  binHome = "${config.home.homeDirectory}/.local/bin";
 in
 {
   xdg.enable = true;
@@ -53,6 +54,16 @@ in
     AWS_CONFIG_FILE = "${configHome}/aws/config";
     AWS_VAULT_KEYCHAIN_NAME = "login";
     GOOGLE_APPLICATION_CREDENTIALS = "${configHome}/gcp/credentials.json";
-    CODEPATH = "\${HOME}/code";
+    CODEPATH = "${config.home.homeDirectory}/code";
   };
+
+  xdg.configFile."npm/npmrc".text = ''
+    prefix=${dataHome}/npm
+    cache=${cacheHome}/npm
+    init-module=${configHome}/npm/config/npm-init.js
+  '';
+
+  xdg.configFile."vault/config".text = ''
+    token_helper = "${binHome}/vault-token-helper"
+  '';
 }
