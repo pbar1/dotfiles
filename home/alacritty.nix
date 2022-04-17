@@ -5,6 +5,7 @@
     enable = true;
 
     settings = {
+      # FIXME: Padding seems to be wrong
       window.padding.x = 6;
       window.padding.y = 5;
       window.padding.dynamic_padding = true;
