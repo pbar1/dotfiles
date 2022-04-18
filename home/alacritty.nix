@@ -1,22 +1,25 @@
 { ... }:
 
+let
+  iosevka = "Iosevka Nerd Font Mono";
+in
 {
   programs.alacritty = {
     enable = true;
 
     settings = {
-      # FIXME: Padding seems to be wrong
+      # FIXME: Padding seems to be wrong compared to previous non-nix config
       window.padding.x = 6;
       window.padding.y = 5;
       window.padding.dynamic_padding = true;
 
-      font.normal.family = "Iosevka Nerd Font Mono";
+      font.normal.family = iosevka;
       font.normal.style = "Light";
-      font.bold.family = "Iosevka Nerd Font Mono";
+      font.bold.family = iosevka;
       font.bold.style = "Regular";
-      font.italic.family = "Iosevka Nerd Font Mono";
+      font.italic.family = iosevka;
       font.italic.style = "Light Italic";
-      font.bold_italic.family = "Iosevka Nerd Font Mono";
+      font.bold_italic.family = iosevka;
       font.bold_italic.style = "Italic";
       font.size = 16.0;
       font.glyph_offset.y = 1; # For Iosevka to look right
