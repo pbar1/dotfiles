@@ -9,7 +9,7 @@ in
 {
   home.packages = with pkgs; [
     # Editor
-    neovim
+    neovim-pbar
     tree-sitter
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
     chafa

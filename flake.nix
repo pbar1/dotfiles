@@ -3,20 +3,24 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    darwin.url = "github:pbar1/nix-darwin"; # FIXME: Waiting for https://github.com/LnL7/nix-darwin/pull/310
-    home-manager.url = "github:nix-community/home-manager";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    # TODO: Waiting for https://github.com/LnL7/nix-darwin/pull/310
+    darwin.url = "github:pbar1/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    nvim-config.url = "github:pbar1/nvim-config";
+    nvim-config.inputs.nixpkgs.follows = "nixpkgs";
+
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
-      overlays = [ inputs.neovim-nightly-overlay.overlay inputs.emacs-overlay.overlay ];
+      overlays = [ inputs.nvim-config.overlay inputs.emacs-overlay.overlay ];
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
