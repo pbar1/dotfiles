@@ -22,7 +22,7 @@ in
     go-task
     direnv
     mdbook
-    hugo
+    /* hugo */
     ninja
     lazygit
 
@@ -113,8 +113,5 @@ in
 
     # .NET and C#
     dotnet-sdk
-
-    # WebAssembly
-    wasmtime
   ];
 }
