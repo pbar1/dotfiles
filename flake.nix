@@ -11,6 +11,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    fenix.url = "github:nix-community/fenix";
+    fenix.inputs.nixpkgs.follows = "nixpkgs";
+
     nvim-config.url = "github:pbar1/nvim-config";
     nvim-config.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,7 +23,11 @@
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
-      overlays = [ inputs.nvim-config.overlay inputs.emacs-overlay.overlay ];
+      overlays = [
+        inputs.fenix.overlay
+        inputs.nvim-config.overlay
+        inputs.emacs-overlay.overlay
+      ];
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {

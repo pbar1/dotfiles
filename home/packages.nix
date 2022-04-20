@@ -25,6 +25,7 @@ in
     /* hugo */
     ninja
     lazygit
+    neofetch
 
     # Command line utils
     coreutils
@@ -68,8 +69,9 @@ in
     fluxcd
 
     # Nix
-    nixpkgs-fmt
     rnix-lsp
+    nixpkgs-fmt
+    statix
     cachix
 
     # Bash
@@ -78,11 +80,17 @@ in
     nodePackages.bash-language-server
 
     # C/C++
-    gcc
+    /* gcc */
     cmake
 
     # Rust
-    rustup
+    (fenix.stable.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
     rust-analyzer
 
     # Go
@@ -113,5 +121,6 @@ in
 
     # .NET and C#
     dotnet-sdk
+    omnisharp-roslyn
   ];
 }

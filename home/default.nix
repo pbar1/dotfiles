@@ -9,6 +9,7 @@
     ./starship.nix
     ./git.nix
     ./alacritty.nix
+    ./vscode.nix
   ];
 
   nixpkgs = {
