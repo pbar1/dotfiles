@@ -55,6 +55,7 @@ in
     AWS_VAULT_KEYCHAIN_NAME = "login";
     GOOGLE_APPLICATION_CREDENTIALS = "${configHome}/gcp/credentials.json";
     CODEPATH = "${config.home.homeDirectory}/code";
+    OMNISHARP_BIN = "${pkgs.omnisharp-roslyn}/bin/omnisharp";
 
     # TODO: Await fix: https://github.com/NixOS/nixpkgs/issues/148946
     # VSCODE_LLDB_PATH = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb";
