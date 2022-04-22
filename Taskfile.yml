@@ -36,3 +36,9 @@ tasks:
     desc: Removes all unused objects from the Nix store.
     cmds:
     - nix-collect-garbage --delete-old
+
+  # TODO: Launch with the current flake in scope
+  repl:
+    desc: Launches a Nix repl with Nixpkgs in scope.
+    cmds:
+    - nix repl '<nixpkgs>'

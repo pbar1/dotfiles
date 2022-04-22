@@ -9,7 +9,6 @@
     ./starship.nix
     ./git.nix
     ./alacritty.nix
-    ./vscode.nix
   ];
 
   nixpkgs = {
@@ -51,6 +50,8 @@
     [*.md]
     max_line_length = 80
   '';
+
+  xdg.configFile."wezterm".source = ./wezterm;
 
   # https://github.com/nix-community/home-manager/tree/master/modules/programs
   programs.home-manager.enable = true;

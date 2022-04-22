@@ -3,7 +3,7 @@
 # https://nixos.org/guides/nix-pills/override-design-pattern.html
 # Used `nix repl '<nixpkgs>'` to play around with this
 let
-  # Disable fzf builtin Fish shell integration
+  # Disable fzf builtin Fish shell integration; we use a plugin instead
   fzf = pkgs.fzf.overrideAttrs (oldAttrs: { preInstall = null; });
 in
 {
@@ -25,7 +25,7 @@ in
     /* hugo */
     ninja
     lazygit
-    neofetch
+    pre-commit
 
     # Command line utils
     coreutils
@@ -43,6 +43,7 @@ in
     xz
     procs
     openssl
+    neofetch
 
     # Networking
     netcat
@@ -82,6 +83,7 @@ in
     # C/C++
     /* gcc */
     cmake
+    vscode-extensions.vadimcn.vscode-lldb
 
     # Rust
     (fenix.stable.withComponents [
