@@ -36,21 +36,22 @@ return {
 
 	leader = { key = "a", mods = "CTRL" },
 	keys = {
+		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
+		{ key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
+
+		-- Emulate Tmux keybinds
+		-- Shift mod is needed due to: https://github.com/wez/wezterm/issues/394
 		{
 			key = '"',
-			mods = "LEADER",
+			mods = "LEADER|SHIFT",
 			action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
 		},
 		{
 			key = "|",
-			mods = "LEADER",
+			mods = "LEADER|SHIFT",
 			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
 		},
-		{
-			key = "z",
-			mods = "LEADER",
-			action = "TogglePaneZoomState",
-		},
+		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
 	},
 
 	colors = catppuccin,
