@@ -1,30 +1,25 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
-
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec -a "$0" "$@"
-  '';
-in
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./packages.nix
+  ];
 
   nix = {
-    package = pkgs.nixFlakes; # or versioned attributes like nix_2_7
+    package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    binaryCaches = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://pbar1.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
+    ];
   };
 
   # Allow unfree packages such as the Nvidia proprietary driver
@@ -104,33 +99,6 @@ in
     extraGroups = [ "wheel" "docker" "libvirtd" ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    firefox
-    alacritty
-    tmux
-    powertop
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.night-theme-switcher
-    gnome.gnome-tweaks
-    qogir-theme
-    qogir-icon-theme
-    virt-manager
-    win-virtio
-    nvidia-offload
-    iosevka
-    swtpm-tpm2
-    pinentry-gnome
-    jetbrains.goland
-    jetbrains.clion
-    googleearth-pro
-    nerdfonts
-    discord
-    vlc
-  ];
-
   # For virt-manager
   programs.dconf.enable = true;
 
@@ -179,6 +147,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
-
 }
-
