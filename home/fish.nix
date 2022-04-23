@@ -112,11 +112,9 @@
 
     shellAliases = {
       cat = "bat";
-      copy = if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -sel clip";
+      copy = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy --trim-newline";
       l = "exa --header --all --long --git";
       tree = "exa --tree";
-      # nvim = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
-      # vi = "CC=/usr/local/bin/gcc-11 /usr/local/bin/nvim"; # FIXME what about linux?
     };
 
     functions = {
