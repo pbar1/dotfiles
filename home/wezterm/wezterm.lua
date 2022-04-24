@@ -1,23 +1,25 @@
 local wezterm = require("wezterm")
-local catppuccin = require("colors.catppuccin")
 
--- function scheme_for_appearance(appearance)
--- 	if appearance:find("Dark") then
--- 		return "OneHalfDark"
--- 	else
--- 		return "OneHalfDark"
--- 	end
--- end
---
--- wezterm.on("window-config-reloaded", function(window, pane)
--- 	local overrides = window:get_config_overrides() or {}
--- 	local appearance = window:get_appearance()
--- 	local scheme = scheme_for_appearance(appearance)
--- 	if overrides.color_scheme ~= scheme then
--- 		overrides.color_scheme = scheme
--- 		window:set_config_overrides(overrides)
--- 	end
--- end)
+function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Gruvbox Dark"
+	else
+		return "Gruvbox Light"
+	end
+end
+
+wezterm.on("window-config-reloaded", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local appearance = window:get_appearance()
+	local scheme = scheme_for_appearance(appearance)
+	if overrides.color_scheme ~= scheme then
+		overrides.color_scheme = scheme
+		window:set_config_overrides(overrides)
+	end
+end)
+
+local split_horizontal = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } })
+local split_vertical = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } })
 
 return {
 	automatically_reload_config = true,
@@ -39,20 +41,23 @@ return {
 		-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 		{ key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
 
-		-- Emulate Tmux keybinds
+		-- Emulate my Tmux/Screen muscle memory
 		-- Shift mod is needed due to: https://github.com/wez/wezterm/issues/394
-		{
-			key = '"',
-			mods = "LEADER|SHIFT",
-			action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
-		},
-		{
-			key = "|",
-			mods = "LEADER|SHIFT",
-			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
-		},
 		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
-	},
+		{ key = "|", mods = "LEADER|SHIFT", action = split_horizontal },
+		{ key = '"', mods = "LEADER|SHIFT", action = split_vertical },
+		{ key = "LeftArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ key = "DownArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ key = "UpArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ key = "RightArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
 
-	colors = catppuccin,
+		-- Emulate Vim
+		{ key = "_", mods = "LEADER|SHIFT", action = "TogglePaneZoomState" },
+		{ key = "s", mods = "LEADER", action = split_horizontal },
+		{ key = "v", mods = "LEADER", action = split_vertical },
+		{ key = "h", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ key = "j", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ key = "k", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ key = "l", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+	},
 }

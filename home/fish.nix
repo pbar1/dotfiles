@@ -6,6 +6,8 @@
 
     # FIXME hardcode
     interactiveShellInit = ''
+      fish_vi_key_bindings
+
       set -gx PATH "''$HOME/.local/bin:''$HOME/.nix-profile/bin:''$HOME/.krew/bin:${config.xdg.dataHome}/go/bin:${config.xdg.dataHome}/cargo/bin:${config.xdg.dataHome}/npm/bin:''$HOME/.dotnet/tools:''$PATH"
 
       set -gx GPG_TTY (tty)
@@ -68,12 +70,12 @@
         };
       }
       {
-        name = "catppuccin";
+        name = "base16-fish-shell";
         src = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "fish";
-          rev = "0b228f65728631bdc815c0f74a4d5134802e092d";
-          sha256 = "sha256-8hJ4EW68NI4Qk5PdpP9Ymj9WOHmxGaoO/kVPQW4NtN8=";
+          owner = "FabioAntunes";
+          repo = "base16-fish-shell";
+          rev = "d358af9a724715efd0d31b417ba56e622a239612";
+          sha256 = "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=";
         };
       }
     ];
@@ -119,33 +121,33 @@
 
     functions = {
       light = ''
-        base16-solarized-light
-        base16-fzf-solarized-light
+        base16-gruvbox-light-medium
+        base16-fzf-gruvbox-light-medium
       '';
 
       dark = ''
-        base16-solarized-dark
-        base16-fzf-solarized-dark
+        base16-gruvbox-dark-medium
+        base16-fzf-gruvbox-dark-medium
       '';
 
-      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-solarized-light.fish
-      base16-fzf-solarized-light = ''
-        set -l color00 '#fdf6e3'
-        set -l color01 '#eee8d5'
-        set -l color02 '#93a1a1'
-        set -l color03 '#839496'
-        set -l color04 '#657b83'
-        set -l color05 '#586e75'
-        set -l color06 '#073642'
-        set -l color07 '#002b36'
-        set -l color08 '#dc322f'
-        set -l color09 '#cb4b16'
-        set -l color0A '#b58900'
-        set -l color0B '#859900'
-        set -l color0C '#2aa198'
-        set -l color0D '#268bd2'
-        set -l color0E '#6c71c4'
-        set -l color0F '#d33682'
+      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-gruvbox-light-medium.fish
+      base16-fzf-gruvbox-light-medium = ''
+        set -l color00 '#fbf1c7'
+        set -l color01 '#ebdbb2'
+        set -l color02 '#d5c4a1'
+        set -l color03 '#bdae93'
+        set -l color04 '#665c54'
+        set -l color05 '#504945'
+        set -l color06 '#3c3836'
+        set -l color07 '#282828'
+        set -l color08 '#9d0006'
+        set -l color09 '#af3a03'
+        set -l color0A '#b57614'
+        set -l color0B '#79740e'
+        set -l color0C '#427b58'
+        set -l color0D '#076678'
+        set -l color0E '#8f3f71'
+        set -l color0F '#d65d0e'
 
         set -l FZF_NON_COLOR_OPTS
 
@@ -159,26 +161,27 @@
         " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
         " --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
         " --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+
       '';
 
-      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-solarized-dark.fish
-      base16-fzf-solarized-dark = ''
-        set -l color00 '#002b36'
-        set -l color01 '#073642'
-        set -l color02 '#586e75'
-        set -l color03 '#657b83'
-        set -l color04 '#839496'
-        set -l color05 '#93a1a1'
-        set -l color06 '#eee8d5'
-        set -l color07 '#fdf6e3'
-        set -l color08 '#dc322f'
-        set -l color09 '#cb4b16'
-        set -l color0A '#b58900'
-        set -l color0B '#859900'
-        set -l color0C '#2aa198'
-        set -l color0D '#268bd2'
-        set -l color0E '#6c71c4'
-        set -l color0F '#d33682'
+      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-gruvbox-dark-medium.fish
+      base16-fzf-gruvbox-dark-medium = ''
+        set -l color00 '#282828'
+        set -l color01 '#3c3836'
+        set -l color02 '#504945'
+        set -l color03 '#665c54'
+        set -l color04 '#bdae93'
+        set -l color05 '#d5c4a1'
+        set -l color06 '#ebdbb2'
+        set -l color07 '#fbf1c7'
+        set -l color08 '#fb4934'
+        set -l color09 '#fe8019'
+        set -l color0A '#fabd2f'
+        set -l color0B '#b8bb26'
+        set -l color0C '#8ec07c'
+        set -l color0D '#83a598'
+        set -l color0E '#d3869b'
+        set -l color0F '#d65d0e'
 
         set -l FZF_NON_COLOR_OPTS
 

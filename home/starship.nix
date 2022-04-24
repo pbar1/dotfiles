@@ -141,7 +141,7 @@
       character = {
         success_symbol = "[♪]()";
         error_symbol = "[ø](red)";
-        vicmd_symbol = "[V](blue)";
+        vicmd_symbol = "[♫](blue)";
       };
     };
   };
