@@ -9,3 +9,4 @@ Configuration for NixOS, macOS, and Home Manager
 - [nix-darwin supports managing Homebrew packages](https://github.com/LnL7/nix-darwin/pull/262)
 - [Example showing nix-darwin managing Homebrew](https://github.com/malob/nixpkgs/blob/master/darwin/homebrew.nix)
 - [Example showing nix-darwin managing macOS `defaults`](https://github.com/LnL7/nix-darwin/blob/master/modules/examples/lnl.nix)
+- [brian/dotfiles.nix](https://git.bytes.zone/brian/dotfiles.nix)

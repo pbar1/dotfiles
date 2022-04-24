@@ -9,28 +9,28 @@ let
   '';
 in
 {
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "googleearth-pro-7.3.4.8248"
+  ];
+
   environment.systemPackages = with pkgs; [
-    wget
-    firefox
     alacritty
-    powertop
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.night-theme-switcher
-    gnome.gnome-tweaks
-    qogir-theme
-    qogir-icon-theme
-    virt-manager
-    win-virtio
-    nvidia-offload
-    swtpm-tpm2
-    pinentry-gnome
-    jetbrains.goland
-    jetbrains.clion
-    googleearth-pro
+    copyq
     discord
+    firefox
+    gnome.gnome-tweaks
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.night-theme-switcher # FIXME: Pin this version to something that works
+    googleearth-pro
+    nvidia-offload
+    pinentry-gnome
+    powertop
+    qogir-icon-theme
+    qogir-theme
     vlc
     wezterm
-    copyq
     wl-clipboard
   ];
 }

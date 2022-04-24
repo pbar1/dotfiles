@@ -21,8 +21,8 @@
   # Keyboard settings
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3; # Enable full keyboard in modal dialogs
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
-  system.defaults.NSGlobalDomain.KeyRepeat = 1;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10; # 150 ms
+  system.defaults.NSGlobalDomain.KeyRepeat = 1; # 15 ms
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
