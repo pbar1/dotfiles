@@ -49,8 +49,22 @@
   services.xserver.autoRepeatInterval = 15;
   services.xserver.libinput.enable = true;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # Disable sound module as it conflicts with PipeWire
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
+
+  # Enable PipeWire for sound
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+
+  # Uncomment this line to allow AirPods to connect. After initial connection,
+  # it can be commented back out (ie, ControllerMode = "dual").
+  # See: https://github.com/tim-hilt/nixos/blob/main/config/desktop.nix
+  # hardware.bluetooth.settings = { General = { ControllerMode = "bredr"; }; };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pierce = {
