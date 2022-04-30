@@ -83,6 +83,7 @@ in
     # C/C++
     /* gcc */
     cmake
+    cmake-language-server
     vscode-extensions.vadimcn.vscode-lldb
 
     # Rust
@@ -124,5 +125,11 @@ in
     # .NET and C#
     dotnet-sdk
     omnisharp-roslyn
+
+    # Config languages
+    nodePackages.vscode-json-languageserver
+    nodePackages.yaml-language-server
+    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.vscode-html-languageserver-bin
   ];
 }

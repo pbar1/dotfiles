@@ -18,7 +18,7 @@
     delta = {
       enable = true;
       options = {
-        syntax-theme = "Solarized (light)";
+        syntax-theme = "gruvbox-light";
         side-by-side = true;
       };
     };
