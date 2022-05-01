@@ -15,7 +15,9 @@
 
   # Required for lid closing on Razer Blade Stealth 13
   # https://help.ubuntu.com/community/RazerBlade#Suspend
-  boot.kernelParams = [ "button.lid_init_state=open" "intel_iommu=on" "iommu=pt" ];
+  # Also required for setting up hibernate
+  # https://www.worldofbs.com/nixos-framework/#setting-up-hibernate
+  boot.kernelParams = [ "button.lid_init_state=open" "intel_iommu=on" "iommu=pt" "resume_offset=1095131" ];
 
   # TODO put the following command into a bootstrap script
   # `sudo cryptsetup config /dev/nvme0n1p2 --label crypt`
@@ -34,30 +36,19 @@
     options = [ "subvol=root" "compress=zstd" "noatime" "ssd" "discard=async" "space_cache=v2" "commit=120" "autodefrag" ];
   };
 
-  #fileSystems."/swap" =
-  #  { device = "/dev/disk/by-label/root";
-  #    fsType = "btrfs";
-  #    options = [ "subvol=swap" "compress=zstd" "noatime" ];
-  #  };
-
-  #swapDevices = [{
-  #  device = "/swap/swapfile";
-  #  size = (1024 * 16) + (1024 * 2); # RAM size + 2 GB
-  #}];
-
-  # Create Btrfs-compatible swapfile
-  # https://github.com/NixOS/nixpkgs/issues/91986#issuecomment-787143060
-  # systemd.services = {
-  #   create-swapfile = {
-  #     serviceConfig.Type = "oneshot";
-  #     wantedBy = [ "swap-swapfile.swap" ];
-  #     script = ''
-  #       ${pkgs.coreutils}/bin/truncate -s 0 /swap/swapfile
-  #       ${pkgs.e2fsprogs}/bin/chattr +C /swap/swapfile
-  #       ${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile compression none
-  #     '';
-  #   };
-  # };
+  # Swapfile on Btrfs subvolume
+  # Options (aside from `subvol`) must be the same on all subvolumes, but some
+  # are incompatible with swap. We use a systemd job to set up the swapfile.
+  boot.resumeDevice = "/dev/disk/by-label/root";
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-label/root";
+    fsType = "btrfs";
+    options = [ "subvol=swap" "compress=zstd" "noatime" "ssd" "discard=async" "space_cache=v2" "commit=120" "autodefrag" ];
+  };
+  swapDevices = [{
+    device = "/swap/swapfile";
+    size = 16593; # RAM size, via `free --mega`
+  }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.video.hidpi.enable = lib.mkDefault true;

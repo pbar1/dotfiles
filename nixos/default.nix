@@ -24,6 +24,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
 
+  # Create Btrfs-compatible swapfile
+  # https://github.com/NixOS/nixpkgs/issues/91986#issuecomment-787143060
+  systemd.services.create-swapfile = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "swap-swapfile.swap" ];
+    script = ''
+      ${pkgs.e2fsprogs}/bin/chattr +C /swap
+      ${pkgs.coreutils}/bin/truncate -s 0 /swap/swapfile
+      ${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile compression none
+      ${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile noautodefrag
+      ${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile nodiscard
+    '';
+  };
+
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.enable = true;
@@ -60,6 +74,9 @@
     extraGroups = [ "wheel" "docker" "libvirtd" ];
   };
   users.users.root.hashedPassword = "!"; # Disable root user
+
+  # Unlock GNOME keyring on login
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   programs.gnupg.agent = {
     enable = true;
