@@ -29,6 +29,7 @@ in
     powertop
     qogir-icon-theme
     qogir-theme
+    virt-manager
     vlc
     wezterm
     wl-clipboard

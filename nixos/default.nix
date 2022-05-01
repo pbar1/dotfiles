@@ -22,22 +22,9 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "bobbery";
-
-  time.timeZone = "America/Los_Angeles";
-
-  networking.interfaces.wlo1.useDHCP = true; # TODO: Remove if default
+  boot.plymouth.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true; # Needed for Wayland
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:57:0:0";
-  };
 
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -70,7 +57,7 @@
   users.users.pierce = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "libvirtd" ];
   };
   users.users.root.hashedPassword = "!"; # Disable root user
 
@@ -84,21 +71,27 @@
 
   services.tailscale.enable = true;
 
-  # Create Btrfs-compatible swapfile
-  # https://github.com/NixOS/nixpkgs/issues/91986#issuecomment-787143060
-  # systemd.services = {
-  #   create-swapfile = {
-  #     serviceConfig.Type = "oneshot";
-  #     wantedBy = [ "swap-swapfile.swap" ];
-  #     script = ''
-  #       ${pkgs.coreutils}/bin/truncate -s 0 /swap/swapfile
-  #       ${pkgs.e2fsprogs}/bin/chattr +C /swap/swapfile
-  #       ${pkgs.btrfs-progs}/bin/btrfs property set /swap/swapfile compression none
-  #     '';
-  #   };
-  # };
+  virtualisation = {
+    # https://adamsimpson.net/writing/windows-11-as-kvm-guest
+    libvirtd.enable = true;
+    libvirtd.qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        package = pkgs.OVMFFull.override {
+          secureBoot = true;
+          tpmSupport = true;
+        };
+      };
+    };
 
-  virtualisation.docker.enable = true;
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
