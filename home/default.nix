@@ -14,8 +14,11 @@
   ];
 
   nixpkgs = {
-    config.allowUnfree = true;
     inherit overlays;
+    config.allowUnfree = true;
+
+    # TODO: https://github.com/nix-community/home-manager/issues/2942
+    config.allowUnfreePredicate = (pkg: true);
   };
 
   home.file.".gnupg/sshcontrol".text = ''
