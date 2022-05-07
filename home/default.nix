@@ -2,13 +2,15 @@
 
 {
   imports = [
-    ./env.nix
-    ./packages.nix
-    ./tmux.nix
-    ./fish.nix
-    ./starship.nix
-    ./git.nix
     ./alacritty.nix
+    ./env.nix
+    ./fish.nix
+    ./git.nix
+    ./neovim
+    ./packages.nix
+    ./starship.nix
+    ./tmux.nix
+    ./vscode.nix
   ];
 
   nixpkgs = {

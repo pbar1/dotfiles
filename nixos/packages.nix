@@ -33,5 +33,7 @@ in
     vlc
     wezterm
     wl-clipboard
+    jetbrains.clion
+    zoom-us
   ];
 }

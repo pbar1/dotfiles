@@ -59,6 +59,7 @@ in
     sops
     terraform-docs
     terraform-ls
+    wrangler
 
     # Containers & Kubernetes
     dive
@@ -81,19 +82,24 @@ in
     nodePackages.bash-language-server
 
     # C/C++
-    /* gcc */
+    gcc
+    gnumake
+    binutils
+    pkg-config
+    zlib
     cmake
     cmake-language-server
     vscode-extensions.vadimcn.vscode-lldb
 
     # Rust
-    (fenix.stable.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
+    rustup
+    /* (fenix.stable.withComponents [ */
+    /*   "cargo" */
+    /*   "clippy" */
+    /*   "rust-src" */
+    /*   "rustc" */
+    /*   "rustfmt" */
+    /* ]) */
     rust-analyzer
 
     # Go
