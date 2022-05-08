@@ -20,6 +20,7 @@
       ms-python.vscode-pylance
       redhat.vscode-yaml
       streetsidesoftware.code-spell-checker
+      tamasfe.even-better-toml
       timonwong.shellcheck
       vadimcn.vscode-lldb
       yzhang.markdown-all-in-one
@@ -45,16 +46,18 @@
       "editor.fontSize" = 16;
       "editor.formatOnSave" = true;
       "editor.renderWhitespace" = "boundary";
+      "explorer.confirmDelete" = false;
       "nix.enableLanguageServer" = true;
+      "rust-analyzer.inlayHints.parameterHints" = true;
       "telemetry.telemetryLevel" = "off";
       "terminal.integrated.copyOnSelection" = true;
       "terminal.integrated.fontSize" = 16;
       "terminal.integrated.rightClickBehavior" = "copyPaste";
-      "vscode-neovim.neovimExecutablePaths.linux" = "${pkgs.neovim-unwrapped}/bin/nvim";
+      "vscode-neovim.neovimExecutablePaths.linux" = "${pkgs.neovim-nightly}/bin/nvim";
       "vsicons.dontShowNewVersionMessage" = true;
       "window.autoDetectColorScheme" = true;
       "window.titleBarStyle" = "custom";
-      "workbench.colorTheme" = "Gruvbox Light Medium";
+      "workbench.colorTheme" = "Gruvbox Dark Medium";
       "workbench.iconTheme" = "vscode-icons";
       "workbench.preferredDarkColorTheme" = "Gruvbox Dark Medium";
       "workbench.preferredLightColorTheme" = "Gruvbox Light Medium";

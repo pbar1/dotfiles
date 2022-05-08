@@ -6,7 +6,6 @@
     ./env.nix
     ./fish.nix
     ./git.nix
-    ./neovim
     ./packages.nix
     ./starship.nix
     ./tmux.nix
@@ -58,8 +57,10 @@
 
   xdg.configFile."wezterm".source = ./wezterm;
 
-  # https://github.com/nix-community/home-manager/tree/master/modules/programs
+  xdg.configFile."nvim".source = ./nvim;
+
   programs.home-manager.enable = true;
+
   programs.zoxide.enable = true;
 
   programs.bat = {

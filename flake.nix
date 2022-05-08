@@ -14,8 +14,8 @@
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    nvim-config.url = "github:pbar1/nvim-config";
-    nvim-config.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +25,7 @@
     let
       overlays = [
         inputs.fenix.overlay
-        inputs.nvim-config.overlay
+        inputs.neovim-nightly-overlay.overlay
         inputs.emacs-overlay.overlay
       ];
     in
