@@ -57,7 +57,8 @@
 
   xdg.configFile."wezterm".source = ./wezterm;
 
-  xdg.configFile."nvim".source = ./nvim;
+  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+  xdg.configFile."nvim/lua".source = ./nvim/lua;
 
   programs.home-manager.enable = true;
 
