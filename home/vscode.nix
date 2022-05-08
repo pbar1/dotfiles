@@ -57,7 +57,7 @@
       "vsicons.dontShowNewVersionMessage" = true;
       "window.autoDetectColorScheme" = true;
       "window.titleBarStyle" = "custom";
-      "workbench.colorTheme" = "Gruvbox Dark Medium";
+      "workbench.colorTheme" = "Gruvbox Light Medium";
       "workbench.iconTheme" = "vscode-icons";
       "workbench.preferredDarkColorTheme" = "Gruvbox Dark Medium";
       "workbench.preferredLightColorTheme" = "Gruvbox Light Medium";
