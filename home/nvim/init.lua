@@ -44,6 +44,24 @@ vim.opt.guifont = "Iosevka_Nerd_Font_Mono"
 if not_vscode() then
 	-- Highlight the current line
 	vim.opt.cursorline = true
+
+	-- Number of ms without typing before swap file is written to
+	vim.opt.updatetime = 100
+
+	-- Display whitespace characters
+	vim.opt.list = true
+	vim.opt.listchars = { space = "·", tab = "→ ", eol = "¬" }
+
+	-- Display line numbers
+	vim.wo.number = true
+
+	-- Always display sign column
+	vim.wo.signcolumn = "yes"
+
+	-- Signify settings
+	vim.g.signify_sign_add = "▊"
+	vim.g.signify_sign_change = "▊"
+	vim.g.signify_sign_change_delete = "~"
 end
 
 -------------------------------------------------------------------------------
@@ -77,11 +95,14 @@ local use = packer.use
 
 use({ "wbthomason/packer.nvim", opt = true })
 
-use({ "lewis6991/impatient.nvim" })
+-- FIXME: Impatient breaks cmp
+-- use({ "lewis6991/impatient.nvim" })
 
 use({ "nvim-lua/plenary.nvim" })
 
 use({ "dstein64/vim-startuptime", cond = not_vscode })
+
+use({ "editorconfig/editorconfig-vim", cond = not_vscode })
 
 use({
 	"sainnhe/gruvbox-material",
@@ -167,6 +188,8 @@ use({
 	end,
 })
 
+use({ "mhinz/vim-signify", cond = not_vscode })
+
 use({
 	"nvim-treesitter/nvim-treesitter",
 	run = ":TSUpdate",
@@ -174,6 +197,7 @@ use({
 	requires = { "lewis6991/spellsitter.nvim" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
+			ensure_installed = "all",
 			highlight = { enable = true },
 			indent = { enable = false }, -- TODO: Enable when not buggy in Go
 			rainbow = { enable = false }, -- TODO: Integrate theme colors
@@ -232,15 +256,11 @@ use({
 	"neovim/nvim-lspconfig",
 	cond = not_vscode,
 	after = "cmp-nvim-lsp",
+	requires = { "simrat39/rust-tools.nvim" },
 	config = function()
 		local lspconfig = require("lspconfig")
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-		local on_attach = function(client, bufnr)
-			-- Disable LSP formatting in favor of null-ls
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
-		end
 		local servers = {
 			"bashls",
 			"gopls",
@@ -250,27 +270,22 @@ use({
 		}
 		for _, server in pairs(servers) do
 			lspconfig[server].setup({
-				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 		end
 		lspconfig["sumneko_lua"].setup({
-			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
 				Lua = {
-					runtime = {
-						version = "LuaJIT",
-					},
-					diagnostics = {
-						globals = { "vim" },
-					},
-					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
-					},
+					runtime = { version = "LuaJIT" },
+					diagnostics = { globals = { "vim" } },
+					workspace = { library = vim.api.nvim_get_runtime_file("", true) },
 					telemetry = { enable = false },
 				},
 			},
+		})
+		require("rust-tools").setup({
+			server = { capabilities = capabilities },
 		})
 	end,
 })
@@ -304,5 +319,14 @@ use({
 				end
 			end,
 		})
+	end,
+})
+
+use({
+	"folke/trouble.nvim",
+	cond = not_vscode,
+	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	config = function()
+		require("trouble").setup({})
 	end,
 })
