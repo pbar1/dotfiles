@@ -17,6 +17,11 @@ end
 -- Vim Options
 -------------------------------------------------------------------------------
 
+-- Remap <Space> as leader key
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Mouse support in all modes
 vim.opt.mouse = "a"
 
@@ -50,7 +55,15 @@ if not_vscode() then
 
 	-- Display whitespace characters
 	vim.opt.list = true
-	vim.opt.listchars = { space = "·", tab = "→ ", eol = "¬" }
+	vim.opt.listchars = {
+		tab = "→ ",
+		lead = "·",
+		trail = "·",
+		-- eol = "¬",
+		extends = "»",
+		precedes = "«",
+		nbsp = "+",
+	}
 
 	-- Display line numbers
 	vim.wo.number = true
@@ -71,7 +84,7 @@ end
 -- Bootstrap Packer if necessary
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-	packer_bootstrap = vim.fn.system({
+	vim.fn.system({
 		"git",
 		"clone",
 		"--depth=1",
@@ -328,5 +341,44 @@ use({
 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
 		require("trouble").setup({})
+	end,
+})
+
+use({
+	"folke/which-key.nvim",
+	cond = not_vscode,
+	config = function()
+		local which_key = require("which-key")
+		which_key.setup({
+			key_labels = {
+				["<Leader>"] = "LDR",
+				["<Space>"] = "SPC",
+				["<Tab>"] = "TAB",
+				["<CR>"] = "RET",
+				["<Esc>"] = "ESC",
+			},
+		})
+		local leader_mappings = {
+			["f"] = {
+				name = "+find 🔎",
+				["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
+				["f"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+				["g"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
+				["h"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+				["r"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+			},
+			["t"] = {
+				name = "+Trouble 😈",
+				["r"] = { "<cmd>TroubleRefresh<cr>", "Refresh Trouble" },
+				["t"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+			},
+			["P"] = {
+				name = "+Packer 📦",
+				["c"] = { "<cmd>PackerCompile<cr>", "PackerCompile" },
+				["p"] = { "<cmd>PackerProfile<cr>", "PackerProfile" },
+				["y"] = { "<cmd>PackerSync<cr>", "PackerSync" },
+			},
+		}
+		which_key.register(leader_mappings, { prefix = "<leader>" })
 	end,
 })
