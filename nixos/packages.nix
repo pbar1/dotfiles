@@ -15,25 +15,24 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    alacritty
+    arc-icon-theme
+    arc-kde-theme
+    arc-theme
+    caffeine-ng
     copyq
     discord
     firefox
-    gnome.gnome-tweaks
-    gnomeExtensions.appindicator
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.night-theme-switcher # FIXME: Pin this version to something that works
     googleearth-pro
+    jetbrains.clion
+    jetbrains.rider
     nvidia-offload
-    pinentry-gnome
+    pinentry-qt
     powertop
-    qogir-icon-theme
-    qogir-theme
+    unzip
     virt-manager
     vlc
     wezterm
-    wl-clipboard
-    jetbrains.clion
+    xclip
     zoom-us
   ];
 }

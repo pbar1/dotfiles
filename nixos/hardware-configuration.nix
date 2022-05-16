@@ -50,7 +50,6 @@
     size = 16593; # RAM size, via `free --mega`
   }];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.video.hidpi.enable = lib.mkDefault true;
 
   # Nvidia GPU support

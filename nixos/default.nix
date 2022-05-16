@@ -40,15 +40,25 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "pierce";
-  services.xserver.xkbOptions = "caps:escape";
-  services.xserver.autoRepeatDelay = 150;
-  services.xserver.autoRepeatInterval = 15;
-  services.xserver.libinput.enable = true;
+  services.xserver = {
+    enable = true;
+    xkbOptions = "caps:escape";
+    autoRepeatDelay = 150;
+    autoRepeatInterval = 15;
+    libinput.enable = true;
+
+    displayManager = {
+      sddm.enable = true;
+      autoLogin.enable = true;
+      autoLogin.user = "pierce";
+    };
+
+    desktopManager.plasma5.enable = true;
+  };
+
+  environment.sessionVariables = {
+    PLASMA_USE_QT_SCALING = "true";
+  };
 
   # Disable sound module as it conflicts with PipeWire
   sound.enable = false;
@@ -66,25 +76,24 @@
   # it can be commented back out (ie, ControllerMode = "dual").
   # See: https://github.com/tim-hilt/nixos/blob/main/config/desktop.nix
   # hardware.bluetooth.settings = { General = { ControllerMode = "bredr"; }; };
+  hardware.bluetooth.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  networking.networkmanager.enable = true;
+
   users.users.pierce = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ];
   };
   users.users.root.hashedPassword = "!"; # Disable root user
 
   # Unlock GNOME keyring on login
-  security.pam.services.gdm.enableGnomeKeyring = true;
+  # security.pam.services.gdm.enableGnomeKeyring = true;
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
-
-  # For systray icons
-  services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
   services.tailscale.enable = true;
 
