@@ -114,7 +114,7 @@
 
     shellAliases = {
       cat = "bat";
-      copy = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy --trim-newline";
+      copy = if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -sel clip";
       l = "exa --header --all --long --git";
       tree = "exa --tree";
     };
