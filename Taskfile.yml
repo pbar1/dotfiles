@@ -19,6 +19,11 @@ tasks:
     cmds:
     - nixos-rebuild switch --use-remote-sudo --flake '.#default' {{.CLI_ARGS}}
 
+  nixos:build:
+    desc: Builds NixOS config.
+    cmds:
+    - nixos-rebuild build --use-remote-sudo --flake '.#default' {{.CLI_ARGS}}
+
   darwin:
     desc: Compiles and activates new macOS config.
     cmds:
