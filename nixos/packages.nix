@@ -7,6 +7,10 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec -a "$0" "$@"
   '';
+
+  retroarch = pkgs.retroarch.override {
+    cores = with pkgs.libretro; [ sameboy ];
+  };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -26,8 +30,9 @@ in
     jetbrains.clion
     jetbrains.rider
     nvidia-offload
-    pinentry-qt
+    kwalletcli
     powertop
+    retroarch
     unzip
     virt-manager
     vlc

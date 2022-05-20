@@ -87,8 +87,10 @@
   };
   users.users.root.hashedPassword = "!"; # Disable root user
 
-  # Unlock GNOME keyring on login
-  # security.pam.services.gdm.enableGnomeKeyring = true;
+  security.pam.services.kwallet = {
+    name = "kwallet";
+    enableKwallet = true;
+  };
 
   programs.gnupg.agent = {
     enable = true;
