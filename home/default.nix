@@ -1,4 +1,4 @@
-{ overlays }:
+{ overlays, ... }:
 
 {
   imports = [
@@ -6,10 +6,11 @@
     ./env.nix
     ./fish.nix
     ./git.nix
+    ./nvim
     ./packages.nix
     ./starship.nix
     ./tmux.nix
-    ./vscode.nix
+    ./wezterm
   ];
 
   nixpkgs = {
@@ -24,7 +25,7 @@
     # personal
     CDCD1DF93F65BF132EB1F33327E34108F53BD47A
     # work
-    34DC36A515AA457BF44D8DE158FE03774C6554A0
+    98A14E84BFC1A99FDE258E54659F86F577798596
   '';
 
   home.file.".editorconfig".text = ''
@@ -55,7 +56,6 @@
     max_line_length = 80
   '';
 
-  xdg.configFile."wezterm".source = ./wezterm;
 
   xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
   xdg.configFile."nvim/lua".source = ./nvim/lua;
