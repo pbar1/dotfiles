@@ -19,6 +19,7 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+    _1password-gui
     arc-icon-theme
     arc-kde-theme
     arc-theme
@@ -29,8 +30,8 @@ in
     googleearth-pro
     jetbrains.clion
     jetbrains.rider
-    nvidia-offload
     kwalletcli
+    nvidia-offload
     powertop
     retroarch
     unzip
@@ -39,5 +40,7 @@ in
     wezterm
     xclip
     zoom-us
+    s-tui
+    stress
   ];
 }
