@@ -34,13 +34,15 @@ in
     nvidia-offload
     powertop
     retroarch
+    s-tui
+    sqlitebrowser
+    stress
+    tor
     unzip
     virt-manager
     vlc
     wezterm
     xclip
     zoom-us
-    s-tui
-    stress
   ];
 }

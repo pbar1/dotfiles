@@ -40,6 +40,14 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  fonts = {
+    fonts = with pkgs; [
+      noto-fonts-cjk
+      twitter-color-emoji
+    ];
+    fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
+  };
+
   services.xserver = {
     enable = true;
     xkbOptions = "caps:escape";
@@ -49,8 +57,8 @@
 
     displayManager = {
       sddm.enable = true;
-      autoLogin.enable = true;
-      autoLogin.user = "pierce";
+      autoLogin.enable = false;
+      # autoLogin.user = "pierce";
     };
 
     desktopManager.plasma5.enable = true;

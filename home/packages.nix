@@ -72,14 +72,14 @@ in
     vscode-extensions.vadimcn.vscode-lldb
 
     # Rust
-    rustup
-    /* (fenix.stable.withComponents [ */
-    /*   "cargo" */
-    /*   "clippy" */
-    /*   "rust-src" */
-    /*   "rustc" */
-    /*   "rustfmt" */
-    /* ]) */
+    #rustup
+    (fenix.stable.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
     rust-analyzer
 
     # Go
@@ -89,6 +89,7 @@ in
     (python39.withPackages (ps: with ps; [
       pyyaml
     ]))
+    poetry
     pipenv
     black
     python3Packages.isort
