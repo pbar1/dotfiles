@@ -8,5 +8,6 @@ if not vim.g.vscode then
 	require("config.lualine")
 	require("config.telescope")
 	require("config.trouble")
+	require("config.null-ls")
 	require("config.which-key")
 end

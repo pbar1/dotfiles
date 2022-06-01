@@ -16,8 +16,18 @@
 
     # All plugins will be `start` and thus not need `packadd`
     plugins = with pkgs.vimPlugins; [
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      (nvim-treesitter.withPlugins (plugins: with pkgs.tree-sitter-grammars; [
+        tree-sitter-c
+        tree-sitter-cpp
+        tree-sitter-rust
+        tree-sitter-go
+        tree-sitter-python
+        tree-sitter-lua
+        # tree-sitter-nix # TODO: broken
+      ]))
     ] ++ pkgs.lib.attrsets.mapAttrsToList (_: value: value) pkgs.neovimPlugins;
+
+    extraPackages = with pkgs; [ gcc ];
   };
 
   xdg.configFile."nvim/lua/config".source = ./lua/config;
