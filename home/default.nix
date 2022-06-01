@@ -56,10 +56,6 @@
     max_line_length = 80
   '';
 
-
-  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
-  xdg.configFile."nvim/lua".source = ./nvim/lua;
-
   programs.home-manager.enable = true;
 
   programs.zoxide.enable = true;
