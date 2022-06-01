@@ -13,8 +13,8 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
-    TERMINFO = "${dataHome}/terminfo";
-    TERMINFO_DIRS = "${dataHome}/terminfo:/usr/share/terminfo";
+    /* TERMINFO = "${dataHome}/terminfo"; */
+    /* TERMINFO_DIRS = "${dataHome}/terminfo:/usr/share/terminfo"; */
     SSH_AGENT_PID = "";
     LESS = "--mouse --use-color --RAW-CONTROL-CHARS --quit-if-one-screen";
     LESSKEY = "${configHome}/less/lesskey";
@@ -54,7 +54,6 @@ in
     AWS_VAULT_KEYCHAIN_NAME = "login";
     GOOGLE_APPLICATION_CREDENTIALS = "${configHome}/gcp/credentials.json";
     CODEPATH = "${config.home.homeDirectory}/code";
-    OMNISHARP_BIN = "${pkgs.omnisharp-roslyn}/bin/omnisharp";
 
     # TODO: Await fix: https://github.com/NixOS/nixpkgs/issues/148946
     # VSCODE_LLDB_PATH = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb";
