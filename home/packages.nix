@@ -54,6 +54,10 @@ in
     kubernetes-helm
     stern
     kind
+    fluxcd
+    kubectx
+    tanka
+    jsonnet-bundler
 
     # Nix
     rnix-lsp
@@ -67,39 +71,26 @@ in
     nodePackages.bash-language-server
 
     # C/C++
+    gcc
+    binutils
     cmake
     cmake-language-server
-    vscode-extensions.vadimcn.vscode-lldb
+    # vscode-extensions.vadimcn.vscode-lldb
 
     # Rust
-    #rustup
-    (fenix.stable.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
+    rustup
     rust-analyzer
+    rust-bindgen
 
     # Go
     go
 
     # Python
-    (python39.withPackages (ps: with ps; [
+    (python3.withPackages (ps: with ps; [
       pyyaml
     ]))
     poetry
-    pipenv
-    black
-    python3Packages.isort
     nodePackages.pyright
-    #python3Packages.debugpy
-
-    # JavaScript
-    nodejs
-    nodePackages.prettier
-    yarn
 
     # Lua
     stylua

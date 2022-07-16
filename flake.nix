@@ -25,6 +25,7 @@
     # Neovim Plugins ----------------------------------------------------------
 
     "vim:alpha-nvim" = { url = "github:goolord/alpha-nvim"; flake = false; };
+    "vim:auto-session" = { url = "github:rmagatti/auto-session"; flake = false; };
     "vim:barbar.nvim" = { url = "github:romgrk/barbar.nvim"; flake = false; };
     "vim:cmp-buffer" = { url = "github:hrsh7th/cmp-buffer"; flake = false; };
     "vim:cmp-cmdline" = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
@@ -61,6 +62,7 @@
     "vim:trouble.nvim" = { url = "github:folke/trouble.nvim"; flake = false; };
     "vim:vim-lastplace" = { url = "github:farmergreg/vim-lastplace"; flake = false; };
     "vim:vim-numbertoggle" = { url = "github:jeffkreeftmeijer/vim-numbertoggle"; flake = false; };
+    "vim:vim-signify" = { url = "github:mhinz/vim-signify"; flake = false; };
     "vim:vim-startuptime" = { url = "github:dstein64/vim-startuptime"; flake = false; };
     "vim:vim-vsnip" = { url = "github:hrsh7th/vim-vsnip"; flake = false; };
     "vim:which-key.nvim" = { url = "github:folke/which-key.nvim"; flake = false; };
@@ -71,7 +73,6 @@
       overlays = [
         inputs.fenix.overlay
         inputs.neovim-nightly-overlay.overlay
-        inputs.emacs-overlay.overlay
         (final: prev: {
           neovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
@@ -96,19 +97,27 @@
       };
 
       homeConfigurations.bobbery = home-manager.lib.homeManagerConfiguration {
-        configuration = import ./home { inherit overlays; };
-        stateVersion = "22.05";
-        system = "x86_64-linux";
-        username = "pierce";
-        homeDirectory = "/home/pierce";
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
+          ./home
+          {
+            home = {
+              username = "pierce";
+              homeDirectory = "/home/pierce";
+              stateVersion = "22.05";
+            };
+          }
+        ];
       };
 
-      homeConfigurations.pbar-mbp = home-manager.lib.homeManagerConfiguration {
-        configuration = import ./home { inherit overlays; };
-        stateVersion = "22.05";
-        system = "aarch64-darwin";
-        username = "pbar";
-        homeDirectory = "/Users/pbar";
-      };
+      homeConfigurations.pbar-mbp = home-manager.lib.homeManagerConfiguration
+        {
+          configuration = import ./home { inherit overlays; };
+          stateVersion = "22.05";
+          system = "aarch64-darwin";
+          username = "pbar";
+          homeDirectory = "/Users/pbar";
+        };
     };
 }

@@ -21,28 +21,29 @@ in
   environment.systemPackages = with pkgs; [
     _1password-gui
     arc-icon-theme
-    arc-kde-theme
     arc-theme
     caffeine-ng
     copyq
     discord
-    firefox
+    firefox-wayland
+    gnome.gnome-tweaks
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.pop-shell
     googleearth-pro
-    jetbrains.clion
     jetbrains.rider
-    kwalletcli
     nvidia-offload
+    obs-studio
+    phinger-cursors
     powertop
     retroarch
-    s-tui
     sqlitebrowser
-    stress
     tor
     unzip
     virt-manager
     vlc
     wezterm
-    xclip
+    wl-clipboard
     zoom-us
   ];
 }

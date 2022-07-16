@@ -1,4 +1,4 @@
-{ overlays, ... }:
+{ ... }:
 
 {
   imports = [
@@ -11,10 +11,10 @@
     ./starship.nix
     ./tmux.nix
     ./wezterm
+    ./vscode.nix
   ];
 
   nixpkgs = {
-    inherit overlays;
     config.allowUnfree = true;
 
     # TODO: https://github.com/nix-community/home-manager/issues/2942

@@ -57,7 +57,7 @@ in
 
     # TODO: Await fix: https://github.com/NixOS/nixpkgs/issues/148946
     # VSCODE_LLDB_PATH = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb";
-    VSCODE_LLDB_PATH = "${config.home.homeDirectory}/.vscode/extensions/vadimcn.vscode-lldb-1.7.0";
+    # VSCODE_LLDB_PATH = "${config.home.homeDirectory}/.vscode/extensions/vadimcn.vscode-lldb-1.7.0";
   };
 
   xdg.configFile."npm/npmrc".text = ''
