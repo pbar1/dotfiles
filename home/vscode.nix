@@ -17,12 +17,12 @@
       jnoortheen.nix-ide
       matklad.rust-analyzer
       ms-dotnettools.csharp
-      ms-python.vscode-pylance
+      ms-python.python
       redhat.vscode-yaml
       streetsidesoftware.code-spell-checker
       tamasfe.even-better-toml
       timonwong.shellcheck
-      vadimcn.vscode-lldb
+      # vadimcn.vscode-lldb
       yzhang.markdown-all-in-one
     ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
@@ -32,10 +32,22 @@
         sha256 = "sha256-Zhc7JfXKaYZpVgiCi1Yj1ui2u9h94ocUjODIsDLwqWE=";
       }
       {
+        name = "vscode-lldb";
+        publisher = "vadimcn";
+        version = "1.7.0";
+        sha256 = "sha256-DuYweIri8NpBHcIG37WyUUc+p4/TaBBHcI6x6YIRvmk=";
+      }
+      {
         name = "lua";
         publisher = "sumneko";
         version = "3.2.2";
         sha256 = "sha256-WEDDad3r6dSOPF2abKQWb5wN4g84UXzlKPaVvonq4Qc=";
+      }
+      {
+        name = "r";
+        publisher = "REditorSupport";
+        version = "2.5.0";
+        sha256 = "sha256-OEZfMDE/2IUwQ/R/vEDcAhpEAypGPej3IaylRgvCOfE=";
       }
     ];
 
@@ -48,7 +60,7 @@
       "editor.renderWhitespace" = "boundary";
       "explorer.confirmDelete" = false;
       "nix.enableLanguageServer" = true;
-      "rust-analyzer.inlayHints.parameterHints" = true;
+      "rust-analyzer.rustfmt.extraArgs" = [ "+nightly" ];
       "telemetry.telemetryLevel" = "off";
       "terminal.integrated.copyOnSelection" = true;
       "terminal.integrated.fontSize" = 16;
@@ -57,7 +69,7 @@
       "vsicons.dontShowNewVersionMessage" = true;
       "window.autoDetectColorScheme" = true;
       "window.titleBarStyle" = "custom";
-      "workbench.colorTheme" = "Gruvbox Light Medium";
+      "workbench.colorTheme" = "Gruvbox Dark Medium";
       "workbench.iconTheme" = "vscode-icons";
       "workbench.preferredDarkColorTheme" = "Gruvbox Dark Medium";
       "workbench.preferredLightColorTheme" = "Gruvbox Light Medium";

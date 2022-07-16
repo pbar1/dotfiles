@@ -19,25 +19,31 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+    _1password-gui
     arc-icon-theme
-    arc-kde-theme
     arc-theme
     caffeine-ng
     copyq
     discord
-    firefox
+    firefox-wayland
+    gnome.gnome-tweaks
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.pop-shell
     googleearth-pro
-    jetbrains.clion
     jetbrains.rider
     nvidia-offload
-    kwalletcli
+    obs-studio
+    phinger-cursors
     powertop
     retroarch
+    sqlitebrowser
+    tor
     unzip
     virt-manager
     vlc
     wezterm
-    xclip
+    wl-clipboard
     zoom-us
   ];
 }

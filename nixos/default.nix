@@ -40,6 +40,14 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  fonts = {
+    fonts = with pkgs; [
+      noto-fonts-cjk
+      twitter-color-emoji
+    ];
+    fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
+  };
+
   services.xserver = {
     enable = true;
     xkbOptions = "caps:escape";
@@ -48,16 +56,16 @@
     libinput.enable = true;
 
     displayManager = {
-      sddm.enable = true;
+      gdm.enable = true;
       autoLogin.enable = true;
       autoLogin.user = "pierce";
     };
 
-    desktopManager.plasma5.enable = true;
+    desktopManager.gnome.enable = true;
   };
 
   environment.sessionVariables = {
-    PLASMA_USE_QT_SCALING = "true";
+    # PLASMA_USE_QT_SCALING = "true";
   };
 
   # Disable sound module as it conflicts with PipeWire
@@ -83,14 +91,11 @@
   users.users.pierce = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" ];
   };
   users.users.root.hashedPassword = "!"; # Disable root user
 
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
-  };
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -99,27 +104,24 @@
 
   services.tailscale.enable = true;
 
-  virtualisation = {
-    # https://adamsimpson.net/writing/windows-11-as-kvm-guest
-    libvirtd.enable = true;
-    libvirtd.qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        package = pkgs.OVMFFull.override {
-          secureBoot = true;
-          tpmSupport = true;
-        };
-      };
-    };
-
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-    };
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
   };
+
+  services.eternal-terminal = {
+    enable = true;
+    port = 2022;
+  };
+
+  networking.firewall.allowedTCPPorts = [ 2022 ];
+
+  virtualisation = {
+    podman.enable = true;
+    podman.dockerCompat = true;
+  };
+
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

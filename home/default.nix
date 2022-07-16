@@ -1,4 +1,4 @@
-{ overlays, ... }:
+{ ... }:
 
 {
   imports = [
@@ -11,10 +11,10 @@
     ./starship.nix
     ./tmux.nix
     ./wezterm
+    ./vscode.nix
   ];
 
   nixpkgs = {
-    inherit overlays;
     config.allowUnfree = true;
 
     # TODO: https://github.com/nix-community/home-manager/issues/2942
@@ -55,10 +55,6 @@
     [*.md]
     max_line_length = 80
   '';
-
-
-  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
-  xdg.configFile."nvim/lua".source = ./nvim/lua;
 
   programs.home-manager.enable = true;
 

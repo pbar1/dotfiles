@@ -9,7 +9,7 @@
     vimdiffAlias = true;
     withNodeJs = false;
     withRuby = false;
-    withPython3 = true;
+    withPython3 = false;
 
     # Simulate using an init.lua
     extraConfig = "lua << EOF\n${builtins.readFile ./init.lua}\nEOF\n";
@@ -18,6 +18,8 @@
     plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     ] ++ pkgs.lib.attrsets.mapAttrsToList (_: value: value) pkgs.neovimPlugins;
+
+    extraPackages = with pkgs; [ gcc ];
   };
 
   xdg.configFile."nvim/lua/config".source = ./lua/config;
