@@ -9,12 +9,12 @@ activ="${AUDIBLE_ACTIVATION_BYTES}"
 input="$1"
 output="${input%.*}.m4b"
 
-docker run                     \
+exec podman run                \
   --rm --interactive --tty     \
   --user="$(id -u)"            \
   --workdir=/workdir           \
   --volume="$PWD:/workdir"     \
-  jrottenberg/ffmpeg           \
+  docker.io/jrottenberg/ffmpeg \
     -y                         \
     -activation_bytes "$activ" \
     -i "$input"                \
