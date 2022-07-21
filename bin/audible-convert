@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Decrypts Audible aax/mp4 to m4b
+# USAGE: audible-convert FILE
+
+set -o errexit -o pipefail -o nounset
+
+# To get this: https://audible-converter.ml/
+activ="${AUDIBLE_ACTIVATION_BYTES}"
+input="$1"
+output="${input%.*}.m4b"
+
+docker run                     \
+  --rm --interactive --tty     \
+  --user="$(id -u)"            \
+  --workdir=/workdir           \
+  --volume="$PWD:/workdir"     \
+  jrottenberg/ffmpeg           \
+    -y                         \
+    -activation_bytes "$activ" \
+    -i "$input"                \
+    -map_metadata 0            \
+    -id3v2_version 3           \
+    -codec:a copy              \
+    -vn                        \
+    "$output"

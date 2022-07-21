@@ -13,6 +13,7 @@ parsers.filetype_to_parsername.tf = "hcl"
 local parser_config = parsers.get_parser_configs()
 parser_config.jsonnet = {
    install_info = {
+      -- FIXME: Don't hardcode
       url = "~/code/tree-sitter-jsonnet",
       files = { "src/parser.c", "src/scanner.c" },
    },
