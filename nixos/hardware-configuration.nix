@@ -13,8 +13,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # Custom kernel for better responsiveness in interactive programs (GUIs, etc)
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  # XanMod kernel for better responsiveness in interactive programs: https://xanmod.org
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   # Required for lid closing on Razer Blade Stealth 13
   # https://help.ubuntu.com/community/RazerBlade#Suspend

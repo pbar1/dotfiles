@@ -58,6 +58,7 @@ in
     kubectx
     tanka
     jsonnet-bundler
+    vagrant
 
     # Nix
     rnix-lsp

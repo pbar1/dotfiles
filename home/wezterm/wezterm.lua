@@ -15,9 +15,9 @@ return {
    enable_wayland = true,
    window_background_opacity = 1.0,
    adjust_window_size_when_changing_font_size = false,
-
-   hide_tab_bar_if_only_one_tab = true,
-   use_fancy_tab_bar = true,
+   -- window_decorations = "NONE", -- Causes unwanted window resize when focus lost
+   use_fancy_tab_bar = false,
+   hide_tab_bar_if_only_one_tab = false,
 
    leader = { key = "a", mods = "CTRL" },
    keys = {

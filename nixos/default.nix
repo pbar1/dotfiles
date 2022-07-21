@@ -5,20 +5,22 @@
     ./packages.nix
   ];
 
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-  nix.binaryCaches = [
-    "https://cache.nixos.org"
-    "https://nix-community.cachix.org"
-    "https://pbar1.cachix.org"
-  ];
-  nix.binaryCachePublicKeys = [
-    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
-  ];
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    settings.substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://pbar1.cachix.org"
+    ];
+    settings.trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
+    ];
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -91,7 +93,7 @@
   users.users.pierce = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
   };
   users.users.root.hashedPassword = "!"; # Disable root user
 
@@ -116,10 +118,14 @@
 
   networking.firewall.allowedTCPPorts = [ 2022 ];
 
-  virtualisation = {
-    podman.enable = true;
-    podman.dockerCompat = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
   };
+
+  virtualisation.libvirtd.enable = true;
+
+  programs.dconf.enable = true;
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 

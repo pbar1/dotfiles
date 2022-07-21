@@ -94,7 +94,7 @@
       python = {
         disabled = false;
         format = " [$symbol $version]($style)";
-        symbol = "🐍";
+        symbol = "";
       };
 
       nodejs = {
@@ -129,7 +129,7 @@
 
       status = {
         disabled = false;
-        symbol = "⚠️";
+        symbol = "⚠";
         format = " [$symbol $common_meaning$signal_name$maybe_int]($style)";
       };
 

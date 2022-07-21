@@ -8,3 +8,13 @@ treesitter.setup({
 })
 
 parsers.filetype_to_parsername.tf = "hcl"
+
+-- https://github.com/sourcegraph/tree-sitter-jsonnet/issues/3
+local parser_config = parsers.get_parser_configs()
+parser_config.jsonnet = {
+   install_info = {
+      url = "~/code/tree-sitter-jsonnet",
+      files = { "src/parser.c", "src/scanner.c" },
+   },
+}
+parsers.filetype_to_parsername.libsonnet = "jsonnet"

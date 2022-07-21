@@ -42,6 +42,7 @@ tasks:
   gc:
     desc: Removes all unused objects from the Nix store.
     cmds:
+    - sudo nix-collect-garbage --delete-old
     - nix-collect-garbage --delete-old
 
   # TODO: Launch with the current flake in scope

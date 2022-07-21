@@ -19,7 +19,6 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    _1password-gui
     arc-icon-theme
     arc-theme
     caffeine-ng
@@ -31,7 +30,6 @@ in
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
     googleearth-pro
-    jetbrains.rider
     nvidia-offload
     obs-studio
     phinger-cursors

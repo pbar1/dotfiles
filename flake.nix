@@ -2,6 +2,8 @@
   description = "Configuration for NixOS, macOS, and Home Manager";
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # TODO: Await https://github.com/LnL7/nix-darwin/pull/310
@@ -18,9 +20,6 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     # Neovim Plugins ----------------------------------------------------------
 
@@ -111,13 +110,19 @@
         ];
       };
 
-      homeConfigurations.pbar-mbp = home-manager.lib.homeManagerConfiguration
-        {
-          configuration = import ./home { inherit overlays; };
-          stateVersion = "22.05";
-          system = "aarch64-darwin";
-          username = "pbar";
-          homeDirectory = "/Users/pbar";
+      homeConfigurations.pbar-mbp = home-manager.lib.homeManagerConfiguration {
+        configuration = import ./home { inherit overlays; };
+        stateVersion = "22.05";
+        system = "aarch64-darwin";
+        username = "pbar";
+        homeDirectory = "/Users/pbar";
+      };
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system}; in
+      {
+        devShells.default = with pkgs; mkShell {
+          buildInputs = [ go-task gnumake vagrant packer ];
         };
-    };
+      }
+    );
 }
