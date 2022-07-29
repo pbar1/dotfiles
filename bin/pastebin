@@ -29,7 +29,16 @@ def recv(dev_key: str, paste_id: str) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Pipe to/from Pastebin")
+    parser = argparse.ArgumentParser(
+        description="""Pipe to/from Pastebin.
+
+If stdin exists, its contents will be used to create a paste whose URL will be
+returned and printed on stdout.
+
+Else if the first argument is a paste URL, its contents will be fetched and
+printed to stdout.""",
+    formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument(
         "paste",
         metavar="PASTE_URL",
@@ -44,10 +53,13 @@ def main() -> None:
         text = "".join(sys.stdin.readlines())
         paste_id = send(dev_key, text)
         print(paste_id)
-    else:
+    elif args.paste is not None:
         paste_id = args.paste
         text = recv(dev_key, paste_id)
         print(text)
+    else:
+        parser.print_help()
+        sys.exit(1)
 
 
 if __name__ == "__main__":
