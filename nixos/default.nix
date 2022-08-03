@@ -98,6 +98,7 @@
   users.users.root.hashedPassword = "!"; # Disable root user
 
   security.pam.services.gdm.enableGnomeKeyring = true;
+  security.sudo.wheelNeedsPassword = false;
 
   programs.gnupg.agent = {
     enable = true;
@@ -117,13 +118,24 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 2022 ];
+  networking.firewall.checkReversePath = "loose";
 
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    onBoot = "ignore";
+    qemu.swtpm.enable = true;
+    qemu.ovmf.packages = [
+      (pkgs.OVMFFull.override {
+        secureBoot = true;
+        tpmSupport = true;
+      }).fd
+    ];
+  };
 
   programs.dconf.enable = true;
 

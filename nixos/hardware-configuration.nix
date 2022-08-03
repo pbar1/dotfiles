@@ -13,6 +13,16 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # FIXME: Remove; for building NixOS image on RPi4
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # Needed for OSX-KVM
+  boot.extraModprobeConfig = ''
+    options kvm_intel nested=1
+    options kvm_intel emulate_invalid_guest_state=0
+    options kvm ignore_msrs=1
+  '';
+
   # XanMod kernel for better responsiveness in interactive programs: https://xanmod.org
   # boot.kernelPackages = pkgs.linuxPackages_xanmod;
 

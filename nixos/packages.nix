@@ -36,6 +36,7 @@ in
     powertop
     retroarch
     sqlitebrowser
+    swtpm
     tor
     unzip
     virt-manager
