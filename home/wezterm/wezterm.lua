@@ -5,6 +5,7 @@ local split_vertical = wezterm.action({ SplitVertical = { domain = "CurrentPaneD
 
 return {
    automatically_reload_config = true,
+   check_for_updates = false,
 
    term = "wezterm",
    default_prog = { "/run/current-system/sw/bin/fish", "--login" },
@@ -19,29 +20,16 @@ return {
    use_fancy_tab_bar = false,
    hide_tab_bar_if_only_one_tab = false,
 
+   -- Shift mod is needed due to: https://github.com/wez/wezterm/issues/394
    leader = { key = "a", mods = "CTRL" },
    keys = {
       -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
       { key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
 
-      -- Emulate my Tmux/Screen muscle memory
-      -- Shift mod is needed due to: https://github.com/wez/wezterm/issues/394
-      { key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
-      { key = "|", mods = "LEADER|SHIFT", action = split_horizontal },
-      { key = '"', mods = "LEADER|SHIFT", action = split_vertical },
-      { key = "LeftArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-      { key = "DownArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-      { key = "UpArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-      { key = "RightArrow", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-
-      -- Emulate Vim
-      { key = "_", mods = "LEADER|SHIFT", action = "TogglePaneZoomState" },
-      { key = "s", mods = "LEADER", action = split_horizontal },
-      { key = "v", mods = "LEADER", action = split_vertical },
-      { key = "h", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-      { key = "j", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-      { key = "k", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-      { key = "l", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+      -- Emulate iTerm2 key bindings
+      { key = "Enter", mods = "SHIFT|SUPER", action = "TogglePaneZoomState" },
+      { key = "d", mods = "SHIFT|SUPER", action = split_vertical },
+      { key = "d", mods = "SUPER", action = split_horizontal },
    },
 
    hyperlink_rules = {
