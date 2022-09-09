@@ -67,6 +67,7 @@
   };
 
   environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     # PLASMA_USE_QT_SCALING = "true";
   };
 

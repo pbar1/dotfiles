@@ -19,9 +19,11 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+    _1password-gui
     arc-icon-theme
     arc-theme
     caffeine-ng
+    chromium
     copyq
     discord
     firefox-wayland
@@ -35,6 +37,7 @@ in
     phinger-cursors
     powertop
     retroarch
+    spotify
     sqlitebrowser
     swtpm
     tor
