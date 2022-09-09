@@ -39,6 +39,7 @@ in
     procs
     openssl
     yubikey-manager
+    pstree
 
     # Networking
     netcat
@@ -46,6 +47,7 @@ in
     eternal-terminal
     hey
     jwt-cli
+    dogdns
 
     # Containers & Kubernetes
     dive
@@ -96,5 +98,8 @@ in
     # Lua
     stylua
     sumneko-lua-language-server
+
+    # WebAssembly
+    wasmer
   ];
 }
