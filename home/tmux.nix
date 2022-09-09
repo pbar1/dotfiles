@@ -7,13 +7,18 @@
     shortcut = "a";
     terminal = "tmux-256color";
 
+    # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
+    escapeTime = 10;
+
     extraConfig = ''
-      set-option -ga terminal-overrides ',xterm-256color:Tc'
+      set -ga terminal-features ',xterm-256color:RGB'
       set -g mouse on
       set -g renumber-windows on
+      #set -g allow-passthrough on
 
-      # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
-      set -gs escape-time 10
+      # Force `tmux load-buffer` to emit OSC 52 escape codes (for Neovim)
+      # https://github.com/tmux/tmux/issues/3088#issuecomment-1054664489
+      set -s command-alias[99] 'load-buffer=load-buffer -w'
     '';
 
     plugins = with pkgs; [
