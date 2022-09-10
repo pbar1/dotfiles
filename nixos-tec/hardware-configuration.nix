@@ -9,6 +9,12 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernel.sysctl = {
+    # For Transmission performance
+    # https://web.archive.org/web/20171019185200/https://falkhusemann.de/blog/2012/07/transmission-utp-and-udp-buffer-optimizations/
+    "net.core.rmem_max" = 4194304;
+    "net.core.wmem_max" = 1048576;
+  };
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "data" ];

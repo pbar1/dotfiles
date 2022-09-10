@@ -48,9 +48,7 @@
 
   services.k3s.enable = true;
   services.k3s.role = "server";
-  services.k3s.extraFlags = toString [
-    "--disable-helm-controller"
-  ];
+  # services.k3s.extraFlags = toString [ ];
 
   system.stateVersion = "22.05";
 }
