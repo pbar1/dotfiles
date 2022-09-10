@@ -86,8 +86,13 @@
       ];
     in
     {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."bobbery" = nixpkgs.lib.nixosSystem {
         modules = [ ./nixos ];
+        system = "x86_64-linux";
+      };
+
+      nixosConfigurations."tec" = nixpkgs.lib.nixosSystem {
+        modules = [ ./nixos-tec ];
         system = "x86_64-linux";
       };
 
