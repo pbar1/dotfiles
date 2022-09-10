@@ -85,6 +85,6 @@ logos = {
 }
 
 -- TODO: Cycle or randomly choose one of these logos
-dashboard.section.header.val = logo_meta
+dashboard.section.header.val = logo_rinnegan
 
 alpha.setup(dashboard.config)

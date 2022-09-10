@@ -44,6 +44,7 @@
     "vim:lspkind.nvim" = { url = "github:onsails/lspkind.nvim"; flake = false; };
     "vim:lualine.nvim" = { url = "github:nvim-lualine/lualine.nvim"; flake = false; };
     "vim:null-ls.nvim" = { url = "github:jose-elias-alvarez/null-ls.nvim"; flake = false; };
+    "vim:nvim-autopairs" = { url = "github:windwp/nvim-autopairs"; flake = false; };
     "vim:nvim-cmp" = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
     "vim:nvim-colorizer.lua" = { url = "github:norcalli/nvim-colorizer.lua"; flake = false; };
     "vim:nvim-gps" = { url = "github:SmiteshP/nvim-gps"; flake = false; };

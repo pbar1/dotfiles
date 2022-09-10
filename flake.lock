@@ -199,6 +199,7 @@
         "vim:lspkind.nvim": "vim:lspkind.nvim",
         "vim:lualine.nvim": "vim:lualine.nvim",
         "vim:null-ls.nvim": "vim:null-ls.nvim",
+        "vim:nvim-autopairs": "vim:nvim-autopairs",
         "vim:nvim-cmp": "vim:nvim-cmp",
         "vim:nvim-colorizer.lua": "vim:nvim-colorizer.lua",
         "vim:nvim-gps": "vim:nvim-gps",
@@ -587,6 +588,22 @@
       "original": {
         "owner": "jose-elias-alvarez",
         "repo": "null-ls.nvim",
+        "type": "github"
+      }
+    },
+    "vim:nvim-autopairs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662675994,
+        "narHash": "sha256-qXhvp3K7I+XoDPOgAhnxqPoOcfXdSIU6PfXeArcFIYk=",
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
+        "rev": "5fe24419e7a7ec536d78d60be1515b018ab41b15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "windwp",
+        "repo": "nvim-autopairs",
         "type": "github"
       }
     },
