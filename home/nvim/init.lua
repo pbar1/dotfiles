@@ -13,4 +13,5 @@ if not vim.g.vscode then
    require("config.completion")
    require("config.lsp")
    require("config.which-key")
+   require("config.mini")
 end

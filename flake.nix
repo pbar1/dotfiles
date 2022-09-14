@@ -43,6 +43,7 @@
     "vim:lsp_signature.nvim" = { url = "github:ray-x/lsp_signature.nvim"; flake = false; };
     "vim:lspkind.nvim" = { url = "github:onsails/lspkind.nvim"; flake = false; };
     "vim:lualine.nvim" = { url = "github:nvim-lualine/lualine.nvim"; flake = false; };
+    "vim:mini.nvim" = { url = "github:echasnovski/mini.nvim"; flake = false; };
     "vim:null-ls.nvim" = { url = "github:jose-elias-alvarez/null-ls.nvim"; flake = false; };
     "vim:nvim-autopairs" = { url = "github:windwp/nvim-autopairs"; flake = false; };
     "vim:nvim-cmp" = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
