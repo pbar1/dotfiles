@@ -15,6 +15,9 @@
     "net.core.rmem_max" = 4194304;
     "net.core.wmem_max" = 1048576;
   };
+  boot.extraModprobeConfig = ''
+    options zfs zfs_txg_timeout=30
+  '';
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "data" ];
