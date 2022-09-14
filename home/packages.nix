@@ -40,6 +40,7 @@ in
     openssl
     yubikey-manager
     pstree
+    pfetch
 
     # Networking
     netcat

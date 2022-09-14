@@ -17,7 +17,7 @@ tasks:
   nixos:
     desc: Compiles and activates new NixOS config.
     cmds:
-    - nixos-rebuild switch --use-remote-sudo --flake '.#default' {{.CLI_ARGS}}
+    - nixos-rebuild switch --use-remote-sudo --flake '.#bobbery' {{.CLI_ARGS}}
 
   nixos-tec:
     desc: Compiles and activates new NixOS config.

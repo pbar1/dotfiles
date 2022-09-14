@@ -30,6 +30,7 @@ in
     gnome.gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.night-theme-switcher
     gnomeExtensions.pop-shell
     googleearth-pro
     nvidia-offload
