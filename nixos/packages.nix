@@ -24,10 +24,10 @@ in
     arc-theme
     caffeine-ng
     chromium
-    copyq
     discord
     firefox-wayland
     gnome.gnome-tweaks
+    gnome.gpaste
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.night-theme-switcher

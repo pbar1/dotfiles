@@ -37,10 +37,11 @@
   security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
-    vim
-    wget
+    fd
     htop
     ripgrep
+    vim
+    wget
   ];
 
   services.openssh.enable = true;
@@ -48,7 +49,7 @@
 
   services.k3s.enable = true;
   services.k3s.role = "server";
-  # services.k3s.extraFlags = toString [ ];
+  /* services.k3s.extraFlags = toString [ ]; */
 
   system.stateVersion = "22.05";
 }

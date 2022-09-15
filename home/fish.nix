@@ -112,18 +112,18 @@
 
     functions = {
       light = ''
-        base16-gruvbox-light-medium
-        base16-fzf-gruvbox-light-medium
+        base16-gruvbox-light-soft
+        base16-fzf-gruvbox-light-soft
       '';
 
       dark = ''
-        base16-gruvbox-dark-medium
-        base16-fzf-gruvbox-dark-medium
+        base16-gruvbox-dark-soft
+        base16-fzf-gruvbox-dark-soft
       '';
 
-      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-gruvbox-light-medium.fish
-      base16-fzf-gruvbox-light-medium = ''
-        set -l color00 '#fbf1c7'
+      # https://github.com/base16-project/base16-fzf/blob/main/fish/base16-gruvbox-dark-soft.fish
+      base16-fzf-gruvbox-light-soft = ''
+        set -l color00 '#f2e5bc'
         set -l color01 '#ebdbb2'
         set -l color02 '#d5c4a1'
         set -l color03 '#bdae93'
@@ -152,12 +152,11 @@
         " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
         " --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
         " --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
-
       '';
 
-      # https://github.com/fnune/base16-fzf/blob/master/fish/base16-gruvbox-dark-medium.fish
-      base16-fzf-gruvbox-dark-medium = ''
-        set -l color00 '#282828'
+      # https://github.com/base16-project/base16-fzf/blob/main/fish/base16-gruvbox-dark-soft.fish
+      base16-fzf-gruvbox-dark-soft = ''
+        set -l color00 '#32302f'
         set -l color01 '#3c3836'
         set -l color02 '#504945'
         set -l color03 '#665c54'
