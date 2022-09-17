@@ -14,7 +14,7 @@ local on_attach = function(client)
 end
 
 -- LSP servers that need only minimal config
-for _, lsp in pairs({ "bashls", "pyright", "rnix" }) do
+for _, lsp in pairs({ "bashls", "pyright", "rnix", "gopls" }) do
    lspconfig[lsp].setup({ on_attach = on_attach, capabilities = caps })
 end
 
@@ -56,9 +56,10 @@ null_ls.setup({
    sources = {
       null_ls.builtins.code_actions.statix,
       null_ls.builtins.completion.spell,
+      null_ls.builtins.formatting.goimports,
       null_ls.builtins.formatting.nixpkgs_fmt,
-      null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.rustfmt.with({ extra_args = rustfmt_extra_args }),
+      null_ls.builtins.formatting.stylua,
    },
    on_attach = function(client, bufnr)
       if client.supports_method("textDocument/formatting") then

@@ -49,6 +49,7 @@ in
     hey
     jwt-cli
     dogdns
+    nmap
 
     # Containers & Kubernetes
     dive
@@ -88,6 +89,8 @@ in
 
     # Go
     go
+    gopls
+    gotools
 
     # Python
     (python3.withPackages (ps: with ps; [

@@ -30,11 +30,8 @@ in
     gnome.gpaste
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.night-theme-switcher
-    gnomeExtensions.pop-shell
     googleearth-pro
     nvidia-offload
-    obs-studio
     phinger-cursors
     powertop
     retroarch
@@ -42,6 +39,7 @@ in
     sqlitebrowser
     swtpm
     tor
+    tor-browser-bundle-bin
     unzip
     virt-manager
     vlc
