@@ -24,7 +24,6 @@
     # Neovim Plugins ----------------------------------------------------------
 
     "vim:alpha-nvim" = { url = "github:goolord/alpha-nvim"; flake = false; };
-    "vim:auto-session" = { url = "github:rmagatti/auto-session"; flake = false; };
     "vim:barbar.nvim" = { url = "github:romgrk/barbar.nvim"; flake = false; };
     "vim:cmp-buffer" = { url = "github:hrsh7th/cmp-buffer"; flake = false; };
     "vim:cmp-cmdline" = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
@@ -61,6 +60,7 @@
     "vim:telescope-zoxide" = { url = "github:jvgrootveld/telescope-zoxide"; flake = false; };
     "vim:telescope.nvim" = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
     "vim:trouble.nvim" = { url = "github:folke/trouble.nvim"; flake = false; };
+    "vim:undotree" = { url = "github:mbbill/undotree"; flake = false; };
     "vim:vim-lastplace" = { url = "github:farmergreg/vim-lastplace"; flake = false; };
     "vim:vim-numbertoggle" = { url = "github:jeffkreeftmeijer/vim-numbertoggle"; flake = false; };
     "vim:vim-signify" = { url = "github:mhinz/vim-signify"; flake = false; };

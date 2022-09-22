@@ -3,7 +3,7 @@ require("config.treesitter")
 
 if not vim.g.vscode then
    require("config.options.full")
-   require("config.auto-session")
+   require("config.mini")
    require("config.colorscheme")
    require("config.source_control")
    require("config.alpha")
@@ -13,5 +13,4 @@ if not vim.g.vscode then
    require("config.completion")
    require("config.lsp")
    require("config.which-key")
-   require("config.mini")
 end

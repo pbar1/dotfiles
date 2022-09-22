@@ -179,7 +179,6 @@
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
         "vim:alpha-nvim": "vim:alpha-nvim",
-        "vim:auto-session": "vim:auto-session",
         "vim:barbar.nvim": "vim:barbar.nvim",
         "vim:cmp-buffer": "vim:cmp-buffer",
         "vim:cmp-cmdline": "vim:cmp-cmdline",
@@ -216,6 +215,7 @@
         "vim:telescope-zoxide": "vim:telescope-zoxide",
         "vim:telescope.nvim": "vim:telescope.nvim",
         "vim:trouble.nvim": "vim:trouble.nvim",
+        "vim:undotree": "vim:undotree",
         "vim:vim-lastplace": "vim:vim-lastplace",
         "vim:vim-numbertoggle": "vim:vim-numbertoggle",
         "vim:vim-signify": "vim:vim-signify",
@@ -269,22 +269,6 @@
       "original": {
         "owner": "goolord",
         "repo": "alpha-nvim",
-        "type": "github"
-      }
-    },
-    "vim:auto-session": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1663621653,
-        "narHash": "sha256-E4Nj0dnYR6wkenLvvSlDh6SfoLMX/B39YsO+YYGJqQk=",
-        "owner": "rmagatti",
-        "repo": "auto-session",
-        "rev": "39319bf7ad15a1881f180fa7c14bf6703775035e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rmagatti",
-        "repo": "auto-session",
         "type": "github"
       }
     },
@@ -861,6 +845,22 @@
       "original": {
         "owner": "folke",
         "repo": "trouble.nvim",
+        "type": "github"
+      }
+    },
+    "vim:undotree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662772978,
+        "narHash": "sha256-kJ5jy9DDmsbVzx2Ep4WMSE/VRytN1+TONF8Ye5u/IyU=",
+        "owner": "mbbill",
+        "repo": "undotree",
+        "rev": "bf76bf2d1a097cda024699738286fa81fb6529ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbbill",
+        "repo": "undotree",
         "type": "github"
       }
     },

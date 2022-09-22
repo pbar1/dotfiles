@@ -24,5 +24,6 @@ local leader_mappings = {
       ["r"] = { "<cmd>TroubleRefresh<cr>", "Refresh Trouble" },
       ["t"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
    },
+   ["uu"] = { "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", "Toggle undo tree" },
 }
 which_key.register(leader_mappings, { prefix = "<Leader>" })

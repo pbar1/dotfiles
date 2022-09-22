@@ -30,6 +30,3 @@ vim.opt.listchars = {
    precedes = "«",
    nbsp = "+",
 }
-
--- Session options recommended by auto-session
-vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
