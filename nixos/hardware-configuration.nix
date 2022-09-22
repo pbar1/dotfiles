@@ -63,6 +63,9 @@
     size = 16593; # RAM size, via `free --mega`
   }];
 
+  services.tlp.enable = true;
+  services.power-profiles-daemon.enable = false;
+
   hardware.video.hidpi.enable = lib.mkDefault true;
 
   # Nvidia GPU support

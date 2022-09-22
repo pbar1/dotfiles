@@ -20,30 +20,21 @@ in
 
   environment.systemPackages = with pkgs; [
     _1password-gui
-    arc-icon-theme
-    arc-theme
-    caffeine-ng
-    chromium
-    discord
     firefox-wayland
     gnome.gnome-tweaks
-    gnome.gpaste
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     googleearth-pro
     nvidia-offload
-    phinger-cursors
     powertop
     retroarch
     spotify
     sqlitebrowser
-    swtpm
-    tor
-    tor-browser-bundle-bin
     unzip
     virt-manager
     vlc
     wezterm
+    wireshark
     wl-clipboard
     zoom-us
   ];

@@ -68,7 +68,6 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    # PLASMA_USE_QT_SCALING = "true";
   };
 
   # Disable sound module as it conflicts with PipeWire
@@ -139,6 +138,8 @@
   };
 
   programs.dconf.enable = true;
+
+  programs.gpaste.enable = true;
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 

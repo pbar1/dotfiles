@@ -100,6 +100,7 @@
       tfp = "terraform plan";
       wo = "type --all --short";
       xi = "xargs -I {}";
+      "," = "nix-shell -p";
     };
 
     shellAliases = {

@@ -9,7 +9,7 @@
 
     extraConfig = {
       branch.autoSetupMerge = "always";
-      credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "gnome-keyring";
+      credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
       pull.rebase = false;
       push.default = "current";
       push.followTags = true;

@@ -20,7 +20,7 @@
   '';
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "data" ];
+  boot.zfs.extraPools = [ "data" "zssd" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-id/nvme-CT500P2SSD8_2118E59D6609-part1";
