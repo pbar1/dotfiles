@@ -20,6 +20,7 @@ in
 
   environment.systemPackages = with pkgs; [
     _1password-gui
+    discord
     firefox-wayland
     gnome.gnome-tweaks
     gnomeExtensions.appindicator

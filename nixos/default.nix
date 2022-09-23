@@ -1,26 +1,23 @@
 { config, pkgs, ... }:
+
 {
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
   ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    settings.substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://pbar1.cachix.org"
-    ];
-    settings.trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
-    ];
-  };
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+  nix.settings.substituters = [
+    "https://nix-community.cachix.org"
+    "https://pbar1.cachix.org"
+  ];
+  nix.settings.trusted-public-keys = [
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -42,29 +39,21 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  fonts = {
-    fonts = with pkgs; [
-      noto-fonts-cjk
-      twitter-color-emoji
-    ];
-    fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
-  };
+  fonts.fonts = with pkgs; [
+    noto-fonts-cjk
+    twitter-color-emoji
+  ];
+  fonts.fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
 
-  services.xserver = {
-    enable = true;
-    xkbOptions = "caps:escape";
-    autoRepeatDelay = 150;
-    autoRepeatInterval = 15;
-    libinput.enable = true;
-
-    displayManager = {
-      gdm.enable = true;
-      autoLogin.enable = true;
-      autoLogin.user = "pierce";
-    };
-
-    desktopManager.gnome.enable = true;
-  };
+  services.xserver.autoRepeatDelay = 150;
+  services.xserver.autoRepeatInterval = 15;
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "pierce";
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.enable = true;
+  services.xserver.libinput.enable = true;
+  services.xserver.xkbOptions = "caps:escape";
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -76,11 +65,9 @@
 
   # Enable PipeWire for sound
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
+  services.pipewire.enable = true;
+  services.pipewire.alsa.enable = true;
+  services.pipewire.pulse.enable = true;
 
   # Uncomment this line to allow AirPods to connect. After initial connection,
   # it can be commented back out (ie, ControllerMode = "dual").
@@ -90,58 +77,34 @@
 
   networking.networkmanager.enable = true;
 
-  users.users.pierce = {
-    isNormalUser = true;
-    shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
-  };
+  users.users.pierce.isNormalUser = true;
+  users.users.pierce.shell = pkgs.fish;
+  users.users.pierce.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
   users.users.root.hashedPassword = "!"; # Disable root user
 
   security.pam.services.gdm.enableGnomeKeyring = true;
   security.sudo.wheelNeedsPassword = false;
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
+  services.eternal-terminal.enable = true;
+  services.eternal-terminal.port = 2022;
+  services.openssh.enable = true;
+  services.openssh.permitRootLogin = "no";
   services.tailscale.enable = true;
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "no";
-  };
-
-  services.eternal-terminal = {
-    enable = true;
-    port = 2022;
-  };
+  programs.dconf.enable = true;
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.enableSSHSupport = true;
+  programs.gpaste.enable = true;
 
   networking.firewall.allowedTCPPorts = [ 2022 ];
   networking.firewall.checkReversePath = "loose";
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
+  virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.onBoot = "ignore";
+  virtualisation.podman.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    onBoot = "ignore";
-    qemu.swtpm.enable = true;
-    qemu.ovmf.packages = [
-      (pkgs.OVMFFull.override {
-        secureBoot = true;
-        tpmSupport = true;
-      }).fd
-    ];
-  };
-
-  programs.dconf.enable = true;
-
-  programs.gpaste.enable = true;
-
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
