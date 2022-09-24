@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./alacritty.nix
     ./env.nix
     ./fish.nix
     ./git.nix

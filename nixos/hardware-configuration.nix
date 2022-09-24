@@ -2,6 +2,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/hardened.nix")
   ];
 
   networking.hostName = "bobbery";
@@ -13,18 +14,8 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # FIXME: Remove; for building NixOS image on RPi4
+  # For building NixOS image on RPi4
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  # Needed for OSX-KVM
-  boot.extraModprobeConfig = ''
-    options kvm_intel nested=1
-    options kvm_intel emulate_invalid_guest_state=0
-    options kvm ignore_msrs=1
-  '';
-
-  # XanMod kernel for better responsiveness in interactive programs: https://xanmod.org
-  # boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   # Required for lid closing on Razer Blade Stealth 13
   # https://help.ubuntu.com/community/RazerBlade#Suspend
@@ -69,11 +60,11 @@
   hardware.video.hidpi.enable = lib.mkDefault true;
 
   # Nvidia GPU support
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true; # Needed for Wayland
-    prime.offload.enable = true;
-    prime.intelBusId = "PCI:0:2:0";
-    prime.nvidiaBusId = "PCI:57:0:0";
-  };
+  # services.xserver.videoDrivers = [ "nvidia" ];
+  # hardware.nvidia = {
+  #   modesetting.enable = true; # Needed for Wayland
+  #   prime.offload.enable = true;
+  #   prime.intelBusId = "PCI:0:2:0";
+  #   prime.nvidiaBusId = "PCI:57:0:0";
+  # };
 }

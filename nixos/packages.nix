@@ -25,6 +25,8 @@ in
     gnome.gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.espresso
+    gnomeExtensions.night-theme-switcher
     googleearth-pro
     nvidia-offload
     powertop
