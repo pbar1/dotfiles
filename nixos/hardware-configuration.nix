@@ -2,7 +2,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    (modulesPath + "/profiles/hardened.nix")
   ];
 
   networking.hostName = "bobbery";
