@@ -23,7 +23,9 @@
 
     # Neovim Plugins ----------------------------------------------------------
 
+    "vim:Comment.nvim" = { url = "github:numToStr/Comment.nvim"; flake = false; };
     "vim:alpha-nvim" = { url = "github:goolord/alpha-nvim"; flake = false; };
+    "vim:auto-session" = { url = "github:rmagatti/auto-session"; flake = false; };
     "vim:barbar.nvim" = { url = "github:romgrk/barbar.nvim"; flake = false; };
     "vim:cmp-buffer" = { url = "github:hrsh7th/cmp-buffer"; flake = false; };
     "vim:cmp-cmdline" = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
@@ -42,7 +44,6 @@
     "vim:lsp_signature.nvim" = { url = "github:ray-x/lsp_signature.nvim"; flake = false; };
     "vim:lspkind.nvim" = { url = "github:onsails/lspkind.nvim"; flake = false; };
     "vim:lualine.nvim" = { url = "github:nvim-lualine/lualine.nvim"; flake = false; };
-    "vim:mini.nvim" = { url = "github:echasnovski/mini.nvim"; flake = false; };
     "vim:null-ls.nvim" = { url = "github:jose-elias-alvarez/null-ls.nvim"; flake = false; };
     "vim:nvim-autopairs" = { url = "github:windwp/nvim-autopairs"; flake = false; };
     "vim:nvim-cmp" = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
@@ -54,6 +55,7 @@
     "vim:nvim-web-devicons" = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
     "vim:plenary.nvim" = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
     "vim:rust-tools.nvim" = { url = "github:simrat39/rust-tools.nvim"; flake = false; };
+    "vim:session-lens" = { url = "github:rmagatti/session-lens"; flake = false; };
     "vim:spellsitter.nvim" = { url = "github:lewis6991/spellsitter.nvim"; flake = false; };
     "vim:telescope-fzf-native.nvim" = { url = "github:nvim-telescope/telescope-fzf-native.nvim"; flake = false; };
     "vim:telescope-ui-select.nvim" = { url = "github:nvim-telescope/telescope-ui-select.nvim"; flake = false; };

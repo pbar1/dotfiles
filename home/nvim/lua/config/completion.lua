@@ -1,5 +1,9 @@
+local autopairs = require("nvim-autopairs")
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local lspkind = require("lspkind")
+
+autopairs.setup()
 
 cmp.setup({
    snippet = {
@@ -30,3 +34,5 @@ cmp.setup({
       format = lspkind.cmp_format(),
    },
 })
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
