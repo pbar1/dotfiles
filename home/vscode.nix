@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
 
-    package = pkgs.vscode;
+    package = pkgs.vscode.fhs;
 
     extensions = (with pkgs.vscode-extensions; [
       asvetliakov.vscode-neovim
@@ -31,23 +31,17 @@
         version = "11.11.0";
         sha256 = "sha256-Zhc7JfXKaYZpVgiCi1Yj1ui2u9h94ocUjODIsDLwqWE=";
       }
-      {
-        name = "vscode-lldb";
-        publisher = "vadimcn";
-        version = "1.7.0";
-        sha256 = "sha256-DuYweIri8NpBHcIG37WyUUc+p4/TaBBHcI6x6YIRvmk=";
-      }
+      /* { */
+      /*   name = "vscode-lldb"; */
+      /*   publisher = "vadimcn"; */
+      /*   version = "1.7.0"; */
+      /*   sha256 = "sha256-DuYweIri8NpBHcIG37WyUUc+p4/TaBBHcI6x6YIRvmk="; */
+      /* } */
       {
         name = "lua";
         publisher = "sumneko";
         version = "3.2.2";
         sha256 = "sha256-WEDDad3r6dSOPF2abKQWb5wN4g84UXzlKPaVvonq4Qc=";
-      }
-      {
-        name = "r";
-        publisher = "REditorSupport";
-        version = "2.5.0";
-        sha256 = "sha256-OEZfMDE/2IUwQ/R/vEDcAhpEAypGPej3IaylRgvCOfE=";
       }
     ];
 
@@ -69,10 +63,10 @@
       "vsicons.dontShowNewVersionMessage" = true;
       "window.autoDetectColorScheme" = true;
       "window.titleBarStyle" = "custom";
-      "workbench.colorTheme" = "Gruvbox Dark Medium";
+      "workbench.colorTheme" = "Gruvbox Dark Soft";
       "workbench.iconTheme" = "vscode-icons";
-      "workbench.preferredDarkColorTheme" = "Gruvbox Dark Medium";
-      "workbench.preferredLightColorTheme" = "Gruvbox Light Medium";
+      "workbench.preferredDarkColorTheme" = "Gruvbox Dark Soft";
+      "workbench.preferredLightColorTheme" = "Gruvbox Light Soft";
       "workbench.startupEditor" = "none";
 
       # To respect <Caps> remaped to <Esc> on Linux

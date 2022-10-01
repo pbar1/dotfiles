@@ -72,11 +72,16 @@
     # Dummy sha256: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
 
     shellAbbrs = {
+      "," = "nix-shell --packages";
       c = "clear";
+      cb = "cargo build";
+      cr = "cargo run";
+      ct = "cargo test";
       e = "$EDITOR";
+      fdh = "fd --no-hidden --no-ignore";
       g = "git";
+      gd = "git diff -- ':!*.lock'";
       gs = "git status --short";
-      gd = "git diff";
       ij = "idea";
       k = "kubectl";
       kapi = "kubectl api-resources";
@@ -86,7 +91,6 @@
       kgn = "kubectl get namespaces --show-labels";
       kgno = "kubectl get nodes --label-columns=beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
       kgp = "kubectl get pods";
-      wkgp = "watch kubectl get pods";
       kn = "kubens";
       kubeconfig = "kubectl config view --minify --flatten";
       kx = "kubectx";
@@ -96,11 +100,9 @@
       rgi = "rg --ignore-case";
       star = "starship";
       tf = "terraform";
-      tfa = "terraform apply";
-      tfp = "terraform plan";
-      wo = "type --all --short";
+      wkgp = "watch kubectl get pods";
+      wo = "type --all --short --path";
       xi = "xargs -I {}";
-      "," = "nix-shell -p";
     };
 
     shellAliases = {

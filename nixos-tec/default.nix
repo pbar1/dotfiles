@@ -40,6 +40,7 @@
   users.users.root.hashedPassword = "!"; # Disable root user
 
   security.sudo.wheelNeedsPassword = false;
+  security.apparmor.enable = true;
 
   environment.systemPackages = with pkgs; [
     fd

@@ -84,6 +84,7 @@
 
   security.pam.services.gdm.enableGnomeKeyring = true;
   security.sudo.wheelNeedsPassword = false;
+  security.apparmor.enable = true;
 
   services.eternal-terminal.enable = true;
   services.eternal-terminal.port = 2022;
@@ -103,6 +104,13 @@
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.onBoot = "ignore";
+  virtualisation.libvirtd.qemu.ovmf.enable = true;
+  # If this was previously set to another value, it needed a `nix-collect-garbage`
+  # clear the conflicting OVMF packages and links. Also, the trailing `.fd` is
+  # crucial - without it, the links are all broken.
+  virtualisation.libvirtd.qemu.ovmf.packages = [ (pkgs.OVMFFull.override { secureBoot = true; tpmSupport = true; }).fd ];
+  virtualisation.libvirtd.qemu.runAsRoot = true;
+  virtualisation.libvirtd.qemu.swtpm.enable = true;
   virtualisation.podman.enable = true;
 
 

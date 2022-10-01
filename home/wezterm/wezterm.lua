@@ -12,6 +12,7 @@ return {
 
    font = wezterm.font("Iosevka Nerd Font Mono"),
    font_size = 14,
+   warn_about_missing_glyphs = false,
 
    enable_wayland = true,
    window_background_opacity = 1.0,

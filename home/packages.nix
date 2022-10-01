@@ -50,6 +50,7 @@ in
     jwt-cli
     dogdns
     nmap
+    tor
 
     # Containers & Kubernetes
     dive
