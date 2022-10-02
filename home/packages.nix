@@ -40,7 +40,7 @@ in
     openssl
     yubikey-manager
     pstree
-    pfetch
+    xsv
 
     # Networking
     netcat
@@ -95,7 +95,9 @@ in
 
     # Python
     (python3.withPackages (ps: with ps; [
+      python-dateutil
       pyyaml
+      requests
     ]))
     poetry
     nodePackages.pyright
