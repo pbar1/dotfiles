@@ -56,7 +56,9 @@ null_ls.setup({
    sources = {
       null_ls.builtins.code_actions.statix,
       null_ls.builtins.completion.spell,
+      null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.goimports,
+      null_ls.builtins.formatting.isort,
       null_ls.builtins.formatting.nixpkgs_fmt,
       null_ls.builtins.formatting.rustfmt.with({ extra_args = rustfmt_extra_args }),
       null_ls.builtins.formatting.stylua,
