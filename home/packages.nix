@@ -95,11 +95,13 @@ in
 
     # Python
     (python3.withPackages (ps: with ps; [
+      httpx
       python-dateutil
       pyyaml
-      requests
     ]))
     poetry
+    black
+    isort
     nodePackages.pyright
 
     # Lua
