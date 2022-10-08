@@ -2,21 +2,15 @@
   description = "Configuration for NixOS, macOS, and Home Manager";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # TODO: Await https://github.com/LnL7/nix-darwin/pull/310
-    darwin.url = "github:pbar1/nix-darwin";
+    darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Overlays ----------------------------------------------------------------
-
-    fenix.url = "github:nix-community/fenix";
-    fenix.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -69,24 +63,26 @@
     "vim:vim-startuptime" = { url = "github:dstein64/vim-startuptime"; flake = false; };
     "vim:vim-vsnip" = { url = "github:hrsh7th/vim-vsnip"; flake = false; };
     "vim:which-key.nvim" = { url = "github:folke/which-key.nvim"; flake = false; };
+
+    #"vim:meta.nvim" = { url = "path:/usr/share/fb-editor-support/nvim"; flake = false; };
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
       overlays = [
-        inputs.fenix.overlay
         inputs.neovim-nightly-overlay.overlay
         (final: prev: {
           neovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
               name = removePrefix "vim:" name;
+              pname = removePrefix "vim:" name;
               src = value.outPath;
               namePrefix = "";
               buildPhase = if hasInfix "fzf-native" name then "make" else ":";
             }))
             (filterAttrs (name: _: hasPrefix "vim:" name) inputs);
-        })
-      ];
+        }) # END final: prev:
+      ]; # END overlays
     in
     {
       nixosConfigurations."bobbery" = nixpkgs.lib.nixosSystem {
@@ -99,39 +95,35 @@
         system = "x86_64-linux";
       };
 
-      darwinConfigurations.default = darwin.lib.darwinSystem {
+      darwinConfigurations."pbar-mbp" = darwin.lib.darwinSystem {
         modules = [ ./darwin ];
         system = "aarch64-darwin";
       };
 
-      homeConfigurations.bobbery = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
           ./home
           {
-            home = {
-              username = "pierce";
-              homeDirectory = "/home/pierce";
-              stateVersion = "22.05";
-            };
+            home.username = "pierce";
+            home.homeDirectory = "/home/pierce";
+            home.stateVersion = "22.05";
           }
         ];
       };
 
-      homeConfigurations.pbar-mbp = home-manager.lib.homeManagerConfiguration {
-        configuration = import ./home { inherit overlays; };
-        stateVersion = "22.05";
-        system = "aarch64-darwin";
-        username = "pbar";
-        homeDirectory = "/Users/pbar";
+      homeConfigurations."pbar-mbp" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
+          ./home-devserver
+          {
+            home.username = "pbar";
+            home.homeDirectory = "/home/pbar";
+            home.stateVersion = "22.05";
+          }
+        ];
       };
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
-      {
-        devShells.default = with pkgs; mkShell {
-          buildInputs = [ go-task gnumake vagrant packer ];
-        };
-      }
-    );
-}
+    }; # END outputs
+} # END flake
