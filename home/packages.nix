@@ -1,7 +1,5 @@
 { pkgs, ... }:
 
-# https://nixos.org/guides/nix-pills/override-design-pattern.html
-# Used `nix repl '<nixpkgs>'` to play around with this
 let
   # Disable fzf builtin Fish shell integration; we use a plugin instead
   fzf = pkgs.fzf.overrideAttrs (oldAttrs: { preInstall = null; });
@@ -10,83 +8,73 @@ in
   home.packages = with pkgs; [
     # Editor
     (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
-    chafa
 
     # Version control & project tools
-    gnupg
     gh # FIXME use hm
-    tokei
+    gnupg
     go-task
-    direnv
-    mdbook
-    ninja
-    lazygit
+    tokei
 
     # Command line utils
-    coreutils
-    fzf
-    ripgrep
-    fd
-    sd
-    exa
-    hyperfine
-    unixtools.watch
-    less
-    gnused
-    jq
     _1password
-    xz
-    procs
+    coreutils
+    exa
+    fd
+    file
+    fzf
+    gnused
+    hyperfine
+    jq
+    less
     openssl
-    yubikey-manager
+    procs
     pstree
-    xsv
+    ripgrep
+    sd
+    unixtools.watch
+    xz
+    yubikey-manager
 
     # Networking
-    netcat
-    socat
+    dig
     eternal-terminal
     hey
     jwt-cli
-    dogdns
+    netcat
     nmap
+    socat
     tor
 
     # Containers & Kubernetes
-    dive
-    kubectl
+    jsonnet-bundler
     krew
+    kubectl
+    kubectx
     kubernetes-helm
     stern
-    kind
-    fluxcd
-    kubectx
     tanka
-    jsonnet-bundler
     vagrant
 
     # Nix
-    rnix-lsp
-    nixpkgs-fmt
-    statix
     cachix
+    nixpkgs-fmt
+    rnix-lsp
+    statix
 
     # Bash
+    nodePackages.bash-language-server
     shellcheck
     shfmt
-    nodePackages.bash-language-server
 
     # C/C++
-    gcc
     binutils
     cmake
     cmake-language-server
-    # vscode-extensions.vadimcn.vscode-lldb
+    gcc
 
     # Rust
-    rustup
     rust-analyzer
-    rust-bindgen
+    rustup
 
     # Go
     go
@@ -99,16 +87,13 @@ in
       python-dateutil
       pyyaml
     ]))
-    # poetry
     black
     isort
     nodePackages.pyright
+    # poetry
 
     # Lua
     stylua
     sumneko-lua-language-server
-
-    # WebAssembly
-    wasmer
   ];
 }
