@@ -117,11 +117,13 @@
       light = ''
         base16-gruvbox-light-soft
         base16-fzf-gruvbox-light-soft
+        set -Ux BAT_THEME gruvbox-light
       '';
 
       dark = ''
         base16-gruvbox-dark-soft
         base16-fzf-gruvbox-dark-soft
+        set -Ux BAT_THEME gruvbox-dark
       '';
 
       # https://github.com/base16-project/base16-fzf/blob/main/fish/base16-gruvbox-dark-soft.fish

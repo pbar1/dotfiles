@@ -59,11 +59,6 @@
 
   programs.zoxide.enable = true;
 
-  programs.bat = {
-    enable = true;
-    config = {
-      style = "plain";
-      theme = "base16-256";
-    };
-  };
+  programs.bat.enable = true;
+  programs.bat.config.style = "plain";
 }

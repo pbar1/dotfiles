@@ -99,7 +99,7 @@ in
       python-dateutil
       pyyaml
     ]))
-    poetry
+    # poetry
     black
     isort
     nodePackages.pyright

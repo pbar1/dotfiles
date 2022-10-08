@@ -15,13 +15,8 @@
       push.followTags = true;
     };
 
-    delta = {
-      enable = true;
-      options = {
-        syntax-theme = "gruvbox-light";
-        side-by-side = true;
-      };
-    };
+    delta.enable = true;
+    delta.options.side-by-side = true;
 
     aliases = {
       root = "rev-parse --show-toplevel";
@@ -35,6 +30,7 @@
       upstream-name = "!git remote | egrep -o '(upstream|origin)' | tail -1";
       head-branch = "!git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'";
       upstream-auto = "!git remote set-head origin --auto";
+      whoami = "config --get-regexp '^user\.'";
     };
 
     ignores = [
