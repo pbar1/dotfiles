@@ -10,20 +10,22 @@ which_key.setup({
    },
 })
 
-local leader_mappings = {
-   ["f"] = {
-      name = "+Telescope 🔭",
-      ["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
-      ["f"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-      ["g"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-      ["h"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
-      ["r"] = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
-   },
-   ["t"] = {
-      name = "+Trouble 😈",
-      ["r"] = { "<cmd>TroubleRefresh<cr>", "Refresh Trouble" },
-      ["t"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
-   },
-   ["ut"] = { "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", "Toggle undo tree" },
+local normal_mappings = {
+   ["<Leader>f"] = { name = "+Telescope 🔭" },
+   ["<Leader>fb"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
+   ["<Leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+   ["<Leader>fg"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
+   ["<Leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+   ["<Leader>fm"] = { "<cmd>Telescope myles<cr>", "(Meta) Find files" },
+   ["<Leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
+   ["<Leader>rn"] = { vim.lsp.buf.rename, "(LSP) Rename symbol" },
+   ["<Leader>t"] = { name = "+Trouble 😈" },
+   ["<Leader>tr"] = { "<cmd>TroubleRefresh<cr>", "Refresh Trouble" },
+   ["<Leader>tt"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+   ["<Leader>u"] = { "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", "Toggle undo tree" },
+   ["gD"] = { vim.lsp.buf.declaration, "(LSP) Go to declaration" },
+   ["gd"] = { vim.lsp.buf.definition, "(LSP) Go to definition" },
+   ["gi"] = { vim.lsp.buf.implementation, "(LSP) Go to implementation" },
+   ["gr"] = { vim.lsp.buf.references, "(LSP) Go to references" },
 }
-which_key.register(leader_mappings, { prefix = "<Leader>" })
+which_key.register(normal_mappings, {})
