@@ -100,7 +100,12 @@
         system = "aarch64-darwin";
       };
 
-      homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
+      darwinConfigurations."bobbery" = darwin.lib.darwinSystem {
+        modules = [ ./darwin ];
+        system = "aarch64-darwin";
+      };
+
+      homeConfigurations."bobbery-wsl" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
@@ -113,17 +118,19 @@
         ];
       };
 
-      homeConfigurations."pbar-mbp" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+
+      homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
-          ./home-devserver
+          ./home
           {
-            home.username = "pbar";
-            home.homeDirectory = "/home/pbar";
+            home.username = "pierce";
+            home.homeDirectory = "/Users/pierce";
             home.stateVersion = "22.05";
           }
         ];
       };
+
     }; # END outputs
 } # END flake

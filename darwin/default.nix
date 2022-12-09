@@ -15,11 +15,11 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  nix.binaryCaches = [
+  nix.settings.substituters = [
     "https://nix-community.cachix.org"
     "https://pbar1.cachix.org"
   ];
-  nix.binaryCachePublicKeys = [
+  nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
   ];
@@ -28,8 +28,9 @@
   # https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix
 
   # Dock
-  system.defaults.dock.autohide-time-modifier = "0.0";
-  system.defaults.dock.autohide-delay = "0.0";
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.autohide-time-modifier = 0.0;
+  system.defaults.dock.autohide-delay = 0.0;
   system.defaults.dock.orientation = "left";
 
   # Falls back to default if directory doesn't exist
@@ -50,5 +51,8 @@
 
   # Enable GPG agent and have it emulate SSH agent
   programs.gnupg.agent.enable = true;
-  programs.gnupg.enableSSHSupport = true;
+  programs.gnupg.agebnt.enableSSHSupport = true;
+
+  # TouchID for sudo
+  security.pam.enableSudoTouchIdAuth = true;
 }

@@ -7,34 +7,27 @@
 
   homebrew = {
     enable = true;
-    brewPrefix = "/Users/pbar/.brew/bin"; # FIXME: hardcode
-    cleanup = "zap";
-    autoUpdate = true;
-    global.brewfile = true;
-    global.noLock = true;
+    onActivation.cleanup = "zap";
 
     taps = [
       "homebrew/cask"
-      "homebrew/core"
       "homebrew/cask-drivers"
+      "homebrew/cask-fonts"
+      "homebrew/core"
     ];
-
-    # brews = [];
 
     casks = [
       "1password"
       "amethyst"
       "bartender"
+      "brave-browser"
       "clipy"
+      "font-iosevka-nerd-font"
       "iterm2"
       "keepingyouawake"
       "qlmarkdown"
-      "rectangle"
-      "signal"
       "syntax-highlight"
       "unnaturalscrollwheels"
     ];
-
-    # masApps = {};
   };
 }

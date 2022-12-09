@@ -6,14 +6,12 @@ let
 in
 {
   home.packages = with pkgs; [
-    # Editor
-    (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
-
     # Version control & project tools
     gh # FIXME use hm
     gnupg
     go-task
     tokei
+    sapling
 
     # Command line utils
     _1password
@@ -33,44 +31,31 @@ in
     sd
     unixtools.watch
     xz
-    yubikey-manager
 
     # Networking
     dig
-    eternal-terminal
     hey
-    jwt-cli
     netcat
     nmap
     socat
     tor
 
     # Containers & Kubernetes
-    jsonnet-bundler
     krew
     kubectl
     kubectx
     kubernetes-helm
     stern
-    tanka
-    vagrant
 
     # Nix
     cachix
     nixpkgs-fmt
     rnix-lsp
-    statix
 
     # Bash
     nodePackages.bash-language-server
     shellcheck
     shfmt
-
-    # C/C++
-    binutils
-    cmake
-    cmake-language-server
-    gcc
 
     # Rust
     rust-analyzer
@@ -95,5 +80,8 @@ in
     # Lua
     stylua
     sumneko-lua-language-server
+
+    # JavaScript
+    nodejs
   ];
 }

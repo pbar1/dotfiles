@@ -37,23 +37,5 @@
       "**/.idea/*"
       "**/.DS_Store"
     ];
-
-    # attributes = [];
-
-    # Load context-based config
-    includes = [
-      { path = "~/.config/git/config.personal"; condition = "gitdir:~/code/"; }
-    ];
   };
-
-  xdg.configFile."git/config.personal".text = ''
-    [user]
-      email = "piercebartine@gmail.com"
-
-    [url "ssh://git@github.com/"]
-      insteadOf = "https://github.com/"
-
-    [url "ssh://git@gitlab.com/"]
-      insteadOf = "https://gitlab.com/"
-  '';
 }
