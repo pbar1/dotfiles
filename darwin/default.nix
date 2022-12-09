@@ -51,7 +51,7 @@
 
   # Enable GPG agent and have it emulate SSH agent
   programs.gnupg.agent.enable = true;
-  programs.gnupg.agebnt.enableSSHSupport = true;
+  programs.gnupg.agent.enableSSHSupport = true;
 
   # TouchID for sudo
   security.pam.enableSudoTouchIdAuth = true;

@@ -22,6 +22,7 @@
       "bartender"
       "brave-browser"
       "clipy"
+      "discord"
       "font-iosevka-nerd-font"
       "iterm2"
       "keepingyouawake"
