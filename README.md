@@ -16,3 +16,18 @@ Configuration for NixOS, macOS, and Home Manager
 - [asimpson/dotfiles](https://github.com/asimpson/dotfiles/blob/master/nixos/t480s/configuration.nix)
 - [NixOS on ZFS](https://grahamc.com/blog/nixos-on-zfs)
 - [Flakes: NixOS and Home Manager migration](https://gvolpe.com/blog/nix-flakes/)
+
+## TODO
+
+macOS updates clear /etc/zshrc back to Apple defaults; this segment was taken
+from the file and should be loaded in some other way, maybe from ~/.zshrc.
+
+```
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+```
+
+Should also find out what needs to be loaded from nix-darwin.

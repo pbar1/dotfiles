@@ -4,8 +4,7 @@ local null_ls = require("null-ls")
 local rust_tools = require("rust-tools")
 
 -- Enable LSP completion
-local caps = vim.lsp.protocol.make_client_capabilities()
-caps = cmp_nvim_lsp.update_capabilities(caps)
+local caps = cmp_nvim_lsp.default_capabilities()
 
 -- Disable LSP formatting in favor of null-ls
 local on_attach = function(client)
@@ -54,7 +53,6 @@ local rustfmt_extra_args = function(params)
 end
 null_ls.setup({
    sources = {
-      null_ls.builtins.code_actions.statix,
       null_ls.builtins.completion.spell,
       null_ls.builtins.formatting.black,
       null_ls.builtins.formatting.goimports,

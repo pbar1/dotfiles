@@ -41,8 +41,8 @@ in
     PSQL_HISTORY = "${cacheHome}/pg/psql_history";
     PGPASSFILE = "${configHome}/pg/pgpass";
     PGSERVICEFILE = "${configHome}/pg/pg_service.conf";
-    DOCKER_CONFIG = "${configHome}/docker";
-    MACHINE_STORAGE_PATH = "${dataHome}/docker-machine";
+    # DOCKER_CONFIG = "${configHome}/docker";
+    # MACHINE_STORAGE_PATH = "${dataHome}/docker-machine";
     K9SCONFIG = "${configHome}/k9s";
     DCOS_DIR = "${configHome}/dcos";
     TF_CLI_CONFIG_FILE = "${configHome}/terraform/terraformrc";

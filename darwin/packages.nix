@@ -17,18 +17,24 @@
     ];
 
     casks = [
+      # core
       "1password"
       "amethyst"
       "bartender"
-      "brave-browser"
       "clipy"
-      "discord"
       "font-iosevka-nerd-font"
       "iterm2"
       "keepingyouawake"
-      "qlmarkdown"
-      "syntax-highlight"
       "unnaturalscrollwheels"
+
+      # personal
+      "brave-browser"
+      "discord"
+      "docker"
+      "qlmarkdown"
+      "spotify"
+      "syntax-highlight"
+      "visual-studio-code"
     ];
   };
 }
