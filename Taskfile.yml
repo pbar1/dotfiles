@@ -27,7 +27,7 @@ tasks:
   darwin:
     desc: Compiles and activates new macOS config.
     cmds:
-    - darwin-rebuild switch --flake '.#pbar-mbp' {{.CLI_ARGS}}
+    - /run/current-system/sw/bin/darwin-rebuild switch --flake '.#{{.HOSTNAME}}' {{.CLI_ARGS}}
 
   home:
     desc: Compiles and actives new Home Manager config.
