@@ -1,13 +1,22 @@
 { config, pkgs, ... }:
 
 let
+  home = config.home.homeDirectory;
   configHome = config.xdg.configHome;
   dataHome = config.xdg.dataHome;
   cacheHome = config.xdg.cacheHome;
-  binHome = "${config.home.homeDirectory}/.local/bin";
 in
 {
   xdg.enable = true;
+
+  home.sessionPath = [
+    "${home}/.local/bin"
+    "${home}/.krew/bin"
+    "${dataHome}/cargo/bin"
+    "${dataHome}/go/bin"
+    "${dataHome}/npm/bin"
+    "/opt/homebrew/bin"
+  ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -64,9 +73,5 @@ in
     prefix=${dataHome}/npm
     cache=${cacheHome}/npm
     init-module=${configHome}/npm/config/npm-init.js
-  '';
-
-  xdg.configFile."vault/config".text = ''
-    token_helper = "${binHome}/vault-token-helper"
   '';
 }
