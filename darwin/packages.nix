@@ -25,15 +25,19 @@
       "font-iosevka-nerd-font"
       "iterm2"
       "keepingyouawake"
-      "unnaturalscrollwheels"
+      "logi-options-plus"
 
       # personal
       "brave-browser"
       "discord"
       "docker"
+      "google-earth-pro"
+      "keka"
+      "kekaexternalhelper"
       "qlmarkdown"
       "spotify"
       "syntax-highlight"
+      "tailscale"
       "visual-studio-code"
     ];
   };

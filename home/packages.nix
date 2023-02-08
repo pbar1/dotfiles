@@ -40,6 +40,10 @@ in
     socat
     tor
 
+    # Cloud
+    terraform
+    google-cloud-sdk
+
     # Containers & Kubernetes
     krew
     kubectl
