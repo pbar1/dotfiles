@@ -43,6 +43,8 @@ in
     # Cloud
     terraform
     google-cloud-sdk
+    fluxcd
+    sops
 
     # Containers & Kubernetes
     krew
