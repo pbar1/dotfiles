@@ -3,6 +3,8 @@ version: '3'
 vars:
   HOSTNAME:
     sh: hostname -s
+  PWD:
+    sh: pwd
 
 tasks:
   default: task --list
@@ -22,7 +24,8 @@ tasks:
   nixos:tec:
     desc: Compiles and activates new NixOS config (tec).
     cmds:
-    - nixos-rebuild switch --use-remote-sudo --flake '.#tec' --build-host nixos@192.168.0.5 --target-host nixos@192.168.0.5 {{.CLI_ARGS}}
+    - rsync --recursive --exclude=".git*" --filter="dir-merge,- .gitignore" {{.PWD}}/* nixos@192.168.0.5:~/nix-config
+    - ssh nixos@192.168.0.5 "nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec {{.CLI_ARGS}}"
 
   darwin:
     desc: Compiles and activates new macOS config.
