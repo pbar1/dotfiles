@@ -56,6 +56,7 @@
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
+    "--secrets-encryption"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
   ];
 
