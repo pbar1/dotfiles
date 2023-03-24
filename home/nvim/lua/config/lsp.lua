@@ -13,7 +13,12 @@ local on_attach = function(client)
 end
 
 -- LSP servers that need only minimal config
-for _, lsp in pairs({ "bashls", "pyright", "rnix", "gopls" }) do
+for _, lsp in pairs({
+   "bashls",  -- Bash
+   "gopls",   -- Go
+   "nil_ls",  -- Nix
+   "pyright", -- Python
+}) do
    lspconfig[lsp].setup({ on_attach = on_attach, capabilities = caps })
 end
 

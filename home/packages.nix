@@ -58,8 +58,8 @@ in
 
     # Nix
     cachix
+    nil
     nixpkgs-fmt
-    rnix-lsp
 
     # Bash
     nodePackages.bash-language-server
