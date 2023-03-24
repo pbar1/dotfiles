@@ -53,6 +53,9 @@ in
     kubernetes-helm
     stern
 
+    # WebAssembly
+    wasmer
+
     # Nix
     cachix
     nixpkgs-fmt

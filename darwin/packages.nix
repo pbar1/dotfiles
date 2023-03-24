@@ -38,6 +38,7 @@
       "spotify"
       "syntax-highlight"
       "tailscale"
+      "transmission"
       "visual-studio-code"
     ];
   };
