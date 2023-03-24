@@ -18,7 +18,7 @@ for _, lsp in pairs({ "bashls", "pyright", "rnix", "gopls" }) do
 end
 
 -- LSP server for Lua with extra config for the Neovim Lua runtime
-lspconfig.sumneko_lua.setup({
+lspconfig["lua_ls"].setup({
    on_attach = on_attach,
    capabilities = caps,
    settings = {
