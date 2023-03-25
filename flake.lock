@@ -169,6 +169,8 @@
         "vim:nvim-lspconfig": "vim:nvim-lspconfig",
         "vim:nvim-notify": "vim:nvim-notify",
         "vim:nvim-tree.lua": "vim:nvim-tree.lua",
+        "vim:nvim-treesitter-textobjects": "vim:nvim-treesitter-textobjects",
+        "vim:nvim-treesitter-textsubjects": "vim:nvim-treesitter-textsubjects",
         "vim:nvim-web-devicons": "vim:nvim-web-devicons",
         "vim:plenary.nvim": "vim:plenary.nvim",
         "vim:rust-tools.nvim": "vim:rust-tools.nvim",
@@ -664,6 +666,38 @@
       "original": {
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
+    "vim:nvim-treesitter-textobjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679254089,
+        "narHash": "sha256-f+s8dTDnhZmAUtjXINAyyGHSjS39ITcSOyt43f1GtYU=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "rev": "582cbb5a4cb50f6161cac8cc01f55aeaff6d836a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "type": "github"
+      }
+    },
+    "vim:nvim-treesitter-textsubjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676144693,
+        "narHash": "sha256-4jb9v0xpO17wp85dzojKUQ6hUdNBx3T2tB4fSWoANus=",
+        "owner": "RRethy",
+        "repo": "nvim-treesitter-textsubjects",
+        "rev": "b913508f503527ff540f7fe2dcf1bf1d1f259887",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RRethy",
+        "repo": "nvim-treesitter-textsubjects",
         "type": "github"
       }
     },

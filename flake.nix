@@ -46,6 +46,8 @@
     "vim:nvim-lspconfig" = { url = "github:neovim/nvim-lspconfig"; flake = false; };
     "vim:nvim-notify" = { url = "github:rcarriga/nvim-notify"; flake = false; };
     "vim:nvim-tree.lua" = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
+    "vim:nvim-treesitter-textobjects" = { url = "github:nvim-treesitter/nvim-treesitter-textobjects"; flake = false; };
+    "vim:nvim-treesitter-textsubjects" = { url = "github:RRethy/nvim-treesitter-textsubjects"; flake = false; };
     "vim:nvim-web-devicons" = { url = "github:kyazdani42/nvim-web-devicons"; flake = false; };
     "vim:plenary.nvim" = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
     "vim:rust-tools.nvim" = { url = "github:simrat39/rust-tools.nvim"; flake = false; };
