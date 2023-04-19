@@ -26,6 +26,7 @@
       "iterm2"
       "keepingyouawake"
       "logi-options-plus"
+      "quicksilver"
 
       # personal
       "brave-browser"

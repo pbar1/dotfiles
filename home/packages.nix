@@ -45,6 +45,8 @@ in
     google-cloud-sdk
     fluxcd
     sops
+    go-jsonnet
+    jsonnet-bundler
 
     # Containers & Kubernetes
     krew
