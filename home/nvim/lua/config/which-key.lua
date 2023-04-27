@@ -2,7 +2,7 @@ local which_key = require("which-key")
 
 which_key.setup({
    key_labels = {
-      ["<Leader>"] = "LDR",
+      ["<leader>"] = "LDR",
       ["<Space>"] = "SPC",
       ["<CR>"] = "RET",
       ["<Tab>"] = "TAB",
@@ -17,6 +17,7 @@ local normal_mappings = {
    ["<Leader>fg"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
    ["<Leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
    ["<Leader>fm"] = { "<cmd>Telescope myles<cr>", "(Meta) Find files" },
+   ["<Leader>fn"] = { "<cmd>Telescope notify<cr>", "Notifications" },
    ["<Leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
    ["<Leader>rn"] = { vim.lsp.buf.rename, "(LSP) Rename symbol" },
    ["<Leader>t"] = { name = "+Trouble 😈" },

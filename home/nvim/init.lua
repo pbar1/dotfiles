@@ -1,3 +1,7 @@
+if not vim.g.vscode then
+   require("config.notify")
+end
+
 require("config.options.core")
 require("config.treesitter")
 
