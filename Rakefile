@@ -1,4 +1,6 @@
-hostname = `hostname -s`.strip()
+# frozen_string_literal: true
+
+hostname = `hostname -s`.strip
 
 task :print_hostname do
   puts hostname
