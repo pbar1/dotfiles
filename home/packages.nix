@@ -94,5 +94,8 @@ in
 
     # JavaScript
     nodejs
+
+    # Dotnet and C#
+    dotnet-sdk
   ];
 }
