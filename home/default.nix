@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -19,6 +19,16 @@
     # TODO: https://github.com/nix-community/home-manager/issues/2942
     config.allowUnfreePredicate = (pkg: true);
   };
+
+  # TODO: Include Nix sourcing here if needed in the future (ie, macOS upgrade)
+  # Zsh is disabled, but on macOS it is the default shell. Instead of changing
+  # shells, we move into Fish.
+  home.file.".zshrc".text = lib.mkIf pkgs.stdenv.isDarwin ''
+    if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]
+    then
+        exec fish
+    fi
+  '';
 
   home.file.".gnupg/sshcontrol".text = ''
     # personal

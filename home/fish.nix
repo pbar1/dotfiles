@@ -80,6 +80,7 @@
       g = "git";
       gd = "git diff -- ':!*.lock'";
       gs = "git status --short";
+      hg = "sl"; # FIXME: Not if work machine
       ij = "idea";
       k = "kubectl";
       kapi = "kubectl api-resources";
