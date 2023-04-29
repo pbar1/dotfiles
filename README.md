@@ -29,21 +29,3 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 # End Nix
 ```
-
-Also added to ~/.zshrc was the following to have zsh exec fish instead of
-setting fish as default shell:
-```
-if [[ $(ps -p $PPID -o comm=) != "fish" && -z ${ZSH_EXECUTION_STRING} ]]
-then
-    exec fish
-fi
-```
-
-Should also find out what needs to be loaded from nix-darwin.
-
-Staging area:
-
-`sudo vifs`:
-```
-UUID=9609B52E-243C-413B-AB4E-6092B3A783C6 /nix apfs rw,noauto,nobrowse,suid,owners
-``````
