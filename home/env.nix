@@ -30,7 +30,6 @@ in
     LESSHISTFILE = "${cacheHome}/less/history";
     XZ_DEFAULTS = "--verbose --keep --threads=0";
     ZSTD_NBTHREADS = "0";
-    FZF_DEFAULT_COMMAND = "fd --type=file --exclude=.git --hidden --follow";
     KDEHOME = "${configHome}/kde";
     GTK_RC_FILES = "${configHome}/gtk-1.0/gtkrc";
     GTK2_RC_FILES = "${configHome}/gtk-2.0/gtkrc";

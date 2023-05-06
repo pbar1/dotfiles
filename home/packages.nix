@@ -1,9 +1,5 @@
 { pkgs, ... }:
 
-let
-  # Disable fzf builtin Fish shell integration; we use a plugin instead
-  fzf = pkgs.fzf.overrideAttrs (oldAttrs: { preInstall = null; });
-in
 {
   home.packages = with pkgs; [
     # Version control & project tools
@@ -18,7 +14,6 @@ in
     exa
     fd
     file
-    fzf
     gnused
     hyperfine
     jq

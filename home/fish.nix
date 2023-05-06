@@ -33,6 +33,7 @@
       gs = "git status --short";
       hg = "sl"; # FIXME: Not if work machine
       ij = "idea";
+      jf = "sl pr"; # FIXME: Not if work machine
       k = "kubectl";
       kapi = "kubectl api-resources";
       kge = "kubectl get events --watch";

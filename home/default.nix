@@ -2,15 +2,17 @@
 
 {
   imports = [
+    # ./vscode.nix
+    # ./wezterm
+    # ./zsh.nix
     ./env.nix
     ./fish.nix
+    ./fzf.nix
     ./git.nix
     ./nvim
     ./packages.nix
     ./starship.nix
     ./tmux.nix
-    # ./wezterm
-    # ./vscode.nix
   ];
 
   nixpkgs = {
@@ -75,6 +77,8 @@
   programs.sapling.userEmail = "piercebartine@gmail.com";
   programs.sapling.aliases = {
     cm = "commit";
+    d = "diff --exclude=*.lock";
+    s = "status";
     view = "!$HG config paths.default | xargs open";
   };
   programs.sapling.extraConfig = {

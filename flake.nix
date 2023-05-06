@@ -16,6 +16,10 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Zsh Plugins -------------------------------------------------------------
+
+    "zsh:zsh-abbr" = { url = "github:olets/zsh-abbr"; flake = false; };
+
     # Fish Plugins ------------------------------------------------------------
 
     "fish:autopair.fish" = { url = "github:jorgebucaran/autopair.fish"; flake = false; };
@@ -82,7 +86,7 @@
       overlays = [
         inputs.neovim-nightly-overlay.overlay
         (final: prev: {
-          neovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
+          myNeovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
               name = removePrefix "vim:" name;
               pname = removePrefix "vim:" name;
