@@ -7,12 +7,15 @@ return {
    automatically_reload_config = true,
    check_for_updates = false,
 
-   -- TODO: https://wezfurlong.org/wezterm/config/lua/config/term.html
-   -- term = "wezterm",
+   set_environment_variables = {
+      TERMINFO_DIRS = "/run/current-system/sw/share/terminfo",
+   },
+   term = "wezterm",
 
    font = wezterm.font("Iosevka Nerd Font Mono"),
    font_size = 14,
    warn_about_missing_glyphs = false,
+   default_cursor_style = "BlinkingBlock",
 
    enable_wayland = true,
    window_background_opacity = 1.0,

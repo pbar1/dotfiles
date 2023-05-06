@@ -65,7 +65,6 @@
     "vim:plenary.nvim" = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
     "vim:rust-tools.nvim" = { url = "github:simrat39/rust-tools.nvim"; flake = false; };
     "vim:session-lens" = { url = "github:rmagatti/session-lens"; flake = false; };
-    "vim:spellsitter.nvim" = { url = "github:lewis6991/spellsitter.nvim"; flake = false; };
     "vim:telescope-fzf-native.nvim" = { url = "github:nvim-telescope/telescope-fzf-native.nvim"; flake = false; };
     "vim:telescope-ui-select.nvim" = { url = "github:nvim-telescope/telescope-ui-select.nvim"; flake = false; };
     "vim:telescope-zoxide" = { url = "github:jvgrootveld/telescope-zoxide"; flake = false; };
