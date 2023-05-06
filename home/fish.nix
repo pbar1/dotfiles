@@ -1,73 +1,24 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.fish = {
     enable = true;
 
     interactiveShellInit = ''
+      set fish_greeting
       fish_vi_key_bindings
 
       set -gx GPG_TTY (tty)
       set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
     '';
 
-    plugins = [
-      {
-        name = "fzf-fish";
-        src = pkgs.fetchFromGitHub {
-          owner = "PatrickF1";
-          repo = "fzf.fish";
-          rev = "6b592e4140168820f5df9dd28b0a93e409e0d0c3";
-          sha256 = "sha256-dngAKzyD+lmqmxsCSOMViyCgA/+Ve35gLtPS+Lgs8Pc=";
-        };
-      }
-      {
-        name = "plugin-bang-bang";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "plugin-bang-bang";
-          rev = "f969c618301163273d0a03d002614d9a81952c1e";
-          sha256 = "sha256-A8ydBX4LORk+nutjHurqNNWFmW6LIiBPQcxS3x4nbeQ=";
-        };
-      }
-      {
-        name = "fish-kubectl-completions";
-        src = pkgs.fetchFromGitHub {
-          owner = "evanlucas";
-          repo = "fish-kubectl-completions";
-          rev = "ced676392575d618d8b80b3895cdc3159be3f628";
-          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc=";
-        };
-      }
-      {
-        name = "bass";
-        src = pkgs.fetchFromGitHub {
-          owner = "edc";
-          repo = "bass";
-          rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
-          sha256 = "sha256-fl4/Pgtkojk5AE52wpGDnuLajQxHoVqyphE90IIPYFU=";
-        };
-      }
-      {
-        name = "pisces";
-        src = pkgs.fetchFromGitHub {
-          owner = "laughedelic";
-          repo = "pisces";
-          rev = "e45e0869855d089ba1e628b6248434b2dfa709c4";
-          sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=q";
-        };
-      }
-      {
-        name = "base16-fish-shell";
-        src = pkgs.fetchFromGitHub {
-          owner = "FabioAntunes";
-          repo = "base16-fish-shell";
-          rev = "d358af9a724715efd0d31b417ba56e622a239612";
-          sha256 = "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=";
-        };
-      }
-    ];
-    # Dummy sha256: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+    # Flake inputs with the prefix `fish:` automatially end up here via overlay
+    plugins = pkgs.lib.attrsets.mapAttrsToList
+      (name: value: {
+        inherit name;
+        inherit (value) src;
+      })
+      pkgs.myFishPlugins;
 
     shellAbbrs = {
       "," = "nix-shell --packages";

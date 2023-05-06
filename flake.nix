@@ -7,13 +7,22 @@
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
+    # home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:pbar1/home-manager/c47a931"; # TODO: Await merge
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Overlays ----------------------------------------------------------------
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Fish Plugins ------------------------------------------------------------
+
+    "fish:autopair.fish" = { url = "github:jorgebucaran/autopair.fish"; flake = false; };
+    "fish:base16-fish-shell" = { url = "github:FabioAntunes/base16-fish-shell"; flake = false; };
+    "fish:bass" = { url = "github:edc/bass"; flake = false; };
+    "fish:fzf.fish" = { url = "github:PatrickF1/fzf.fish"; flake = false; };
+    "fish:plugin-bang-bang" = { url = "github:oh-my-fish/plugin-bang-bang"; flake = false; };
 
     # Neovim Plugins ----------------------------------------------------------
 
@@ -65,7 +74,6 @@
     "vim:vim-startuptime" = { url = "github:dstein64/vim-startuptime"; flake = false; };
     "vim:vim-vsnip" = { url = "github:hrsh7th/vim-vsnip"; flake = false; };
     "vim:which-key.nvim" = { url = "github:folke/which-key.nvim"; flake = false; };
-
     #"vim:meta.nvim" = { url = "path:/usr/share/fb-editor-support/nvim"; flake = false; };
   };
 
@@ -83,6 +91,14 @@
               buildPhase = if hasInfix "fzf-native" name then "make" else ":";
             }))
             (filterAttrs (name: _: hasPrefix "vim:" name) inputs);
+
+          myFishPlugins = with final.lib; with attrsets; with strings; mapAttrs'
+            (name: value: nameValuePair (removePrefix "fish:" name) (final.fishPlugins.buildFishPlugin {
+              pname = removePrefix "fish:" name;
+              src = value.outPath;
+              version = value.rev;
+            }))
+            (filterAttrs (name: _: hasPrefix "fish:" name) inputs);
         }) # END final: prev:
       ]; # END overlays
     in

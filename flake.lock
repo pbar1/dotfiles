@@ -20,6 +20,86 @@
         "type": "github"
       }
     },
+    "fish:autopair.fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656950411,
+        "narHash": "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=",
+        "owner": "jorgebucaran",
+        "repo": "autopair.fish",
+        "rev": "4d1752ff5b39819ab58d7337c69220342e9de0e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jorgebucaran",
+        "repo": "autopair.fish",
+        "type": "github"
+      }
+    },
+    "fish:base16-fish-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1638317847,
+        "narHash": "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=",
+        "owner": "FabioAntunes",
+        "repo": "base16-fish-shell",
+        "rev": "d358af9a724715efd0d31b417ba56e622a239612",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FabioAntunes",
+        "repo": "base16-fish-shell",
+        "type": "github"
+      }
+    },
+    "fish:bass": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682309832,
+        "narHash": "sha256-3mFlFiqGfQ+GfNshwKfhQ39AuNMdt8Nv2Vgb7bBV7L4=",
+        "owner": "edc",
+        "repo": "bass",
+        "rev": "f3a547b0239cf8529d35c1922dd242bacf751d3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edc",
+        "repo": "bass",
+        "type": "github"
+      }
+    },
+    "fish:fzf.fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674674469,
+        "narHash": "sha256-i9FcuQdmNlJnMWQp7myF3N0tMD/2I0CaMs/PlD8o1gw=",
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
+        "rev": "63c8f8e65761295da51029c5b6c9e601571837a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
+        "type": "github"
+      }
+    },
+    "fish:plugin-bang-bang": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669582361,
+        "narHash": "sha256-35xXBWCciXl4jJrFUUN5NhnHdzk6+gAxetPxXCv4pDc=",
+        "owner": "oh-my-fish",
+        "repo": "plugin-bang-bang",
+        "rev": "816c66df34e1cb94a476fa6418d46206ef84e8d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "plugin-bang-bang",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -58,15 +138,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1682535786,
-        "narHash": "sha256-NH2a8yB8V25cglvcHDrvaTLvohzMgGLLZ4vnXQn4vOw=",
-        "owner": "nix-community",
+        "lastModified": 1682816298,
+        "narHash": "sha256-ClYeBFHLhzNqs8U2UDc/0XxJETko3X85RQn3sTpvhHk=",
+        "owner": "pbar1",
         "repo": "home-manager",
-        "rev": "d82c9af8175878a461a0fdf914e67cc446664570",
+        "rev": "c47a931e3ba341c8514edb41e10554a2c3d30b68",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "pbar1",
+        "ref": "c47a931",
         "repo": "home-manager",
         "type": "github"
       }
@@ -136,6 +217,11 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "fish:autopair.fish": "fish:autopair.fish",
+        "fish:base16-fish-shell": "fish:base16-fish-shell",
+        "fish:bass": "fish:bass",
+        "fish:fzf.fish": "fish:fzf.fish",
+        "fish:plugin-bang-bang": "fish:plugin-bang-bang",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",

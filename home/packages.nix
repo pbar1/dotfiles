@@ -11,7 +11,6 @@ in
     gnupg
     go-task
     tokei
-    sapling
 
     # Command line utils
     _1password
@@ -39,6 +38,7 @@ in
     nmap
     socat
     tor
+    chromedriver
 
     # Cloud
     terraform
@@ -82,6 +82,8 @@ in
       httpx
       python-dateutil
       pyyaml
+      beautifulsoup4
+      selenium
     ]))
     black
     isort
