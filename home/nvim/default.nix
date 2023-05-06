@@ -16,8 +16,9 @@
 
     # All plugins will be `start` and thus not need `packadd`
     plugins = with pkgs.vimPlugins; [
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
-    ] ++ pkgs.lib.attrsets.mapAttrsToList (_: value: value) pkgs.neovimPlugins;
+      # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      nvim-treesitter.withAllGrammars
+    ] ++ pkgs.lib.attrsets.mapAttrsToList (_: value: value) pkgs.myNeovimPlugins;
 
     extraPackages = with pkgs; [ gcc ];
   };

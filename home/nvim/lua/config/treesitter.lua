@@ -1,15 +1,29 @@
-local treesitter = require("nvim-treesitter.configs")
+local filetype = require("filetype")
 local repeatable_move = require("nvim-treesitter.textobjects.repeatable_move")
+local treesitter = require("nvim-treesitter.configs")
+
+filetype.setup({
+   overrides = {
+      extensions = {
+         bxl = "bzl",
+         libsonnet = "jsonnet",
+      },
+      literal = {
+         BUCK = "bzl",
+         TARGETS = "bzl",
+      },
+   },
+})
 
 treesitter.setup({
    highlight = {
-      enable = not vim.g.vscode
+      enable = not vim.g.vscode,
    },
    indent = {
-      enable = false
+      enable = false,
    },
    rainbow = {
-      enable = false
+      enable = false,
    },
    -- TODO: Remove comments that came from treesitter docs
    textobjects = {
@@ -36,9 +50,9 @@ treesitter.setup({
          -- and should return the mode ('v', 'V', or '<c-v>') or a table
          -- mapping query_strings to modes.
          selection_modes = {
-            ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V',  -- linewise
-            ['@class.outer'] = '<c-v>', -- blockwise
+            ["@parameter.outer"] = "v", -- charwise
+            ["@function.outer"] = "V", -- linewise
+            ["@class.outer"] = "<c-v>", -- blockwise
          },
          -- If you set this to `true` (default is `false`) then any textobject is
          -- extended to include preceding or succeeding whitespace. Succeeding
@@ -96,7 +110,7 @@ treesitter.setup({
          },
          goto_previous = {
             ["[d"] = "@conditional.outer",
-         }
+         },
       },
    },
    textsubjects = {
@@ -121,4 +135,3 @@ vim.keymap.set({ "n", "x", "o" }, "T", repeatable_move.builtin_T)
 
 -- Register other filetypes with supported parsers
 vim.treesitter.language.register("hcl", "tf")
-vim.treesitter.language.register("jsonnet", "libsonnet")
