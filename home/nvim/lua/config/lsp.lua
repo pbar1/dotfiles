@@ -17,6 +17,7 @@ for _, lsp in pairs({
    "bashls", -- Bash
    "buck2", -- Buck2
    "gopls", -- Go
+   "jsonnet_ls", -- Jsonnet
    "nil_ls", -- Nix
    "pyright", -- Python
 }) do
@@ -35,6 +36,13 @@ lspconfig["lua_ls"].setup({
          telemetry = { enable = false },
       },
    },
+})
+
+-- Dotnet
+lspconfig["omnisharp"].setup({
+   on_attach = on_attach,
+   capabilities = caps,
+   cmd = { "OmniSharp" },
 })
 
 -- Rust language support

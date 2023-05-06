@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: Support CLI args passthru
+
 hostname = `hostname -s`.strip
 
 task :print_hostname do
@@ -23,7 +25,10 @@ task :install_homemanager do
   sh "nix run '.#homeConfigurations.#{hostname}.activationPackage'"
 end
 
-# FIXME: Support CLI args passthru
+task :darwin do
+  sh '/run/current-system/sw/bin/darwin-rebuild switch --flake .#'
+end
+
 task :home do
   sh "home-manager switch --flake '.##{hostname}'"
 end

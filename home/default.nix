@@ -3,7 +3,6 @@
 {
   imports = [
     # ./vscode.nix
-    # ./wezterm
     # ./zsh.nix
     ./env.nix
     ./fish.nix
@@ -13,6 +12,7 @@
     ./packages.nix
     ./starship.nix
     ./tmux.nix
+    ./wezterm
   ];
 
   nixpkgs = {

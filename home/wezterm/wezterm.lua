@@ -7,8 +7,8 @@ return {
    automatically_reload_config = true,
    check_for_updates = false,
 
-   term = "wezterm",
-   default_prog = { "/run/current-system/sw/bin/fish", "--login" },
+   -- TODO: https://wezfurlong.org/wezterm/config/lua/config/term.html
+   -- term = "wezterm",
 
    font = wezterm.font("Iosevka Nerd Font Mono"),
    font_size = 14,
@@ -17,9 +17,9 @@ return {
    enable_wayland = true,
    window_background_opacity = 1.0,
    adjust_window_size_when_changing_font_size = false,
-   -- window_decorations = "NONE", -- Causes unwanted window resize when focus lost
+   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
    use_fancy_tab_bar = false,
-   hide_tab_bar_if_only_one_tab = false,
+   hide_tab_bar_if_only_one_tab = true,
 
    -- Shift mod is needed due to: https://github.com/wez/wezterm/issues/394
    leader = { key = "a", mods = "CTRL" },

@@ -40,8 +40,11 @@
     google-cloud-sdk
     fluxcd
     sops
+
+    # Jsonnet
     go-jsonnet
     jsonnet-bundler
+    jsonnet-language-server
 
     # Containers & Kubernetes
     krew
@@ -94,5 +97,6 @@
 
     # Dotnet and C#
     dotnet-sdk
+    omnisharp-roslyn
   ];
 }
