@@ -8,6 +8,20 @@
 hostname = `hostname -s`.strip
 pwd = `pwd`.strip
 
+# [Tasks] Defaults ------------------------------------------------------------
+
+task :default do
+  sh 'rake --tasks', verbose: false
+end
+
+task update: ['nix:update']
+
+task gc: ['nix:gc']
+
+task tec: ['nixos:switch_tec']
+
+task devvm: ['home:switch_devvm']
+
 # [Tasks] Utility -------------------------------------------------------------
 
 desc 'Print hostname to be used for flake evaluations'
@@ -17,12 +31,14 @@ end
 
 desc 'Format code in this project'
 task :fmt do
-  sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
   sh 'nixpkgs-fmt .'
   sh 'stylua .'
+  sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
 end
 
 # [Tasks] Nix -----------------------------------------------------------------
+
+task nix: ['nix:default']
 
 namespace :nix do
   task default: [:repl]
@@ -60,9 +76,9 @@ namespace :nix do
   end
 end
 
-task nix: ['nix:default']
-
 # [Tasks] NixOS ---------------------------------------------------------------
+
+task nixos: ['nixos:switch']
 
 namespace :nixos do
   task default: [:switch]
@@ -79,9 +95,9 @@ namespace :nixos do
   end
 end
 
-task nixos: ['nixos:switch']
-
 # [Tasks] nix-darwin ----------------------------------------------------------
+
+task darwin: ['darwin:default']
 
 namespace :darwin do
   task default: [:switch]
@@ -98,9 +114,9 @@ namespace :darwin do
   end
 end
 
-task darwin: ['darwin:default']
-
 # [Tasks] Home Manager --------------------------------------------------------
+
+task home: ['home:default']
 
 namespace :home do
   task default: [:switch]
@@ -123,17 +139,3 @@ namespace :home do
     sh 'sed -i \'s|[^#]"vim:meta.nvim"| #"vim:meta.nvim"|g\' flake.nix'
   end
 end
-
-task home: ['home:default']
-
-# [Tasks] Defaults ------------------------------------------------------------
-
-task :default do
-  sh 'rake --tasks', verbose: false
-end
-
-task update: ['nix:update']
-
-task gc: ['nix:gc']
-
-task tec: ['nixos:switch_tec']
