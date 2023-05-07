@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+image=$1
+shift
+
+shell="$(podman run --rm --entrypoint=cat "$image" /etc/shells \
+| grep -v "valid login shells" \
+| fzf)"
+
+exec podman run \
+  --rm --interactive --tty \
+  --workdir=/workdir \
+  --volume="$PWD:/workdir" \
+  --entrypoint="$shell" \
+  "$@" \
+  "$image"

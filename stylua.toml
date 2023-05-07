@@ -1,0 +1,7 @@
+# https://github.com/luarocks/lua-style-guide
+
+indent_type = "Spaces"
+indent_width = 3
+
+[sort_requires]
+enabled = true
