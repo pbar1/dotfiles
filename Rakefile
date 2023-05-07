@@ -19,6 +19,7 @@ desc 'Format code in this project'
 task :fmt do
   sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
   sh 'nixpkgs-fmt .'
+  sh 'stylua .'
 end
 
 # [Tasks] Nix -----------------------------------------------------------------
