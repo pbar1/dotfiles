@@ -51,7 +51,7 @@
   ];
 
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "no";
+  services.openssh.settings.PermitRootLogin = "no";
 
   services.k3s.enable = true;
   services.k3s.role = "server";

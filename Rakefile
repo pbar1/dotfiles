@@ -74,7 +74,7 @@ namespace :nixos do
 
   desc 'Compile and activate NixOS config (tec)'
   task :switch_tec do
-    sh "rsync --recursive --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.0.5:~/nix-config"
+    sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.0.5:~/nix-config"
     sh "ssh nixos@192.168.0.5 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
   end
 end
@@ -135,3 +135,5 @@ end
 task update: ['nix:update']
 
 task gc: ['nix:gc']
+
+task tec: ['nixos:switch_tec']

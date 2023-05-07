@@ -88,7 +88,7 @@
   services.eternal-terminal.enable = true;
   services.eternal-terminal.port = 2022;
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "no";
+  services.openssh.settings.permitRootLogin = "no";
   services.tailscale.enable = true;
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
