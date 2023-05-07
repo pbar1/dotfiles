@@ -538,7 +538,6 @@
         "vim:plenary.nvim": "vim:plenary.nvim",
         "vim:rust-tools.nvim": "vim:rust-tools.nvim",
         "vim:session-lens": "vim:session-lens",
-        "vim:spellsitter.nvim": "vim:spellsitter.nvim",
         "vim:telescope-fzf-native.nvim": "vim:telescope-fzf-native.nvim",
         "vim:telescope-ui-select.nvim": "vim:telescope-ui-select.nvim",
         "vim:telescope-zoxide": "vim:telescope-zoxide",
@@ -1111,22 +1110,6 @@
       "original": {
         "owner": "rmagatti",
         "repo": "session-lens",
-        "type": "github"
-      }
-    },
-    "vim:spellsitter.nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1662462015,
-        "narHash": "sha256-GvNrHog/A/Mo9U97uLE/tOF29h82bc4Lnvyd8NwLntQ=",
-        "owner": "lewis6991",
-        "repo": "spellsitter.nvim",
-        "rev": "4af8640d9d706447e78c13150ef7475ea2c16b30",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lewis6991",
-        "repo": "spellsitter.nvim",
         "type": "github"
       }
     },
