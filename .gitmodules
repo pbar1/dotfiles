@@ -1,3 +1,0 @@
-[submodule ".config/base16-fzf"]
-	path = .config/base16-fzf
-	url = https://github.com/pbar1/base16-fzf.git
