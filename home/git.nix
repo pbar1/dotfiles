@@ -61,6 +61,7 @@ in
       s = "status";
       update = "goto";
       view = "!$HG config paths.default | xargs open";
+      whoami = "config ui.username";
     };
   };
 }
