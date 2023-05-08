@@ -8,7 +8,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # home-manager.url = "github:nix-community/home-manager";
-    home-manager.url = "github:pbar1/home-manager/c47a931"; # TODO: Await merge
+    home-manager.url = "github:pbar1/home-manager/8491af0ebdae50bca573c11ef66b0ffb30f6bc8a"; # TODO: Await merge
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Overlays ----------------------------------------------------------------

@@ -71,19 +71,4 @@
 
   programs.bat.enable = true;
   programs.bat.config.style = "plain";
-
-  programs.sapling.enable = true;
-  programs.sapling.userName = "Pierce Bartine";
-  programs.sapling.userEmail = "piercebartine@gmail.com";
-  programs.sapling.aliases = {
-    cm = "commit";
-    d = "diff --exclude=*.lock";
-    s = "status";
-    view = "!$HG config paths.default | xargs open";
-  };
-  programs.sapling.extraConfig = {
-    pager.pager = "delta";
-    # piercebartine@gmail.com
-    gpg.key = "9C50D0763BD88153A18C7273067A906C7C92A80F";
-  };
 }
