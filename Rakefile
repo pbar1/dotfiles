@@ -36,6 +36,11 @@ task :fmt do
   sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
 end
 
+desc 'Print Neovim plugin flake inputs ordered by lastModified'
+task :nvim_plugin_dates do
+  sh './scripts/nvim_plugin_meta | sort -k 2 | column -t'
+end
+
 # [Tasks] Nix -----------------------------------------------------------------
 
 task nix: ['nix:default']

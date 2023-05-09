@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import json
+from datetime import datetime
+
+
+def main():
+    with open("metadata.json", "r") as file:
+        flake = json.load(file)
+
+    for k, v in flake["locks"]["nodes"].items():
+        if not k.startswith("vim:"):
+            continue
+
+        last_mod = int(v["locked"]["lastModified"])
+        last_mod = datetime.utcfromtimestamp(last_mod).strftime("%Y-%m-%d %H:%M:%S")
+        print(f"{k}: {last_mod}")
+
+
+if __name__ == "__main__":
+    main()
