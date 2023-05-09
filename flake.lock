@@ -509,7 +509,6 @@
         "vim:barbar.nvim": "vim:barbar.nvim",
         "vim:cmp-buffer": "vim:cmp-buffer",
         "vim:cmp-cmdline": "vim:cmp-cmdline",
-        "vim:cmp-emoji": "vim:cmp-emoji",
         "vim:cmp-nvim-lsp": "vim:cmp-nvim-lsp",
         "vim:cmp-nvim-lsp-signature-help": "vim:cmp-nvim-lsp-signature-help",
         "vim:cmp-nvim-lua": "vim:cmp-nvim-lua",
@@ -528,8 +527,8 @@
         "vim:nvim-autopairs": "vim:nvim-autopairs",
         "vim:nvim-cmp": "vim:nvim-cmp",
         "vim:nvim-colorizer.lua": "vim:nvim-colorizer.lua",
-        "vim:nvim-gps": "vim:nvim-gps",
         "vim:nvim-lspconfig": "vim:nvim-lspconfig",
+        "vim:nvim-navic": "vim:nvim-navic",
         "vim:nvim-notify": "vim:nvim-notify",
         "vim:nvim-tree.lua": "vim:nvim-tree.lua",
         "vim:nvim-treesitter-textobjects": "vim:nvim-treesitter-textobjects",
@@ -646,22 +645,6 @@
       "original": {
         "owner": "hrsh7th",
         "repo": "cmp-cmdline",
-        "type": "github"
-      }
-    },
-    "vim:cmp-emoji": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1632834658,
-        "narHash": "sha256-zc5GNkwdVHaeEoCer9tz40F2Xc8qTzPw6NbgkMjjWQI=",
-        "owner": "hrsh7th",
-        "repo": "cmp-emoji",
-        "rev": "19075c36d5820253d32e2478b6aaf3734aeaafa0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hrsh7th",
-        "repo": "cmp-emoji",
         "type": "github"
       }
     },
@@ -953,22 +936,6 @@
         "type": "github"
       }
     },
-    "vim:nvim-gps": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1656991502,
-        "narHash": "sha256-o0pgk0IyeWmb4DOqlrpsWWl//E8geSUfoT06754Fz0k=",
-        "owner": "SmiteshP",
-        "repo": "nvim-gps",
-        "rev": "f4734dff6fc2f33b5fd13412e56c4fce06650a74",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SmiteshP",
-        "repo": "nvim-gps",
-        "type": "github"
-      }
-    },
     "vim:nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -982,6 +949,22 @@
       "original": {
         "owner": "neovim",
         "repo": "nvim-lspconfig",
+        "type": "github"
+      }
+    },
+    "vim:nvim-navic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682150618,
+        "narHash": "sha256-K0FB7f9hhnDTwq9EizjcmupBBu0Twl0P0ak5C2ktmaY=",
+        "owner": "SmiteshP",
+        "repo": "nvim-navic",
+        "rev": "83dc174da915f9dbc9b51169e9b62a2e0d42b527",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SmiteshP",
+        "repo": "nvim-navic",
         "type": "github"
       }
     },

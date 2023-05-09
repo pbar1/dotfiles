@@ -36,7 +36,6 @@
     "vim:barbar.nvim" = { url = "github:romgrk/barbar.nvim"; flake = false; };
     "vim:cmp-buffer" = { url = "github:hrsh7th/cmp-buffer"; flake = false; };
     "vim:cmp-cmdline" = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
-    "vim:cmp-emoji" = { url = "github:hrsh7th/cmp-emoji"; flake = false; };
     "vim:cmp-nvim-lsp" = { url = "github:hrsh7th/cmp-nvim-lsp"; flake = false; };
     "vim:cmp-nvim-lsp-signature-help" = { url = "github:hrsh7th/cmp-nvim-lsp-signature-help"; flake = false; };
     "vim:cmp-nvim-lua" = { url = "github:hrsh7th/cmp-nvim-lua"; flake = false; };
@@ -55,8 +54,8 @@
     "vim:nvim-autopairs" = { url = "github:windwp/nvim-autopairs"; flake = false; };
     "vim:nvim-cmp" = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
     "vim:nvim-colorizer.lua" = { url = "github:norcalli/nvim-colorizer.lua"; flake = false; };
-    "vim:nvim-gps" = { url = "github:SmiteshP/nvim-gps"; flake = false; };
     "vim:nvim-lspconfig" = { url = "github:neovim/nvim-lspconfig"; flake = false; };
+    "vim:nvim-navic" = { url = "github:SmiteshP/nvim-navic"; flake = false; };
     "vim:nvim-notify" = { url = "github:rcarriga/nvim-notify"; flake = false; };
     "vim:nvim-tree.lua" = { url = "github:kyazdani42/nvim-tree.lua"; flake = false; };
     "vim:nvim-treesitter-textobjects" = { url = "github:nvim-treesitter/nvim-treesitter-textobjects"; flake = false; };

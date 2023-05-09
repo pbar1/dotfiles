@@ -1,7 +1,4 @@
-local gps = require("nvim-gps")
 local lualine = require("lualine")
-
-gps.setup()
 
 lualine.setup({
    options = {
@@ -15,7 +12,7 @@ lualine.setup({
          { "branch", icon = "" },
       },
       lualine_c = {
-         { gps.get_location, cond = gps.is_available },
+         "navic",
       },
    },
 })

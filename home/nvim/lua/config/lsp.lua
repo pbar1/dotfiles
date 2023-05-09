@@ -1,25 +1,31 @@
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspconfig = require("lspconfig")
+local navic = require("nvim-navic")
 local null_ls = require("null-ls")
 local rust_tools = require("rust-tools")
 
 -- Enable LSP completion
 local caps = cmp_nvim_lsp.default_capabilities()
 
--- Disable LSP formatting in favor of null-ls
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
+   -- Disable LSP formatting in favor of null-ls
    client.server_capabilities.document_formatting = false
    client.server_capabilities.document_range_formatting = false
+
+   -- Enable nvim-navic
+   if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+   end
 end
 
 -- LSP servers that need only minimal config
 for _, lsp in pairs({
-   "bashls", -- Bash
-   "buck2", -- Buck2
-   "gopls", -- Go
+   "bashls",     -- Bash
+   "buck2",      -- Buck2
+   "gopls",      -- Go
    "jsonnet_ls", -- Jsonnet
-   "nil_ls", -- Nix
-   "pyright", -- Python
+   "nil_ls",     -- Nix
+   "pyright",    -- Python
 }) do
    lspconfig[lsp].setup({ on_attach = on_attach, capabilities = caps })
 end
