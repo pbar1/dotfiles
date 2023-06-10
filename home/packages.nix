@@ -77,10 +77,11 @@
 
     # Python
     (python3.withPackages (ps: with ps; [
+      beautifulsoup4
       httpx
+      pandas
       python-dateutil
       pyyaml
-      beautifulsoup4
       selenium
     ]))
     black

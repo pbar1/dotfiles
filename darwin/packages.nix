@@ -30,6 +30,7 @@
       "quicksilver"
 
       # personal
+      "android-file-transfer"
       "brave-browser"
       "discord"
       "docker"
@@ -42,6 +43,7 @@
       "tailscale"
       "transmission"
       "visual-studio-code"
+      "vlc"
     ];
   };
 }
