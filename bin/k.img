@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-(
-  echo 'NAMESPACE NAME CONTAINER IMAGE'
-  kubectl get pod --output=go-template='{{range $pod := .items}}{{range .spec.containers}}{{printf "%s %s %s %s\n" $pod.metadata.namespace $pod.metadata.name .name .image}}{{end}}{{end}}' $@
-) | column -t

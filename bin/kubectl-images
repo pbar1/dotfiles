@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import subprocess
+
+
+def main():
+    parser = argparse.ArgumentParser("kubectl-images")
+    parser.add_argument("--namespace")
+    parser.add_argument("--all-namespaces")
+    parser.add_argument("--init")
+    args = parser.parse_args()
+
+    result = subprocess.run(
+        ["kubectl", "get", "pod", "--output=json"], stdout=subprocess.PIPE, text=True
+    )
+    pods = json.loads(result.stdout)
+
+    ctrs = []
+    for pod in pods["items"]:
+        for ctr in pod["status"]["containerStatuses"]:
+            ctrs.append(
+                {
+                    "pod": pod["metadata"]["name"],
+                    "container": ctr["name"],
+                    "image": ctr["image"],
+                }
+            )
+
+    input = "POD CONTAINER IMAGE\n"
+    for c in ctrs:
+        input += f"{c['pod']} {c['container']} {c['image']}\n"
+    subprocess.run(["column", "-t"], input=input, text=True)
+
+
+if __name__ == "__main__":
+    main()
