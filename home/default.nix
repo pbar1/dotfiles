@@ -26,9 +26,20 @@
   # Zsh is disabled, but on macOS it is the default shell. Instead of changing
   # shells, we move into Fish.
   home.file.".zshrc".text = lib.mkIf pkgs.stdenv.isDarwin ''
-    if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]
-    then
-        exec fish
+    # macOS updates clear /etc/zshrc back to Apple defaults; this segment was
+    # taken from the file and should be loaded in some other way, maybe from
+    # ~/.zshrc
+    #
+    # Nix
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
+    # End Nix
+
+    # Non-POSIX-compliant shells should not be set as user default shell. As a
+    # workaround, move into the desired shell from the default shell here
+    if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]; then
+        (( $+commands[fish] )) && exec fish
     fi
   '';
 
