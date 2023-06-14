@@ -13,7 +13,7 @@ return {
    term = "wezterm",
 
    font = wezterm.font("Iosevka Nerd Font Mono"),
-   font_size = 14,
+   font_size = 16,
    warn_about_missing_glyphs = false,
    default_cursor_style = "BlinkingBlock",
 

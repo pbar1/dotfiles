@@ -20,19 +20,14 @@ cmp.setup({
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
-      -- If nothing explicitly selected, add newline, else select it
-      -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr
-      ["<CR>"] = cmp.mapping({
-         i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-               cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-            else
-               fallback()
-            end
-         end,
-         s = cmp.mapping.confirm({ select = true }),
-         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-      }),
+      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      ["<ESC>"] = cmp.mapping(function(fallback)
+         if cmp.visible() then
+            cmp.abort()
+         else
+            fallback()
+         end
+      end, { "i", "c" }),
    }),
    sources = cmp.config.sources({
       { name = "nvim_lsp" },
@@ -45,6 +40,7 @@ cmp.setup({
    formatting = {
       format = lspkind.cmp_format(),
    },
+   preselect = cmp.PreselectMode.None,
 })
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
