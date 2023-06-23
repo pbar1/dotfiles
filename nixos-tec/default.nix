@@ -67,8 +67,15 @@
   # https://devopstales.github.io/kubernetes/k3s-crio/
   virtualisation.cri-o.enable = true;
   virtualisation.cri-o.extraPackages = with pkgs; [
+    criu
     gvisor
   ];
+  virtualisation.cri-o.settings = {
+    crio.runtime.enable_criu_support = true;
+    crio.runtime.runtimes.runsc = {
+      runtime_path = "${pkgs.gvisor}/bin/runsc";
+    };
+  };
 
   programs.criu.enable = true;
 
