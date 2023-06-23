@@ -17,6 +17,7 @@
     gnused
     hyperfine
     jq
+    dyff
     less
     openssl
     procs
@@ -40,6 +41,8 @@
     google-cloud-sdk
     fluxcd
     sops
+    pulumi-bin
+    crd2pulumi
 
     # Jsonnet
     go-jsonnet
@@ -95,6 +98,7 @@
 
     # JavaScript
     nodejs
+    yarn
 
     # Dotnet and C#
     dotnet-sdk

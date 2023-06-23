@@ -26,6 +26,7 @@
       cb = "cargo build";
       cr = "cargo run";
       ct = "cargo test";
+      dyf = "dyff between -b";
       e = "$EDITOR";
       fdh = "fd --no-hidden --no-ignore";
       g = "git";
