@@ -31,7 +31,7 @@
   system.defaults.dock.autohide = true;
   system.defaults.dock.autohide-time-modifier = 0.0;
   system.defaults.dock.autohide-delay = 0.0;
-  system.defaults.dock.orientation = "left";
+  system.defaults.dock.orientation = "bottom";
 
   # Falls back to default if directory doesn't exist
   system.defaults.screencapture.location = "~/Pictures/Screenshots";
