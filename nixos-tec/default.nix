@@ -58,7 +58,19 @@
   services.k3s.extraFlags = toString [
     "--secrets-encryption"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
+    "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
+    "--kubelet-arg cgroup-driver=systemd" # for CRI-O
   ];
+
+  # TODO: Verify if not setting CNI config works for now
+  # TODO: Ran `sudo mkdir /var/lib/crio` to allow for clean shutdown
+  # https://devopstales.github.io/kubernetes/k3s-crio/
+  virtualisation.cri-o.enable = true;
+  virtualisation.cri-o.extraPackages = with pkgs; [
+    gvisor
+  ];
+
+  programs.criu.enable = true;
 
   system.stateVersion = "22.05";
 }
