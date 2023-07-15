@@ -22,11 +22,11 @@
       "1password"
       "amethyst"
       "bartender"
-      "clipy"
       "font-iosevka-nerd-font"
       "iterm2"
       "keepingyouawake"
       "logi-options-plus"
+      "maccy"
       "quicksilver"
 
       # personal
@@ -38,6 +38,7 @@
       "keka"
       "kekaexternalhelper"
       "qlmarkdown"
+      "slack"
       "spotify"
       "syntax-highlight"
       "tailscale"
