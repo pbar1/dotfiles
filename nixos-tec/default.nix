@@ -71,9 +71,11 @@
     gvisor
   ];
   virtualisation.cri-o.settings = {
+    crio.log_level = "debug";
     crio.runtime.enable_criu_support = true;
     crio.runtime.runtimes.runsc = {
       runtime_path = "${pkgs.gvisor}/bin/runsc";
+      runtime_root = "/run/runsc";
     };
   };
 
