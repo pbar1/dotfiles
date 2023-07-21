@@ -43,8 +43,10 @@
   security.apparmor.enable = true;
 
   environment.systemPackages = with pkgs; [
+    bpftrace
+    btop
     fd
-    htop
+    jq
     ripgrep
     vim
     wget
@@ -53,12 +55,18 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
 
+  services.below.enable = true;
+
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
-    "--secrets-encryption"
-    "--default-local-storage-path=/zssd/general/local-path-provisioner"
+    "--cluster-cidr=10.42.0.0/16,2001:cafe:42:0::/56"
+    "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
     "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
+    "--default-local-storage-path=/zssd/general/local-path-provisioner"
+    "--disable=traefik"
+    "--disable=metrics-server"
+    "--secrets-encryption"
     "--kubelet-arg cgroup-driver=systemd" # for CRI-O
   ];
 
