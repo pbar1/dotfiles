@@ -64,8 +64,12 @@
     "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
     "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
-    "--disable=traefik"
+    "--disable-kube-proxy"
+    "--disable-network-policy"
     "--disable=metrics-server"
+    "--disable=servicelb"
+    "--disable=traefik"
+    "--flannel-backend=none"
     "--secrets-encryption"
     "--kubelet-arg cgroup-driver=systemd" # for CRI-O
   ];
