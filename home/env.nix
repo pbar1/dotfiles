@@ -22,17 +22,13 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
-    /* TERMINFO = "${dataHome}/terminfo"; */
-    /* TERMINFO_DIRS = "${dataHome}/terminfo:/usr/share/terminfo"; */
+    BAT_THEME = "base16"; # Used by Bat and Delta
     SSH_AGENT_PID = "";
-    LESS = "--mouse --use-color --RAW-CONTROL-CHARS --quit-if-one-screen";
+    LESS = "--quit-if-one-screen"; # --mouse breaks iTerm mouse select
     LESSKEY = "${configHome}/less/lesskey";
     LESSHISTFILE = "${cacheHome}/less/history";
     XZ_DEFAULTS = "--verbose --keep --threads=0";
     ZSTD_NBTHREADS = "0";
-    KDEHOME = "${configHome}/kde";
-    GTK_RC_FILES = "${configHome}/gtk-1.0/gtkrc";
-    GTK2_RC_FILES = "${configHome}/gtk-2.0/gtkrc";
     GOPATH = "${dataHome}/go";
     RUSTUP_HOME = "${dataHome}/rustup";
     CARGO_HOME = "${dataHome}/cargo";
@@ -43,16 +39,10 @@ in
     GEM_SPEC_CACHE = "${cacheHome}/gem";
     NODE_REPL_HISTORY = "${dataHome}/node_repl_history";
     NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
-    NVM_DIR = "${dataHome}/nvm";
-    DENO_INSTALL_ROOT = "${dataHome}/deno";
     PSQLRC = "${configHome}/pg/psqlrc";
     PSQL_HISTORY = "${cacheHome}/pg/psql_history";
     PGPASSFILE = "${configHome}/pg/pgpass";
     PGSERVICEFILE = "${configHome}/pg/pg_service.conf";
-    # DOCKER_CONFIG = "${configHome}/docker";
-    # MACHINE_STORAGE_PATH = "${dataHome}/docker-machine";
-    K9SCONFIG = "${configHome}/k9s";
-    DCOS_DIR = "${configHome}/dcos";
     TF_CLI_CONFIG_FILE = "${configHome}/terraform/terraformrc";
     VAULT_CONFIG_PATH = "${configHome}/vault/config";
     VAGRANT_HOME = "${dataHome}/vagrant";
@@ -62,10 +52,6 @@ in
     AWS_VAULT_KEYCHAIN_NAME = "login";
     GOOGLE_APPLICATION_CREDENTIALS = "${configHome}/gcp/credentials.json";
     CODEPATH = "${config.home.homeDirectory}/code";
-
-    # TODO: Await fix: https://github.com/NixOS/nixpkgs/issues/148946
-    # VSCODE_LLDB_PATH = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb";
-    # VSCODE_LLDB_PATH = "${config.home.homeDirectory}/.vscode/extensions/vadimcn.vscode-lldb-1.7.0";
   };
 
   xdg.configFile."npm/npmrc".text = ''

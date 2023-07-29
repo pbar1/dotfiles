@@ -9,7 +9,6 @@
   e = "$EDITOR";
   fdh = "fd --no-hidden --no-ignore";
   g = "git";
-  # gd = "git diff -- ':!*.lock'";
   gs = "git status --short";
   hg = "sl"; # FIXME: Not if work machine
   ij = "idea";

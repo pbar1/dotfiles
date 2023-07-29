@@ -20,7 +20,6 @@ in
       push.followTags = true;
     };
 
-    # TODO: https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
     delta.enable = true;
     delta.options.side-by-side = true;
 

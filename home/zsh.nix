@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
 let
+  shellAliases = import ./shell/aliases.nix { inherit pkgs; };
+
   shellAbbrs = import ./shell/abbrs.nix;
   shellAbbrsInit = lib.concatStringsSep "\n"
     (lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs);
@@ -8,11 +10,15 @@ in
 {
   programs.zsh = {
     enable = true;
+
+    inherit shellAliases;
+
     dotDir = ".config/zsh";
     enableVteIntegration = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
 
+    # Flake inputs with prefix "zsh:" automatically end up here via overlay
     plugins = pkgs.lib.attrsets.mapAttrsToList
       (name: value: {
         inherit name;
