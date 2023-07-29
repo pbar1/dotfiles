@@ -13,6 +13,7 @@
     # Zsh Plugins -------------------------------------------------------------
 
     "zsh:zsh-abbr" = { url = "github:olets/zsh-abbr"; flake = false; };
+    "zsh:zsh-autopair" = { url = "github:hlissner/zsh-autopair"; flake = false; };
 
     # Fish Plugins ------------------------------------------------------------
 
