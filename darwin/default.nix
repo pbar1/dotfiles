@@ -14,6 +14,8 @@
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    extra-nix-path = nixpkgs=flake:nixpkgs
+    bash-prompt-prefix = (nix:$name)\040
   '';
   nix.settings.substituters = [
     "https://nix-community.cachix.org"
