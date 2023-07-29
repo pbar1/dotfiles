@@ -22,6 +22,10 @@
     config.allowUnfreePredicate = (pkg: true);
   };
 
+  # Fish shell enables this for `man` completion to work, but it is very slow
+  # https://github.com/NixOS/nixpkgs/issues/100288
+  programs.man.generateCaches = lib.mkForce false;
+
   # TODO: Include Nix sourcing here if needed in the future (ie, macOS upgrade)
   # Zsh is disabled, but on macOS it is the default shell. Instead of changing
   # shells, we move into Fish.
