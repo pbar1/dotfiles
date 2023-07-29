@@ -45,23 +45,23 @@ in
     ];
   };
 
-  programs.sapling = {
-    enable = true;
-    inherit userName;
-    inherit userEmail;
+  # programs.sapling = {
+  #   enable = true;
+  #   inherit userName;
+  #   inherit userEmail;
 
-    extraConfig = {
-      pager.pager = "delta";
-      gpg.key = "9C50D0763BD88153A18C7273067A906C7C92A80F"; # piercebartine@gmail.com
-    };
+  #   extraConfig = {
+  #     pager.pager = "delta";
+  #     gpg.key = "9C50D0763BD88153A18C7273067A906C7C92A80F"; # piercebartine@gmail.com
+  #   };
 
-    aliases = {
-      cm = "commit";
-      d = "diff --exclude=*.lock";
-      s = "status";
-      update = "goto";
-      view = "!$HG config paths.default | xargs open";
-      whoami = "config ui.username";
-    };
-  };
+  #   aliases = {
+  #     cm = "commit";
+  #     d = "diff --exclude=*.lock";
+  #     s = "status";
+  #     update = "goto";
+  #     view = "!$HG config paths.default | xargs open";
+  #     whoami = "config ui.username";
+  #   };
+  # };
 }

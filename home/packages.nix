@@ -7,6 +7,7 @@
     gnupg
     go-task
     tokei
+    sapling # TODO: Use module
 
     # Command line utils
     _1password
@@ -43,6 +44,7 @@
     sops
     pulumi-bin
     crd2pulumi
+    cilium-cli
 
     # Jsonnet
     go-jsonnet
@@ -70,7 +72,6 @@
     shfmt
 
     # Rust
-    rust-analyzer
     rustup
 
     # Go
