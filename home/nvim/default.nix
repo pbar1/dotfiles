@@ -1,15 +1,17 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = false;
     withRuby = false;
     withPython3 = false;
+
+    # Use Neovim nightly build from overlay
+    # package = pkgs.neovim-nightly;
 
     # Simulate using an init.lua
     extraConfig = "lua << EOF\n${builtins.readFile ./init.lua}\nEOF\n";

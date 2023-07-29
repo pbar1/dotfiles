@@ -2,19 +2,13 @@
   description = "Configuration for NixOS, macOS, and Home Manager";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    darwin.url = "github:LnL7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    # home-manager.url = "github:nix-community/home-manager";
-    home-manager.url = "github:pbar1/home-manager/8491af0ebdae50bca573c11ef66b0ffb30f6bc8a"; # TODO: Await merge
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
+    darwin = { url = "github:LnL7/nix-darwin"; inputs.nixpkgs.follows = "nixpkgs"; };
+    home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Overlays ----------------------------------------------------------------
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    # neovim-nightly-overlay = { url = "github:nix-community/neovim-nightly-overlay"; inputs.nixpkgs.follows = "nixpkgs"; };
 
     # Zsh Plugins -------------------------------------------------------------
 
@@ -82,7 +76,7 @@
   outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
       overlays = [
-        inputs.neovim-nightly-overlay.overlay
+        # inputs.neovim-nightly-overlay.overlay
         (final: prev: {
           myNeovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
