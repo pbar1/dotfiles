@@ -6,7 +6,6 @@ let
     (lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs);
 in
 {
-  # FIXME: GPG
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
