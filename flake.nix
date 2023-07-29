@@ -78,6 +78,13 @@
       overlays = [
         # inputs.neovim-nightly-overlay.overlay
         (final: prev: {
+          myZshPlugins = with final.lib; with attrsets; with strings; mapAttrs'
+            (name: value: nameValuePair (removePrefix "zsh:" name) {
+              name = removePrefix "zsh:" name;
+              src = value.outPath;
+            })
+            (filterAttrs (name: _: hasPrefix "zsh:" name) inputs);
+
           myNeovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
               name = removePrefix "vim:" name;

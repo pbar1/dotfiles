@@ -33,7 +33,7 @@ desc 'Format code in this project'
 task :fmt do
   sh 'nixpkgs-fmt .'
   sh 'stylua .'
-  sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
+  # sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
 end
 
 desc 'Print Neovim plugin flake inputs ordered by lastModified'
