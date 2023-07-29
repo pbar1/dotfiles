@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  shellAbbrs = (import ./shell/abbrs.nix);
+  shellAbbrs = import ./shell/abbrs.nix;
   shellAbbrsInit = lib.concatStringsSep "\n"
     (lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs);
 in
@@ -9,10 +9,10 @@ in
   # FIXME: GPG
   programs.zsh = {
     enable = true;
-    history.size = 10000000;
-
-    # Relative to home directory
     dotDir = ".config/zsh";
+    enableVteIntegration = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
 
     plugins = pkgs.lib.attrsets.mapAttrsToList
       (name: value: {

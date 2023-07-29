@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     pinentry_mac
-    wezterm
   ];
 
   homebrew = {
@@ -14,6 +13,7 @@
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
+      "homebrew/cask-versions"
       "homebrew/core"
     ];
 
@@ -23,7 +23,7 @@
       "amethyst"
       "bartender"
       "font-iosevka-nerd-font"
-      "iterm2"
+      "iterm2-beta"
       "keepingyouawake"
       "logi-options-plus"
       "maccy"
@@ -45,7 +45,6 @@
       "tailscale"
       "transmission"
       "vagrant"
-      "virtualbox"
       "visual-studio-code"
       "vlc"
     ];
