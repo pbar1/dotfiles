@@ -57,6 +57,7 @@
 
   services.below.enable = true;
 
+  # FIXME: After installing Cilium, always get 10.85 IPs...
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
@@ -64,14 +65,15 @@
     "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
     "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
-    "--disable-kube-proxy"
-    "--disable-network-policy"
-    "--disable=metrics-server"
-    "--disable=servicelb"
-    "--disable=traefik"
-    "--flannel-backend=none"
+    # "--disable=metrics-server"
     "--secrets-encryption"
     "--kubelet-arg cgroup-driver=systemd" # for CRI-O
+    # TODO: For using Cilium in the future
+    # "--flannel-backend=none"
+    # "--disable-network-policy"
+    # "--disable-kube-proxy"
+    # "--disable=servicelb"
+    # "--disable=traefik"
   ];
 
   # TODO: Verify if not setting CNI config works for now
