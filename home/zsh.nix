@@ -41,6 +41,9 @@ in
       # if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]; then
       #     (( $+commands[fish] )) && exec fish
       # fi
+
+      export GPG_TTY="$(tty)"
+      export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
     '';
 
     initExtra = ''

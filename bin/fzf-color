@@ -6,7 +6,6 @@
 set -euo pipefail
 
 OS="$(uname)"
-SCRIPT_NAME="$0"
 
 if [[ "$OS" == "Darwin" ]]; then
   MODE="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo dark || echo light)"
