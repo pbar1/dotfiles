@@ -18,9 +18,9 @@
   networking.hostName = "tec";
   networking.hostId = "e7e35d28"; # via `head -c 8 /etc/machine-id`
   networking.firewall.allowedTCPPorts = [
-    6443 # Kubernetes API
+    6443 # Kubernetes - API
     8080 # Unifi Controller - device command/control
-    10250 # Kubernetes Metrics Server
+    10250 # Kubernetes - Metrics Server
     32400 # Plex
   ];
   networking.firewall.allowedUDPPorts = [
@@ -55,6 +55,12 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
 
+  services.eternal-terminal.enable = true;
+
+  programs.tmux.enable = true;
+  programs.tmux.shortcut = "a";
+
+
   services.below.enable = true;
 
   # FIXME: After installing Cilium, always get 10.85 IPs...
@@ -65,7 +71,6 @@
     "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
     "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
-    # "--disable=metrics-server"
     "--secrets-encryption"
     "--kubelet-arg cgroup-driver=systemd" # for CRI-O
     # TODO: For using Cilium in the future
@@ -73,7 +78,7 @@
     # "--disable-network-policy"
     # "--disable-kube-proxy"
     # "--disable=servicelb"
-    # "--disable=traefik"
+    "--disable=traefik"
   ];
 
   # TODO: Verify if not setting CNI config works for now
