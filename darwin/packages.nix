@@ -38,6 +38,7 @@
       "keka"
       "kekaexternalhelper"
       "little-snitch"
+      "minecraft"
       "qlmarkdown"
       "slack"
       "spotify"
@@ -47,6 +48,7 @@
       "vagrant"
       "visual-studio-code"
       "vlc"
+      "wireshark"
     ];
   };
 }
