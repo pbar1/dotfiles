@@ -10,6 +10,7 @@ in
   xdg.enable = true;
 
   home.sessionPath = [
+    "${home}/code/nix-config/bin"
     "${home}/.local/bin"
     "${home}/.krew/bin"
     "${dataHome}/cargo/bin"
