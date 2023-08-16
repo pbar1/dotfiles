@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   nix.settings.substituters = [
     "https://nix-community.cachix.org"
@@ -27,7 +29,6 @@
     3478 # Unifi Controller - STUN
     10001 # Unifi Controller - device discovery
   ];
-
 
   time.timeZone = "America/Los_Angeles";
 
@@ -63,36 +64,17 @@
 
   services.below.enable = true;
 
-  services.k3s.enable = false;
+  services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
+    # Enable dual stack networking by passing both IPv4 and IPv6 ranges
+    # https://docs.k3s.io/installation/network-options#dual-stack-ipv4--ipv6-networking
     "--cluster-cidr=10.42.0.0/16,2001:cafe:42:0::/56"
     "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
-    "--container-runtime-endpoint=unix:///var/run/crio/crio.sock"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
     "--secrets-encryption"
-    "--kubelet-arg cgroup-driver=systemd" # for CRI-O
-    "--flannel-backend=none" # for Calico CNI
-    "--disable-network-policy" # for Calico CNI
     "--disable=traefik"
   ];
-
-  # TODO: Ran `sudo mkdir /var/lib/crio` to allow for clean shutdown
-  # https://devopstales.github.io/kubernetes/k3s-crio/
-  virtualisation.cri-o.enable = false;
-  virtualisation.cri-o.extraPackages = with pkgs; [
-    criu
-    gvisor
-  ];
-  virtualisation.cri-o.settings = {
-    crio.log_level = "debug";
-    crio.runtime.enable_criu_support = true;
-    crio.runtime.runtimes.runsc = {
-      runtime_path = "${pkgs.gvisor}/bin/runsc";
-      runtime_root = "/run/runsc";
-    };
-    crio.network.plugin_dirs = [ "/opt/cni/bin" ];
-  };
 
   programs.criu.enable = true;
 
