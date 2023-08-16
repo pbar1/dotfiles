@@ -39,6 +39,7 @@
       "kekaexternalhelper"
       "little-snitch"
       "minecraft"
+      "obsidian"
       "qlmarkdown"
       "slack"
       "spotify"
