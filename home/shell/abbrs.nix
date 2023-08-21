@@ -21,7 +21,7 @@
   kgn = "kubectl get namespaces --show-labels";
   kgno = "kubectl get nodes --label-columns=beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
   kgp = "kubectl get pods";
-  kn = "kubens";
+  kns = "kubens";
   kubeconfig = "kubectl config view --minify --flatten";
   kx = "kubectx";
   lt = "exa --tree";

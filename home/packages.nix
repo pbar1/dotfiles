@@ -40,11 +40,8 @@
     # Cloud
     terraform
     google-cloud-sdk
-    fluxcd
-    sops
     pulumi-bin
     crd2pulumi
-    cilium-cli
 
     # Jsonnet
     go-jsonnet
@@ -52,6 +49,8 @@
     jsonnet-language-server
 
     # Containers & Kubernetes
+    fluxcd
+    kn
     krew
     kubectl
     kubectx
