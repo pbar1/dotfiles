@@ -62,8 +62,6 @@
   programs.tmux.enable = true;
   programs.tmux.shortcut = "a";
 
-  services.below.enable = true;
-
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
