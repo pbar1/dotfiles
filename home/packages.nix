@@ -56,6 +56,7 @@
     kubectx
     kubernetes-helm
     stern
+    nodePackages.cdk8s-cli
 
     # WebAssembly
     wasmer
