@@ -8,6 +8,7 @@
     go-task
     tokei
     sapling # TODO: Use module
+    buck2
 
     # Command line utils
     _1password
@@ -42,6 +43,7 @@
     google-cloud-sdk
     pulumi-bin
     crd2pulumi
+    nodePackages.cdktf-cli
 
     # Jsonnet
     go-jsonnet
