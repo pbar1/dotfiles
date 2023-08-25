@@ -8,7 +8,6 @@
     go-task
     tokei
     sapling # TODO: Use module
-    buck2
 
     # Command line utils
     _1password
