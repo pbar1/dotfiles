@@ -3,3 +3,4 @@ result/
 nvim-config/
 **/startuptime.log
 .luarc.json
+.ssh/
