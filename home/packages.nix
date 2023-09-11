@@ -12,7 +12,7 @@
     # Command line utils
     _1password
     coreutils
-    exa
+    eza
     fd
     file
     gnused
@@ -37,12 +37,15 @@
     tor
     chromedriver
 
+    # Database
+    duckdb
+    sqlite
+
     # Cloud
     terraform
     google-cloud-sdk
     pulumi-bin
     crd2pulumi
-    nodePackages.cdktf-cli
 
     # Jsonnet
     go-jsonnet
@@ -57,7 +60,6 @@
     kubectx
     kubernetes-helm
     stern
-    nodePackages.cdk8s-cli
 
     # WebAssembly
     wasmer
@@ -100,7 +102,8 @@
 
     # JavaScript
     nodejs
-    yarn
+    yarn-berry
+    bun
 
     # Dotnet and C#
     dotnet-sdk

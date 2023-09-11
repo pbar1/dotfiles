@@ -22,7 +22,7 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
+    # MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
     BAT_THEME = "base16"; # Used by Bat and Delta
     SSH_AGENT_PID = "";
     LESS = "--quit-if-one-screen"; # --mouse breaks iTerm mouse select

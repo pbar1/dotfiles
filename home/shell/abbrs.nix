@@ -22,9 +22,10 @@
   kgno = "kubectl get nodes --label-columns=beta.kubernetes.io/instance-type,failure-domain.beta.kubernetes.io/zone";
   kgp = "kubectl get pods";
   kns = "kubens";
+  ktp = "kubectl top pod --sort-by=cpu";
   kubeconfig = "kubectl config view --minify --flatten";
   kx = "kubectx";
-  lt = "exa --tree";
+  lt = "eza --tree";
   nv = "nvim";
   rgf = "rg --fixed-strings";
   rgi = "rg --ignore-case";
