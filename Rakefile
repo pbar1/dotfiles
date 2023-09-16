@@ -22,6 +22,8 @@ task tec: ['nixos:switch_tec']
 
 task devvm: ['home:switch_devvm']
 
+task kubeconfig: ['nixos:kubeconfig_tec']
+
 # [Tasks] Utility -------------------------------------------------------------
 
 desc 'Print hostname to be used for flake evaluations'
@@ -97,6 +99,11 @@ namespace :nixos do
   task :switch_tec do
     sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.0.5:~/nix-config"
     sh "ssh nixos@192.168.0.5 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
+  end
+
+  desc 'Fetch kubeconfig (tec)'
+  task :kubeconfig_tec do
+    sh 'ssh tec sudo k3s kubectl config view --flatten --minify | sed "s|127.0.0.1|192.168.0.5|g" > ~/.kube/config'
   end
 end
 
