@@ -7,13 +7,24 @@ import subprocess
 
 def main():
     parser = argparse.ArgumentParser("kubectl-images")
-    parser.add_argument("--namespace")
-    parser.add_argument("--all-namespaces")
-    parser.add_argument("--init")
+    parser.add_argument(
+        "-n", "--namespace", help="If present, the namespace scope for this CLI request"
+    )
+    parser.add_argument(
+        "-A",
+        "--all-namespaces",
+        action="store_true",
+        help="If present, list the requested object(s) across all namespaces",
+    )
     args = parser.parse_args()
 
+    all_namespaces = (
+        "--all-namespaces=true" if args.all_namespaces else "--all-namespaces=false"
+    )
     result = subprocess.run(
-        ["kubectl", "get", "pod", "--output=json"], stdout=subprocess.PIPE, text=True
+        ["kubectl", "get", "pod", "--output=json", all_namespaces],
+        stdout=subprocess.PIPE,
+        text=True,
     )
     pods = json.loads(result.stdout)
 
@@ -22,6 +33,7 @@ def main():
         for ctr in pod["status"]["containerStatuses"]:
             ctrs.append(
                 {
+                    "namespace": pod["metadata"]["namespace"],
                     "pod": pod["metadata"]["name"],
                     "container": ctr["name"],
                     "image": ctr["image"],
