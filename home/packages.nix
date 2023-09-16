@@ -76,6 +76,7 @@
 
     # Rust
     rustup
+    diesel-cli
 
     # Go
     go
