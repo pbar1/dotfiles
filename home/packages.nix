@@ -97,6 +97,10 @@
     nodePackages.pyright
     # poetry
 
+    # Ruby
+    # ruby
+    rufo
+
     # Lua
     stylua
     sumneko-lua-language-server
