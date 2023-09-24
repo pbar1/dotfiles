@@ -52,6 +52,7 @@
     bpftrace
     btop
     fd
+    ffmpeg
     jq
     ripgrep
     vim
