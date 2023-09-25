@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'base64'
+require 'json'
+
+secret = `kubectl get secret -o name | fzf --preview='kubectl describe {}'`.strip
+secret_key = `kubectl get #{secret} -o json | jq -r '.data | keys[]' | fzf`.strip
+secret_val = JSON.load(`kubectl get #{secret} -o json`)["data"][secret_key]
+
+puts Base64.decode64(secret_val)

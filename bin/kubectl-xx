@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+pod = `kubectl get pod -o name | fzf --preview='kubectl describe {}' --preview-window=70%`.strip
+container = `kubectl get #{pod} -o json | jq -r '.spec.containers[].name' | fzf`.strip
+shell = `kubectl exec #{pod} --container=#{container} -- cat /etc/shells | grep -v '^#' | fzf`.strip
+
+exec "kubectl exec #{pod} --container=#{container} --stdin --tty -- #{shell}"
