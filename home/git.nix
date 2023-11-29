@@ -3,18 +3,23 @@
 let
   userName = "Pierce Bartine";
   userEmail = "piercebartine@gmail.com";
+
+  credentialHelper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
+  sshSignProgram = if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else "";
 in
 {
   programs.git = {
     enable = true;
     inherit userName;
     inherit userEmail;
-    signing.key = null; # GPG picks key based on email if not set
+    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDim41ofReCgbmijkayBsFg5TlO9qqV8b6Y8Xcwnr49m";
     signing.signByDefault = true;
 
     extraConfig = {
       branch.autoSetupMerge = "always";
-      credential.helper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
+      credential.helper = credentialHelper;
+      gpg.format = "ssh";
+      gpg.ssh.program = sshSignProgram;
       pull.rebase = false;
       push.default = "current";
       push.followTags = true;
@@ -36,6 +41,12 @@ in
       head-branch = "!git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'";
       upstream-auto = "!git remote set-head origin --auto";
       whoami = "config --get-regexp '^user\.'";
+
+      # Mercurial/Sapling emulation
+      ci = "commit";
+      d = "diff";
+      shelve = "stash";
+      st = "status --short";
     };
 
     ignores = [
