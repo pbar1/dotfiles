@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require "json"
+require "optparse"
+
+options = { all_namespaces: false }
+OptionParser.new do |opts|
+  opts.on("-A", "--all-namespaces", "If present, list the requested object(s) across all namespaces") do |x|
+    options[:all_namespaces] = x
+  end
+end.parse!
+
+pods = JSON.load(`kubectl get pod --output=json --all-namespaces=#{options[:all_namespaces]}`)
+
+containers = []
+pods["items"].each do |pod|
+  pod["spec"]["containers"].each do |container|
+    containers << {
+      "pod" => pod["metadata"]["name"],
+      "container" => container["name"],
+    }
+  end if pod["spec"].key?("containers")
+end
+
+puts JSON.generate(containers)

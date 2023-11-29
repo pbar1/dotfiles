@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    pinentry_mac
-  ];
+  # environment.systemPackages = with pkgs; [ ];
 
   homebrew = {
     enable = true;
@@ -20,6 +18,7 @@
     casks = [
       # core
       "1password"
+      "alfred"
       "amethyst"
       "bartender"
       "font-iosevka-nerd-font"
@@ -27,7 +26,6 @@
       "keepingyouawake"
       "logi-options-plus"
       "maccy"
-      "quicksilver"
 
       # personal
       "android-file-transfer"
@@ -40,6 +38,7 @@
       "little-snitch"
       "minecraft"
       "obsidian"
+      "pinentry-mac"
       "qlmarkdown"
       "slack"
       "spotify"
