@@ -61,12 +61,8 @@
   programs.fish.enable = false;
   programs.zsh.enable = false;
 
-  # FIXME: Touch ~/.hushlogin to disable last login time
-
-  # Enable GPG agent and have it emulate SSH agent
-  programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.enableSSHSupport = true;
-
   # TouchID for sudo
   security.pam.enableSudoTouchIdAuth = true;
+
+  # FIXME: Touch ~/.hushlogin to disable last login time
 }

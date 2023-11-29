@@ -38,7 +38,6 @@
       "little-snitch"
       "minecraft"
       "obsidian"
-      "pinentry-mac"
       "qlmarkdown"
       "slack"
       "spotify"

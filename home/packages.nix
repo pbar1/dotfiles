@@ -8,8 +8,6 @@
     go-task
     tokei
     sapling # TODO: Use module
-    protobuf
-    autoconf
 
     # Command line utils
     _1password

@@ -22,9 +22,6 @@ in
     interactiveShellInit = ''
       set fish_greeting
       fish_vi_key_bindings
-
-      set -gx GPG_TTY (tty)
-      set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
     '';
 
     functions = {

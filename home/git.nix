@@ -51,7 +51,6 @@ in
 
   #   extraConfig = {
   #     pager.pager = "delta";
-  #     gpg.key = "9C50D0763BD88153A18C7273067A906C7C92A80F"; # piercebartine@gmail.com
   #   };
 
   #   aliases = {
