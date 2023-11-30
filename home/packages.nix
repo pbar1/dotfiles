@@ -34,7 +34,7 @@
     netcat
     nmap
     socat
-    tor
+    # tor
     chromedriver
 
     # Database
