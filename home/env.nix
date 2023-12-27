@@ -25,7 +25,7 @@ in
     # MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
     BAT_THEME = "base16"; # Used by Bat and Delta
     SSH_AGENT_PID = "";
-    LESS = "--quit-if-one-screen"; # --mouse breaks iTerm mouse select
+    LESS = "--quit-if-one-screen --RAW-CONTROL-CHARS"; # --mouse breaks iTerm mouse select
     LESSKEY = "${configHome}/less/lesskey";
     LESSHISTFILE = "${cacheHome}/less/history";
     XZ_DEFAULTS = "--verbose --keep --threads=0";

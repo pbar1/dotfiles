@@ -60,6 +60,9 @@
     kubectx
     kubernetes-helm
     stern
+    dive
+    trivy
+    devbox
 
     # WebAssembly
     wasmer
