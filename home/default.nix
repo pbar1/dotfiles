@@ -1,8 +1,5 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-in
 {
   imports = [
     ./env.nix
@@ -50,8 +47,6 @@ in
     [*.md]
     max_line_length = 80
   '';
-
-  home.file."AppleScripts".source = if isDarwin then ./AppleScripts else null;
 
   programs.home-manager.enable = true;
 
