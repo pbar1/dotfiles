@@ -87,7 +87,7 @@
             (filterAttrs (name: _: hasPrefix "zsh:" name) inputs);
 
           myNeovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
-            (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPluginFrom2Nix {
+            (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPlugin {
               name = removePrefix "vim:" name;
               pname = removePrefix "vim:" name;
               src = value.outPath;
