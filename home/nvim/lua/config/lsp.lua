@@ -20,12 +20,12 @@ end
 
 -- LSP servers that need only minimal config
 for _, lsp in pairs({
-   "bashls",     -- Bash
-   "buck2",      -- Buck2
-   "gopls",      -- Go
+   "bashls", -- Bash
+   "buck2", -- Buck2
+   "gopls", -- Go
    "jsonnet_ls", -- Jsonnet
-   "nil_ls",     -- Nix
-   "pyright",    -- Python
+   "nil_ls", -- Nix
+   "pyright", -- Python
 }) do
    lspconfig[lsp].setup({ on_attach = on_attach, capabilities = caps })
 end

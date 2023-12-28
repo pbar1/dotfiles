@@ -1,5 +1,8 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+in
 {
   imports = [
     ./env.nix
@@ -44,12 +47,11 @@
     indent_size = 4
     indent_style = tab
 
-    [*.lua]
-    indent_size = 3
-
     [*.md]
     max_line_length = 80
   '';
+
+  home.file."AppleScripts".source = if isDarwin then ./AppleScripts else null;
 
   programs.home-manager.enable = true;
 

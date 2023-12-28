@@ -65,4 +65,5 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   # FIXME: Touch ~/.hushlogin to disable last login time
+  # TODO: Linux builder: https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable
 }

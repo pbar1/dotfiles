@@ -15,6 +15,10 @@
       "homebrew/core"
     ];
 
+    brews = [
+      "openssl"
+    ];
+
     casks = [
       # core
       "1password"
@@ -26,6 +30,7 @@
       "keepingyouawake"
       "logi-options-plus"
       "maccy"
+      "wezterm"
 
       # personal
       "android-file-transfer"
