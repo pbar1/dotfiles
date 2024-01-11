@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export KUBECTL_EXTERNAL_DIFF="dyff between --omit-header --set-exit-code --color=on"
+
+fd . "$@" --type f --exec kubectl diff -f
