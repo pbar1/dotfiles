@@ -8,6 +8,7 @@
     onActivation.cleanup = "zap";
 
     taps = [
+      "d12frosted/emacs-plus"
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
@@ -17,6 +18,7 @@
 
     brews = [
       "openssl"
+      { name = "d12frosted/emacs-plus/emacs-plus"; args = [ "with-native-comp" ]; }
     ];
 
     casks = [

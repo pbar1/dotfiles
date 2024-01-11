@@ -8,6 +8,7 @@
     go-task
     tokei
     sapling # TODO: Use module
+    neovim
 
     # Command line utils
     _1password
@@ -69,7 +70,7 @@
 
     # Nix
     cachix
-    nil
+    nixd
     nixpkgs-fmt
 
     # Bash
@@ -116,5 +117,8 @@
     # Dotnet and C#
     dotnet-sdk
     omnisharp-roslyn
+
+    # BEAM
+    elixir
   ];
 }

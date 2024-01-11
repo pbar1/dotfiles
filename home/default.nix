@@ -6,7 +6,7 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    ./nvim
+    # ./nvim
     ./packages.nix
     ./starship.nix
     ./tmux.nix
@@ -43,6 +43,9 @@
     [*.go]
     indent_size = 4
     indent_style = tab
+
+    [*.lua]
+    indent_size = 3
 
     [*.md]
     max_line_length = 80
