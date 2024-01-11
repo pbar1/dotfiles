@@ -68,6 +68,7 @@ def main():
             eval(args.e)
     else:
         # TODO: _ should still be populated, and -F, -a should still work
+        # TODO: ; does not work, should be supported by `exec`
         eval(args.e)
 
 
