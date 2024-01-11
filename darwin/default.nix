@@ -31,7 +31,7 @@
     system = "x86_64-linux";
     protocol = "ssh-ng";
     sshUser = "nixos";
-    sshKey = "/Users/pierce/code/nix-config/.ssh/nix-build"; # FIXME
+    sshKey = "/Users/pierce/code/dotfiles/.ssh/nix-build"; # FIXME
     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
     maxJobs = 16;
   }];
