@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+
+import argparse
+import fileinput
+import sys
+import re
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Python but for Perl/Ruby-style oneliners"
+    )
+    parser.add_argument(
+        "files",
+        metavar="FILE",
+        nargs="*",
+        default="-",
+        help="files to read, defaulting to stdin if empty",
+    )
+    parser.add_argument(
+        "-e",
+        metavar="program",
+        help="one line of program (TODO: several -e's allowed, omit programfile)",
+    )
+    parser.add_argument(
+        "-a",
+        action="store_true",
+        help="autosplit mode with -n or -p (splits `_` into `F`)",
+    )
+    parser.add_argument(
+        "-F",
+        metavar="pattern",
+        default=r"\s+",
+        help="split() pattern for autosplit (-a)",
+    )
+    parser.add_argument(
+        "-n",
+        action="store_true",
+        help="assume 'for _ in fileinput.input: ...' loop around your script",
+    )
+    parser.add_argument(
+        "-p",
+        action="store_true",
+        help="assume loop like -n but print line also, like sed",
+    )
+    parser.add_argument(
+        "-l",
+        action="store_true",
+        help="enable line ending processing",
+    )
+    args = parser.parse_args()
+
+    pattern = re.compile(args.F)
+
+    if args.p:
+        for _ in fileinput.input(files=args.files):
+            if args.l:
+                _ = _.rstrip("\n")
+            if args.a:
+                F = pattern.split(_)
+            print(eval(args.e))
+    elif args.n:
+        for _ in fileinput.input(files=args.files):
+            if args.l:
+                _ = _.rstrip("\n")
+            if args.a:
+                F = pattern.split(_)
+            eval(args.e)
+    else:
+        # TODO: _ should still be populated, and -F, -a should still work
+        eval(args.e)
+
+
+if __name__ == "__main__":
+    main()
