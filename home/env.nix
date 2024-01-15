@@ -20,8 +20,8 @@ in
   ];
 
   home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+    EDITOR = "code";
+    VISUAL = "code";
     # MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
     BAT_THEME = "base16"; # Used by Bat and Delta
     SSH_AGENT_PID = "";
@@ -44,6 +44,7 @@ in
     PSQL_HISTORY = "${cacheHome}/pg/psql_history";
     PGPASSFILE = "${configHome}/pg/pgpass";
     PGSERVICEFILE = "${configHome}/pg/pg_service.conf";
+    RIPGREP_CONFIG_PATH = "${configHome}/ripgrep/config";
     TF_CLI_CONFIG_FILE = "${configHome}/terraform/terraformrc";
     VAULT_CONFIG_PATH = "${configHome}/vault/config";
     VAGRANT_HOME = "${dataHome}/vagrant";
