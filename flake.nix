@@ -23,6 +23,13 @@
     "fish:fzf.fish" = { url = "github:PatrickF1/fzf.fish"; flake = false; };
     "fish:plugin-bang-bang" = { url = "github:oh-my-fish/plugin-bang-bang"; flake = false; };
 
+    # Hammerspoon Plugins -----------------------------------------------------
+
+    "spoon:Caffeine" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Caffeine.spoon.zip"; flake = false; };
+    "spoon:KSheet" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/KSheet.spoon.zip"; flake = false; };
+    "spoon:ReloadConfiguration" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ReloadConfiguration.spoon.zip"; flake = false; };
+    "spoon:Seal" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip"; flake = false; };
+
     # Neovim Plugins ----------------------------------------------------------
 
     "vim:Comment.nvim" = { url = "github:numToStr/Comment.nvim"; flake = false; };
@@ -86,6 +93,13 @@
             })
             (filterAttrs (name: _: hasPrefix "zsh:" name) inputs);
 
+          myHammerspoonPlugins = with final.lib; with attrsets; with strings; mapAttrs'
+            (name: value: nameValuePair (removePrefix "spoon:" name) {
+              name = removePrefix "spoon:" name;
+              src = value.outPath;
+            })
+            (filterAttrs (name: _: hasPrefix "spoon:" name) inputs);
+
           myNeovimPlugins = with final.lib; with attrsets; with strings; mapAttrs'
             (name: value: nameValuePair (removePrefix "vim:" name) (final.vimUtils.buildVimPlugin {
               name = removePrefix "vim:" name;
@@ -139,7 +153,6 @@
           }
         ];
       };
-
 
       homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";

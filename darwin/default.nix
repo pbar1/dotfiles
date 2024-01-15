@@ -53,8 +53,6 @@
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 10; # 150 ms
   system.defaults.NSGlobalDomain.KeyRepeat = 1; # 15 ms
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
 
   # Disable nix-darwin shell integrations
   programs.bash.enable = false;

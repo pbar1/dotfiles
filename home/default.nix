@@ -6,7 +6,7 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    # ./nvim
+    ./hammerspoon
     ./packages.nix
     ./starship.nix
     ./tmux.nix
