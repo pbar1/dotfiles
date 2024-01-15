@@ -147,6 +147,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "spoon:Caffeine": "spoon:Caffeine",
+        "spoon:ClipboardTool": "spoon:ClipboardTool",
         "spoon:KSheet": "spoon:KSheet",
         "spoon:ReloadConfiguration": "spoon:ReloadConfiguration",
         "spoon:Seal": "spoon:Seal",
@@ -164,6 +165,18 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Caffeine.spoon.zip"
+      }
+    },
+    "spoon:ClipboardTool": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-H2YX6Xm7zBr3ahdfF6wppxN3OQRl03zkYEgP2wXLWJY=",
+        "type": "tarball",
+        "url": "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ClipboardTool.spoon.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ClipboardTool.spoon.zip"
       }
     },
     "spoon:KSheet": {

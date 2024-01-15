@@ -27,7 +27,6 @@
       "font-iosevka-nerd-font"
       "hammerspoon"
       "logi-options-plus"
-      "maccy"
       "wezterm"
 
       # personal
@@ -43,7 +42,6 @@
       "spotify"
       "syntax-highlight"
       "tailscale"
-      "vagrant"
       "visual-studio-code"
       "vlc"
       "wireshark"

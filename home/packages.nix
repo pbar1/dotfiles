@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # Version control & project tools
-    gh # FIXME use hm
+    gh # FIXME: use hm
     gnupg
     go-task
     tokei
@@ -34,7 +34,6 @@
     netcat
     nmap
     socat
-    # tor
     chromedriver
 
     # Database
@@ -44,17 +43,9 @@
     # Cloud
     terraform
     google-cloud-sdk
-    pulumi-bin
-    crd2pulumi
-
-    # Jsonnet
-    go-jsonnet
-    jsonnet-bundler
-    jsonnet-language-server
 
     # Containers & Kubernetes
     fluxcd
-    kn
     krew
     kubectl
     kubectx
@@ -63,9 +54,6 @@
     dive
     trivy
     devbox
-
-    # WebAssembly
-    wasmer
 
     # Nix
     cachix
@@ -79,7 +67,6 @@
 
     # Rust
     rustup
-    diesel-cli
 
     # Go
     go
@@ -116,8 +103,5 @@
     # Dotnet and C#
     dotnet-sdk
     omnisharp-roslyn
-
-    # BEAM
-    elixir
   ];
 }

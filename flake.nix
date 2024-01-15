@@ -22,6 +22,7 @@
     # Hammerspoon Plugins -----------------------------------------------------
 
     "spoon:Caffeine" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Caffeine.spoon.zip"; flake = false; };
+    "spoon:ClipboardTool" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ClipboardTool.spoon.zip"; flake = false; };
     "spoon:KSheet" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/KSheet.spoon.zip"; flake = false; };
     "spoon:ReloadConfiguration" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ReloadConfiguration.spoon.zip"; flake = false; };
     "spoon:Seal" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip"; flake = false; };

@@ -1,4 +1,5 @@
 local cmd = { "cmd" }
+local shift_cmd = { "shift", "cmd" }
 local ctrl_alt = { "ctrl", "alt" }
 
 -- Hammerspoon config options
@@ -23,6 +24,15 @@ spoon.Seal.plugins.useractions.actions = {
    },
 }
 spoon.Seal:start()
+
+-- Clipboard manager
+hs.loadSpoon("ClipboardTool")
+spoon.ClipboardTool.show_copied_alert = false
+spoon.ClipboardTool.show_in_menubar = false
+spoon.ClipboardTool:bindHotkeys({
+   toggle_clipboard = { shift_cmd, "v" }
+})
+spoon.ClipboardTool:start()
 
 -- Menu bar applet to keep display awake
 hs.loadSpoon("Caffeine")
