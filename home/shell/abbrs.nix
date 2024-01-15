@@ -33,6 +33,7 @@
   rgi = "rg --ignore-case";
   star = "starship";
   tf = "terraform";
+  tk = "task";
   wkgp = "watch kubectl get pods";
   wo = "type --all --short --path";
   xi = "xargs -I {}";

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+NAMESPACE=$1
+
+kubectl proxy &
+KUBECTL_PID=$!
+
+cd "$(mktemp -d)"
+
+TEMPFILE="$NAMESPACE.nofinalizers.k8s.yaml"
+kubectl get namespace $NAMESPACE -o json | jq '.spec = {"finalizers":[]}' >"$TEMPFILE"
+curl -k -H "Content-Type: application/json" -X PUT --data-binary @"$TEMPFILE" 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+
+kill -9 $KUBECTL_PID
