@@ -8,7 +8,6 @@
     go-task
     tokei
     sapling # TODO: Use module
-    neovim
 
     # Command line utils
     _1password
