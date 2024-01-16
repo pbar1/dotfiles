@@ -16,9 +16,9 @@ spoon.Seal:loadPlugins({ "apps", "calc", "useractions" })
 spoon.Seal:bindHotkeys({
    toggle = { cmd, "Space" },
 })
-spoon.Seal.plugins.apps.appSearchPaths = {
-   "~/code/dotfiles/scripts",
-}
+-- spoon.Seal.plugins.apps.appSearchPaths = {
+--    "~/code/dotfiles/scripts",
+-- }
 spoon.Seal.plugins.apps:restart()
 spoon.Seal.plugins.useractions.actions = {
    ["Sonarr"] = {
@@ -28,16 +28,6 @@ spoon.Seal.plugins.useractions.actions = {
    },
 }
 spoon.Seal:start()
-
--- Clipboard manager
-hs.loadSpoon("ClipboardTool")
-spoon.ClipboardTool.show_copied_alert = false
-spoon.ClipboardTool.show_in_menubar = false
-spoon.ClipboardTool.paste_on_select = true
-spoon.ClipboardTool:bindHotkeys({
-   toggle_clipboard = { shift_cmd, "v" },
-})
-spoon.ClipboardTool:start()
 
 -- Menu bar applet to keep display awake
 hs.loadSpoon("Caffeine")

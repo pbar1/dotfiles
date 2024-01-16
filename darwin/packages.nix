@@ -27,6 +27,7 @@
       "font-iosevka-nerd-font"
       "hammerspoon"
       "logi-options-plus"
+      "maccy"
       "wezterm"
 
       # personal
