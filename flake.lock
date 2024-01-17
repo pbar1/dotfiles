@@ -20,70 +20,6 @@
         "type": "github"
       }
     },
-    "fish:autopair.fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1656950411,
-        "narHash": "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=",
-        "owner": "jorgebucaran",
-        "repo": "autopair.fish",
-        "rev": "4d1752ff5b39819ab58d7337c69220342e9de0e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jorgebucaran",
-        "repo": "autopair.fish",
-        "type": "github"
-      }
-    },
-    "fish:base16-fish-shell": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1638317847,
-        "narHash": "sha256-Bf6V/sF0NqUC2iCNXMZWM3ijpicnJhMpoKZSwOuiS3s=",
-        "owner": "FabioAntunes",
-        "repo": "base16-fish-shell",
-        "rev": "d358af9a724715efd0d31b417ba56e622a239612",
-        "type": "github"
-      },
-      "original": {
-        "owner": "FabioAntunes",
-        "repo": "base16-fish-shell",
-        "type": "github"
-      }
-    },
-    "fish:bass": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1702770652,
-        "narHash": "sha256-3d/qL+hovNA4VMWZ0n1L+dSM1lcz7P5CQJyy+/8exTc=",
-        "owner": "edc",
-        "repo": "bass",
-        "rev": "79b62958ecf4e87334f24d6743e5766475bcf4d0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edc",
-        "repo": "bass",
-        "type": "github"
-      }
-    },
-    "fish:fzf.fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704317914,
-        "narHash": "sha256-5cO5Ey7z7KMF3vqQhIbYip5JR6YiS2I9VPRd6BOmeC8=",
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
-        "rev": "e5d54b93cd3e096ad6c2a419df33c4f50451c900",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
-        "type": "github"
-      }
-    },
     "fish:plugin-bang-bang": {
       "flake": false,
       "locked": {
@@ -139,10 +75,6 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
-        "fish:autopair.fish": "fish:autopair.fish",
-        "fish:base16-fish-shell": "fish:base16-fish-shell",
-        "fish:bass": "fish:bass",
-        "fish:fzf.fish": "fish:fzf.fish",
         "fish:plugin-bang-bang": "fish:plugin-bang-bang",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

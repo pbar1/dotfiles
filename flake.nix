@@ -13,10 +13,6 @@
 
     # Fish Plugins ------------------------------------------------------------
 
-    "fish:autopair.fish" = { url = "github:jorgebucaran/autopair.fish"; flake = false; };
-    "fish:base16-fish-shell" = { url = "github:FabioAntunes/base16-fish-shell"; flake = false; };
-    "fish:bass" = { url = "github:edc/bass"; flake = false; };
-    "fish:fzf.fish" = { url = "github:PatrickF1/fzf.fish"; flake = false; };
     "fish:plugin-bang-bang" = { url = "github:oh-my-fish/plugin-bang-bang"; flake = false; };
 
     # Hammerspoon Plugins -----------------------------------------------------

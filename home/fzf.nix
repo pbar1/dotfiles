@@ -75,6 +75,7 @@ in
 
   programs.atuin = {
     enable = true;
+    enableZshIntegration = false; # Otherwise `(eval):27: command not found: atuin` on shell launch
     flags = [ "--disable-up-arrow" ];
     settings = {
       auto_sync = true;

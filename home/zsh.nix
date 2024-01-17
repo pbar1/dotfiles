@@ -2,7 +2,6 @@
 
 let
   shellAliases = import ./shell/aliases.nix { inherit pkgs; };
-
   shellAbbrs = import ./shell/abbrs.nix;
   shellAbbrsInit = lib.concatStringsSep "\n"
     (lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs);
@@ -37,9 +36,9 @@ in
 
       # Non-POSIX-compliant shells (for example, fish) should not be set as user
       # login shell. Exec said shell here as a workaround if desired.
-      # if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]; then
-      #     (( $+commands[fish] )) && exec fish
-      # fi
+      if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]; then
+          (( $+commands[fish] )) && exec fish
+      fi
     '';
 
     initExtra = ''

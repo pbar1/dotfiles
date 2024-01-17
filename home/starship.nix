@@ -33,8 +33,8 @@
         disabled = false;
         format = " [$indicator]($style)";
         bash_indicator = "bash";
-        zsh_indicator = ""; # Because default
-        fish_indicator = "fish";
+        zsh_indicator = "zsh";
+        fish_indicator = ""; # Default
         powershell_indicator = "posh";
         ion_indicator = "ion";
         elvish_indicator = "elvish";
