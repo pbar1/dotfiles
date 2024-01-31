@@ -12,14 +12,25 @@ spoon.ReloadConfiguration:start()
 
 -- Launch bar
 hs.loadSpoon("Seal")
-spoon.Seal:loadPlugins({ "apps", "calc", "useractions" })
+spoon.Seal:loadPlugins({ "apps", "calc", "useractions", "screencapture" })
 spoon.Seal:bindHotkeys({
    toggle = { cmd, "Space" },
 })
--- spoon.Seal.plugins.apps.appSearchPaths = {
---    "~/code/dotfiles/scripts",
--- }
+spoon.Seal.plugins.apps.appSearchPaths = {
+   "/System/Applications",
+   "/Applications",
+   "~/Applications",
+   "/System/Library/PreferencePanes",
+   "/Library/PreferencePanes",
+   "~/Library/PreferencePanes",
+   "/System/Library/CoreServices/Applications",
+   "/System/Library/CoreServices/",
+   -- "/Library/Scripts",
+   "~/Library/Scripts",
+   "~/code/dotfiles/scripts",
+}
 spoon.Seal.plugins.apps:restart()
+-- TODO: use `vscode://file/<path>` to make a launcher, or just `code` cli which opens in new window
 spoon.Seal.plugins.useractions.actions = {
    ["Sonarr"] = {
       url = "https://sonarr.xnauts.net",
