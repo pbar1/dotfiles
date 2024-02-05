@@ -1,16 +1,34 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-set -euo pipefail
+import argparse
+import json
+import subprocess
+from urllib.request import Request, urlopen
 
-NAMESPACE=$1
+parser = argparse.ArgumentParser(
+    "kubectl-nukens",
+    description="Forcibly removes finalizers from namespaces stuck in terminating",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+parser.add_argument("namespace", help="namespace to remove finalizers from")
+args = parser.parse_args()
 
-kubectl proxy &
-KUBECTL_PID=$!
+namespace = args.namespace
 
-cd "$(mktemp -d)"
+# Overwrite whatever finalizers are blocking deletion with empty list
+manifest = subprocess.check_output(
+    ["kubectl", "get", "namespace", namespace, "--output=json"]
+)
+manifest = json.loads(manifest)
+manifest["spec"]["finalizers"] = []
+manifest = json.dumps(manifest)
 
-TEMPFILE="$NAMESPACE.nofinalizers.k8s.yaml"
-kubectl get namespace $NAMESPACE -o json | jq '.spec = {"finalizers":[]}' >"$TEMPFILE"
-curl -k -H "Content-Type: application/json" -X PUT --data-binary @"$TEMPFILE" 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
-
-kill -9 $KUBECTL_PID
+proxy = subprocess.Popen(["kubectl", "proxy"])
+request = Request(
+    f"http://127.0.0.1:8001/api/v1/namespaces/{namespace}/finalize",
+    method="PUT",
+    headers={"Content-Type": "application/json"},
+    data=manifest.encode(),
+)
+urlopen(request)
+proxy.kill()

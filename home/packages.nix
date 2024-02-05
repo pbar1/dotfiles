@@ -51,6 +51,7 @@
     kubectx
     kubernetes-helm
     stern
+    k3d
     dive
     trivy
     devbox
