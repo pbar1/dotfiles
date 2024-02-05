@@ -71,7 +71,7 @@
     # Go
     go
     gopls
-    gotools
+    # gotools # TODO: Conflicts with `ruby`
 
     # Python
     (python3.withPackages (ps: with ps; [
@@ -88,7 +88,7 @@
     # poetry
 
     # Ruby
-    # ruby
+    ruby
     rufo
 
     # Lua
