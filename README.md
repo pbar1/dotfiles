@@ -17,3 +17,13 @@ Configuration for NixOS, macOS, and Home Manager
 - [NixOS on ZFS](https://grahamc.com/blog/nixos-on-zfs)
 - [Flakes: NixOS and Home Manager migration](https://gvolpe.com/blog/nix-flakes/)
 
+## Flowchart for Language Choice
+
+- Text processing? `ruby`
+  - Any case where `sed`/`awk`/`perl` oneliners would fit
+- Simple wrapper script? `bash` or `ruby`
+  - < 10 lines, heavy shelling-out, pipelines
+- Complex script? `python`
+  - ~ 100 lines, has arguments, process control, JSON
+- CLI program? `rust`
+- Web server? `rust`
