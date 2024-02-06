@@ -9,7 +9,7 @@ activ="${AUDIBLE_ACTIVATION_BYTES}"
 input="$1"
 output="${input%.*}.m4b"
 
-exec podman run                \
+exec docker run                \
   --rm --interactive --tty     \
   --user="$(id -u)"            \
   --workdir=/workdir           \
