@@ -2,6 +2,11 @@ local cmd = { "cmd" }
 local shift_cmd = { "shift", "cmd" }
 local ctrl_alt = { "ctrl", "alt" }
 
+---@param folder string
+local function open_in_vscode(folder)
+   os.execute("/usr/local/bin/code '" .. folder .. "'")
+end
+
 -- Hammerspoon config options
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(false)
@@ -16,6 +21,7 @@ spoon.Seal:loadPlugins({ "apps", "calc", "useractions", "screencapture" })
 spoon.Seal:bindHotkeys({
    toggle = { cmd, "Space" },
 })
+-- TODO: Mutate rather than override
 spoon.Seal.plugins.apps.appSearchPaths = {
    "/System/Applications",
    "/Applications",
@@ -30,12 +36,22 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "~/code/dotfiles/scripts",
 }
 spoon.Seal.plugins.apps:restart()
--- TODO: use `vscode://file/<path>` to make a launcher, or just `code` cli which opens in new window
 spoon.Seal.plugins.useractions.actions = {
-   ["Sonarr"] = {
-      url = "https://sonarr.xnauts.net",
-      icon = "favicon",
-      keyword = "sonarr",
+   ["Open folder in VS Code"] = {
+      keyword = "code",
+      fn = function()
+         local chooser = hs.chooser.new(function(choice)
+            if choice then
+               open_in_vscode(choice.text)
+            end
+         end)
+         -- TODO: Populate by listing ~/code
+         chooser:choices({
+            { ["text"] = "/Users/pierce/code/dotfiles" },
+            { ["text"] = "/Users/pierce/code/pbcloud" },
+         })
+         chooser:show()
+      end,
    },
 }
 spoon.Seal:start()
