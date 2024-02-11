@@ -38,11 +38,6 @@ task :fmt do
   # sh 'nix run nixpkgs#rubocop -- --autocorrect Rakefile'
 end
 
-desc 'Print Neovim plugin flake inputs ordered by lastModified'
-task :nvim_plugin_dates do
-  sh './scripts/nvim_plugin_meta | sort -k 2 | column -t'
-end
-
 # [Tasks] Nix -----------------------------------------------------------------
 
 task nix: ['nix:default']
@@ -97,13 +92,13 @@ namespace :nixos do
 
   desc 'Compile and activate NixOS config (tec)'
   task :switch_tec do
-    sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.0.5:~/nix-config"
-    sh "ssh nixos@192.168.0.5 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
+    sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.1.84:~/nix-config"
+    sh "ssh nixos@192.168.1.84 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
   end
 
   desc 'Fetch kubeconfig (tec)'
   task :kubeconfig_tec do
-    sh 'ssh tec sudo k3s kubectl config view --flatten --minify | sed "s|127.0.0.1|192.168.0.5|g" > ~/.kube/config'
+    sh 'ssh tec sudo k3s kubectl config view --flatten --minify | sed "s|127.0.0.1|192.168.1.84|g" > ~/.kube/config'
   end
 end
 
@@ -141,13 +136,5 @@ namespace :home do
   desc 'Compile and activate Home Manager config'
   task :switch do
     sh "home-manager switch --flake '.##{hostname}'"
-  end
-
-  # TODO: Add dynamism to Neovim config to load this if needed, maybe with Lazy.nvim
-  desc 'Compile and activate Home Manager config (devvm)'
-  task :switch_devvm do
-    sh 'sed -i \'s|#"vim:meta.nvim"|"vim:meta.nvim"|g\' flake.nix'
-    sh 'home-manager --extra-experimental-features "nix-command flakes" switch --flake ".#devserver"'
-    sh 'sed -i \'s|[^#]"vim:meta.nvim"| #"vim:meta.nvim"|g\' flake.nix'
   end
 end

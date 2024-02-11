@@ -27,11 +27,11 @@
   ];
   nix.distributedBuilds = true;
   nix.buildMachines = [{
-    hostName = "192.168.0.5";
+    hostName = "192.168.1.84";
     system = "x86_64-linux";
     protocol = "ssh-ng";
     sshUser = "nixos";
-    sshKey = "/Users/pierce/code/dotfiles/.ssh/nix-build"; # FIXME
+    sshKey = "/Users/pierce/code/dotfiles/.ssh/nix-build"; # FIXME: No hardcode
     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
     maxJobs = 16;
   }];
