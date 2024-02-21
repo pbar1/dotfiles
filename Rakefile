@@ -92,13 +92,13 @@ namespace :nixos do
 
   desc 'Compile and activate NixOS config (tec)'
   task :switch_tec do
-    sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@192.168.1.84:~/nix-config"
-    sh "ssh nixos@192.168.1.84 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
+    sh "rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' #{pwd}/* nixos@tec.lan:~/nix-config"
+    sh "ssh nixos@tec.lan 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'"
   end
 
   desc 'Fetch kubeconfig (tec)'
   task :kubeconfig_tec do
-    sh 'ssh tec sudo k3s kubectl config view --flatten --minify | sed "s|127.0.0.1|192.168.1.84|g" > ~/.kube/config'
+    sh 'ssh tec sudo k3s kubectl config view --flatten --minify | sed "s|127.0.0.1|tec|g" > ~/.kube/config'
   end
 end
 

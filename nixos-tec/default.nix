@@ -22,13 +22,8 @@
   networking.hostId = "e7e35d28"; # via `head -c 8 /etc/machine-id`
   networking.firewall.allowedTCPPorts = [
     6443 # Kubernetes - API
-    8080 # Unifi Controller - device command/control
     10250 # Kubernetes - Metrics Server
     32400 # Plex
-  ];
-  networking.firewall.allowedUDPPorts = [
-    3478 # Unifi Controller - STUN
-    10001 # Unifi Controller - device discovery
   ];
 
   time.timeZone = "America/Los_Angeles";

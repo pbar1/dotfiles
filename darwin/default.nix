@@ -27,7 +27,7 @@
   ];
   nix.distributedBuilds = true;
   nix.buildMachines = [{
-    hostName = "192.168.1.84";
+    hostName = "tec";
     system = "x86_64-linux";
     protocol = "ssh-ng";
     sshUser = "nixos";
