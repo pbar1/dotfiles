@@ -19,6 +19,8 @@
       # Force `tmux load-buffer` to emit OSC 52 escape codes (for Neovim)
       # https://github.com/tmux/tmux/issues/3088#issuecomment-1054664489
       set -s command-alias[99] 'load-buffer=load-buffer -w'
+
+      bind s set synchronize-panes
     '';
 
     plugins = with pkgs; [

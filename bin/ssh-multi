@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+import argparse
+import fileinput
+import os
+
+
+def get_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Open many interactive SSH sessions in Tmux"
+    )
+    parser.add_argument(
+        "files",
+        metavar="FILE",
+        nargs="*",
+        default="-",
+        help="files to read, defaulting to stdin if empty",
+    )
+    parser.add_argument(
+        "--session", default="ssh-multi", help="name of tmux session to create"
+    )
+    parser.add_argument(
+        "--program", default="ssh", help="executable to connect to targets with"
+    )
+    return parser.parse_args()
+
+
+def main():
+    args = get_args()
+
+    session = args.session
+    window = f"{session}-main"
+    targets = [
+        line.strip() for line in fileinput.input(files=args.files) if line.strip()
+    ]
+    program = args.program
+
+    # Create a tmux server and session using the first target
+    os.system("tmux start-server")
+    os.system(
+        f"tmux new-session -d -s {session} -n {window} '{program} {targets.pop(0)}'"
+    )
+
+    # Spawn the rest of the targets as split panes in the same window,
+    # rebalancing the layout each time to avoid "no space for new pane" error
+    for target in targets:
+        os.system(f"tmux split-window -t {session}:0 '{program} {target}'")
+        os.system(f"tmux select-layout -t {session}:0 tiled")
+
+    # Attach current terminal to the session
+    os.system(f"tmux attach -t {session}")
+
+
+if __name__ == "__main__":
+    main()
