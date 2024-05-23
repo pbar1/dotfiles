@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+for heading in $(ssh -Q help); do
+  echo "=== $heading ==="
+  ssh -Q "$heading"
+  echo
+done

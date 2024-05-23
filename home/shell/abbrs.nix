@@ -31,6 +31,7 @@
   nv = "nvim";
   rgf = "rg --fixed-strings";
   rgi = "rg --ignore-case";
+  s = "sl";
   star = "starship";
   tf = "terraform";
   tk = "task";
