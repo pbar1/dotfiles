@@ -30,7 +30,9 @@
 
       # personal
       "android-file-transfer"
+      "anki"
       "brave-browser"
+      "cyberduck"
       "docker"
       "google-earth-pro"
       "keka"
