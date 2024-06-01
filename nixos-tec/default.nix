@@ -50,6 +50,7 @@
     ffmpeg
     jq
     ripgrep
+    ruby
     vim
     wget
   ];
