@@ -21,9 +21,9 @@
       # core
       "1password"
       "amethyst"
-      "bartender"
       "font-iosevka-nerd-font"
       "hammerspoon"
+      "jordanbaird-ice"
       "logi-options-plus"
       "maccy"
       "wezterm"
