@@ -14,6 +14,7 @@
     coreutils
     eza
     fd
+    fselect
     file
     gnused
     hyperfine

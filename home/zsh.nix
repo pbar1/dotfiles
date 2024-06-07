@@ -14,7 +14,7 @@ in
 
     dotDir = ".config/zsh";
     enableVteIntegration = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     # Flake inputs with prefix "zsh:" automatically end up here via overlay

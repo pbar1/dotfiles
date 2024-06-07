@@ -48,11 +48,13 @@
     btop
     fd
     ffmpeg
+    fselect
     jq
     ripgrep
     ruby
     vim
     wget
+    yt-dlp
   ];
 
   services.openssh.enable = true;
