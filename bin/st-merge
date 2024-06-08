@@ -29,11 +29,13 @@ def subtitle_merge(base: str, merge: str, api_key: str) -> str:
     files = {
         "subtitle": open(base, "rb"),
         "second-subtitle": open(merge, "rb"),
-        "simpleTopBottom": 1,
+    }
+    data = {
+        "simpleTopBottom": True,
         "baseSubtitleColor": None,
         "mergeSubtitleColor": None,
     }
-    response = requests.post(url=url, headers=headers, files=files)
+    response = requests.post(url=url, headers=headers, files=files, data=data)
     z = response.json()
     print(z)
     download_url = z["download_url"]
