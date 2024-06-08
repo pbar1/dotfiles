@@ -29,7 +29,6 @@
       "wezterm"
 
       # personal
-      "android-file-transfer"
       "anki"
       "brave-browser"
       "cyberduck"
@@ -39,10 +38,7 @@
       "kekaexternalhelper"
       "little-snitch"
       "minecraft"
-      "qlmarkdown"
       "spotify"
-      "syntax-highlight"
-      "tailscale"
       "visual-studio-code"
       "vlc"
       "wireshark"
