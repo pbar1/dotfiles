@@ -28,6 +28,7 @@
     sd
     unixtools.watch
     xz
+    ffmpeg
 
     # Networking
     dig
