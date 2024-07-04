@@ -39,6 +39,7 @@
       "little-snitch"
       "minecraft"
       "spotify"
+      "syntax-highlight"
       "visual-studio-code"
       "vlc"
       "wireshark"
