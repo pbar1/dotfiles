@@ -15,6 +15,7 @@
 
     brews = [
       "openssl"
+      "sapling" # FIXME: temporary
     ];
 
     casks = [
@@ -31,6 +32,7 @@
       # personal
       "anki"
       "brave-browser"
+      "calibre"
       "cyberduck"
       "docker"
       "google-earth-pro"

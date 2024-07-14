@@ -7,7 +7,8 @@
     gnupg
     go-task
     tokei
-    sapling # TODO: Use module
+    # sapling # TODO: Use module
+    buck2
 
     # Command line utils
     _1password
@@ -87,7 +88,6 @@
     ]))
     black
     isort
-    nodePackages.pyright
     # poetry
 
     # Ruby
