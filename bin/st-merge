@@ -1,61 +1,25 @@
-#!/usr/bin/env python3
+#!/usr/bin/env bash
 
-import argparse
-import json
-import os
+set -euo pipefail
 
-import requests
+base="$1"
+merge="$2"
+output="$base.merged"
 
+download_url=$(curl \
+  --request POST \
+  --header "Accept: application/json" \
+  --header "Authorization: Bearer $SUBTITLE_TOOLS_API_KEY" \
+  --form "subtitle=@$base" \
+  --form "second-subtitle=@$merge" \
+  --form "simpleTopBottom=1" \
+  --form "baseSubtitleColor=" \
+  --form "mergeSubtitleColor=" \
+  https://subtitletools.com/api/v1/merge-subtitles/simple |
+  jq -r .download_url)
 
-def get_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        "st-merge",
-        description="""
-Merge subtitles using SubtitleTools.com API
-""",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    parser.add_argument("base", help="Subtitle file to use as the base")
-    parser.add_argument("merge", help="Subtitle file to merge into the base")
-    parser.add_argument(
-        "--output", default="", help="Subtitle file to write result into"
-    )
-    return parser.parse_args()
-
-
-def subtitle_merge(base: str, merge: str, api_key: str) -> str:
-    url = "https://subtitletools.com/api/v1/merge-subtitles/simple"
-    headers = {"Accept": "application/json", "Authorization": f"Bearer {api_key}"}
-    files = {
-        "subtitle": open(base, "rb"),
-        "second-subtitle": open(merge, "rb"),
-    }
-    data = {
-        "simpleTopBottom": True,
-        "baseSubtitleColor": None,
-        "mergeSubtitleColor": None,
-    }
-    response = requests.post(url=url, headers=headers, files=files, data=data)
-    z = response.json()
-    print(z)
-    download_url = z["download_url"]
-
-    download = requests.get(url=download_url, headers=headers)
-    return download.text
-
-
-def main():
-    args = get_args()
-
-    base = args.base
-    merge = args.merge
-    output = f"{base}.merged" if args.output == "" else args.output
-    api_key = os.getenv("SUBTITLE_TOOLS_API_KEY")
-
-    ouptput_contents = subtitle_merge(base, merge, api_key=api_key)
-    with open(output, "w") as output_file:
-        output_file.write(ouptput_contents)
-
-
-if __name__ == "__main__":
-    main()
+curl \
+  --header "Accept: application/json" \
+  --header "Authorization: Bearer $SUBTITLE_TOOLS_API_KEY" \
+  "$download_url" \
+  >"$output"

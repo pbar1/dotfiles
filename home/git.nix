@@ -20,6 +20,7 @@ in
       credential.helper = credentialHelper;
       gpg.format = "ssh";
       gpg.ssh.program = sshSignProgram;
+      init.defaultBranch = "main";
       pull.rebase = false;
       push.default = "current";
       push.followTags = true;

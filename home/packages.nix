@@ -8,7 +8,11 @@
     go-task
     tokei
     # sapling # TODO: Use module
-    buck2
+    bazelisk
+    (writeShellScriptBin "bazel" ''exec "${bazelisk}/bin/bazelisk" "$@"'')
+    buckle
+    (writeShellScriptBin "buck" ''exec "${buckle}/bin/buckle" "$@"'')
+    (writeShellScriptBin "buck2" ''exec "${buckle}/bin/buckle" "$@"'')
 
     # Command line utils
     _1password
