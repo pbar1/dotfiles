@@ -10,6 +10,7 @@
     # sapling # TODO: Use module
     bazelisk
     (writeShellScriptBin "bazel" ''exec "${bazelisk}/bin/bazelisk" "$@"'')
+    bazel-buildtools
     buckle
     (writeShellScriptBin "buck" ''exec "${buckle}/bin/buckle" "$@"'')
     (writeShellScriptBin "buck2" ''exec "${buckle}/bin/buckle" "$@"'')
