@@ -15,6 +15,10 @@
     (writeShellScriptBin "buck" ''exec "${buckle}/bin/buckle" "$@"'')
     (writeShellScriptBin "buck2" ''exec "${buckle}/bin/buckle" "$@"'')
 
+    # Other
+    fh
+    typst
+
     # Command line utils
     _1password
     coreutils
