@@ -50,8 +50,10 @@
     ffmpeg
     fselect
     jq
+    pv
     ripgrep
     ruby
+    smartmontools
     vim
     wget
     yt-dlp
