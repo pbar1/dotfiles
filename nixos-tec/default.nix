@@ -70,10 +70,10 @@
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
-    # Enable dual stack networking by passing both IPv4 and IPv6 ranges
-    # https://docs.k3s.io/installation/network-options#dual-stack-ipv4--ipv6-networking
-    "--cluster-cidr=10.42.0.0/16,2001:cafe:42:0::/56"
-    "--service-cidr=10.43.0.0/16,2001:cafe:42:1::/112"
+    # IPv4-only beacuse ISP has trouble keeping an IPv6 address, which crashes
+    # the cluster when lost
+    "--cluster-cidr=10.42.0.0/16"
+    "--service-cidr=10.43.0.0/16"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
     "--secrets-encryption"
     "--disable=traefik"
