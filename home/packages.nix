@@ -110,6 +110,7 @@
     # JavaScript
     nodejs
     yarn-berry
+    deno
     bun
 
     # Dotnet and C#
