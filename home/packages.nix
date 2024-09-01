@@ -114,7 +114,7 @@
     bun
 
     # Dotnet and C#
-    dotnet-sdk
+    dotnet-sdk_8
     omnisharp-roslyn
   ];
 }

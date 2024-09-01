@@ -37,7 +37,7 @@
     [*{M,m}akefile]
     indent_style = tab
 
-    [*.{py,rs}]
+    [*.{py,rs,cs}]
     indent_size = 4
 
     [*.go]

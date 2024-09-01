@@ -34,7 +34,7 @@
   s = "sl";
   star = "starship";
   tf = "terraform";
-  tk = "task";
+  t = "task";
   wkgp = "watch kubectl get pods";
   wo = "type --all --short --path";
   xi = "xargs -I {}";
