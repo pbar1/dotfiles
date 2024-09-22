@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  # environment.systemPackages = with pkgs; [ ];
-
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
@@ -15,7 +13,6 @@
 
     brews = [
       "openssl"
-      "sapling" # FIXME: temporary
     ];
 
     casks = [

@@ -56,22 +56,22 @@ in
     ];
   };
 
-  # programs.sapling = {
-  #   enable = true;
-  #   inherit userName;
-  #   inherit userEmail;
+  programs.sapling = {
+    enable = true;
+    inherit userName;
+    inherit userEmail;
 
-  #   extraConfig = {
-  #     pager.pager = "delta";
-  #   };
+    extraConfig = {
+      pager.pager = "delta";
+    };
 
-  #   aliases = {
-  #     cm = "commit";
-  #     d = "diff --exclude=*.lock";
-  #     s = "status";
-  #     update = "goto";
-  #     view = "!$HG config paths.default | xargs open";
-  #     whoami = "config ui.username";
-  #   };
-  # };
+    aliases = {
+      cm = "commit";
+      d = "diff --exclude=*.lock";
+      s = "status";
+      update = "goto";
+      view = "!$HG config paths.default | xargs open";
+      whoami = "config ui.username";
+    };
+  };
 }
