@@ -29,6 +29,7 @@
     gnused
     hyperfine
     jq
+    xsv
     dyff
     less
     openssl
