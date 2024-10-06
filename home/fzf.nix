@@ -80,6 +80,7 @@ in
     settings = {
       auto_sync = true;
       sync_address = "https://atuin.xnauts.net";
+      network_timeout = "600";
     };
   };
 }

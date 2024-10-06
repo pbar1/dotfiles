@@ -98,7 +98,7 @@
     ]))
     black
     isort
-    # poetry
+    poetry
 
     # Ruby
     ruby
