@@ -23,6 +23,7 @@
   networking.firewall.allowedTCPPorts = [
     6443 # Kubernetes - API
     10250 # Kubernetes - Metrics Server
+    31887 # Immich
     32400 # Plex
   ];
 
@@ -32,9 +33,8 @@
   users.users.nixos.extraGroups = [ "wheel" ];
   users.users.nixos.hashedPassword = "$6$ouPdfmFbwMP/0uf7$qHv26BknhOYNzoZPMJZ6Ic5uR6Rw3K/CLSYEDWr5djV9UJKkzcGB4b3ZRqHawJ5pt.dKr3ySK7JDUyTnXEl2k1";
   users.users.nixos.openssh.authorizedKeys.keys = [
-    # SSH Personal
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D"
-    # nix-build
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D personal"
+    "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBeL5XO0CnwlYNUX+4OXnLBLXzbYsOjLYp7TtJpjrn9QpnrIo/zUDp0HZifnauOyVln9+GvqiMyB4xqfYhUhRjg= blink-goombella"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHU/j3uw6wGWO3+2aRO7We1oQXtcExTyl8uGM4zhq8Zq nix-build"
   ];
 

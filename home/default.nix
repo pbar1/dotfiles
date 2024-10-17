@@ -23,34 +23,6 @@
     CDCD1DF93F65BF132EB1F33327E34108F53BD47A
   '';
 
-  home.file.".editorconfig".text = ''
-    root = true
-
-    [*]
-    charset = utf-8
-    end_of_line = lf
-    indent_size = 2
-    indent_style = space
-    insert_final_newline = true
-    trim_trailing_whitespace = true
-
-    [*{M,m}akefile]
-    indent_style = tab
-
-    [*.{py,rs,cs}]
-    indent_size = 4
-
-    [*.go]
-    indent_size = 4
-    indent_style = tab
-
-    [*.lua]
-    indent_size = 3
-
-    [*.md]
-    max_line_length = 80
-  '';
-
   programs.home-manager.enable = true;
 
   # Fish shell enables this for `man` completion to work, but it is very slow
