@@ -89,7 +89,8 @@
         ];
       };
 
-      homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
+      # FIXME: eww...
+      homeConfigurations."Mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })

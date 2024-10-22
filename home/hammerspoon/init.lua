@@ -56,20 +56,6 @@ spoon.Seal.plugins.useractions.actions = {
 }
 spoon.Seal:start()
 
--- Menu bar applet to keep display awake
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:bindHotkeys({
-   toggle = { ctrl_alt, "c" },
-})
-spoon.Caffeine:start()
-
--- Keybindings cheatsheet for current app
-hs.loadSpoon("KSheet")
-spoon.KSheet:bindHotkeys({
-   toggle = { ctrl_alt, "/" },
-})
-spoon.KSheet:init()
-
 -- TODO: Toggle terminal
 
 -- Display a notification when this config has been loaded

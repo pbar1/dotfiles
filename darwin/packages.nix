@@ -22,6 +22,7 @@
       "font-iosevka-nerd-font"
       "hammerspoon"
       "jordanbaird-ice"
+      "keepingyouawake"
       "logi-options+"
       "maccy"
       "wezterm"

@@ -35,7 +35,7 @@
   users.users.nixos.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D personal"
     "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBeL5XO0CnwlYNUX+4OXnLBLXzbYsOjLYp7TtJpjrn9QpnrIo/zUDp0HZifnauOyVln9+GvqiMyB4xqfYhUhRjg= blink-goombella"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHU/j3uw6wGWO3+2aRO7We1oQXtcExTyl8uGM4zhq8Zq nix-build"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO00lZvj7Xhb8SqwW/2VFDxg6SOD4GdAjsmX75txEn6p nix_build"
   ];
 
   users.users.root.hashedPassword = "!"; # Disable root user
