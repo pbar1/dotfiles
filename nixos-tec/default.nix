@@ -44,6 +44,7 @@
   security.apparmor.enable = true;
 
   environment.systemPackages = with pkgs; [
+    atuin
     bpftrace
     btop
     fd
