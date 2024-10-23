@@ -7,13 +7,6 @@
     gnupg
     go-task
     tokei
-    # sapling # TODO: Use module
-    bazelisk
-    (writeShellScriptBin "bazel" ''exec "${bazelisk}/bin/bazelisk" "$@"'')
-    bazel-buildtools
-    buckle
-    (writeShellScriptBin "buck" ''exec "${buckle}/bin/buckle" "$@"'')
-    (writeShellScriptBin "buck2" ''exec "${buckle}/bin/buckle" "$@"'')
 
     # Other
     fh
@@ -44,10 +37,8 @@
     # Networking
     dig
     hey
-    netcat
     nmap
     socat
-    chromedriver
 
     # Database
     duckdb
@@ -58,7 +49,6 @@
     google-cloud-sdk
 
     # Containers & Kubernetes
-    fluxcd
     krew
     kubectl
     kubectx
@@ -66,8 +56,6 @@
     stern
     k3d
     dive
-    trivy
-    devbox
 
     # Nix
     cachix
@@ -89,12 +77,10 @@
 
     # Python
     (python3.withPackages (ps: with ps; [
-      beautifulsoup4
       pandas
       python-dateutil
       pyyaml
       requests
-      selenium
     ]))
     black
     isort
@@ -102,7 +88,6 @@
 
     # Ruby
     ruby
-    rufo
 
     # Lua
     stylua
@@ -112,7 +97,6 @@
     nodejs
     yarn-berry
     deno
-    bun
 
     # Dotnet and C#
     dotnet-sdk_8

@@ -18,11 +18,6 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  home.file.".gnupg/sshcontrol".text = ''
-    # personal
-    CDCD1DF93F65BF132EB1F33327E34108F53BD47A
-  '';
-
   programs.home-manager.enable = true;
 
   # Fish shell enables this for `man` completion to work, but it is very slow

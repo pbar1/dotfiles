@@ -28,6 +28,7 @@
   kx = "kubectx";
   kxx = "kubectl xx";
   lt = "eza --tree";
+  nc = "ncat";
   nv = "nvim";
   rgf = "rg --fixed-strings";
   rgi = "rg --ignore-case";
