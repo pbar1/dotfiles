@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     # Version control & project tools
     gh # FIXME: use hm
-    gnupg
     go-task
     tokei
 

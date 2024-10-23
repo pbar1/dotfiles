@@ -63,6 +63,7 @@ in
 
     extraConfig = {
       pager.pager = "delta";
+      gpg.key = "7C92A80F";
     };
 
     aliases = {

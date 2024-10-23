@@ -6,6 +6,7 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
+    ./gpg.nix
     ./hammerspoon
     ./packages.nix
     ./starship.nix
