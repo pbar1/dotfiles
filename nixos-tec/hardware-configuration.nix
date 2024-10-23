@@ -8,7 +8,9 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # TODO: If ZFS breaks, change to `pkgs.linuxPackages.packages.linux_<latest supported>`
+  # https://discourse.nixos.org/t/zfs-latestcompatiblelinuxpackages-is-deprecated/52540/7
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernel.sysctl = {
     # For Transmission performance
     # https://web.archive.org/web/20171019185200/https://falkhusemann.de/blog/2012/07/transmission-utp-and-udp-buffer-optimizations/
