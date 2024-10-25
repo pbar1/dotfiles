@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
+    nixos-wsl = { url = "github:nix-community/NixOS-WSL/main"; inputs.nixpkgs.follows = "nixpkgs"; };
     darwin = { url = "github:LnL7/nix-darwin"; inputs.nixpkgs.follows = "nixpkgs"; };
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
 
@@ -21,7 +22,7 @@
     "spoon:Seal" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, nixos-wsl, ... }@inputs:
     let
       overlays = [
         (final: prev: {
@@ -55,6 +56,18 @@
 
       nixosConfigurations."bobbery" = nixpkgs.lib.nixosSystem {
         modules = [ ./nixos ];
+        system = "x86_64-linux";
+      };
+
+      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+        modules = [
+          nixos-wsl.nixosModules.default
+          {
+            system.stateVersion = "24.05";
+            wsl.enable = true;
+            wsl.defaultUser = "nixos";
+          }
+        ];
         system = "x86_64-linux";
       };
 
