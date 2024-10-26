@@ -38,6 +38,7 @@
       "kekaexternalhelper"
       "little-snitch"
       "minecraft"
+      "qmk-toolbox"
       "spotify"
       "syntax-highlight"
       "tailscale"
