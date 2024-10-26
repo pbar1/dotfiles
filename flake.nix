@@ -71,8 +71,11 @@
       };
 
       nixosConfigurations."tec" = nixpkgs.lib.nixosSystem {
-        modules = [ ./nixos-tec ];
         system = "x86_64-linux";
+        modules = [
+          ./nixos-tec
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       darwinConfigurations."bobbery" = darwin.lib.darwinSystem {

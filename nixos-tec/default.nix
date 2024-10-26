@@ -15,6 +15,16 @@
   ];
   nix.settings.trusted-users = [ "root" "nixos" ];
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.nixos = {
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = "24.05";
+
+    programs.git.enable = true;
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
