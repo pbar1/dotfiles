@@ -38,6 +38,7 @@
     hey
     nmap
     socat
+    eternal-terminal
 
     # Database
     duckdb

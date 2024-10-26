@@ -31,6 +31,7 @@
   networking.hostName = "tec";
   networking.hostId = "e7e35d28"; # via `head -c 8 /etc/machine-id`
   networking.firewall.allowedTCPPorts = [
+    2022 # Eternal Terminal
     6443 # Kubernetes - API
     10250 # Kubernetes - Metrics Server
     31887 # Immich

@@ -9,6 +9,7 @@
     ./gpg.nix
     ./hammerspoon
     ./packages.nix
+    ./ssh.nix
     ./starship.nix
     ./tmux.nix
     ./wezterm
