@@ -15,6 +15,10 @@
     ./zsh.nix
   ];
 
+  home.username = "pierce";
+  home.homeDirectory = "/Users/pierce";
+  home.stateVersion = "22.05";
+
   # https://github.com/nix-community/home-manager/issues/2942#issuecomment-1119760100
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
