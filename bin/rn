@@ -2,46 +2,68 @@
 
 import argparse
 import os
-import re
-import shutil
+import sys
+from subprocess import run
 
-parser = argparse.ArgumentParser(description="Rename files with Python regex")
+
+class bcolors:
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+
+parser = argparse.ArgumentParser(description="Rename files with fd + sd")
 parser.add_argument(
-    "input",
+    "find",
     metavar="FROM",
     help="search regex",
 )
 parser.add_argument(
-    "output",
+    "replace",
     metavar="TO",
     help="replacement string",
 )
 parser.add_argument(
-    "-n",
-    "--dry-run",
+    "-y",
+    "--yes",
     action="store_true",
-    help="only print what would be done",
-)
-parser.add_argument(
-    "-b",
-    "--backup",
-    metavar="SUFFIX",
-    default="",
-    help="backup the file fith this suffix if set",
+    help="perform the rename without asking for confirmation",
 )
 args = parser.parse_args()
 
-search = re.compile(args.input)
-replace = args.output
-dry_run = args.dry_run
-backup = args.backup
+plan = {}
+for filename in os.listdir():
+    before = filename.strip()
+    after = run(
+        ["sd", args.find, args.replace],
+        input=filename,
+        check=True,
+        text=True,
+        capture_output=True,
+    ).stdout.strip()
+    if after != before:
+        plan[before] = after
 
-for file in os.listdir():
-    if search.match(file):
-        if backup != "":
-            shutil.copy2(file, f"{file}{backup}")
-        renamed = search.sub(file, replace)
-        if dry_run:
-            print(renamed)
-        else:
-            os.rename(file, renamed)
+for before, after in plan.items():
+    tty = sys.stderr.isatty()
+    left = f"{bcolors.OKBLUE}'{before}'{bcolors.ENDC}" if tty else before
+    right = f"{bcolors.OKCYAN}'{after}'{bcolors.ENDC}" if tty else after
+    eprint(f"{left} => {right}")
+
+if not args.yes:
+    confirm = str(input("Proceed? (y/N): ")).lower().strip()
+    if len(confirm) == 0 or confirm[0] != "y":
+        exit(1)
+
+for before, after in plan.items():
+    os.rename(before, after)
