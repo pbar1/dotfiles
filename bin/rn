@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import argparse
 import os
 import sys
+from argparse import ArgumentParser
 from subprocess import run
 
 
@@ -22,7 +22,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-parser = argparse.ArgumentParser(description="Rename files with `sd`")
+parser = ArgumentParser(description="Rename files with `sd`")
 parser.add_argument(
     "find",
     metavar="FROM",
@@ -61,7 +61,7 @@ for before, after in plan.items():
     eprint(f"'{left}' => '{right}'")
 
 if not args.yes:
-    confirm = str(input("Proceed? (y/N): ")).lower().strip()
+    confirm = str(input("Proceed with rename? (y/N): ")).lower().strip()
     if len(confirm) == 0 or confirm[0] != "y":
         exit(1)
 
