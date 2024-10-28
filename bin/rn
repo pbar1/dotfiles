@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import re
+import shutil
+
+parser = argparse.ArgumentParser(description="Rename files with Python regex")
+parser.add_argument(
+    "input",
+    metavar="FROM",
+    help="search regex",
+)
+parser.add_argument(
+    "output",
+    metavar="TO",
+    help="replacement string",
+)
+parser.add_argument(
+    "-n",
+    "--dry-run",
+    action="store_true",
+    help="only print what would be done",
+)
+parser.add_argument(
+    "-b",
+    "--backup",
+    metavar="SUFFIX",
+    default="",
+    help="backup the file fith this suffix if set",
+)
+args = parser.parse_args()
+
+search = re.compile(args.input)
+replace = args.output
+dry_run = args.dry_run
+backup = args.backup
+
+for file in os.listdir():
+    if search.match(file):
+        if backup != "":
+            shutil.copy2(file, f"{file}{backup}")
+        renamed = search.sub(file, replace)
+        if dry_run:
+            print(renamed)
+        else:
+            os.rename(file, renamed)
