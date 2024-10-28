@@ -10,4 +10,6 @@
     sync_address = "https://atuin.xnauts.net";
     network_timeout = "600";
   };
+
+  programs.zoxide.enable = true;
 }
