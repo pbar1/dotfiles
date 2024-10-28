@@ -22,7 +22,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-parser = argparse.ArgumentParser(description="Rename files with fd + sd")
+parser = argparse.ArgumentParser(description="Rename files with `sd`")
 parser.add_argument(
     "find",
     metavar="FROM",
