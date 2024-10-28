@@ -56,9 +56,9 @@ for filename in os.listdir():
 
 for before, after in plan.items():
     tty = sys.stderr.isatty()
-    left = f"{bcolors.OKBLUE}'{before}'{bcolors.ENDC}" if tty else before
-    right = f"{bcolors.OKCYAN}'{after}'{bcolors.ENDC}" if tty else after
-    eprint(f"{left} => {right}")
+    left = f"{bcolors.OKBLUE}{before}{bcolors.ENDC}" if tty else before
+    right = f"{bcolors.OKCYAN}{after}{bcolors.ENDC}" if tty else after
+    eprint(f"'{left}' => '{right}'")
 
 if not args.yes:
     confirm = str(input("Proceed? (y/N): ")).lower().strip()
