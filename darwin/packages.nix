@@ -1,50 +1,46 @@
 { ... }:
 
 {
-  homebrew = {
-    enable = true;
-    onActivation.cleanup = "zap";
 
-    taps = [
-      "homebrew/cask-drivers"
-      "homebrew/cask-fonts"
-      "homebrew/cask-versions"
-    ];
+  homebrew.enable = true;
+  homebrew.onActivation.cleanup = "zap";
 
-    brews = [
-      "openssl"
-    ];
+  homebrew.taps = [
+    "homebrew/cask-drivers"
+    "homebrew/cask-fonts"
+    "homebrew/cask-versions"
+  ];
 
-    casks = [
-      # core
-      "1password"
-      "amethyst"
-      "font-iosevka-nerd-font"
-      "hammerspoon"
-      "jordanbaird-ice"
-      "keepingyouawake"
-      "logi-options+"
-      "maccy"
-      "wezterm"
+  homebrew.brews = [
+    "openssl" # Makes compiling Rust native-tls deps easier
+  ];
 
-      # personal
-      "anki"
-      "brave-browser"
-      "calibre"
-      "cyberduck"
-      "docker"
-      "google-earth-pro"
-      "keka"
-      "kekaexternalhelper"
-      "little-snitch"
-      "minecraft"
-      "qmk-toolbox"
-      "spotify"
-      "syntax-highlight"
-      "tailscale"
-      "visual-studio-code"
-      "vlc"
-      "wireshark"
-    ];
-  };
+  # First set applies to all machines, second is for daily driver only
+  homebrew.casks = [
+    "1password"
+    "amethyst"
+    "bettermouse"
+    "font-iosevka-nerd-font"
+    "hammerspoon"
+    "jordanbaird-ice"
+    "keepingyouawake"
+    "maccy"
+    "wezterm"
+  ] ++ [
+    "brave-browser"
+    "calibre"
+    "cyberduck"
+    "docker"
+    "google-earth-pro"
+    "keka"
+    "kekaexternalhelper"
+    "lulu"
+    "qmk-toolbox"
+    "spotify"
+    "syntax-highlight"
+    "tailscale"
+    "visual-studio-code"
+    "vlc"
+    "wireshark"
+  ];
 }
