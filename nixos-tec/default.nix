@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./home.nix
   ];
 
   nix.settings.substituters = [
@@ -14,16 +15,6 @@
     "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
   ];
   nix.settings.trusted-users = [ "root" "nixos" ];
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.nixos = {
-    # The state version is required and should stay at the version you
-    # originally installed.
-    home.stateVersion = "24.05";
-
-    programs.git.enable = true;
-  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -55,7 +46,6 @@
   security.apparmor.enable = true;
 
   environment.systemPackages = with pkgs; [
-    atuin
     bpftrace
     btop
     fd
@@ -63,8 +53,10 @@
     fselect
     jq
     pv
+    python3
     ripgrep
     ruby
+    sd
     smartmontools
     vim
     wget
