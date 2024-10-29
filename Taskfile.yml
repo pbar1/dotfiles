@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+  default: task --list
+
+  nix:install:
+    desc: Install Nix
+    cmd: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+  nix:uninstall:
+    desc: Uninstall Nix
+    cmd: /nix/nix-installer uninstall
+
+  nix:update:
+    desc: Update Nix flake inputs
+    cmd: nix flake update
+
+  nix:gc:
+    desc: Remove unused objects from the Nix store
+    cmds:
+    - nix-collect-garbage --delete-old
+    - sudo nix-collect-garbage --delete-old
+
+  nix:repl:
+    desc: Launch a Nix repl
+    cmds:
+    - echo 'To load flake config, type `:lf .#` in the repl'
+    - nix repl

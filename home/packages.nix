@@ -5,7 +5,6 @@
     # Version control & project tools
     gh # FIXME: use hm
     go-task
-    just
     tokei
 
     # Other
