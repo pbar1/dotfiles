@@ -70,6 +70,7 @@ in
       ar = "addremove";
       cm = "commit";
       d = "diff --exclude=*.lock";
+      last = "status --change tip";
       s = "status";
       update = "goto";
       view = "!$HG config paths.default | xargs open";
