@@ -67,6 +67,7 @@ in
     };
 
     aliases = {
+      ar = "addremove";
       cm = "commit";
       d = "diff --exclude=*.lock";
       s = "status";
