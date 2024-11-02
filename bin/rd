@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+from argparse import ArgumentParser
+from subprocess import run
+
+parser = ArgumentParser(description="Recursive find/replace with rg + sd")
+parser.add_argument(
+    "find", metavar="<FIND>", help="The regexp or string (if using `-F`) to search for"
+)
+parser.add_argument(
+    "replace_with",
+    metavar="<REPLACE_WITH>",
+    help="What to replace each match with. Unless in string mode, you may use captured values like $1, $2, etc",
+)
+parser.add_argument(
+    "-F",
+    "--fixed-strings",
+    action="store_true",
+    help="Treat FIND and REPLACE_WITH args as literal strings",
+)
+parser.add_argument(
+    "-n",
+    "--dry-run",
+    action="store_true",
+    help="Print what would be done without making changes",
+)
+args = parser.parse_args()
+
+if args.dry_run:
+    run(
+        ["rg"]
+        + (["--fixed-strings"] if args.fixed_strings else [])
+        + [args.find, f"--replace={args.replace_with}"],
+        check=True,
+    )
+else:
+    files = run(
+        ["rg", "--files-with-matches"]
+        + (["--fixed-strings"] if args.fixed_strings else [])
+        + [args.find],
+        check=True,
+        text=True,
+        capture_output=True,
+    ).stdout.splitlines()
+
+    run(
+        ["sd"]
+        + (["--fixed-strings"] if args.fixed_strings else [])
+        + [args.find, args.replace_with]
+        + files,
+        check=True,
+    )
