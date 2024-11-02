@@ -1,7 +1,15 @@
 version: "3"
 
+env:
+  # Trim domain suffix from hostname
+  HOSTNAME:
+    sh: hostname -s
+
 tasks:
   default: task --list
+  hostname: echo $HOSTNAME
+
+  # Nix -----------------------------------------------------------------------
 
   nix:install:
     desc: Install Nix
@@ -13,21 +21,60 @@ tasks:
 
   # https://docs.determinate.systems/flakehub/faq/#upgrade-nix
   nix:upgrade:
-    desc: Upgrade to a newer version of Nix
+    desc: Upgrade Nix
     cmd: sudo nix upgrade-nix --nix-store-paths-url https://releases.nixos.org/nix/nix-2.18.1/fallback-paths.nix
 
   nix:update:
+    aliases: [up]
     desc: Update Nix flake inputs
     cmd: nix flake update
 
   nix:gc:
+    aliases: [gc]
     desc: Remove unused objects from the Nix store
     cmds:
     - nix-collect-garbage --delete-old
     - sudo nix-collect-garbage --delete-old
 
   nix:repl:
-    desc: Launch a Nix repl
+    desc: Launch a repl for this Nix flake
     cmds:
     - echo 'To load flake config, type `:lf .#` in the repl'
     - nix repl
+
+  # NixOS ---------------------------------------------------------------------
+
+  nixos:switch:
+    desc: Compile and activate NixOS config
+    cmd: nixos-rebuid switch --use-remote-sudo --flake .#$HOSTNAME
+
+  nixos:switch:tec:
+    aliases: [tec]
+    desc: Compile and activate NixOS config (tec)
+    cmds:
+    - rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' $PWD/* nixos@tec.lan:~/nix-config
+    - ssh nixos@tec.lan 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'
+
+  # Darwin --------------------------------------------------------------------
+
+  darwin:install:
+    desc: Install nix-darwin
+    cmds:
+    - nix build .#darwinConfigurations.$HOSTNAME.system
+    - ./result/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME
+
+  darwin:switch:
+    aliases: [mac]
+    desc: Compile and activate nix-darwin config
+    cmd: /run/current-system/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME
+
+  # Home ----------------------------------------------------------------------
+
+  home:install:
+    desc: Install Home Manager
+    cmd: nix run .#homeConfigurations.$HOSTNAME.activationPackage
+
+  home:switch:
+    aliases: [home]
+    desc: Compile and activate Home Manager config
+    cmd: home-manager switch --flake .#$HOSTNAME
