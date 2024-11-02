@@ -1,25 +1,37 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
-require "json"
-require "optparse"
+import json
+from argparse import ArgumentParser
+from subprocess import run
 
-options = { all_namespaces: false }
-OptionParser.new do |opts|
-  opts.on("-A", "--all-namespaces", "If present, list the requested object(s) across all namespaces") do |x|
-    options[:all_namespaces] = x
-  end
-end.parse!
+parser = ArgumentParser(description="Get containers")
+parser.add_argument(
+    "-A",
+    "--all-namespaces",
+    action="store_true",
+    help="If present, list the requested object(s) across all namespaces",
+)
+args = parser.parse_args()
 
-pods = JSON.load(`kubectl get pod --output=json --all-namespaces=#{options[:all_namespaces]}`)
+opts = ["--all-namespaces"] if args.all_namespaces else []
+
+output = run(
+    ["kubectl", "get", "pod", "--output=json"],
+    check=True,
+    text=True,
+    capture_output=True,
+).stdout
 
 containers = []
-pods["items"].each do |pod|
-  pod["spec"]["containers"].each do |container|
-    containers << {
-      "pod" => pod["metadata"]["name"],
-      "container" => container["name"],
-    }
-  end if pod["spec"].key?("containers")
-end
 
-puts JSON.generate(containers)
+for pod in json.loads(output)["items"]:
+    for container in pod["spec"]["containers"]:
+        containers.append(
+            {
+                "namespace": pod["metadata"]["namespace"],
+                "name": pod["metadata"]["name"],
+                "container": container["name"],
+            }
+        )
+
+print(json.dumps(containers, indent=2))
