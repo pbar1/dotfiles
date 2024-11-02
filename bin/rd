@@ -19,21 +19,16 @@ parser.add_argument(
     help="Treat FIND and REPLACE_WITH args as literal strings",
 )
 parser.add_argument(
-    "-n",
-    "--dry-run",
+    "-y",
+    "--yes",
     action="store_true",
-    help="Print what would be done without making changes",
+    help="Changes will be displayed but not written unless set",
 )
 args = parser.parse_args()
 
 opts = ["--fixed-strings"] if args.fixed_strings else []
 
-if args.dry_run:
-    run(
-        ["rg"] + opts + [args.find, f"--replace={args.replace_with}"],
-        check=True,
-    )
-else:
+if args.yes:
     files = run(
         ["rg", "--files-with-matches"] + opts + [args.find],
         check=True,
@@ -42,5 +37,10 @@ else:
     ).stdout.splitlines()
     run(
         ["sd"] + opts + [args.find, args.replace_with] + files,
+        check=True,
+    )
+else:
+    run(
+        ["rg"] + opts + [args.find, f"--replace={args.replace_with}"],
         check=True,
     )
