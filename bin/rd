@@ -26,27 +26,21 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+opts = ["--fixed-strings"] if args.fixed_strings else []
+
 if args.dry_run:
     run(
-        ["rg"]
-        + (["--fixed-strings"] if args.fixed_strings else [])
-        + [args.find, f"--replace={args.replace_with}"],
+        ["rg"] + opts + [args.find, f"--replace={args.replace_with}"],
         check=True,
     )
 else:
     files = run(
-        ["rg", "--files-with-matches"]
-        + (["--fixed-strings"] if args.fixed_strings else [])
-        + [args.find],
+        ["rg", "--files-with-matches"] + opts + [args.find],
         check=True,
         text=True,
         capture_output=True,
     ).stdout.splitlines()
-
     run(
-        ["sd"]
-        + (["--fixed-strings"] if args.fixed_strings else [])
-        + [args.find, args.replace_with]
-        + files,
+        ["sd"] + opts + [args.find, args.replace_with] + files,
         check=True,
     )
