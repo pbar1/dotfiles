@@ -17,6 +17,9 @@
     ./zsh.nix
   ];
 
+  # Don't show Home Manager news on switch
+  news.display = "silent";
+
   home.username = "pierce";
   home.homeDirectory = "/Users/pierce";
   home.stateVersion = "22.05";

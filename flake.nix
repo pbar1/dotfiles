@@ -6,10 +6,12 @@
     darwin.url = "github:LnL7/nix-darwin";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     home-manager.url = "github:nix-community/home-manager";
+    nixvim.url = "github:nix-community/nixvim";
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zsh Plugins -------------------------------------------------------------
 
@@ -26,7 +28,7 @@
     "spoon:Seal" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, nixos-wsl, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, nixos-wsl, nixvim, ... }@inputs:
     let
       overlays = [
         (final: prev: {
@@ -83,11 +85,12 @@
         system = "aarch64-darwin";
       };
 
-      # FIXME: eww...
+      # FIXME: Figure why hostname now must be "Mac"
       homeConfigurations."Mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
+          nixvim.homeManagerModules.nixvim
           ./home
         ];
       };

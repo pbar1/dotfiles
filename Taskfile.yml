@@ -11,6 +11,11 @@ tasks:
     desc: Uninstall Nix
     cmd: /nix/nix-installer uninstall
 
+  # https://docs.determinate.systems/flakehub/faq/#upgrade-nix
+  nix:upgrade:
+    desc: Upgrade to a newer version of Nix
+    cmd: sudo nix upgrade-nix --nix-store-paths-url https://releases.nixos.org/nix/nix-2.18.1/fallback-paths.nix
+
   nix:update:
     desc: Update Nix flake inputs
     cmd: nix flake update

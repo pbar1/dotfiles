@@ -12,7 +12,7 @@
     typst
 
     # Command line utils
-    _1password
+    _1password-cli
     coreutils
     eza
     fd
