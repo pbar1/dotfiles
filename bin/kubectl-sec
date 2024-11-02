@@ -1,10 +1,20 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
-require "base64"
-require "json"
+import json
+from argparse import ArgumentParser
+from base64 import b64decode
+from subprocess import check_output
 
-secret = `kubectl get secret -o name | fzf --preview='kubectl describe {}'`.strip
-secret_key = `kubectl get #{secret} -o json | jq -r '.data | keys[]' | fzf`.strip
-secret_val = JSON.load(`kubectl get #{secret} -o json`)["data"][secret_key]
 
-puts Base64.decode64(secret_val)
+def run(cmd: str) -> str:
+    return check_output(cmd, shell=True, text=True).strip()
+
+
+parser = ArgumentParser(description="Select and and decode a secret")
+parser.parse_args()
+
+secret = run("kubectl get secret -o name" + "| fzf --preview='kubectl describe {}'")
+key = run(f"kubectl get {secret} -o json" + "| jq -r '.data | keys[]'" + "| fzf")
+encoded = json.loads(run(f"kubectl get {secret} -o json"))["data"][key]
+
+print(b64decode(encoded).decode())

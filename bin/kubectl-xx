@@ -1,7 +1,29 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
-pod = `kubectl get pod -o name | fzf --preview='kubectl describe {}' --preview-window=70%`.strip
-container = `kubectl get #{pod} -o json | jq -r '.spec.containers[].name' | fzf`.strip
-shell = `kubectl exec #{pod} --container=#{container} -- cat /etc/shells | grep -v '^#' | fzf`.strip
+from argparse import ArgumentParser
+from subprocess import check_call, check_output
 
-exec "kubectl exec #{pod} --container=#{container} --stdin --tty -- #{shell}"
+
+def run(cmd: str) -> str:
+    return check_output(cmd, shell=True, text=True).strip()
+
+
+parser = ArgumentParser(description="Get an interactive shell in a container")
+parser.parse_args()
+
+pod = run(
+    "kubectl get pod -o name"
+    + "| fzf --preview='kubectl describe {}' --preview-window=70%"
+)
+container = run(
+    f"kubectl get {pod} -o json" + "| jq -r '.spec.containers[].name'" + "| fzf"
+)
+shell = run(
+    f"kubectl exec {pod} --container={container} -- cat /etc/shells"
+    + "| grep -v '^#'"
+    + "| fzf"
+)
+
+check_call(
+    f"kubectl exec {pod} --container={container} --stdin --tty -- {shell}", shell=True
+)
