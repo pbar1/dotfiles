@@ -61,4 +61,6 @@ in
     cache=${cacheHome}/npm
     init-module=${configHome}/npm/config/npm-init.js
   '';
+
+  programs.direnv.enable = true;
 }
