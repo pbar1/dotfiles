@@ -6,6 +6,7 @@
     gh # FIXME: use hm
     go-task
     tokei
+    pre-commit
 
     # Other
     fh
