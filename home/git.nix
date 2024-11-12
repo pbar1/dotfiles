@@ -30,21 +30,22 @@ in
     delta.options.side-by-side = true;
 
     aliases = {
-      root = "rev-parse --show-toplevel";
-      co = "checkout";
-      unstage = "reset HEAD --";
+      ar = "add .";
       br = "branch";
       cm = "commit";
-      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-      zap = "remote prune origin";
-      remotes = "remote --verbose";
-      upstream-name = "!git remote | egrep -o '(upstream|origin)' | tail -1";
+      co = "checkout";
       head-branch = "!git remote show $(git upstream-name) | awk '/HEAD branch/ {print $NF}'";
+      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      remotes = "remote --verbose";
+      root = "rev-parse --show-toplevel";
+      unstage = "reset HEAD --";
       upstream-auto = "!git remote set-head origin --auto";
+      upstream-name = "!git remote | egrep -o '(upstream|origin)' | tail -1";
       whoami = "config --get-regexp '^user\.'";
+      zap = "remote prune origin";
 
       # Mercurial/Sapling emulation
-      ci = "commit";
+      ci = "commit --all";
       d = "diff";
       shelve = "stash";
       st = "status --short";
@@ -76,5 +77,9 @@ in
       view = "!$HG config paths.default | xargs open";
       whoami = "config ui.username";
     };
+  };
+
+  programs.jujutsu = {
+    enable = true;
   };
 }
