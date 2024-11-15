@@ -25,5 +25,10 @@ in
     interactiveShellInit = ''
       set fish_greeting
     '';
+
+    functions = {
+      starship_transient_prompt_func = "starship module character";
+      starship_transient_rprompt_func = "starship module time";
+    };
   };
 }
