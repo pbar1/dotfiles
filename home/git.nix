@@ -21,7 +21,7 @@ in
       gpg.format = "ssh";
       gpg.ssh.program = sshSignProgram;
       init.defaultBranch = "main";
-      pull.rebase = false;
+      pull.rebase = true;
       push.default = "current";
       push.followTags = true;
     };
