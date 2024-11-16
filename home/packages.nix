@@ -47,7 +47,6 @@
 
     # Cloud
     terraform
-    google-cloud-sdk
 
     # Containers & Kubernetes
     krew
@@ -60,8 +59,8 @@
 
     # Nix
     cachix
+    nix-tree
     nixd
-    nixpkgs-fmt
     nixfmt-rfc-style
 
     # Bash
@@ -79,7 +78,6 @@
 
     # Python
     (python3.withPackages (ps: with ps; [
-      pandas
       python-dateutil
       pyyaml
       requests
