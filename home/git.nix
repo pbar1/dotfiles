@@ -46,7 +46,7 @@ in
 
       # Mercurial/Sapling emulation
       ci = "commit --all";
-      d = "diff";
+      d = "diff ':!*.lock'";
       shelve = "stash";
       st = "status --short";
     };
@@ -76,16 +76,6 @@ in
       update = "goto";
       view = "!$HG config paths.default | xargs open";
       whoami = "config ui.username";
-    };
-  };
-
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      user = {
-        name = userName;
-        email = userEmail;
-      };
     };
   };
 }

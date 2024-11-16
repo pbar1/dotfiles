@@ -62,6 +62,7 @@
     cachix
     nixd
     nixpkgs-fmt
+    nixfmt-rfc-style
 
     # Bash
     nodePackages.bash-language-server
