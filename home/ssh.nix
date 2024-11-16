@@ -7,15 +7,25 @@ in
 
 {
   programs.ssh.enable = true;
-  programs.ssh.matchBlocks."tec".extraOptions = {
-    User = "nixos";
-    Hostname = "tec.lan";
-  };
-  programs.ssh.matchBlocks."frankly".extraOptions = {
-    User = "root";
-    Hostname = "frankly.lan";
-  };
+
   programs.ssh.matchBlocks."*".extraOptions = {
     inherit IdentityAgent;
+  };
+
+  programs.ssh.matchBlocks."tec" = {
+    user = "nixos";
+    hostname = "tec.lan";
+  };
+
+  programs.ssh.matchBlocks."frankly" = {
+    user = "root";
+    hostname = "frankly.lan";
+  };
+
+  programs.ssh.matchBlocks."github.com" = {
+    user = "git";
+    hostname = "github.com";
+    identityFile = "~/.ssh/github.pub";
+    identitiesOnly = true;
   };
 }
