@@ -10,7 +10,7 @@ in
   xdg.enable = true;
 
   home.sessionPath = [
-    "${home}/code/dotfiles/bin"
+    "${home}/code/bin"
     "${home}/.local/bin"
     "${home}/.krew/bin"
     "${dataHome}/cargo/bin"

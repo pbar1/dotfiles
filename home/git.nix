@@ -5,7 +5,8 @@ let
   userEmail = "piercebartine@gmail.com";
 
   credentialHelper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
-  sshSignProgram = if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else "";
+  sshSignProgram =
+    if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else "";
 in
 {
   programs.git = {
@@ -41,6 +42,7 @@ in
       unstage = "reset HEAD --";
       upstream-auto = "!git remote set-head origin --auto";
       upstream-name = "!git remote | egrep -o '(upstream|origin)' | tail -1";
+      view = "!gh repo view --web";
       whoami = "config --get-regexp '^user\.'";
       zap = "remote prune origin";
 
