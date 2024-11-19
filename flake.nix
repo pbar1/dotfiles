@@ -15,45 +15,86 @@
 
     # Zsh Plugins -------------------------------------------------------------
 
-    "zsh:zsh-abbr" = { url = "github:olets/zsh-abbr"; flake = false; };
-    "zsh:zsh-autopair" = { url = "github:hlissner/zsh-autopair"; flake = false; };
+    "zsh:zsh-abbr" = {
+      url = "github:olets/zsh-abbr";
+      flake = false;
+    };
+    "zsh:zsh-autopair" = {
+      url = "github:hlissner/zsh-autopair";
+      flake = false;
+    };
 
     # Fish Plugins ------------------------------------------------------------
 
-    "fish:plugin-bang-bang" = { url = "github:oh-my-fish/plugin-bang-bang"; flake = false; };
+    "fish:plugin-bang-bang" = {
+      url = "github:oh-my-fish/plugin-bang-bang";
+      flake = false;
+    };
 
     # Hammerspoon Plugins -----------------------------------------------------
 
-    "spoon:ReloadConfiguration" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ReloadConfiguration.spoon.zip"; flake = false; };
-    "spoon:Seal" = { url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip"; flake = false; };
+    "spoon:ReloadConfiguration" = {
+      url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ReloadConfiguration.spoon.zip";
+      flake = false;
+    };
+    "spoon:Seal" = {
+      url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, nixos-wsl, nixvim, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      darwin,
+      home-manager,
+      nixos-wsl,
+      nixvim,
+      ...
+    }@inputs:
     let
       overlays = [
         (final: prev: {
 
-          myZshPlugins = with final.lib; with attrsets; with strings; mapAttrs'
-            (name: value: nameValuePair (removePrefix "zsh:" name) {
-              name = removePrefix "zsh:" name;
-              src = value.outPath;
-            })
-            (filterAttrs (name: _: hasPrefix "zsh:" name) inputs);
+          myZshPlugins =
+            with final.lib;
+            with attrsets;
+            with strings;
+            mapAttrs' (
+              name: value:
+              nameValuePair (removePrefix "zsh:" name) {
+                name = removePrefix "zsh:" name;
+                src = value.outPath;
+              }
+            ) (filterAttrs (name: _: hasPrefix "zsh:" name) inputs);
 
-          myFishPlugins = with final.lib; with attrsets; with strings; mapAttrs'
-            (name: value: nameValuePair (removePrefix "fish:" name) (final.fishPlugins.buildFishPlugin {
-              pname = removePrefix "fish:" name;
-              src = value.outPath;
-              version = value.rev;
-            }))
-            (filterAttrs (name: _: hasPrefix "fish:" name) inputs);
+          myFishPlugins =
+            with final.lib;
+            with attrsets;
+            with strings;
+            mapAttrs' (
+              name: value:
+              nameValuePair (removePrefix "fish:" name) (
+                final.fishPlugins.buildFishPlugin {
+                  pname = removePrefix "fish:" name;
+                  src = value.outPath;
+                  version = value.rev;
+                }
+              )
+            ) (filterAttrs (name: _: hasPrefix "fish:" name) inputs);
 
-          myHammerspoonPlugins = with final.lib; with attrsets; with strings; mapAttrs'
-            (name: value: nameValuePair (removePrefix "spoon:" name) {
-              name = removePrefix "spoon:" name;
-              src = value.outPath;
-            })
-            (filterAttrs (name: _: hasPrefix "spoon:" name) inputs);
+          myHammerspoonPlugins =
+            with final.lib;
+            with attrsets;
+            with strings;
+            mapAttrs' (
+              name: value:
+              nameValuePair (removePrefix "spoon:" name) {
+                name = removePrefix "spoon:" name;
+                src = value.outPath;
+              }
+            ) (filterAttrs (name: _: hasPrefix "spoon:" name) inputs);
 
         }) # END final: prev:
       ]; # END overlays
@@ -80,7 +121,8 @@
         ];
       };
 
-      darwinConfigurations."bobbery" = darwin.lib.darwinSystem {
+      # FIXME: Figure why hostname now must be "Mac"
+      darwinConfigurations."Mac" = darwin.lib.darwinSystem {
         modules = [ ./darwin ];
         system = "aarch64-darwin";
       };
@@ -89,7 +131,12 @@
       homeConfigurations."Mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
-          ({ config, pkgs, ... }: { nixpkgs.overlays = overlays; })
+          (
+            { config, pkgs, ... }:
+            {
+              nixpkgs.overlays = overlays;
+            }
+          )
           nixvim.homeManagerModules.nixvim
           ./home
         ];
