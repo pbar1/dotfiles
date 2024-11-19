@@ -1,11 +1,24 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   # TODO: If ZFS breaks, change to `pkgs.linuxPackages.packages.linux_<latest supported>`
@@ -22,7 +35,10 @@
   '';
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "data" "zssd" ];
+  boot.zfs.extraPools = [
+    "data"
+    "zssd"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-id/nvme-CT500P2SSD8_2118E59D6609-part1";
@@ -36,7 +52,10 @@
 
   fileSystems."/keys" = {
     device = "/dev/disk/by-id/usb-Lexar_USB_Flash_Drive_04DDARFLD3OSXBA7-0:0-part1";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   # Swap is disabled for Kubernetes

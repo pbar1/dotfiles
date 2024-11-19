@@ -26,15 +26,22 @@
     "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
   ];
   nix.distributedBuilds = true;
-  nix.buildMachines = [{
-    hostName = "tec";
-    system = "x86_64-linux";
-    protocol = "ssh-ng";
-    sshUser = "nixos";
-    sshKey = "/Users/pierce/.ssh/nix_build"; # FIXME: No hardcode
-    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-    maxJobs = 16;
-  }];
+  nix.buildMachines = [
+    {
+      hostName = "tec";
+      system = "x86_64-linux";
+      protocol = "ssh-ng";
+      sshUser = "nixos";
+      sshKey = "/Users/pierce/.ssh/nix_build"; # FIXME: No hardcode
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
+      maxJobs = 16;
+    }
+  ];
 
   # Handy list of macOS `defaults` options
   # https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix

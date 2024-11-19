@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -8,7 +14,13 @@
   time.timeZone = "America/Los_Angeles";
   networking.interfaces.wlo1.useDHCP = true; # TODO: Remove if default
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -20,7 +32,12 @@
   # https://help.ubuntu.com/community/RazerBlade#Suspend
   # Also required for setting up hibernate
   # https://www.worldofbs.com/nixos-framework/#setting-up-hibernate
-  boot.kernelParams = [ "button.lid_init_state=open" "intel_iommu=on" "iommu=pt" "resume_offset=1095131" ];
+  boot.kernelParams = [
+    "button.lid_init_state=open"
+    "intel_iommu=on"
+    "iommu=pt"
+    "resume_offset=1095131"
+  ];
 
   # TODO put the following command into a bootstrap script
   # `sudo cryptsetup config /dev/nvme0n1p2 --label crypt`
@@ -36,7 +53,16 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
     fsType = "btrfs";
-    options = [ "subvol=root" "compress=zstd" "noatime" "ssd" "discard=async" "space_cache=v2" "commit=120" "autodefrag" ];
+    options = [
+      "subvol=root"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+      "discard=async"
+      "space_cache=v2"
+      "commit=120"
+      "autodefrag"
+    ];
   };
 
   # Swapfile on Btrfs subvolume
@@ -46,12 +72,23 @@
   fileSystems."/swap" = {
     device = "/dev/disk/by-label/root";
     fsType = "btrfs";
-    options = [ "subvol=swap" "compress=zstd" "noatime" "ssd" "discard=async" "space_cache=v2" "commit=120" "autodefrag" ];
+    options = [
+      "subvol=swap"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+      "discard=async"
+      "space_cache=v2"
+      "commit=120"
+      "autodefrag"
+    ];
   };
-  swapDevices = [{
-    device = "/swap/swapfile";
-    size = 16593; # RAM size, via `free --mega`
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16593; # RAM size, via `free --mega`
+    }
+  ];
 
   services.tlp.enable = true;
   services.power-profiles-daemon.enable = false;

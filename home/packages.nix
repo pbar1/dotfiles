@@ -77,11 +77,13 @@
     # gotools # TODO: Conflicts with `ruby`
 
     # Python
-    (python3.withPackages (ps: with ps; [
-      python-dateutil
-      pyyaml
-      requests
-    ]))
+    (python3.withPackages (
+      ps: with ps; [
+        python-dateutil
+        pyyaml
+        requests
+      ]
+    ))
     black
     isort
     poetry

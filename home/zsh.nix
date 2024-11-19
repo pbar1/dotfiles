@@ -3,8 +3,9 @@
 let
   shellAliases = import ./shell/aliases.nix { inherit pkgs; };
   shellAbbrs = import ./shell/abbrs.nix;
-  shellAbbrsInit = lib.concatStringsSep "\n"
-    (lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs);
+  shellAbbrsInit = lib.concatStringsSep "\n" (
+    lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs
+  );
 in
 {
   programs.zsh = {
@@ -18,12 +19,10 @@ in
     syntaxHighlighting.enable = true;
 
     # Flake inputs with prefix "zsh:" automatically end up here via overlay
-    plugins = pkgs.lib.attrsets.mapAttrsToList
-      (name: value: {
-        inherit name;
-        inherit (value) src;
-      })
-      pkgs.myZshPlugins;
+    plugins = pkgs.lib.attrsets.mapAttrsToList (name: value: {
+      inherit name;
+      inherit (value) src;
+    }) pkgs.myZshPlugins;
 
     loginExtra = lib.mkIf pkgs.stdenv.isDarwin ''
       # macOS updates clear /etc/zshrc back to Apple defaults; this segment was

@@ -78,7 +78,12 @@
 
   users.users.pierce.isNormalUser = true;
   users.users.pierce.shell = pkgs.fish;
-  users.users.pierce.extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+  users.users.pierce.extraGroups = [
+    "wheel"
+    "networkmanager"
+    "libvirtd"
+    "docker"
+  ];
   users.users.root.hashedPassword = "!"; # Disable root user
 
   security.pam.services.gdm.enableGnomeKeyring = true;
@@ -107,11 +112,15 @@
   # If this was previously set to another value, it needed a `nix-collect-garbage`
   # clear the conflicting OVMF packages and links. Also, the trailing `.fd` is
   # crucial - without it, the links are all broken.
-  virtualisation.libvirtd.qemu.ovmf.packages = [ (pkgs.OVMFFull.override { secureBoot = true; tpmSupport = true; }).fd ];
+  virtualisation.libvirtd.qemu.ovmf.packages = [
+    (pkgs.OVMFFull.override {
+      secureBoot = true;
+      tpmSupport = true;
+    }).fd
+  ];
   virtualisation.libvirtd.qemu.runAsRoot = true;
   virtualisation.libvirtd.qemu.swtpm.enable = true;
   virtualisation.podman.enable = true;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

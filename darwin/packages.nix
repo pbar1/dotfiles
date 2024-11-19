@@ -16,31 +16,33 @@
   ];
 
   # First set applies to all machines, second is for daily driver only
-  homebrew.casks = [
-    "1password"
-    "amethyst"
-    "bettermouse"
-    "font-iosevka-nerd-font"
-    "hammerspoon"
-    "jordanbaird-ice"
-    "keepingyouawake"
-    "maccy"
-    "wezterm"
-  ] ++ [
-    "brave-browser"
-    "calibre"
-    "cyberduck"
-    "docker"
-    "google-earth-pro"
-    "keka"
-    "kekaexternalhelper"
-    "lulu"
-    "qmk-toolbox"
-    "spotify"
-    "syntax-highlight"
-    "tailscale"
-    "visual-studio-code"
-    "vlc"
-    "wireshark"
-  ];
+  homebrew.casks =
+    [
+      "1password"
+      "amethyst"
+      "bettermouse"
+      "font-iosevka-nerd-font"
+      "hammerspoon"
+      "jordanbaird-ice"
+      "keepingyouawake"
+      "maccy"
+      "wezterm"
+    ]
+    ++ [
+      "brave-browser"
+      "calibre"
+      "cyberduck"
+      "docker"
+      "google-earth-pro"
+      "keka"
+      "kekaexternalhelper"
+      "lulu"
+      "qmk-toolbox"
+      "spotify"
+      "syntax-highlight"
+      "tailscale"
+      "visual-studio-code"
+      "vlc"
+      "wireshark"
+    ];
 }

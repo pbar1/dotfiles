@@ -12,15 +12,16 @@ in
     inherit shellAliases;
 
     # Flake inputs with the prefix `fish:` automatially end up here via overlay
-    plugins = with pkgs.fishPlugins; [
-      { inherit (fzf-fish) name src; }
-      { inherit (autopair) name src; }
-    ] ++ pkgs.lib.attrsets.mapAttrsToList
-      (name: value: {
+    plugins =
+      with pkgs.fishPlugins;
+      [
+        { inherit (fzf-fish) name src; }
+        { inherit (autopair) name src; }
+      ]
+      ++ pkgs.lib.attrsets.mapAttrsToList (name: value: {
         inherit name;
         inherit (value) src;
-      })
-      pkgs.myFishPlugins;
+      }) pkgs.myFishPlugins;
 
     interactiveShellInit = ''
       set fish_greeting
