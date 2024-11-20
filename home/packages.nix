@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     # Version control & project tools
-    gh # FIXME: use hm
     go-task
     tokei
     pre-commit

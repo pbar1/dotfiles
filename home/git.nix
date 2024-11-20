@@ -80,4 +80,9 @@ in
       whoami = "config ui.username";
     };
   };
+
+  programs.gh.enable = true;
+  programs.gh.settings.aliases = {
+    co = "pr checkout";
+  };
 }
