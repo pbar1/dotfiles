@@ -19,9 +19,9 @@ in
     "/opt/homebrew/bin"
   ];
 
-  home.sessionVariables = {
-    EDITOR = "code";
-    VISUAL = "code";
+  home.sessionVariables = rec {
+    EDITOR = "nvim";
+    VISUAL = EDITOR;
     # MANPAGER = "sh -c 'col -bx | bat --plain --language=man'";
     BAT_THEME = "base16"; # Used by Bat and Delta
     SSH_AGENT_PID = "";
