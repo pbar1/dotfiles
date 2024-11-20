@@ -385,7 +385,6 @@
         "nixvim": "nixvim",
         "spoon:ReloadConfiguration": "spoon:ReloadConfiguration",
         "spoon:Seal": "spoon:Seal",
-        "zsh:zsh-abbr": "zsh:zsh-abbr",
         "zsh:zsh-autopair": "zsh:zsh-autopair"
       }
     },
@@ -463,22 +462,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "zsh:zsh-abbr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731435944,
-        "narHash": "sha256-ehdp9uV1ojFSirbD1OD0eaU1XF8sTUhP9U9/0VkaEdM=",
-        "owner": "olets",
-        "repo": "zsh-abbr",
-        "rev": "510cf85ce7c1a3a0cf8e81aefe83b8c79c2ae09c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "olets",
-        "repo": "zsh-abbr",
         "type": "github"
       }
     },

@@ -62,6 +62,7 @@
     nix-tree
     nixd
     nixfmt-rfc-style
+    nixdoc
 
     # Bash
     nodePackages.bash-language-server

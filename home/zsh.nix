@@ -3,20 +3,19 @@
 let
   shellAliases = import ./shell/aliases.nix { inherit pkgs; };
   shellAbbrs = import ./shell/abbrs.nix;
-  shellAbbrsInit = lib.concatStringsSep "\n" (
-    lib.attrsets.mapAttrsToList (k: v: "abbr --quiet --session ${k}='${v}'") shellAbbrs
-  );
 in
 {
   programs.zsh = {
     enable = true;
 
-    inherit shellAliases;
-
     dotDir = ".config/zsh";
     enableVteIntegration = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    inherit shellAliases;
+    zsh-abbr.enable = true;
+    zsh-abbr.abbreviations = shellAbbrs;
 
     # Flake inputs with prefix "zsh:" automatically end up here via overlay
     plugins = pkgs.lib.attrsets.mapAttrsToList (name: value: {
@@ -38,10 +37,6 @@ in
       if [[ $(ps -p $PPID -o comm=) != "fish" && -z $ZSH_EXECUTION_STRING ]]; then
           (( $+commands[fish] )) && exec fish
       fi
-    '';
-
-    initExtra = ''
-      ${shellAbbrsInit}
     '';
   };
 }
