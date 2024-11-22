@@ -6,6 +6,7 @@
     go-task
     tokei
     pre-commit
+    devenv
 
     # Other
     fh
