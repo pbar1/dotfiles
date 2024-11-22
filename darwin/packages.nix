@@ -37,6 +37,7 @@
       "keka"
       "kekaexternalhelper"
       "lulu"
+      "obsidian"
       "qmk-toolbox"
       "spotify"
       "syntax-highlight"

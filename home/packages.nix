@@ -78,7 +78,7 @@
 
     # Python
     (python3.withPackages (
-      ps: with ps; [
+      p: with p; [
         python-dateutil
         pyyaml
         requests
@@ -89,7 +89,11 @@
     poetry
 
     # Ruby
-    ruby
+    (ruby.withPackages (
+      p: with p; [
+        rails
+      ]
+    ))
 
     # Lua
     stylua
