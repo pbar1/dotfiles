@@ -89,13 +89,6 @@
     isort
     poetry
 
-    # Ruby
-    (ruby.withPackages (
-      p: with p; [
-        rails
-      ]
-    ))
-
     # Lua
     stylua
     sumneko-lua-language-server

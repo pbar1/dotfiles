@@ -124,7 +124,7 @@
       };
 
       # FIXME: Figure why hostname now must be "Mac"
-      homeConfigurations."Mac" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."Bobbery" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
           (

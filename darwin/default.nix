@@ -27,6 +27,10 @@
     "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     "pbar1.cachix.org-1:DsBqAi4CnR7TaABRn59sUBBK+lofYhQaV8lK8nl2gow="
   ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
