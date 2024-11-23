@@ -99,7 +99,12 @@
     deno
 
     # Dotnet and C#
-    dotnet-sdk_8
-    omnisharp-roslyn
-  ];
+    (
+      with dotnetCorePackages;
+      combinePackages [
+        sdk_8_0
+        sdk_9_0
+      ]
+    )
+  ]; # home.packages
 }

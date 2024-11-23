@@ -4,10 +4,12 @@ env:
   # Trim domain suffix from hostname
   HOSTNAME:
     sh: hostname -s
+  # MacOS hostname is flapping, so forcefully set the proper one
+  HOSTNAME_HACK: '{{ .HOSTNAME | replace "Mac" "Bobbery" }}'
 
 tasks:
   default: task --list
-  hostname: echo $HOSTNAME
+  hostname: echo $HOSTNAME_HACK
 
   # Nix -----------------------------------------------------------------------
 
@@ -25,12 +27,12 @@ tasks:
     cmd: sudo nix upgrade-nix --nix-store-paths-url https://releases.nixos.org/nix/nix-2.18.1/fallback-paths.nix
 
   nix:update:
-    aliases: [up]
+    aliases: [ up ]
     desc: Update Nix flake inputs
     cmd: nix flake update
 
   nix:gc:
-    aliases: [gc]
+    aliases: [ gc ]
     desc: Remove unused objects from the Nix store
     cmds:
     - nix-collect-garbage --delete-old
@@ -46,10 +48,10 @@ tasks:
 
   nixos:switch:
     desc: Compile and activate NixOS config
-    cmd: nixos-rebuid switch --use-remote-sudo --flake .#$HOSTNAME
+    cmd: nixos-rebuid switch --use-remote-sudo --flake .#$HOSTNAME_HACK
 
   nixos:switch:tec:
-    aliases: [tec]
+    aliases: [ tec ]
     desc: Compile and activate NixOS config (tec)
     cmds:
     - rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' $PWD/* nixos@tec.lan:~/nix-config
@@ -60,21 +62,21 @@ tasks:
   darwin:install:
     desc: Install nix-darwin
     cmds:
-    - nix build .#darwinConfigurations.$HOSTNAME.system
-    - ./result/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME
+    - nix build .#darwinConfigurations.$HOSTNAME_HACK.system
+    - ./result/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME_HACK
 
   darwin:switch:
-    aliases: [mac]
+    aliases: [ mac ]
     desc: Compile and activate nix-darwin config
-    cmd: /run/current-system/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME
+    cmd: /run/current-system/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME_HACK
 
   # Home ----------------------------------------------------------------------
 
   home:install:
     desc: Install Home Manager
-    cmd: nix run .#homeConfigurations.$HOSTNAME.activationPackage
+    cmd: nix run .#homeConfigurations.$HOSTNAME_HACK.activationPackage
 
   home:switch:
-    aliases: [home]
+    aliases: [ home ]
     desc: Compile and activate Home Manager config
-    cmd: home-manager switch --flake .#$HOSTNAME
+    cmd: home-manager switch --flake .#$HOSTNAME_HACK

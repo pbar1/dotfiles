@@ -117,13 +117,11 @@
         ];
       };
 
-      # FIXME: Figure why hostname now must be "Mac"
-      darwinConfigurations."Mac" = darwin.lib.darwinSystem {
+      darwinConfigurations."Bobbery" = darwin.lib.darwinSystem {
         modules = [ ./darwin ];
         system = "aarch64-darwin";
       };
 
-      # FIXME: Figure why hostname now must be "Mac"
       homeConfigurations."Bobbery" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
