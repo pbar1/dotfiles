@@ -36,6 +36,7 @@
     ffmpeg
 
     # Networking
+    wget2
     dig
     hey
     nmap
