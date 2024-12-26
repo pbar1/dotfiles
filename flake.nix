@@ -117,12 +117,12 @@
         ];
       };
 
-      darwinConfigurations."Bobbery" = darwin.lib.darwinSystem {
+      darwinConfigurations."bobbery" = darwin.lib.darwinSystem {
         modules = [ ./darwin ];
         system = "aarch64-darwin";
       };
 
-      homeConfigurations."Bobbery" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."bobbery" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [
           (

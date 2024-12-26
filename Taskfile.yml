@@ -5,7 +5,7 @@ env:
   HOSTNAME:
     sh: hostname -s
   # MacOS hostname is flapping, so forcefully set the proper one
-  HOSTNAME_HACK: '{{ .HOSTNAME | replace "Mac" "Bobbery" }}'
+  HOSTNAME_HACK: '{{ .HOSTNAME | replace "Mac" "Bobbery" | lower }}'
 
 tasks:
   default: task --list

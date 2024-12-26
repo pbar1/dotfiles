@@ -20,6 +20,7 @@
     fselect
     file
     gnused
+    gawk
     hyperfine
     jq
     xsv

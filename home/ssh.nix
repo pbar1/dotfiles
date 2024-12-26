@@ -14,7 +14,7 @@ in
 
   programs.ssh.matchBlocks."tec" = {
     user = "nixos";
-    hostname = "tec.lan";
+    hostname = "10.0.0.54";
   };
 
   programs.ssh.matchBlocks."frankly" = {
