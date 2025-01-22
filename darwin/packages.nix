@@ -45,5 +45,6 @@
       "visual-studio-code"
       "vlc"
       "wireshark"
+      "zoom"
     ];
 }

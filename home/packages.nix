@@ -36,7 +36,7 @@
     ffmpeg
 
     # Networking
-    wget2
+    aria2
     dig
     hey
     nmap
