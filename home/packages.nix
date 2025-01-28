@@ -49,6 +49,7 @@
 
     # Cloud
     terraform
+    pulumi-bin
 
     # Containers & Kubernetes
     krew
@@ -99,6 +100,7 @@
     nodejs
     yarn-berry
     deno
+    bun
 
     # Dotnet and C#
     (

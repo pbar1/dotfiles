@@ -33,6 +33,7 @@
       "calibre"
       "cyberduck"
       "docker"
+      "ghostty"
       "google-earth-pro"
       "keka"
       "kekaexternalhelper"
