@@ -11,9 +11,7 @@
     "homebrew/cask-versions"
   ];
 
-  homebrew.brews = [
-    "openssl" # Makes compiling Rust native-tls deps easier
-  ];
+  homebrew.brews = [ ];
 
   # First set applies to all machines, second is for daily driver only
   homebrew.casks =

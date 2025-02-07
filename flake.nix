@@ -92,6 +92,10 @@
               }
             ) (filterAttrs (name: _: hasPrefix "spoon:" name) inputs);
 
+          opensshNoneCipher = prev.openssh.overrideAttrs (oldAttrs: {
+            patches = (oldAttrs.patches or [ ]) ++ [ ./patches/openssh-enable-none-cipher.patch ];
+          });
+
         }) # END final: prev:
       ]; # END overlays
     in
@@ -112,6 +116,12 @@
       nixosConfigurations."tec" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          (
+            { config, pkgs, ... }:
+            {
+              nixpkgs.overlays = overlays;
+            }
+          )
           ./nixos-tec
           home-manager.nixosModules.home-manager
         ];

@@ -26,7 +26,6 @@
     xsv
     dyff
     less
-    openssl
     procs
     pstree
     ripgrep
