@@ -68,6 +68,24 @@
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
+  services.openssh.settings.PasswordAuthentication = false;
+  services.openssh.settings.KexAlgorithms = [
+    "mlkem768x25519-sha256"
+    "sntrup761x25519-sha512"
+    "sntrup761x25519-sha512@openssh.com"
+    "curve25519-sha256"
+    "curve25519-sha256@libssh.org"
+  ];
+  services.openssh.settings.Ciphers = [
+    "chacha20-poly1305@openssh.com"
+    "aes256-gcm@openssh.com"
+  ];
+  services.openssh.settings.Macs = [
+    "hmac-sha2-256-etm@openssh.com" # must enable at least one
+  ];
+  services.openssh.extraConfig = ''
+    HostKeyAlgorithms ssh-ed25519
+  '';
 
   services.eternal-terminal.enable = true;
 
