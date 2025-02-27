@@ -1,11 +1,13 @@
 version: "3"
 
 env:
+  OS:
+    sh: uname
   # Trim domain suffix from hostname
   HOSTNAME:
     sh: hostname -s
   # MacOS hostname is flapping, so forcefully set the proper one
-  HOSTNAME_HACK: '{{ .HOSTNAME | replace "Mac" "Bobbery" | lower }}'
+  HOSTNAME_HACK: '{{ if eq .OS "Darwin" }}bobbery{{ else }}{{ .HOSTNAME }}{{ end }}'
 
 tasks:
   default: task --list
