@@ -10,8 +10,7 @@
   system.stateVersion = 4;
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
+  nix.enable = true;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
     extra-nix-path = nixpkgs=flake:nixpkgs
@@ -73,7 +72,7 @@
   programs.zsh.enable = false;
 
   # TouchID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # FIXME: Touch ~/.hushlogin to disable last login time
   # TODO: Linux builder: https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable

@@ -23,7 +23,6 @@
     gawk
     hyperfine
     jq
-    xsv
     dyff
     less
     procs

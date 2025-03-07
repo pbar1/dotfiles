@@ -9,9 +9,12 @@
     "homebrew/cask-drivers"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
+    "homebrew/services"
   ];
 
-  homebrew.brews = [ ];
+  homebrew.brews = [
+    "ollama"
+  ];
 
   # First set applies to all machines, second is for daily driver only
   homebrew.casks =
@@ -36,8 +39,6 @@
       "keka"
       "kekaexternalhelper"
       "lulu"
-      "obsidian"
-      "ollama"
       "qmk-toolbox"
       "spotify"
       "syntax-highlight"
