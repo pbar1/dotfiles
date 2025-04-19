@@ -6,10 +6,8 @@
     go-task
     tokei
     pre-commit
-    devenv
 
     # Other
-    fh
     typst
 
     # Command line utils
@@ -34,7 +32,6 @@
     ffmpeg
 
     # Networking
-    aria2
     dig
     hey
     nmap
@@ -47,7 +44,6 @@
 
     # Cloud
     terraform
-    pulumi-bin
 
     # Containers & Kubernetes
     krew
@@ -108,5 +104,5 @@
         sdk_9_0
       ]
     )
-  ]; # home.packages
+  ];
 }

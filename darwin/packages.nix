@@ -1,7 +1,6 @@
 { ... }:
 
 {
-
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "zap";
 
@@ -12,12 +11,10 @@
     "homebrew/services"
   ];
 
-  homebrew.brews = [
-    "ollama"
-  ];
+  homebrew.brews = [ ];
 
-  # First set applies to all machines, second is for daily driver only
   homebrew.casks =
+    # Core
     [
       "1password"
       "amethyst"
@@ -29,13 +26,13 @@
       "maccy"
       "wezterm"
     ]
+    # Personal machine
     ++ [
       "brave-browser"
       "calibre"
       "cyberduck"
       "docker"
       "google-earth-pro"
-      "keepassxc"
       "keka"
       "kekaexternalhelper"
       "lulu"
@@ -43,7 +40,6 @@
       "spotify"
       "syntax-highlight"
       "tailscale"
-      "thunderbird"
       "visual-studio-code"
       "vlc"
       "wireshark"
