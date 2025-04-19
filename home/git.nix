@@ -56,6 +56,7 @@ in
     ignores = [
       "**/.idea/*"
       "**/.DS_Store"
+      "**/Session.vim"
     ];
   };
 
