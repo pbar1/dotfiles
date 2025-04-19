@@ -116,10 +116,6 @@ table.insert(config.hyperlink_rules, {
    regex = "\\b(E\\d{4})\\b", -- Rust compiler errors
    format = "https://doc.rust-lang.org/error_codes/$1.html",
 })
-table.insert(config.hyperlink_rules, {
-   regex = "\\b([tTdDpPsS]\\d+)\\b", -- task, diff, paste, sev
-   format = "https://fburl.com/b/$1",
-})
 
 -- Domains (ie, connection profiles) ------------------------------------------
 
@@ -127,9 +123,6 @@ config.ssh_domains = wezterm.default_ssh_domains()
 for _, domain in ipairs(config.ssh_domains) do
    domain.assume_shell = "Posix"
    domain.multiplexing = "None"
-end
-if hostname == "pbar-mbp" then
-   config.default_domain = "SSHMUX:devvm"
 end
 
 -- ∎ --------------------------------------------------------------------------
