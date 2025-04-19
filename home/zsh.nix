@@ -14,7 +14,7 @@ in
     syntaxHighlighting.enable = true;
 
     inherit shellAliases;
-    zsh-abbr.enable = true;
+    zsh-abbr.enable = false; # Saw errors causing long shell startup  
     zsh-abbr.abbreviations = shellAbbrs;
 
     # Flake inputs with prefix "zsh:" automatically end up here via overlay
