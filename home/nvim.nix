@@ -8,6 +8,13 @@ in
   programs.nixvim = {
     enable = true;
 
+    # TODO: base16 colorscheme not being set correctly
+    # https://github.com/nix-community/nixvim/issues/2446
+    extraConfigLuaPost = ''vim.cmd [[ colorscheme base16-gruvbox-light-soft ]]'';
+    # TODO: Light/dark mode
+    colorschemes.base16.enable = true;
+    colorschemes.base16.colorscheme = "gruvbox-light-soft";
+
     # Yank to system clipboard
     clipboard.register = "unnamedplus";
 
@@ -44,8 +51,6 @@ in
         options.desc = "Delete word backwards";
       }
     ];
-
-    colorschemes.gruvbox.enable = true;
 
     # Required for plugins like Telescope and Which-Key
     plugins.web-devicons.enable = true;
@@ -99,21 +104,25 @@ in
     plugins.blink-cmp.settings.signature.enabled = true;
     plugins.blink-cmp.settings.keymap.preset = "enter";
     plugins.blink-cmp.settings.completion.list.selection.preselect = false;
-    plugins.blink-cmp.settings.completion.menu.draw.__raw = ''
-      {
-      columns = { { "kind_icon" }, { "label", gap = 1 } },
-      components = {
-        label = {
-          text = function(ctx)
-            return require("colorful-menu").blink_components_text(ctx)
-          end,
-          highlight = function(ctx)
-            return require("colorful-menu").blink_components_highlight(ctx)
-          end,
-        },
-      },
-      }
-    '';
+    plugins.blink-cmp.settings.completion.menu.draw = {
+      columns = [
+        { __unkeyed = "kind_icon"; }
+        {
+          __unkeyed = "label";
+          gap = 1;
+        }
+      ];
+      components.label.text.__raw = ''
+        function(ctx)
+          return require("colorful-menu").blink_components_text(ctx)
+        end
+      '';
+      components.label.highlight.__raw = ''
+        function(ctx)
+          return require("colorful-menu").blink_components_highlight(ctx)
+        end
+      '';
+    };
     plugins.colorful-menu.enable = true;
 
     plugins.lsp.enable = true;
