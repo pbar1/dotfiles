@@ -26,6 +26,7 @@
     procs
     pstree
     ripgrep
+    ast-grep
     sd
     unixtools.watch
     xz

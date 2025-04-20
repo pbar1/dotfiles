@@ -1,14 +1,16 @@
 { config, ... }:
 let
-  inherit (config.lib.nixvim) listToUnkeyedAttrs;
+  helpers = config.lib.nixvim;
 in
 {
-  # Previous Neovim config: https://github.com/pbar1/dotfiles/tree/c2ca9ff3138ad68f010ff81581a5d2f88f43cc7f/home/nvim
+  # Previous Neovim config
+  # https://github.com/pbar1/dotfiles/tree/c2ca9ff3138ad68f010ff81581a5d2f88f43cc7f/home/nvim
   programs.nixvim = {
     enable = true;
 
-    clipboard.register = "unnamedplus"; # yank to system clipboard
-    
+    # Yank to system clipboard
+    clipboard.register = "unnamedplus";
+
     globals.mapleader = " ";
     keymaps = [
       {
@@ -45,7 +47,8 @@ in
 
     colorschemes.gruvbox.enable = true;
 
-    plugins.web-devicons.enable = true; # required for telescope
+    # Required for plugins like Telescope and Which-Key
+    plugins.web-devicons.enable = true;
 
     plugins.mini.enable = true;
     plugins.mini.modules = {
@@ -57,6 +60,36 @@ in
     plugins.lualine.settings.options.component_separators = "|";
     plugins.lualine.settings.options.section_separators = "";
     plugins.lualine.settings.options.globalstatus = true;
+    plugins.lualine.settings.sections.lualine_b = [
+      {
+        __unkeyed = "branch";
+        icon = "";
+      }
+      "diff"
+      "diagnostics"
+    ];
+    plugins.lualine.settings.sections.lualine_c = [
+      "filename"
+      {
+        __unkeyed = "lsp_status";
+        icon = "";
+        symbols.spinner = [
+          "⠋"
+          "⠙"
+          "⠹"
+          "⠸"
+          "⠼"
+          "⠴"
+          "⠦"
+          "⠧"
+          "⠇"
+          "⠏"
+        ];
+        symbols.done = "✓";
+        symbols.separator = " ";
+        ignore_lsp = [ ];
+      }
+    ];
 
     plugins.telescope.enable = true;
 
@@ -64,7 +97,8 @@ in
 
     plugins.blink-cmp.enable = true;
     plugins.blink-cmp.settings.signature.enabled = true;
-    plugins.blink-cmp.settings.completion.list.selection.preselect = false; # TODO: Enable for VSCode behavior
+    plugins.blink-cmp.settings.keymap.preset = "enter";
+    plugins.blink-cmp.settings.completion.list.selection.preselect = false;
     plugins.blink-cmp.settings.completion.menu.draw.__raw = ''
       {
       columns = { { "kind_icon" }, { "label", gap = 1 } },
@@ -80,12 +114,21 @@ in
       },
       }
     '';
-    plugins.blink-cmp.settings.keymap.preset = "enter";
     plugins.colorful-menu.enable = true;
 
-    # LSP servers
     plugins.lsp.enable = true;
     plugins.lsp.servers.nixd.enable = true;
     plugins.rustaceanvim.enable = true;
+
+    plugins.conform-nvim.enable = true;
+    plugins.conform-nvim.settings.format_on_save = {
+      timeout_ms = 500;
+      lsp_format = "fallback";
+    };
+    plugins.conform-nvim.settings.formatters_by_ft = {
+      "*" = [ "injected" ]; # Formats code blocks
+      nix = [ "nixfmt" ];
+      rust = [ "rustfmt" ];
+    };
   };
 }
