@@ -8,6 +8,9 @@ in
   programs.nixvim = {
     enable = true;
 
+    # options.number = true;
+    # options.signcolumn = "yes";
+
     # TODO: base16 colorscheme not being set correctly
     # https://github.com/nix-community/nixvim/issues/2446
     extraConfigLuaPost = ''vim.cmd [[ colorscheme base16-gruvbox-light-soft ]]'';
@@ -20,6 +23,7 @@ in
 
     globals.mapleader = " ";
     keymaps = [
+      # Search
       {
         mode = "n";
         key = "<leader>ff";
@@ -32,6 +36,7 @@ in
         action = "<cmd>Telescope live_grep<cr>";
         options.desc = "Live grep";
       }
+      # Quitting and saving
       {
         mode = "n";
         key = "<leader>qq";
@@ -45,12 +50,47 @@ in
         options.desc = "Save and quit";
       }
       {
+        mode = "n";
+        key = "<leader>s";
+        action = "<cmd>w<cr>";
+        options.desc = "Save";
+      }
+      # Window manipulation
+      {
+        mode = "n";
+        key = "<leader>wc";
+        action = "<cmd>close<cr>";
+        options.desc = "Close window";
+      }
+      {
+        mode = "n";
+        key = "<leader>wh";
+        action = "<cmd>split<cr>";
+        options.desc = "Split horizontally";
+      }
+      {
+        mode = "n";
+        key = "<leader>wv";
+        action = "<cmd>vsplit<cr>";
+        options.desc = "Split vertically";
+      }
+      # Text editing
+      {
         mode = "i";
         key = "<M-BS>";
         action = "<C-w>";
         options.desc = "Delete word backwards";
       }
+      # LSP
+      {
+        mode = "n";
+        key = "<leader>rn";
+        action.__raw = "vim.lsp.buf.rename";
+        options.desc = "Rename symbol";
+      }
     ];
+
+    editorconfig.enable = true;
 
     # Required for plugins like Telescope and Which-Key
     plugins.web-devicons.enable = true;
@@ -124,6 +164,9 @@ in
       '';
     };
     plugins.colorful-menu.enable = true;
+
+    plugins.treesitter.enable = true;
+    plugins.treesitter.settings.highlight.enable = true;
 
     plugins.lsp.enable = true;
     plugins.lsp.servers.nixd.enable = true;

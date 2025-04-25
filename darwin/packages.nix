@@ -9,6 +9,7 @@
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/services"
+    "nikitabobko/tap"
   ];
 
   homebrew.brews = [ ];
@@ -17,7 +18,7 @@
     # Core
     [
       "1password"
-      "amethyst"
+      "aerospace"
       "bettermouse"
       "font-iosevka-nerd-font"
       "hammerspoon"

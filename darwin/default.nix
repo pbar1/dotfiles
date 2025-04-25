@@ -65,6 +65,7 @@
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 10; # 150 ms
   system.defaults.NSGlobalDomain.KeyRepeat = 1; # 15 ms
+  system.defaults.NSGlobalDomain.NSWindowShouldDragOnGesture = true; # ctrl+cmd+drag any part of window
 
   # Disable nix-darwin shell integrations
   programs.bash.enable = false;
