@@ -9,7 +9,6 @@
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/services"
-    "nikitabobko/tap"
   ];
 
   homebrew.brews = [ ];
@@ -18,7 +17,7 @@
     # Core
     [
       "1password"
-      "aerospace"
+      "amethyst"
       "bettermouse"
       "font-iosevka-nerd-font"
       "hammerspoon"
@@ -37,7 +36,6 @@
       "keka"
       "kekaexternalhelper"
       "lulu"
-      "qmk-toolbox"
       "spotify"
       "syntax-highlight"
       "tailscale"
