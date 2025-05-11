@@ -36,6 +36,7 @@
       "keka"
       "kekaexternalhelper"
       "lulu"
+      "netspot"
       "spotify"
       "syntax-highlight"
       "tailscale"
