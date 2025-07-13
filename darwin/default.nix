@@ -48,6 +48,11 @@
     }
   ];
 
+  # Must be set for `homebrew` and `system` attributes. Previously the user
+  # running the switch command would be chosen implictly.
+  # FIXME: No hardcode
+  system.primaryUser = "pierce";
+
   # Handy list of macOS `defaults` options
   # https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix
 

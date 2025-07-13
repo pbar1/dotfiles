@@ -9,6 +9,7 @@
 
     # Other
     typst
+    claude-code
 
     # Command line utils
     _1password-cli
