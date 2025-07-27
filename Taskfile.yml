@@ -70,7 +70,7 @@ tasks:
   darwin:switch:
     aliases: [ mac ]
     desc: Compile and activate nix-darwin config
-    cmd: /run/current-system/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME_HACK
+    cmd: sudo /run/current-system/sw/bin/darwin-rebuild switch --flake .#$HOSTNAME_HACK
 
   # Home ----------------------------------------------------------------------
 
