@@ -46,6 +46,7 @@
 
     # Cloud
     terraform
+    pulumi-bin
 
     # Containers & Kubernetes
     krew
