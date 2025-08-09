@@ -141,7 +141,7 @@
               nixpkgs.overlays = overlays;
             }
           )
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           ./home
         ];
       };

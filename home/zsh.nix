@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   shellAliases = import ./shell/aliases.nix { inherit pkgs; };
@@ -8,13 +13,13 @@ in
   programs.zsh = {
     enable = true;
 
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     enableVteIntegration = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     inherit shellAliases;
-    zsh-abbr.enable = false; # Saw errors causing long shell startup  
+    zsh-abbr.enable = false; # Saw errors causing long shell startup
     zsh-abbr.abbreviations = shellAbbrs;
 
     # Flake inputs with prefix "zsh:" automatically end up here via overlay
