@@ -50,14 +50,14 @@ tasks:
 
   nixos:switch:
     desc: Compile and activate NixOS config
-    cmd: nixos-rebuid switch --use-remote-sudo --flake .#$HOSTNAME_HACK
+    cmd: nixos-rebuid switch --sudo --flake .#$HOSTNAME_HACK
 
   nixos:switch:tec:
     aliases: [ tec ]
     desc: Compile and activate NixOS config (tec)
     cmds:
-    - rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' $PWD/* nixos@tec.lan:~/nix-config
-    - ssh nixos@tec.lan 'nixos-rebuild switch --use-remote-sudo --flake ~/nix-config#tec'
+    - rsync --recursive --delete --exclude='.git*' --filter='dir-merge,- .gitignore' $PWD/* nixos@tec:~/nix-config
+    - ssh nixos@tec 'nixos-rebuild switch --sudo --flake ~/nix-config#tec'
 
   # Darwin --------------------------------------------------------------------
 
