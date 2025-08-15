@@ -5,9 +5,6 @@
   homebrew.onActivation.cleanup = "zap";
 
   homebrew.taps = [
-    "homebrew/cask-drivers"
-    "homebrew/cask-fonts"
-    "homebrew/cask-versions"
     "homebrew/services"
   ];
 
