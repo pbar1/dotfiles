@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  user = "pierce";
+in
 {
   imports = [
     ./packages.nix
@@ -37,7 +40,7 @@
       system = "x86_64-linux";
       protocol = "ssh-ng";
       sshUser = "nixos";
-      sshKey = "/Users/pierce/.ssh/nix_build"; # FIXME: No hardcode
+      sshKey = "/Users/${user}/.ssh/nix_build";
       supportedFeatures = [
         "nixos-test"
         "benchmark"
@@ -50,8 +53,7 @@
 
   # Must be set for `homebrew` and `system` attributes. Previously the user
   # running the switch command would be chosen implictly.
-  # FIXME: No hardcode
-  system.primaryUser = "pierce";
+  system.primaryUser = user;
 
   # Handy list of macOS `defaults` options
   # https://github.com/LnL7/nix-darwin/blob/master/tests/system-defaults-write.nix
@@ -79,6 +81,11 @@
 
   # TouchID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  # SSH server
+  users.users."${user}".openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D"
+  ];
 
   # FIXME: Touch ~/.hushlogin to disable last login time
   # TODO: Linux builder: https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable

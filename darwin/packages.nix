@@ -8,7 +8,10 @@
     "homebrew/services"
   ];
 
-  homebrew.brews = [ ];
+  homebrew.brews = [
+    "openssl"
+    "pkg-config"
+  ];
 
   homebrew.casks =
     # Core
