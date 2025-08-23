@@ -34,15 +34,15 @@
     };
 
     username = {
-      disabled = true;
+      disabled = false;
       format = "[$user]($style)@";
       show_always = false;
     };
 
     hostname = {
-      disabled = true;
+      disabled = false;
       format = "[$hostname]($style):";
-      ssh_only = false;
+      ssh_only = true;
     };
 
     directory = {
