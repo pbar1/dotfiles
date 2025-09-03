@@ -37,6 +37,7 @@
       "kekaexternalhelper"
       "lulu"
       "netspot"
+      "obsidian"
       "slack"
       "spotify"
       "syntax-highlight"

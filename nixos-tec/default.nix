@@ -101,7 +101,6 @@
     "--service-cidr=10.43.0.0/16"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
     "--secrets-encryption"
-    "--disable=traefik"
   ];
 
   programs.criu.enable = true;
