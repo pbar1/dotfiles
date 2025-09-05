@@ -1,6 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    wireshark
+  ];
+
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "zap";
 
@@ -31,20 +35,19 @@
       "brave-browser"
       "calibre"
       "cyberduck"
-      "docker"
       "google-earth-pro"
       "keka"
       "kekaexternalhelper"
       "lulu"
       "netspot"
       "obsidian"
+      "secretive"
       "slack"
       "spotify"
       "syntax-highlight"
       "tailscale"
       "visual-studio-code"
       "vlc"
-      "wireshark"
       "zoom"
     ];
 }

@@ -5,22 +5,19 @@ let
   userEmail = "piercebartine@gmail.com";
 
   credentialHelper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
-  sshSignProgram =
-    if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else "";
 in
 {
   programs.git = {
     enable = true;
     inherit userName;
     inherit userEmail;
-    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDim41ofReCgbmijkayBsFg5TlO9qqV8b6Y8Xcwnr49m";
+    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDim41ofReCgbmijkayBsFg5TlO9qqV8b6Y8Xcwnr49m github@1password";
     signing.signByDefault = true;
 
     extraConfig = {
       branch.autoSetupMerge = "always";
       credential.helper = credentialHelper;
       gpg.format = "ssh";
-      gpg.ssh.program = sshSignProgram;
       init.defaultBranch = "main";
       pull.rebase = true;
       push.default = "current";

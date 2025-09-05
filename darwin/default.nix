@@ -84,8 +84,19 @@ in
 
   # SSH server
   users.users."${user}".openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvmdvrrgYY3Q+Wp/SyQm2a2OWL82S2Z+e+FoJ/vmS/D personal@1password"
   ];
+
+  # https://developer.1password.com/docs/ssh/agent/compatibility#configure-ssh_auth_sock-globally-for-every-client
+  launchd.user.agents."com.1password.SSH_AUTH_SOCK" = {
+    serviceConfig.Label = "com.1password.SSH_AUTH_SOCK";
+    serviceConfig.ProgramArguments = [
+      "/bin/sh"
+      "-c"
+      ''/bin/ln -sf $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock \$SSH_AUTH_SOCK''
+    ];
+    serviceConfig.RunAtLoad = true;
+  };
 
   # FIXME: Touch ~/.hushlogin to disable last login time
   # TODO: Linux builder: https://daiderd.com/nix-darwin/manual/index.html#opt-nix.linux-builder.enable
