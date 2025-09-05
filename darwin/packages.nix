@@ -1,12 +1,16 @@
 { pkgs, ... }:
 
+# TODO: https://github.com/zhaofengli/nix-homebrew
 {
   environment.systemPackages = with pkgs; [
     wireshark
+    wezterm
   ];
 
   homebrew.enable = true;
-  homebrew.onActivation.cleanup = "zap";
+
+  # prefer "zap", but this may make docker/tailscale/wireshark flap
+  homebrew.onActivation.cleanup = "none";
 
   homebrew.taps = [
     "homebrew/services"
@@ -28,20 +32,19 @@
       "jordanbaird-ice"
       "keepingyouawake"
       "maccy"
-      "wezterm"
     ]
     # Personal machine
     ++ [
       "brave-browser"
       "calibre"
       "cyberduck"
+      "docker"
       "google-earth-pro"
       "keka"
       "kekaexternalhelper"
       "lulu"
       "netspot"
       "obsidian"
-      "secretive"
       "slack"
       "spotify"
       "syntax-highlight"
