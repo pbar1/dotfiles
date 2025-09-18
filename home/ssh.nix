@@ -1,11 +1,21 @@
 { pkgs, ... }:
 let
   toTOML = (pkgs.formats.toml { }).generate "dummy";
+
+  identityAgent =
+    if pkgs.stdenv.isDarwin then
+      "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    else
+      null;
 in
 {
   programs.ssh.enable = true;
 
   programs.ssh.enableDefaultConfig = false;
+
+  programs.ssh.matchBlocks."*" = {
+    inherit identityAgent;
+  };
 
   programs.ssh.matchBlocks."github.com" = {
     user = "git";
