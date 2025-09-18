@@ -28,7 +28,6 @@
     2022 # Eternal Terminal
     6443 # Kubernetes - API
     10250 # Kubernetes - Metrics Server
-    31887 # Immich
     32400 # Plex
   ];
 
@@ -101,6 +100,7 @@
     "--service-cidr=10.43.0.0/16"
     "--default-local-storage-path=/zssd/general/local-path-provisioner"
     "--secrets-encryption"
+    "--disable=traefik"
   ];
 
   programs.criu.enable = true;

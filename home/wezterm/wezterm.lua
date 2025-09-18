@@ -119,6 +119,7 @@ table.insert(config.hyperlink_rules, {
 
 -- Domains (ie, connection profiles) ------------------------------------------
 
+config.mux_enable_ssh_agent = false
 config.ssh_domains = wezterm.default_ssh_domains()
 for _, domain in ipairs(config.ssh_domains) do
    domain.assume_shell = "Posix"
