@@ -5,6 +5,8 @@ let
   userEmail = "piercebartine@gmail.com";
 
   credentialHelper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
+  sshSignProgram =
+    if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else null;
 in
 {
   programs.git = {
@@ -18,6 +20,7 @@ in
       branch.autoSetupMerge = "always";
       credential.helper = credentialHelper;
       gpg.format = "ssh";
+      gpg.ssh.program = sshSignProgram;
       init.defaultBranch = "main";
       pull.rebase = true;
       push.default = "current";
