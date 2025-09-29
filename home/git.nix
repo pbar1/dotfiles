@@ -3,6 +3,7 @@
 let
   userName = "Pierce Bartine";
   userEmail = "piercebartine@gmail.com";
+  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDim41ofReCgbmijkayBsFg5TlO9qqV8b6Y8Xcwnr49m github@1password";
 
   credentialHelper = if pkgs.stdenv.isDarwin then "osxkeychain" else "libsecret";
   sshSignProgram =
@@ -13,7 +14,7 @@ in
     enable = true;
     inherit userName;
     inherit userEmail;
-    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDim41ofReCgbmijkayBsFg5TlO9qqV8b6Y8Xcwnr49m github@1password";
+    signing.key = signingKey;
     signing.signByDefault = true;
 
     extraConfig = {
@@ -85,5 +86,16 @@ in
   programs.gh.enable = true;
   programs.gh.settings.aliases = {
     co = "pr checkout";
+  };
+
+  programs.jujutsu.enable = true;
+  programs.jujutsu.settings = {
+    user.name = userName;
+    user.email = userEmail;
+    ui."default-command" = "log";
+    signing.behavior = "own";
+    signing.backend = "ssh";
+    signing.key = signingKey;
+    signing.backends.ssh.program = sshSignProgram;
   };
 }
