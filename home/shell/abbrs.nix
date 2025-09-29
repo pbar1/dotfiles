@@ -10,9 +10,7 @@
   fdh = "fd --no-hidden --no-ignore";
   g = "git";
   gs = "git status --short";
-  hg = "sl"; # FIXME: Not if work machine
   ij = "idea";
-  jf = "sl pr"; # FIXME: Not if work machine
   k = "kubectl";
   kapi = "kubectl api-resources";
   kge = "kubectl get events --watch";
@@ -32,7 +30,7 @@
   nv = "nvim";
   rgf = "rg --fixed-strings";
   rgi = "rg --ignore-case";
-  s = "git";
+  s = "jj";
   star = "starship";
   tf = "terraform";
   t = "task";
