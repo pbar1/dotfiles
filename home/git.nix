@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   userName = "Pierce Bartine";
@@ -93,6 +93,12 @@ in
     user.name = userName;
     user.email = userEmail;
     ui."default-command" = "log";
+    ui.diff-formatter = [
+      (lib.getExe pkgs.difftastic)
+      "--color=always"
+      "$left"
+      "$right"
+    ];
     signing.behavior = "own";
     signing.backend = "ssh";
     signing.key = signingKey;
