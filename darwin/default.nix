@@ -33,6 +33,7 @@ in
     "root"
     "@wheel"
   ];
+  nix.settings.download-buffer-size = 500000000;
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {

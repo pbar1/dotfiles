@@ -30,7 +30,7 @@
   nv = "nvim";
   rgf = "rg --fixed-strings";
   rgi = "rg --ignore-case";
-  s = "jj";
+  s = "sl";
   star = "starship";
   tf = "terraform";
   t = "task";

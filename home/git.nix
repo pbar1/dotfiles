@@ -1,5 +1,13 @@
 { lib, pkgs, ... }:
 
+# trace: warning: The option `programs.git.aliases' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.alias'.
+# trace: warning: The option `programs.git.userEmail' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.user.email'.
+# trace: warning: The option `programs.git.userName' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.user.name'.
+# trace: warning: The option `programs.git.extraConfig' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings'.
+# trace: warning: The option `programs.git.delta.options' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.delta.options'.
+# trace: warning: The option `programs.git.delta.enable' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.delta.enable'.
+# trace: warning: `programs.delta.enableGitIntegration` automatic enablement is deprecated. Please explicitly set `programs.delta.enableGitIntegration = true`.
+
 let
   userName = "Pierce Bartine";
   userEmail = "piercebartine@gmail.com";
@@ -10,28 +18,25 @@ let
     if pkgs.stdenv.isDarwin then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" else null;
 in
 {
-  programs.git = {
-    enable = true;
-    inherit userName;
-    inherit userEmail;
-    signing.key = signingKey;
-    signing.signByDefault = true;
+  programs.delta.enable = true;
+  programs.delta.enableGitIntegration = true;
+  programs.delta.options.side-by-side = true;
 
-    extraConfig = {
-      branch.autoSetupMerge = "always";
-      credential.helper = credentialHelper;
-      gpg.format = "ssh";
-      gpg.ssh.program = sshSignProgram;
-      init.defaultBranch = "main";
-      pull.rebase = true;
-      push.default = "current";
-      push.followTags = true;
-    };
-
-    delta.enable = true;
-    delta.options.side-by-side = true;
-
-    aliases = {
+  programs.git.enable = true;
+  programs.git.signing.key = signingKey;
+  programs.git.signing.signByDefault = true;
+  programs.git.settings = {
+    user.name = userName;
+    user.email = userEmail;
+    branch.autoSetupMerge = "always";
+    credential.helper = credentialHelper;
+    gpg.format = "ssh";
+    gpg.ssh.program = sshSignProgram;
+    init.defaultBranch = "main";
+    pull.rebase = true;
+    push.default = "current";
+    push.followTags = true;
+    alias = {
       ar = "add .";
       br = "branch";
       cm = "commit";
@@ -53,13 +58,12 @@ in
       shelve = "stash";
       st = "status --short";
     };
-
-    ignores = [
-      "**/.idea/*"
-      "**/.DS_Store"
-      "**/Session.vim"
-    ];
   };
+  programs.git.ignores = [
+    "**/.idea/*"
+    "**/.DS_Store"
+    "**/Session.vim"
+  ];
 
   programs.sapling = {
     enable = true;
