@@ -1,13 +1,5 @@
 { lib, pkgs, ... }:
 
-# trace: warning: The option `programs.git.aliases' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.alias'.
-# trace: warning: The option `programs.git.userEmail' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.user.email'.
-# trace: warning: The option `programs.git.userName' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings.user.name'.
-# trace: warning: The option `programs.git.extraConfig' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.git.settings'.
-# trace: warning: The option `programs.git.delta.options' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.delta.options'.
-# trace: warning: The option `programs.git.delta.enable' defined in `/nix/store/p1z0hgwmn6ly3q7blnlzgpc8a4nxjqzd-source/home/git.nix' has been renamed to `programs.delta.enable'.
-# trace: warning: `programs.delta.enableGitIntegration` automatic enablement is deprecated. Please explicitly set `programs.delta.enableGitIntegration = true`.
-
 let
   userName = "Pierce Bartine";
   userEmail = "piercebartine@gmail.com";
